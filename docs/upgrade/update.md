@@ -18,7 +18,7 @@ cd /var/www/billing
 
 php artisan down
 
-curl -L https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
+curl -Lo EsmileBilling.zip https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
 
 unzip EsmileBilling.zip
 

@@ -11,7 +11,7 @@ cd /var/www/billing
 ```
 
 ```shell
-curl -L https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
+curl -Lo EsmileBilling.zip https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
 unzip EsmileBilling.zip
 chmod -R 755 storage/* bootstrap/cache/
 ```

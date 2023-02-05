@@ -7,14 +7,14 @@ title: Updating
 
 ```bash
 cd /var/www
-mv esmilebilling esmilebilling-backup
-mysqldump -u username -p password mydatabase > /path/to/esmilebilling-backup.sql
+mv billing billing-backup
+mysqldump -u username -p password mydatabase > /path/to/billing-backup.sql
 ```
 
 ## Install the New Version
 
 ```bash
-cd /var/www/esmilebilling
+cd /var/www/billing
 
 php artisan down
 
@@ -36,13 +36,13 @@ php artisan migrate --seed --force
 
 ```bash
 # If using NGINX or Apache (not on CentOS):
-chown -R www-data:www-data /var/www/esmilebilling/*
+chown -R www-data:www-data /var/www/billing/*
 
 # If using NGINX on CentOS:
-chown -R nginx:nginx /var/www/esmilebilling/*
+chown -R nginx:nginx /var/www/billing/*
 
 # If using Apache on CentOS
-chown -R apache:apache /var/www/esmilebilling/*
+chown -R apache:apache /var/www/billing/*
 ```
 
 ## Install

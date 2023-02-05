@@ -8,7 +8,7 @@ title: Requirements
 ## Required Dependencies
 
 - Pterodactyl panel **v1.4 or above** already installed on the same or different server
-- **PHP >= 7.4** and the following extensions: `BCMath`, `Ctype`, `Fileinfo`, `JSON`, `Mbstring`, `OpenSSL`, `PDO`, `MySQL`, `Tokenizer`, `XML`, `GD`, `cURL`, and `Zip` (`FPM` if using nginx)
+- **PHP >= 8.2** and the following extensions: `BCMath`, `Ctype`, `Fileinfo`, `JSON`, `Mbstring`, `OpenSSL`, `PDO`, `MySQL`, `Tokenizer`, `XML`, `GD`, `cURL`, and `Zip` (`FPM` if using nginx)
 - Composer 2
 - Web server (**nginx** is recommended)
 - MySQL >= 5.7 or **MariaDB >= 10.2** (MariaDB is recommended)
@@ -25,30 +25,42 @@ If you have already installed Pterodactyl panel on the same server, you usually 
 apt update -y
 ```
 
-### Nginx
-
-```bash
-apt install -y nginx
-```
-
-#### Certbot
+### Certbot
 
 ```bash
 apt install -y certbot
 ```
 
-### PHP (8.0)
+### Dependency Installation
 
 ```bash
-apt -y install php8.0 php8.0-common php8.0-bcmath php8.0-ctype php8.0-fileinfo php8.0-json php8.0-mbstring openssl php8.0-pdo php8.0-mysql php8.0-tokenizer php8.0-xml php8.0-gd php8.0-curl php8.0-zip php8.0-fpm unzip
-systemctl enable php8.0-fpm
-systemctl start php8.0-fpm
+# Add "add-apt-repository" command
+apt -y install software-properties-common curl apt-transport-https ca-certificates gnupg
+
+# Add additional repositories for PHP, Redis, and MariaDB
+LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+
+# Add Redis official APT repository
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+# MariaDB repo setup script can be skipped on Ubuntu 22.04
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+
+# Update repositories list
+apt update
+
+# Add universe repository if you are on Ubuntu 18.04
+apt-add-repository universe
+
+# Install Dependencies
+apt -y install php8.2 php8.2-{common,cli,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} mariadb-server nginx tar unzip git redis-server
 ```
 
-#### Composer
+### Composer
 
 ```bash
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
 ### MariaDB

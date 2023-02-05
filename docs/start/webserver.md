@@ -11,7 +11,15 @@ First, create an SSL certificate. Please follow [the guide from Pterodactyl](htt
 
 ### Create Virtual Host Configuration
 
-Next, create a file named `/etc/nginx/sites-available/esmilebilling.conf`. Then, copy and paste the content below into the file. Replace &lt;domain&gt; with your domain name.
+Next, create a file named `/etc/nginx/sites-available/billing.conf`. Then, copy and paste the content below into the file. Replace &lt;domain&gt; with your domain name.
+
+#### Example
+
+```bash
+nano /etc/nginx/sites-available/billing.conf
+```
+
+#### Conf File
 
 ```conf
 server {
@@ -23,7 +31,7 @@ server {
 server {
     listen 443 ssl http2;
     server_name <domain>; # Edit this
-    root /var/www/esmilebilling/public;
+    root /var/www/billing/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
@@ -36,8 +44,8 @@ server {
 
     charset utf-8;
 
-    access_log /var/log/nginx/esmilebilling.access.log;
-    error_log  /var/log/nginx/esmilebilling.error.log error;
+    access_log /var/log/nginx/billing.access.log;
+    error_log  /var/log/nginx/billing.error.log error;
 
     ssl_certificate /etc/letsencrypt/live/<domain>/fullchain.pem; # Edit this
     ssl_certificate_key /etc/letsencrypt/live/<domain>/privkey.pem; # Edit this
@@ -56,7 +64,7 @@ server {
     error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/run/php/php8.0-fpm.sock;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
@@ -77,7 +85,7 @@ server {
 Finally, enable the configuration and restart the Nginx server.
 
 ```bash
-ln -s /etc/nginx/sites-available/esmilebilling.conf /etc/nginx/sites-enabled/esmilebilling.conf
+ln -s /etc/nginx/sites-available/billing.conf /etc/nginx/sites-enabled/billing.conf
 systemctl restart nginx
 ```
 

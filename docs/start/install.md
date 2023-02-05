@@ -6,12 +6,12 @@ title: Installation
 ## Download Files
 
 ```shell
-mkdir -p /var/www/esmilebilling
-cd /var/www/esmilebilling
+mkdir -p /var/www/billing
+cd /var/www/billing
 ```
 
 ```shell
-curl -Lo panel.tar.gz https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
+curl -L https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
 unzip EsmileBilling.zip
 chmod -R 755 storage/* bootstrap/cache/
 ```
@@ -46,13 +46,10 @@ If these steps are omitted, billing may not work.
 
 ```shell
 php artisan p:update:config
-php artisan p:update:settings
-```
 
-## Database Setup
-
-```shell
 php artisan migrate --seed --force
+
+php artisan p:update:settings
 ```
 
 ## Optimize Performance
@@ -75,7 +72,7 @@ crontab -e
 Copy and paste the following line to the file.
 
 ```shell
-* * * * * php /var/www/esmilebilling/artisan schedule:run >> /dev/null 2>&1
+* * * * * php /var/www/billing/artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## Admin User

@@ -13,7 +13,7 @@ In the admin area, go to the Settings page. You may skip some of them if they we
 
 - **Company Name**
 - **Store URL**: you must include `https://` and do not add a `/` at the end
-- **Logo Path**: upload your own file to `/path/to/esmilebilling/public/img/yourlogo.webp` first (.webp file recommended by Google)
+- **Logo Path**: upload your own file to `/path/to/billing/public/img/yourlogo.webp` first (.webp file recommended by Google)
 - **Favicon Path**: same instruction as `Logo Path`
 - **Panel URL**: same instruction as `Store URL`
 - **Panel Client API Key**: your Pterodactyl panel admin account API key

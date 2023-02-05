@@ -5,10 +5,6 @@ title: Webserver Configuration
 
 ## For Nginx Users
 
-### Create SSL Certificate
-
-First, create an SSL certificate. Please follow [the guide from Pterodactyl](https://pterodactyl.io/tutorials/creating_ssl_certificates.html).
-
 ### Create Virtual Host Configuration
 
 Next, create a file named `/etc/nginx/sites-available/billing.conf`. Then, copy and paste the content below into the file. Replace &lt;domain&gt; with your domain name.
@@ -23,36 +19,14 @@ nano /etc/nginx/sites-available/billing.conf
 
 ```conf
 server {
+    # Replace the example <domain> with your domain name or IP address
     listen 80;
     server_name <domain>;
-    return 301 https://$server_name$request_uri;
-}
 
-server {
-    listen 443 ssl http2;
-    server_name <domain>; # Edit this
+
     root /var/www/billing/public;
-
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-Content-Type-Options "nosniff";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Robots-Tag none;
-    add_header Content-Security-Policy "frame-ancestors 'self'";
-    add_header Referrer-Policy same-origin;
-
-    index index.php;
-
+    index index.html index.htm index.php;
     charset utf-8;
-
-    access_log /var/log/nginx/billing.access.log;
-    error_log  /var/log/nginx/billing.error.log error;
-
-    ssl_certificate /etc/letsencrypt/live/<domain>/fullchain.pem; # Edit this
-    ssl_certificate_key /etc/letsencrypt/live/<domain>/privkey.pem; # Edit this
-    ssl_session_cache shared:SSL:10m;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384";
-    ssl_prefer_server_ciphers on;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -61,23 +35,46 @@ server {
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
-    error_page 404 /index.php;
+    access_log off;
+    error_log  /var/log/nginx/billing.app-error.log error;
+
+    # allow larger file uploads and longer script runtimes
+    client_max_body_size 100m;
+    client_body_timeout 120s;
+
+    sendfile off;
 
     location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
     }
 
     location ~ /\.ht {
         deny all;
     }
-
-    location ~ /\.(?!well-known).* {
-        deny all;
-    }
 }
+```
+
+### Create Certificate If You Don't Have One Or If You Need One
+
+```bash
+# Nginx
+certbot certonly --nginx -d example.com
+# Apache
+certbot certonly --apache -d example.com
+# Standalone - Use this if neither works. Make sure to stop your webserver first when using this method.
+certbot certonly --standalone -d example.com
 ```
 
 ### Enable the Configuration

@@ -29,6 +29,10 @@ apt update -y
 
 ```bash
 apt install -y certbot
+# Run this if you use Nginx
+sudo apt install -y python3-certbot-nginx
+# Run this if you use Apache
+sudo apt install -y python3-certbot-apache
 ```
 
 ### Dependency Installation

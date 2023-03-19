@@ -1,6 +1,6 @@
 module.exports = {
-  title: "EsmileBilling",
-  tagline: "Billing software specially made for Pterodactyl panel",
+  title: "Esmile",
+  tagline: "Documentation of smile packages, applications and others",
   url: "https://docs.mresmile.com",
   baseUrl: "/",
   favicon: "img/favicon.webp",
@@ -8,9 +8,9 @@ module.exports = {
   projectName: "docs",
   themeConfig: {
     navbar: {
-      title: "EsmileBilling",
+      title: "Esmile",
       logo: {
-        alt: "EsmileBilling Icon",
+        alt: "Esmile Icon",
         src: "img/icon.webp",
       },
       items: [
@@ -26,7 +26,7 @@ module.exports = {
           position: "left",
         },
         {
-          href: "https://github.com/Zastinian/EsmileBilling",
+          href: "https://github.com/Zastinian",
           label: "GitHub",
           position: "right",
         },
@@ -67,7 +67,7 @@ module.exports = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/Zastinian/EsmileBilling",
+              href: "https://github.com/Zastinian",
             },
           ],
         },
@@ -81,11 +81,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/Zastinian/EsmileBillingDocs/edit/master/",
+          editUrl: "https://github.com/Zastinian/EsmileDocs/edit/master/",
         },
         blog: {
           showReadingTime: true,
-          editUrl: "https://github.com/Zastinian/EsmileBillingDocs/edit/master/blog/",
+          editUrl: "https://github.com/Zastinian/EsmileDocs/edit/master/blog/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -93,4 +93,4 @@ module.exports = {
       },
     ],
   ],
-}
+};

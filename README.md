@@ -1,5 +1,5 @@
-# EsmileBilling Documentation
+# Esmile Documentation
 
-### The documentation for guiding you on how to set up EsmileBilling on your server
+### Esmile's general project documentation
 
-#### Note: Our documentation is still under development.
+#### Note: Documentation is still under development.

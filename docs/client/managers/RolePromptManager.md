@@ -56,7 +56,7 @@ It fetches all role prompts from the API and returns them in a cache
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="RolePromptManager+set"></a>
 
@@ -68,7 +68,7 @@ It sets the role prompts for the guild
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="RolePromptManager.transformPayload"></a>
 

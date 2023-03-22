@@ -76,7 +76,7 @@ It gets a list of members from the API and returns a cache of the members
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildMemberManager+search"></a>
 
@@ -88,7 +88,7 @@ It searches for members in a guild
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildMemberManager+kick"></a>
 
@@ -114,7 +114,7 @@ It bans a member from a guild
 | Param | Description |
 | --- | --- |
 | member | The member to ban. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildMemberManager+unban"></a>
 

@@ -58,7 +58,7 @@ This function is a constructor for the class
 | Param | Description |
 | --- | --- |
 | [guild] | The guild ID or guild object to edit the discovery metadata for. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildDiscoveryManager.transformPayload"></a>
 

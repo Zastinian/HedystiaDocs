@@ -37,5 +37,5 @@ It edits the voice state of a user in a guild
 | Param | Description |
 | --- | --- |
 | user | The user to edit the voice state of. |
-| [options] | { |
+| [options] | Object |
 

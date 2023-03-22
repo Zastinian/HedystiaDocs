@@ -57,7 +57,7 @@ It fetches a stage instance from the API and adds it to the cache
 | Param | Description |
 | --- | --- |
 | channel | The channel to fetch. Can be a channel ID or a channel object. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="StageInstanceManager+create"></a>
 
@@ -69,7 +69,7 @@ It creates a new stage instance.
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="StageInstanceManager+edit"></a>
 

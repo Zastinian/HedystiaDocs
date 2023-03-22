@@ -81,7 +81,7 @@ It creates a sticker.
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="StickerManager+edit"></a>
 
@@ -94,7 +94,7 @@ It edits a sticker.
 | Param | Description |
 | --- | --- |
 | sticker | The sticker to edit. Can be a sticker object or a sticker ID. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="StickerManager+delete"></a>
 

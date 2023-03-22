@@ -112,7 +112,7 @@ It takes a template code and creates a new guild with the template
 | Param | Description |
 | --- | --- |
 | code | The code of the template you want to use. |
-| [options] | { |
+| [options] | Object |
 
 <a name="Client+generateInvite"></a>
 
@@ -124,7 +124,7 @@ The function generates an invite link for the user to invite the bot to their se
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 
 <a name="Client+fetchSticker"></a>
 

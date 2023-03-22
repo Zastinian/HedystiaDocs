@@ -1,16 +1,16 @@
-import React from "react"
-import classnames from "classnames"
-import Layout from "@theme/Layout"
-import Link from "@docusaurus/Link"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
-import useBaseUrl from "@docusaurus/useBaseUrl"
-import styles from "./styles.module.css"
+import React from "react";
+import classnames from "classnames";
+import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import styles from "./styles.module.css";
 
 function Home() {
-  const context = useDocusaurusContext()
-  const {siteConfig = {}} = context
+  const context = useDocusaurusContext();
+  const {siteConfig = {}} = context;
   return (
-    <Layout description="Billing software specially made for Pterodactyl panel">
+    <Layout description="Documentation of Esmile packages, applications and others">
       <header className={classnames("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -23,7 +23,7 @@ function Home() {
         </div>
       </header>
     </Layout>
-  )
+  );
 }
 
-export default Home
+export default Home;

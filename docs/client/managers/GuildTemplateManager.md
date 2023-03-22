@@ -57,7 +57,7 @@ It fetches all the templates from the API and returns a new cache of them
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildTemplateManager+create"></a>
 
@@ -69,7 +69,7 @@ It fetches all the templates from the API and returns a new cache of them
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildTemplateManager+edit"></a>
 
@@ -82,7 +82,7 @@ It edits a guild template
 | Param | Description |
 | --- | --- |
 | code | The code of the template you want to edit. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildTemplateManager+sync"></a>
 

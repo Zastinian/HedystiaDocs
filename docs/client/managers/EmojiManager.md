@@ -58,7 +58,7 @@ It creates a new emoji
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="EmojiManager+edit"></a>
 
@@ -71,7 +71,7 @@ It edits an emoji
 | Param | Description |
 | --- | --- |
 | emoji | The emoji to edit. Can be an emoji object, or an emoji ID. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="EmojiManager+delete"></a>
 

@@ -71,7 +71,7 @@ It creates a role
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="RoleManager+edit"></a>
 
@@ -84,7 +84,7 @@ It edits a role
 | Param | Description |
 | --- | --- |
 | role | The role to edit. Can be a role object or a role ID. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="RoleManager+delete"></a>
 
@@ -121,7 +121,7 @@ It takes an array of role objects, transforms them into a format that the API ca
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="RoleManager.transformPayload"></a>
 

@@ -60,7 +60,7 @@ It creates a new guild
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 
 <a name="GuildManager+fetch"></a>
 
@@ -99,7 +99,7 @@ It edits a guild
 | Param | Description |
 | --- | --- |
 | guilds | The guild object |
-| [options] | { |
+| [options] | Object |
 
 <a name="GuildManager+delete"></a>
 
@@ -136,7 +136,7 @@ It modifies the MFA level of a guild
 | Param | Description |
 | --- | --- |
 | guild | The guild to modify the MFA level of. |
-| [options] | { |
+| [options] | Object |
 
 <a name="GuildManager.transformPayload"></a>
 

@@ -373,5 +373,5 @@ It creates a webhook for the channel
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 

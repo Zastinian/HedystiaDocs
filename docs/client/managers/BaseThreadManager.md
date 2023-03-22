@@ -87,7 +87,7 @@ This function fetches archived threads from a channel
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="BaseThreadManager+fetchForumThreads"></a>
 

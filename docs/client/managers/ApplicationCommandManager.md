@@ -148,7 +148,7 @@ If the option type is a sub command group or sub command, return a new instance 
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 
 <a name="ApplicationCommandManager.transformPayload"></a>
 

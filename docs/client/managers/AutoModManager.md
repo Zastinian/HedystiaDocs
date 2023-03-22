@@ -99,7 +99,7 @@ It edits an existing rule
 | Param | Description |
 | --- | --- |
 | rule | The rule to edit. Can be a rule object or a rule ID. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="AutoModManager+delete"></a>
 

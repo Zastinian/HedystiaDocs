@@ -59,7 +59,7 @@ It creates a new permission overwrite for a user or role
 | --- | --- |
 | user | The user or role to add the overwrite to. |
 | overwrites | An object containing the permissions to overwrite. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="PermissionOverwriteManager+set"></a>
 

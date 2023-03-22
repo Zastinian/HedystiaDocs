@@ -48,7 +48,7 @@ It fetches the permissions of the command
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="ApplicationCommandPermission.transformPermissions"></a>
 

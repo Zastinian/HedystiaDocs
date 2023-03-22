@@ -65,6 +65,6 @@ It deletes an integration from a guild.
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 | reason | The reason for the audit log. |
 

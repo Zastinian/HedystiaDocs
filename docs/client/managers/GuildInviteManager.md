@@ -52,7 +52,7 @@ It fetches all the invites for the guild and returns a new cache of the invites
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildInviteManager+delete"></a>
 

@@ -32,7 +32,7 @@
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildMemberVerificationManager+edit"></a>
 
@@ -44,7 +44,7 @@ It edits the verification form
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildMemberVerificationManager.createFormFields"></a>
 

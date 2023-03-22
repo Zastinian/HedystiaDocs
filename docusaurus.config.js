@@ -1,6 +1,6 @@
 module.exports = {
   title: "Esmile",
-  tagline: "Documentation of smile packages, applications and others",
+  tagline: "Documentation of Esmile packages, applications and others",
   url: "https://docs.mresmile.com",
   baseUrl: "/",
   favicon: "img/favicon.webp",

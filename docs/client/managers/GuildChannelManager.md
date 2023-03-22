@@ -37,7 +37,7 @@ It creates a new channel in the guild.
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 
 <a name="GuildChannelManager+modifyPosition"></a>
 
@@ -49,5 +49,5 @@ It takes an array of objects, transforms them, and then sends them to the API
 
 | Param | Description |
 | --- | --- |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 

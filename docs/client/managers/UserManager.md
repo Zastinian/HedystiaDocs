@@ -90,5 +90,5 @@ It creates a message payload, creates a DM channel, and sends the message payloa
 | Param | Description |
 | --- | --- |
 | user | The user to send the message to. |
-| [options] | { |
+| [options] | Object |
 

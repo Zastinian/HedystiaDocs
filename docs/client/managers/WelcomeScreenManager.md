@@ -40,7 +40,7 @@ It edits the welcome screen of a guild.
 
 | Param | Description |
 | --- | --- |
-| [options] | { |
+| [options] | Object |
 
 <a name="WelcomeScreenManager.transformChannels"></a>
 

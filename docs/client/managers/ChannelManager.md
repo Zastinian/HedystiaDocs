@@ -89,7 +89,7 @@ It edits a channel
 | Param | Description |
 | --- | --- |
 | channel | The channel to edit. |
-| [options] | { |
+| [options] | Object |
 
 <a name="ChannelManager+delete"></a>
 
@@ -115,7 +115,7 @@ It creates an invite for a channel
 | Param | Description |
 | --- | --- |
 | channel | The channel to create the invite for. |
-| [options] | { |
+| [options] | Object |
 
 <a name="ChannelManager+follow"></a>
 
@@ -128,7 +128,7 @@ It follows a channel
 | Param | Description |
 | --- | --- |
 | news | The channel you want to follow. |
-| [options] | { |
+| [options] | Object |
 
 <a name="ChannelManager+triggerTyping"></a>
 

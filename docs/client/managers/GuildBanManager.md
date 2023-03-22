@@ -45,7 +45,7 @@ It adds a ban to the cache
 | --- | --- |
 | bans | The ban object or ID of the ban to add to the cache. |
 | [guildId] | The ID of the guild to fetch the bans from. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildBanManager+create"></a>
 
@@ -58,7 +58,7 @@ It bans a user from the guild.
 | Param | Description |
 | --- | --- |
 | user | The user to ban. |
-| [options] | An object containing the following properties: |
+| [options] | Object |
 
 <a name="GuildBanManager+remove"></a>
 

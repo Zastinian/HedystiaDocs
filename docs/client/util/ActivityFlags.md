@@ -40,17 +40,18 @@ All available flag values.
 The individual flags that can be used to represent activity options.
 
 **Kind**: static enum of [<code>ActivityFlags</code>](#ActivityFlags)  
+**Read only**: true  
 **Properties**
 
 | Name | Type | Default |
 | --- | --- | --- |
-| Instance | <code>number</code> | <code></code> | 
-| Join | <code>number</code> | <code></code> | 
-| Spectate | <code>number</code> | <code></code> | 
-| Join_Request | <code>number</code> | <code></code> | 
-| Sync | <code>number</code> | <code></code> | 
-| Play | <code>number</code> | <code></code> | 
-| Party_Privacy_Friends | <code>number</code> | <code></code> | 
-| Party_Privacy_Voice_Channel | <code>number</code> | <code></code> | 
-| Embedded | <code>number</code> | <code></code> | 
+| Instance | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Join | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Spectate | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Join_Request | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Sync | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Play | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Party_Privacy_Friends | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Party_Privacy_Voice_Channel | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Embedded | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
 

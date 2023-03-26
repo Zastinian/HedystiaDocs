@@ -38,12 +38,13 @@ Bitfield representing all available thread member flags.
 Thread member flags.
 
 **Kind**: static enum of [<code>ThreadMemberFlags</code>](#ThreadMemberFlags)  
+**Read only**: true  
 **Properties**
 
 | Name | Type | Default |
 | --- | --- | --- |
-| Has_Interacted | <code>bigint</code> | <code></code> | 
-| All_Messages | <code>bigint</code> | <code></code> | 
-| Only_Mentions | <code>bigint</code> | <code></code> | 
-| No_Messages | <code>bigint</code> | <code></code> | 
+| Has_Interacted | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| All_Messages | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Only_Mentions | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| No_Messages | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
 

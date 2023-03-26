@@ -45,5 +45,8 @@ The flags for a guild member.
 
 | Name | Type | Default |
 | --- | --- | --- |
-| Did_Rejoin | <code>bigint</code> | <code></code> | 
+| Did_Rejoin | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Completed_Onboarding | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Bypasses_Verification | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Started_Onboarding | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
 

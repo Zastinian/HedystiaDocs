@@ -46,23 +46,23 @@ The available flags for the Intents bitfield.
 
 | Name | Type | Default |
 | --- | --- | --- |
-| Guilds | <code>bigint</code> | <code></code> | 
-| Guild_Members | <code>bigint</code> | <code></code> | 
-| Guild_Moderation | <code>bigint</code> | <code></code> | 
-| Guild_Emojis_And_Stickers | <code>bigint</code> | <code></code> | 
-| Guild_Integrations | <code>bigint</code> | <code></code> | 
-| Guild_Webhooks | <code>bigint</code> | <code></code> | 
-| Guild_Invites | <code>bigint</code> | <code></code> | 
-| Guild_Voice_States | <code>bigint</code> | <code></code> | 
-| Guild_Presences | <code>bigint</code> | <code></code> | 
-| Guild_Messages | <code>bigint</code> | <code></code> | 
-| Guild_Message_Reactions | <code>bigint</code> | <code></code> | 
-| Guild_Message_Typing | <code>bigint</code> | <code></code> | 
-| Direct_Messages | <code>bigint</code> | <code></code> | 
-| Direct_Message_Reactions | <code>bigint</code> | <code></code> | 
-| Direct_Message_Typing | <code>bigint</code> | <code></code> | 
-| Message_Content | <code>bigint</code> | <code></code> | 
-| Guild_Scheduled_Events | <code>bigint</code> | <code></code> | 
-| Auto_Moderation_Configuration | <code>bigint</code> | <code></code> | 
-| Auto_Moderation_Execution | <code>bigint</code> | <code></code> | 
+| Guilds | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Members | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Moderation | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Emojis_And_Stickers | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Integrations | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Webhooks | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Invites | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Voice_States | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Presences | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Messages | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Message_Reactions | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Message_Typing | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Direct_Messages | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Direct_Message_Reactions | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Direct_Message_Typing | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Message_Content | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Guild_Scheduled_Events | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Auto_Moderation_Configuration | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Auto_Moderation_Execution | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
 

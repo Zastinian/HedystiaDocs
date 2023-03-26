@@ -43,30 +43,15 @@ Application flag bitfields.
 **Read only**: true  
 **Properties**
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| Embedded_Released | <code>number</code> |  | The application has been embedded |
-| Managed_Emoji | <code>number</code> |  | The application can create emojis |
-| Group_Dm_Create | <code>number</code> |  | The application can create group DMs |
-| Gateway_Presence | <code>number</code> |  | The application can use gateway presence intents |
-| Gateway_Presence_Limited | <code>number</code> |  | The application can use gateway presence intents, but with lower privileged intents |
-| Gateway_Guild_Members | <code>number</code> |  | The application can use gateway guild members intents |
-| Gateway_Guild_Members_Limited | <code>number</code> |  | The application can use gateway guild members intents, but with lower privileged intents |
-| Verification_Pending_Guild_Limit | <code>number</code> |  | The application's guild limit is pending verification |
-| Embedded | <code>number</code> |  | The application is embedded |
-| Gateway_Message_Content | <code>number</code> |  | The application can use gateway message content intents |
-| Gateway_Message_Content_Limited | <code>number</code> |  | The application can use gateway message content intents, but with lower privileged intents |
-| Embedded_First_Party | <code>number</code> |  | The application is a first party embedded application |
-| Embedded_Released | <code>number</code> | <code></code> |  |
-| Managed_Emoji | <code>number</code> | <code></code> |  |
-| Group_Dm_Create | <code>number</code> | <code></code> |  |
-| Gateway_Presence | <code>number</code> | <code></code> |  |
-| Gateway_Presence_Limited | <code>number</code> | <code></code> |  |
-| Gateway_Guild_Members | <code>number</code> | <code></code> |  |
-| Gateway_Guild_Members_Limited | <code>number</code> | <code></code> |  |
-| Verification_Pending_Guild_Limit | <code>number</code> | <code></code> |  |
-| Embedded | <code>number</code> | <code></code> |  |
-| Gateway_Message_Content | <code>number</code> | <code></code> |  |
-| Gateway_Message_Content_Limited | <code>number</code> | <code></code> |  |
-| Embedded_First_Party | <code>number</code> | <code></code> |  |
+| Name | Type | Default |
+| --- | --- | --- |
+| Gateway_Presence | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Gateway_Presence_Limited | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Gateway_Guild_Members | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Gateway_Guild_Members_Limited | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Verification_Pending_Guild_Limit | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Embedded | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Gateway_Message_Content | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Gateway_Message_Content_Limited | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
+| Application_Command_Badge | <code>Object.&lt;string, bigint&gt;</code> | <code></code> | 
 

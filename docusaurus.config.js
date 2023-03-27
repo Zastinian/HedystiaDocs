@@ -3,10 +3,16 @@ module.exports = {
   tagline: "Documentation of Esmile packages, applications and others",
   url: "https://docs.mresmile.com",
   baseUrl: "/",
-  favicon: "img/favicon.webp",
+  favicon: "img/favicon.ico",
   organizationName: "Esmile",
   projectName: "docs",
+
   themeConfig: {
+    colorMode: {
+      defaultMode: "dark",
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: "Esmile",
       logo: {
@@ -74,10 +80,13 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Esmile. All rights reserved.`,
     },
+    prism: {
+      darkTheme: require("prism-react-renderer/themes/palenight"),
+    },
   },
   presets: [
     [
-      "@docusaurus/preset-classic",
+      "classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),

@@ -1,0 +1,7 @@
+{
+  "build": "readme.md",
+  "files": ["_readme.md"]
+}
+
+//#include "isValidEmail.md"
+//markdown-include .\markdown.json

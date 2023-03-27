@@ -1,9 +1,6 @@
 ---
 id: start
 title: Start
-description: Installation
-sidebar_position: 1
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine] 
 ---
 
 ## Installation

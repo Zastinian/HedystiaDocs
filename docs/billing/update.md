@@ -1,6 +1,9 @@
 ---
 id: update
 title: Updating
+description: Updating Section
+sidebar_position: 2
+keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
 ---
 
 ## Backup Current Installation

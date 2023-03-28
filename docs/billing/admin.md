@@ -1,6 +1,9 @@
 ---
-id: admin-area
-title: Admin Area
+id: admin
+title: Admin
+description: Admin Section
+sidebar_position: 4
+keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
 ---
 
 ## Log into Admin Area

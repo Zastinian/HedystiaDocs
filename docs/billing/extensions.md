@@ -1,9 +1,18 @@
 ---
-id: paypal
-title: PayPal
+id: extensions
+title: Extensions
+description: Extensions Section
+sidebar_position: 3
+keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
 ---
 
-## Obtaining API Credentials
+## What are extensions?
+
+- **Gateways** add payment gateways, e.g. PayPal
+
+## Paypal
+
+### Obtaining API Credentials
 
 ### Sandbox Mode
 

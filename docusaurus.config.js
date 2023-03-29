@@ -81,7 +81,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Esmile. All rights reserved.`,
     },
     prism: {
-      darkTheme: require("prism-react-renderer/themes/palenight"),
+      darkTheme: require("prism-react-renderer/themes/oceanicNext"),
     },
   },
   presets: [

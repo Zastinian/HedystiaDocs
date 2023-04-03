@@ -46,9 +46,7 @@ client.on("messageCreate", (msg) => {
 
 ```js
 client.once("ready", async () => {
-  let slash = [
-    new Slash().setName("command").setDescription("Command").setDmPermission(true),
-  ];
+  let slash = [new Slash().setName("command").setDescription("Command").setDmPermission(true)];
   client.application.commands.set(slash);
   console.log("Bot on: " + client.user.tag);
 });
@@ -67,9 +65,7 @@ client.on("interactionCreate", (interaction) => {
 
 ```js
 client.once("ready", async () => {
-  let slash = [
-    new Slash().setName("help").setDescription("Help Command").setDmPermission(true),
-  ];
+  let slash = [new Slash().setName("help").setDescription("Help Command").setDmPermission(true)];
   client.application.commands.set(slash);
   console.log("Bot on: " + client.user.tag);
 });

@@ -146,7 +146,7 @@ It fetches commands from the API
 | Param   | Description           |
 | ------- | --------------------- |
 | command | The command to fetch. |
-| options | {                     |
+| options |                       |
 
 <a name="ApplicationCommandManager+delete"></a>
 
@@ -285,7 +285,7 @@ It fetches the command permissions for a guild
 | Param    | Description                                         |
 | -------- | --------------------------------------------------- |
 | commands | The command ID or an array of command IDs to fetch. |
-| options  | {                                                   |
+| options  |                                                     |
 
 <a name="ApplicationCommandPermissionManager+_fetchId"></a>
 
@@ -314,9 +314,9 @@ property, otherwise return undefined."
 **Kind**: static method of [<code>ApplicationCommandPermissionManager</code>](#ApplicationCommandPermissionManager)  
 **Returns**: The return value is an object with the following properties:
 
-| Param | Description                                       |
-| ----- | ------------------------------------------------- |
-| [o]   | -&gt; this is the object that is being passed in. |
+| Param | Description                                 |
+| ----- | ------------------------------------------- |
+| [o]   | This is the object that is being passed in. |
 
 <a name="ApplicationCommandPermissionManager.transformPermission"></a>
 
@@ -692,7 +692,7 @@ It fetches all the channels in a guild.
 | Param   | Description               |
 | ------- | ------------------------- |
 | channel | The channel ID or object. |
-| options | {                         |
+| options |                           |
 
 <a name="ChannelManager+_fetchId"></a>
 
@@ -1574,7 +1574,7 @@ It fetches a guild by ID
 | Param   | Description            |
 | ------- | ---------------------- |
 | guild   | The guild object or ID |
-| options | {                      |
+| options |                        |
 
 <a name="GuildManager+edit"></a>
 
@@ -1640,9 +1640,9 @@ transformed
 **Kind**: static method of [<code>GuildManager</code>](#GuildManager)  
 **Returns**: The payload is being returned.
 
-| Param     | Description |
-| --------- | ----------- |
-| [payload] | {           |
+| Param     |
+| --------- |
+| [payload] |
 
 <a name="GuildManager.transformOptions"></a>
 
@@ -1730,7 +1730,7 @@ It fetches the members of a guild
 | Param   | Description                                                                     |
 | ------- | ------------------------------------------------------------------------------- |
 | member  | The member to fetch. Can be a user ID, a user object, or a guild member object. |
-| options | {                                                                               |
+| options |                                                                                 |
 
 <a name="GuildMemberManager+list"></a>
 
@@ -2768,7 +2768,7 @@ It edits a message.
 | Param   | Description          |
 | ------- | -------------------- |
 | message | The message to edit. |
-| options | {                    |
+| options |                      |
 
 <a name="MessageManager+fetch"></a>
 
@@ -2782,7 +2782,7 @@ It fetches messages from a channel
 | Param   | Description                                                               |
 | ------- | ------------------------------------------------------------------------- |
 | message | The message to fetch. Can be a message object, a message ID, or a string. |
-| options | {                                                                         |
+| options |                                                                           |
 
 <a name="MessageManager+_fetchId"></a>
 

@@ -80,7 +80,7 @@ It fetches an invite from the Discord API
 | Param  | Description     |
 | ------ | --------------- |
 | invite | The invite code |
-| query  | {               |
+| query  |                 |
 
 <a name="Client+fetchPreview"></a>
 
@@ -228,6 +228,6 @@ properties, but with the type property converted to a number.
 **Kind**: static method of [<code>Client</code>](#Client)  
 **Returns**: An object with the properties name, type, and url.
 
-| Param        | Description |
-| ------------ | ----------- |
-| [activities] | {           |
+| Param        |
+| ------------ |
+| [activities] |

@@ -224,9 +224,9 @@ id: The id of the permission.
 type: The type of the permission.
 permission: The permission.
 
-| Param         | Description |
-| ------------- | ----------- |
-| [permissions] | {           |
+| Param         |
+| ------------- |
+| [permissions] |
 
 <a name="AutocompleteInteraction"></a>
 
@@ -287,9 +287,9 @@ property
 **Kind**: static method of [<code>AutocompleteInteraction</code>](#AutocompleteInteraction)  
 **Returns**: The transformed choices object.
 
-| Param     | Description |
-| --------- | ----------- |
-| [choices] | {           |
+| Param     |
+| --------- |
+| [choices] |
 
 <a name="BaseGuildChannel"></a>
 
@@ -823,7 +823,7 @@ It's a constructor for the Application class.
 
 | Param  | Description   |
 | ------ | ------------- |
-| [data] | {             |
+| [data] |               |
 | client | DiscordClient |
 
 <a name="ClientApplication+commands"></a>
@@ -4686,9 +4686,9 @@ object with a property called "type" and a property called "components"
 **Kind**: static method of [<code>ModalInteraction</code>](#ModalInteraction)  
 **Returns**: An object with the following properties:
 
-| Param    | Description |
-| -------- | ----------- |
-| [fields] | {           |
+| Param    |
+| -------- |
+| [fields] |
 
 <a name="NewsChannel"></a>
 
@@ -5473,9 +5473,9 @@ It edits the stage instance
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
 **Returns**: The return value of the edit method.
 
-| Param   | Description |
-| ------- | ----------- |
-| options | {           |
+| Param   |
+| ------- |
+| options |
 
 <a name="StageInstance+delete"></a>
 
@@ -6528,9 +6528,9 @@ It sends a packet to the Discord API to join the voice channel
 **Kind**: instance method of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
 **Returns**: The VoiceChannel object.
 
-| Param     | Description                                    |
-| --------- | ---------------------------------------------- |
-| [options] | An object containing the following properties: |
+| Param     | Description |
+| --------- | ----------- |
+| [options] | Object      |
 
 <a name="VoiceBasedChannels+disconnect"></a>
 

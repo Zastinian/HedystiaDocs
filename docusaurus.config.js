@@ -6,7 +6,6 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "Esmile",
   projectName: "docs",
-
   themeConfig: {
     colorMode: {
       defaultMode: "dark",

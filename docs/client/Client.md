@@ -3,7 +3,7 @@ id: client
 title: Client
 description: Discord Bot Client
 sidebar_position: 2
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="Client"></a>

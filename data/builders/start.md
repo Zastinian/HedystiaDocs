@@ -17,7 +17,7 @@ yarn add esmile-builders
 
 ## Links
 
-- [Discord](https://discord.gg/aXvuUpvRQs) [Esmile Discord]
+- [Discord](https://discord.gg/aXvuUpvRQs) [Hedystia Discord]
 
 ## Compatible With
 

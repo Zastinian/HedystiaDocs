@@ -3,7 +3,7 @@ id: managers
 title: Managers
 description: Managers Section
 sidebar_position: 4
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="ActionsManager"></a>

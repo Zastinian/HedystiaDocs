@@ -3,7 +3,7 @@ id: start
 title: Start
 description: Installation
 sidebar_position: 1
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 ## Installation
@@ -20,7 +20,7 @@ yarn add esmile-builders
 
 ## Links
 
-- [Discord](https://discord.gg/aXvuUpvRQs) [Esmile Discord]
+- [Discord](https://discord.gg/aXvuUpvRQs) [Hedystia Discord]
 
 ## Compatible With
 

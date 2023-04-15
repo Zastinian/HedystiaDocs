@@ -1,10 +1,10 @@
 module.exports = {
-  title: "Esmile",
-  tagline: "Documentation of Esmile packages, applications and others",
+  title: "Hedystia",
+  tagline: "Documentation of Hedystia packages, applications and others",
   url: "https://docs.mresmile.com",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "Esmile",
+  organizationName: "Hedystia",
   projectName: "docs",
   themeConfig: {
     colorMode: {
@@ -13,9 +13,9 @@ module.exports = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: "Esmile",
+      title: "Hedystia",
       logo: {
-        alt: "Esmile Icon",
+        alt: "Hedystia Icon",
         src: "img/icon.webp",
       },
       items: [
@@ -77,7 +77,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Esmile. All rights reserved.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Hedystia. All rights reserved.`,
     },
     prism: {
       darkTheme: require("prism-react-renderer/themes/oceanicNext"),
@@ -89,11 +89,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/Zastinian/EsmileDocs/edit/master/",
+          editUrl: "https://github.com/Zastinian/HedystiaDocs/edit/master/",
         },
         blog: {
           showReadingTime: true,
-          editUrl: "https://github.com/Zastinian/EsmileDocs/edit/master/blog/",
+          editUrl: "https://github.com/Zastinian/HedystiaDocs/edit/master/blog/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

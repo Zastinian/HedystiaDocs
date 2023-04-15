@@ -3,7 +3,7 @@ id: structures
 title: Structures
 description: Structures Section
 sidebar_position: 5
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="Activity"></a>

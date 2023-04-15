@@ -1,5 +1,5 @@
-# Esmile Documentation
+# Hedystia Documentation
 
-### Esmile's general project documentation
+### Hedystia's general project documentation
 
 #### Note: Documentation is still under development.

@@ -3,61 +3,66 @@ id: validation
 title: Validations
 description: Use of the validation section
 sidebar_position: 2
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine] 
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="isValidEmail"></a>
 
 ## isValidEmail(email) ⇒ <code>Boolean</code>
+
 Check if it is a email
 
 **Kind**: global function  
-**Returns**: <code>Boolean</code> - Boolean  
+**Returns**: <code>Boolean</code> - Boolean
 
-| Param | Type |
-| --- | --- |
-| email | <code>String</code> | 
+| Param | Type                |
+| ----- | ------------------- |
+| email | <code>String</code> |
 
-**Example**  
+**Example**
+
 ```js
-console.log(isValidEmail('test@email.com'))
+console.log(isValidEmail("test@email.com"));
 ```
 
 <a name="isValidNumber"></a>
 
 ## isValidNumber(number) ⇒ <code>Boolean</code>
+
 Check if it is a number
 
 **Kind**: global function  
-**Returns**: <code>Boolean</code> - Boolean  
+**Returns**: <code>Boolean</code> - Boolean
 
-| Param | Type |
-| --- | --- |
-| number | <code>Number</code> | 
+| Param  | Type                |
+| ------ | ------------------- |
+| number | <code>Number</code> |
 
-**Example**  
+**Example**
+
 ```js
-console.log(isValidNumber(number))
+console.log(isValidNumber(number));
 ```
 
 <a name="isValidUrl"></a>
 
 ## isValidUrl(content, whitelist) ⇒ <code>Boolean</code>
+
 Check that the text is a link | Only texts with http: or https:
 
 **Kind**: global function  
-**Returns**: <code>Boolean</code> - Boolean  
+**Returns**: <code>Boolean</code> - Boolean
 
-| Param | Type |
-| --- | --- |
-| content | <code>String</code> | 
-| whitelist | <code>Array</code> | 
+| Param     | Type                |
+| --------- | ------------------- |
+| content   | <code>String</code> |
+| whitelist | <code>Array</code>  |
 
-**Example**  
+**Example**
+
 ```js
-console.log(isValidUrl('https://google.com'))
+console.log(isValidUrl("https://google.com"));
 ```
-
 
 <a name="isEmptyString"></a>
 

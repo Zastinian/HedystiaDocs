@@ -3,7 +3,7 @@ id: admin
 title: Admin
 description: Admin Section
 sidebar_position: 4
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 ## Log into Admin Area

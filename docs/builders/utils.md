@@ -3,7 +3,7 @@ id: utils
 title: Utils
 description: Utils Section
 sidebar_position: 4
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="module_ButtonStyle"></a>

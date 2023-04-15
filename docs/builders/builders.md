@@ -3,7 +3,7 @@ id: builders
 title: Builders
 description: Builders Section
 sidebar_position: 2
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 <a name="ButtonBuilder"></a>

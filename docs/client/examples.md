@@ -3,7 +3,7 @@ id: examples
 title: Examples
 description: Examples Section
 sidebar_position: 7
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 ## Start
@@ -18,7 +18,7 @@ const client = new Client({
     status: Status.Idle,
     activities: [
       {
-        name: "Esmile",
+        name: "Hedystia",
         type: "Playing",
       },
     ],

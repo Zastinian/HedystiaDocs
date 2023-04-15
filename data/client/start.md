@@ -17,7 +17,7 @@ yarn add esmile.js
 
 ## Links
 
-- [Discord](https://discord.gg/aXvuUpvRQs) [Esmile Discord]
+- [Discord](https://discord.gg/aXvuUpvRQs) [Hedystia Discord]
 
 ## Example
 
@@ -31,7 +31,7 @@ const client = new Client({
     status: Status.Idle,
     activities: [
       {
-        name: "Esmile",
+        name: "Hedystia",
         type: "Playing",
       },
     ],

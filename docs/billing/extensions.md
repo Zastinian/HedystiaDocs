@@ -3,7 +3,7 @@ id: extensions
 title: Extensions
 description: Extensions Section
 sidebar_position: 3
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 ## What are extensions?

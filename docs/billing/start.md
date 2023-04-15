@@ -3,7 +3,7 @@ id: start
 title: Getting Started
 description: Getting Started Section
 sidebar_position: 1
-keywords: [Esmile, MrEsmile, Esmile Bot, Boxmine]
+keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 ---
 
 # Manual Installation

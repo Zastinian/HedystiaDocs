@@ -17,11 +17,11 @@ yarn add esmile-useful
 
 ## Links
 
-- [Discord](https://discord.gg/aXvuUpvRQs) [Esmile Discord]
+- [Discord](https://discord.gg/aXvuUpvRQs) [Hedystia Discord]
 
 ## Example
 
-<img src='https://cdn.discordapp.com/attachments/851919671878746112/1007663992338128956/2022-08-12_09-45-24.gif' alt='Esmile' />
+<img src='https://cdn.discordapp.com/attachments/851919671878746112/1007663992338128956/2022-08-12_09-45-24.gif' alt='Hedystia' />
 
 ## Sections
 

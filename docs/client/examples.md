@@ -3,13 +3,13 @@ id: examples
 title: Examples
 description: Examples Section
 sidebar_position: 7
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 ## Start
 
 ```js
-const {Client, Intents, Status} = require("esmile.js");
+const {Client, Intents, Status} = require("hedystia.js");
 
 const client = new Client({
   token: "<BOT_TOKEN>",
@@ -76,12 +76,12 @@ client.on("interactionCreate", (interaction) => {
     const helpEmbed = new MessageEmbed()
       .setColor(0x0099ff)
       .setTitle("Help Menu")
-      .setURL("https://docs.mresmile.com/docs/client/start")
+      .setURL("https://docs.hedystia.com/docs/client/start")
       .setAuthor({
         name: "Name",
         iconURL:
           "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTMyYzU4YTVjNjNlZWUwZTgwN2ZiMDgxYzVlOGE0NGRhYTM3MmE1NCZjdD1z/K9svE9i7P3Ox2/giphy.gif",
-        url: "https://docs.mresmile.com/docs/client/start",
+        url: "https://docs.hedystia.com/docs/client/start",
       })
       .setDescription("Help Description")
       .setThumbnail({
@@ -124,7 +124,7 @@ client.on("interactionCreate", (interaction) => {
     const userEmbed = new MessageEmbed()
       .setColor(0x0099ff)
       .setTitle("User Info")
-      .setURL("https://docs.mresmile.com/docs/client/start")
+      .setURL("https://docs.hedystia.com/docs/client/start")
       .addFields({name: "Username", value: user.username, inline: true}, {name: "Discriminator", value: user.discriminator, inline: true})
       .setThumbnail({
         url: user.displayAvatarURL(),

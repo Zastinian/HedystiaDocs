@@ -3,7 +3,7 @@ id: utils
 title: Utils
 description: Utils Section
 sidebar_position: 6
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 <a name="ActivityFlags"></a>

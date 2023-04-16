@@ -1,7 +1,7 @@
 module.exports = {
   title: "Hedystia",
   tagline: "Documentation of Hedystia packages, applications and others",
-  url: "https://docs.mresmile.com",
+  url: "https://docs.hedystia.com",
   baseUrl: "/",
   favicon: "img/favicon.ico",
   organizationName: "Hedystia",
@@ -20,7 +20,7 @@ module.exports = {
       },
       items: [
         {
-          href: "https://mresmile.com",
+          href: "https://hedystia.com",
           label: "Website",
           position: "left",
         },
@@ -49,7 +49,7 @@ module.exports = {
           title: "Useful Links",
           items: [
             {
-              href: "https://mresmile.com",
+              href: "https://hedystia.com",
               label: "Website",
             },
             {

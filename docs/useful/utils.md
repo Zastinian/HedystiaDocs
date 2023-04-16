@@ -3,7 +3,7 @@ id: utils
 title: Utils
 description: Use of the utils section
 sidebar_position: 5
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 <a name="log"></a>

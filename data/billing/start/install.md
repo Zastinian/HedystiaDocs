@@ -11,8 +11,8 @@ cd /var/www/billing
 ```
 
 ```shell
-curl -Lo EsmileBilling.zip https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
-unzip EsmileBilling.zip
+curl -Lo HedystiaBilling.zip https://github.com/Zastinian/HedystiaBilling/releases/latest/download/HedystiaBilling.zip
+unzip HedystiaBilling.zip
 chmod -R 755 storage/* bootstrap/cache/
 ```
 
@@ -22,9 +22,9 @@ chmod -R 755 storage/* bootstrap/cache/
 mysql -u root -p
 
 # Remember to change 'yourPassword' below to be a unique password
-CREATE USER 'esmilebilling'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
+CREATE USER 'hedystiabilling'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
 CREATE DATABASE billing;
-GRANT ALL PRIVILEGES ON billing.* TO 'esmilebilling'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON billing.* TO 'hedystiabilling'@'127.0.0.1' WITH GRANT OPTION;
 exit
 ```
 

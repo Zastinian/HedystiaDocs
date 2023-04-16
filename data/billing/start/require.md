@@ -17,7 +17,7 @@ title: Requirements
 
 ## Example Dependencies Installation
 
-If you have already installed Pterodactyl panel on the same server, you usually need not install the dependencies again as EsmileBilling requires the same dependencies as it does.
+If you have already installed Pterodactyl panel on the same server, you usually need not install the dependencies again as HedystiaBilling requires the same dependencies as it does.
 
 ### Update apt
 

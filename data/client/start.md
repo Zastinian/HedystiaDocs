@@ -6,9 +6,9 @@ title: Start
 ## Installation
 
 ```
-npm i esmile.js
+npm i hedystia.js
 
-yarn add esmile.js
+yarn add hedystia.js
 ```
 
 ## Nodejs Version
@@ -22,7 +22,7 @@ yarn add esmile.js
 ## Example
 
 ```js
-const {Client, Intents, Status} = require("esmile.js");
+const {Client, Intents, Status} = require("hedystia.js");
 
 const client = new Client({
   token: "<TOKEN>",

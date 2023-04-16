@@ -3,7 +3,7 @@ id: generators
 title: Generators
 description: Use of the generators section
 sidebar_position: 3
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 <a name="generateKey"></a>

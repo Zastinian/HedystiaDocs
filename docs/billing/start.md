@@ -3,7 +3,7 @@ id: start
 title: Getting Started
 description: Getting Started Section
 sidebar_position: 1
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 # Manual Installation
@@ -20,7 +20,7 @@ keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
 
 ## Example Dependencies Installation
 
-If you have already installed Pterodactyl panel on the same server, you usually need not install the dependencies again as EsmileBilling requires the same dependencies as it does.
+If you have already installed Pterodactyl panel on the same server, you usually need not install the dependencies again as HedystiaBilling requires the same dependencies as it does.
 
 ### Update apt
 
@@ -118,8 +118,8 @@ cd /var/www/billing
 ```
 
 ```shell
-curl -Lo EsmileBilling.zip https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
-unzip EsmileBilling.zip
+curl -Lo HedystiaBilling.zip https://github.com/Zastinian/HedystiaBilling/releases/latest/download/HedystiaBilling.zip
+unzip HedystiaBilling.zip
 chmod -R 755 storage/* bootstrap/cache/
 ```
 
@@ -129,9 +129,9 @@ chmod -R 755 storage/* bootstrap/cache/
 mysql -u root -p
 
 # Remember to change 'yourPassword' below to be a unique password
-CREATE USER 'esmilebilling'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
+CREATE USER 'hedystiabilling'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
 CREATE DATABASE billing;
-GRANT ALL PRIVILEGES ON billing.* TO 'esmilebilling'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON billing.* TO 'hedystiabilling'@'127.0.0.1' WITH GRANT OPTION;
 exit
 ```
 
@@ -273,18 +273,18 @@ systemctl restart nginx
 
 ## For Non-Nginx users
 
-EsmileBilling should work on most of the popular web servers, such as Nginx, Apache, and LiteSpeed. However, we currently only focus on supporting Nginx. If you need help set up EsmileBilling on Apache, please take a look at [the guide from Pterodactyl](https://pterodactyl.io/panel/1.0/webserver_configuration.html#apache-with-ssl).
+HedystiaBilling should work on most of the popular web servers, such as Nginx, Apache, and LiteSpeed. However, we currently only focus on supporting Nginx. If you need help set up HedystiaBilling on Apache, please take a look at [the guide from Pterodactyl](https://pterodactyl.io/panel/1.0/webserver_configuration.html#apache-with-ssl).
 
 ## Increase Panel API Rate Limit
 
-The following steps are completely optional. If you want to prevent EsmileBilling from failing to communicate with Pterodactyl panel, please add the following lines to the end of the **.env file of Pterodactyl panel**.
+The following steps are completely optional. If you want to prevent HedystiaBilling from failing to communicate with Pterodactyl panel, please add the following lines to the end of the **.env file of Pterodactyl panel**.
 
 ```
 APP_API_CLIENT_RATELIMIT=1440
 APP_API_APPLICATION_RATELIMIT=480
 ```
 
-The above lines tell Pterodactyl to accept more API requests. If there are more than 300 users using EsmileBilling at the same time, consider increase both values to avoid reaching the limit.
+The above lines tell Pterodactyl to accept more API requests. If there are more than 300 users using HedystiaBilling at the same time, consider increase both values to avoid reaching the limit.
 
 ## Enable the Configuration
 

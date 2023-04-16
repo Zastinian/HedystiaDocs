@@ -88,4 +88,4 @@ systemctl restart nginx
 
 ## For Non-Nginx users
 
-EsmileBilling should work on most of the popular web servers, such as Nginx, Apache, and LiteSpeed. However, we currently only focus on supporting Nginx. If you need help set up EsmileBilling on Apache, please take a look at [the guide from Pterodactyl](https://pterodactyl.io/panel/1.0/webserver_configuration.html#apache-with-ssl).
+HedystiaBilling should work on most of the popular web servers, such as Nginx, Apache, and LiteSpeed. However, we currently only focus on supporting Nginx. If you need help set up HedystiaBilling on Apache, please take a look at [the guide from Pterodactyl](https://pterodactyl.io/panel/1.0/webserver_configuration.html#apache-with-ssl).

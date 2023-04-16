@@ -5,14 +5,14 @@ title: Pterodactyl Panel Configuration
 
 ## Increase Panel API Rate Limit
 
-The following steps are completely optional. If you want to prevent EsmileBilling from failing to communicate with Pterodactyl panel, please add the following lines to the end of the **.env file of Pterodactyl panel**.
+The following steps are completely optional. If you want to prevent HedystiaBilling from failing to communicate with Pterodactyl panel, please add the following lines to the end of the **.env file of Pterodactyl panel**.
 
 ```
 APP_API_CLIENT_RATELIMIT=1440
 APP_API_APPLICATION_RATELIMIT=480
 ```
 
-The above lines tell Pterodactyl to accept more API requests. If there are more than 300 users using EsmileBilling at the same time, consider increase both values to avoid reaching the limit.
+The above lines tell Pterodactyl to accept more API requests. If there are more than 300 users using HedystiaBilling at the same time, consider increase both values to avoid reaching the limit.
 
 ## Enable the Configuration
 

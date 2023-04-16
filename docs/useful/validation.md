@@ -3,7 +3,7 @@ id: validation
 title: Validations
 description: Use of the validation section
 sidebar_position: 2
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 <a name="isValidEmail"></a>

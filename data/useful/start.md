@@ -6,9 +6,9 @@ title: Start
 ## Installation
 
 ```
-npm i esmile-useful
+npm i hedystia-useful
 
-yarn add esmile-useful
+yarn add hedystia-useful
 ```
 
 ## Nodejs Version

@@ -3,7 +3,7 @@ id: update
 title: Updating
 description: Updating Section
 sidebar_position: 2
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 ## Backup Current Installation
@@ -21,9 +21,9 @@ cd /var/www/billing
 
 php artisan down
 
-curl -Lo EsmileBilling.zip https://github.com/Zastinian/EsmileBilling/releases/latest/download/EsmileBilling.zip
+curl -Lo HedystiaBilling.zip https://github.com/Zastinian/HedystiaBilling/releases/latest/download/HedystiaBilling.zip
 
-unzip EsmileBilling.zip
+unzip HedystiaBilling.zip
 
 chmod -R 755 storage/* bootstrap/cache
 

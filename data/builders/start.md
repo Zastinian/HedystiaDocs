@@ -6,9 +6,9 @@ title: Start
 ## Installation
 
 ```
-npm i esmile-builders
+npm i hedystia-builders
 
-yarn add esmile-builders
+yarn add hedystia-builders
 ```
 
 ## Nodejs Version

@@ -3,7 +3,7 @@ id: colors
 title: Colors
 description: Use of the color section
 sidebar_position: 4
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 <a name="module_colorZero"></a>

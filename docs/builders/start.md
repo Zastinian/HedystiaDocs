@@ -3,15 +3,15 @@ id: start
 title: Start
 description: Installation
 sidebar_position: 1
-keywords: [Hedystia, MrEsmile, Hedystia Bot, Boxmine]
+keywords: [Hedystia, Hedystia Bot, Boxmine]
 ---
 
 ## Installation
 
 ```
-npm i esmile-builders
+npm i hedystia-builders
 
-yarn add esmile-builders
+yarn add hedystia-builders
 ```
 
 ## Nodejs Version

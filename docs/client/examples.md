@@ -26,7 +26,7 @@ const client = new Client({
 });
 
 client.once("ready", () => {
-  console.log("Bot on: " + client.user.tag);
+  console.log("Bot on: " + client.user.username);
 });
 ```
 
@@ -48,7 +48,7 @@ client.on("messageCreate", (msg) => {
 client.once("ready", async () => {
   let slash = [new Slash().setName("command").setDescription("Command").setDmPermission(true)];
   client.application.commands.set(slash);
-  console.log("Bot on: " + client.user.tag);
+  console.log("Bot on: " + client.user.username);
 });
 
 client.on("interactionCreate", (interaction) => {
@@ -67,7 +67,7 @@ client.on("interactionCreate", (interaction) => {
 client.once("ready", async () => {
   let slash = [new Slash().setName("help").setDescription("Help Command").setDmPermission(true)];
   client.application.commands.set(slash);
-  console.log("Bot on: " + client.user.tag);
+  console.log("Bot on: " + client.user.username);
 });
 
 client.on("interactionCreate", (interaction) => {
@@ -114,7 +114,7 @@ client.once("ready", async () => {
       .setOptions([new SlashOption().setName("user_option").setDescription("user").setRequired(true).setType(OptionType.User)]),
   ];
   client.application.commands.set(slash);
-  console.log("Bot on: " + client.user.tag);
+  console.log("Bot on: " + client.user.username);
 });
 
 client.on("interactionCreate", (interaction) => {
@@ -130,7 +130,7 @@ client.on("interactionCreate", (interaction) => {
         url: user.displayAvatarURL(),
       });
     return interaction.reply({
-      content: `**${user.tag}** Info`,
+      content: `**${user.username}** Info`,
       embeds: [userEmbed],
     });
   }

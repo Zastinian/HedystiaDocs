@@ -125,7 +125,7 @@ client.on("interactionCreate", (interaction) => {
       .setColor(0x0099ff)
       .setTitle("User Info")
       .setURL("https://docs.hedystia.com/docs/client/start")
-      .addFields({name: "Username", value: user.username, inline: true}, {name: "Discriminator", value: user.discriminator, inline: true})
+      .addFields({name: "Username", value: user.username, inline: true})
       .setThumbnail({
         url: user.displayAvatarURL(),
       });

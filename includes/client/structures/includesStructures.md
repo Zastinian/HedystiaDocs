@@ -3,6 +3,7 @@
 #include "ApplicationCommand.md"
 #include "ApplicationCommandInteraction.md"
 #include "ApplicationCommandPermission.md"
+#include "AuditLogEntry.md"
 #include "AutocompleteInteraction.md"
 #include "BaseGuildChannel.md"
 #include "ButtonInteraction.md"

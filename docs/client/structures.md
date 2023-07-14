@@ -8,40 +8,57 @@ keywords: [Hedystia, Hedystia Bot, Boxmine]
 
 <a name="Activity"></a>
 
-## Activity
+## Activity ⇐ <code>Base</code>
 
-**Kind**: global class
+It's a class that represents a user's activity
 
-- [Activity](#Activity)
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [Activity](#Activity) ⇐ <code>Base</code>
   - [new Activity([data], client)](#new_Activity_new)
-  - [.toJSON()](#Activity+toJSON) ⇒
+  - [.toJSON()](#Activity+toJSON) ⇒ <code>Object</code>
 
 <a name="new_Activity_new"></a>
 
 ### new Activity([data], client)
 
-It takes in a data object and a client object, and then it sets the properties of the Activity
-object to the values of the data object
+The constructor function initializes an object with properties based on the provided data, and
+assigns default values if the data is missing or invalid.
 
-| Param  | Description                                  |
-| ------ | -------------------------------------------- |
-| [data] | The data that was sent from the Discord API. |
-| client | DiscordClient                                |
+| Param  | Type                | Description                                 |
+| ------ | ------------------- | ------------------------------------------- |
+| [data] | <code>Object</code> | The data for the activity.                  |
+| client | <code>Client</code> | The client that instantiated this activity. |
 
 <a name="Activity+toJSON"></a>
 
-### activity.toJSON() ⇒
+### activity.toJSON() ⇒ <code>Object</code>
 
-It takes the enum value and returns the string value.
+Converts the current object to a JSON representation.
 
 **Kind**: instance method of [<code>Activity</code>](#Activity)  
-**Returns**: The object literal is being returned.
+**Returns**: <code>Object</code> - - The JSON representation of the object.
 
 <a name="APIGuild"></a>
 
-## APIGuild
+## APIGuild ⇐ <code>Base</code>
+
+Represents a guild in the API.
 
 **Kind**: global class  
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name                        | Type                                                          | Description                                             |
+| --------------------------- | ------------------------------------------------------------- | ------------------------------------------------------- |
+| name                        | <code>string</code> \| <code>null</code>                      | The name of the guild.                                  |
+| description                 | <code>string</code> \| <code>null</code>                      | The description of the guild.                           |
+| region                      | <code>string</code> \| <code>null</code>                      | The region of the guild.                                |
+| verificationLevel           | <code>VerificationLevel</code> \| <code>null</code>           | The verification level of the guild.                    |
+| defaultMessageNotifications | <code>DefaultMessageNotifications</code> \| <code>null</code> | The default message notifications setting of the guild. |
+| explicitContentFilter       | <code>ExplicitContentFilter</code> \| <code>null</code>       |                                                         |
+
 <a name="new_APIGuild_new"></a>
 
 ### new APIGuild([data], client)
@@ -49,37 +66,38 @@ It takes the enum value and returns the string value.
 It takes in a data object and a client, and then sets the properties of the class to the values of
 the data object
 
-| Param  | Description                          |
-| ------ | ------------------------------------ |
-| [data] | The data that was sent from the API. |
-| client | The client that created the guild.   |
+| Param  | Type                | Description                                   |
+| ------ | ------------------- | --------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing guild information. |
+| client | <code>Client</code> | The client instance.                          |
 
 <a name="ApplicationCommand"></a>
 
-## ApplicationCommand
+## ApplicationCommand ⇐ <code>Base</code>
 
-Class representing an application command.
+Represents an application command.
 
-**Kind**: global class
+**Kind**: global class  
+**Extends**: <code>Base</code>
 
-- [ApplicationCommand](#ApplicationCommand)
-  - [new ApplicationCommand(data, guildId, client)](#new_ApplicationCommand_new)
+- [ApplicationCommand](#ApplicationCommand) ⇐ <code>Base</code>
+  - [new ApplicationCommand([data], guildId, client)](#new_ApplicationCommand_new)
   - [.guild](#ApplicationCommand+guild) ⇒
-  - [.fetch([options])](#ApplicationCommand+fetch) ⇒
-  - [.edit([options])](#ApplicationCommand+edit) ⇒
-  - [.delete()](#ApplicationCommand+delete) ⇒
+  - [.fetch([options])](#ApplicationCommand+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#ApplicationCommand+edit) ⇒ <code>Promise</code>
+  - [.delete()](#ApplicationCommand+delete) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_ApplicationCommand_new"></a>
 
-### new ApplicationCommand(data, guildId, client)
+### new ApplicationCommand([data], guildId, client)
 
 Create an application command object.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| data    | The data object for the command.            |
-| guildId | The ID of the guild the command belongs to. |
-| client  | The client object for the command.          |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the command information. |
+| guildId | <code>string</code> | The ID of the guild the command belongs to.         |
+| client  | <code>Client</code> | The client instance.                                |
 
 <a name="ApplicationCommand+guild"></a>
 
@@ -91,913 +109,1290 @@ Get the guild object if it exists, otherwise return null.
 **Returns**: The guild object or null.  
 <a name="ApplicationCommand+fetch"></a>
 
-### applicationCommand.fetch([options]) ⇒
+### applicationCommand.fetch([options]) ⇒ <code>Promise</code>
 
-Fetch the command from the guild or the client.
+Fetches the commands for a guild or the global application.
 
 **Kind**: instance method of [<code>ApplicationCommand</code>](#ApplicationCommand)  
-**Returns**: The command object.
+**Returns**: <code>Promise</code> - - A promise that resolves with the fetched commands.
 
-| Param     | Description                         |
-| --------- | ----------------------------------- |
-| [options] | The options to pass to the command. |
+| Param     | Type                | Description                                  |
+| --------- | ------------------- | -------------------------------------------- |
+| [options] | <code>Object</code> | Optional parameters for the fetch operation. |
 
 <a name="ApplicationCommand+edit"></a>
 
-### applicationCommand.edit([options]) ⇒
+### applicationCommand.edit(options) ⇒ <code>Promise</code>
 
-Edit the command.
+Edits the command with the specified options.
+If the command is associated with a guild, it will edit the guild command.
+Otherwise, it will edit the global command.
 
 **Kind**: instance method of [<code>ApplicationCommand</code>](#ApplicationCommand)  
-**Returns**: The return value of the edit method of the commands property of the guild or application object.
+**Returns**: <code>Promise</code> - A promise that resolves when the command is successfully edited.
 
-| Param     | Description                           |
-| --------- | ------------------------------------- |
-| [options] | The options to edit the command with. |
+| Param   | Type                | Description                           |
+| ------- | ------------------- | ------------------------------------- |
+| options | <code>Object</code> | The options to edit the command with. |
 
 <a name="ApplicationCommand+delete"></a>
 
-### applicationCommand.delete() ⇒
+### applicationCommand.delete() ⇒ <code>Promise.&lt;void&gt;</code>
 
-Delete the command from the commands collection.
+Deletes the command from the guild or the global application.
 
 **Kind**: instance method of [<code>ApplicationCommand</code>](#ApplicationCommand)  
-**Returns**: The return value of the delete method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the command is successfully deleted.
 
 <a name="ApplicationCommandInteraction"></a>
 
-## ApplicationCommandInteraction
+## ApplicationCommandInteraction ⇐ <code>Interaction</code>
+
+Represents an application command interaction.
 
 **Kind**: global class  
+**Extends**: <code>Interaction</code>  
+**Properties**
+
+| Name        | Type                                          | Description                                              |
+| ----------- | --------------------------------------------- | -------------------------------------------------------- |
+| commandId   | <code>string</code> \| <code>null</code>      | The ID of the command associated with the interaction.   |
+| commandName | <code>string</code> \| <code>null</code>      | The name of the command associated with the interaction. |
+| commandType | <code>string</code> \| <code>null</code>      | The type of the command associated with the interaction. |
+| options     | <code>CommandInteractionOptionResolver</code> | The resolver for the command interaction options.        |
+
 <a name="new_ApplicationCommandInteraction_new"></a>
 
 ### new ApplicationCommandInteraction([data], guildId, client)
 
-It's a constructor for a class that extends another class.
+Constructs a new instance of the CommandInteraction class.
 
-| Param   | Description           |
-| ------- | --------------------- |
-| [data]  | The data from the API |
-| guildId | The guild ID          |
-| client  | Discord.Client        |
+| Param   | Type                | Description                                                   |
+| ------- | ------------------- | ------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the interaction. |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred.           |
+| client  | <code>Client</code> | The client instance.                                          |
 
 <a name="ApplicationCommandPermission"></a>
 
-## ApplicationCommandPermission
+## ApplicationCommandPermission ⇐ <code>Base</code>
 
-**Kind**: global class
+Represents an application command permission.
 
-- [ApplicationCommandPermission](#ApplicationCommandPermission)
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [ApplicationCommandPermission](#ApplicationCommandPermission) ⇐ <code>Base</code>
   - [new ApplicationCommandPermission([data], guildId, client)](#new_ApplicationCommandPermission_new)
   - _instance_
     - [.command](#ApplicationCommandPermission+command) ⇒
     - [.guild](#ApplicationCommandPermission+guild) ⇒
-    - [.fetch([options])](#ApplicationCommandPermission+fetch) ⇒
+    - [.fetch([options])](#ApplicationCommandPermission+fetch) ⇒ <code>Promise</code>
   - _static_
-    - [.transformPermissions([permissions])](#ApplicationCommandPermission.transformPermissions) ⇒
+    - [.transformPermissions(permissions)](#ApplicationCommandPermission.transformPermissions) ⇒ <code>Object</code>
 
 <a name="new_ApplicationCommandPermission_new"></a>
 
 ### new ApplicationCommandPermission([data], guildId, client)
 
-It's a constructor function that takes in a data object, a guildId, and a client, and then sets the
-commandId to the id of the data object, or undefined if it doesn't exist, and sets the applicationId
-to the application_id of the data object, or null if it doesn't exist. It then sets the guildId to
-the guildId, and then sets the permissions to a new RaidenCol object, which is a collection class,
-and then maps the permissions of the data object to a new array, and then sets the id of the object
-to the id of the data object, and then sets the permissions of the object to the
-ApplicationCommandPermission.transformPermissions function, which takes in the object.
+Constructs a new instance of the CommandPermissions class.
 
-| Param   | Description                                |
-| ------- | ------------------------------------------ |
-| [data]  | The data that is passed to the constructor |
-| guildId | The guild id                               |
-| client  | RaidenClient                               |
+| Param   | Type                | Description                                                    |
+| ------- | ------------------- | -------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the command permission information. |
+| guildId | <code>string</code> | The ID of the guild the command permission belongs to.         |
+| client  | <code>Client</code> | The client instance.                                           |
 
 <a name="ApplicationCommandPermission+command"></a>
 
 ### applicationCommandPermission.command ⇒
 
-If the command is in the client's cache, return it. If it's not, check if it's in the guild's cache.
-If it's not, return null.
+Retrieves the command associated with this instance.
 
 **Kind**: instance property of [<code>ApplicationCommandPermission</code>](#ApplicationCommandPermission)  
-**Returns**: The command object.  
+**Returns**: The command object if found, otherwise null.  
 <a name="ApplicationCommandPermission+guild"></a>
 
 ### applicationCommandPermission.guild ⇒
 
-It returns the guild object if it exists, otherwise it returns null.
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>ApplicationCommandPermission</code>](#ApplicationCommandPermission)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="ApplicationCommandPermission+fetch"></a>
 
-### applicationCommandPermission.fetch([options]) ⇒
+### applicationCommandPermission.fetch([options]) ⇒ <code>Promise</code>
 
-It fetches the permissions of the command
+Fetches the permissions for the guild commands.
 
 **Kind**: instance method of [<code>ApplicationCommandPermission</code>](#ApplicationCommandPermission)  
-**Returns**: The return value is the result of the await expression.
+**Returns**: <code>Promise</code> - - A promise that resolves to the fetched permissions.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param     | Type                | Description                                |
+| --------- | ------------------- | ------------------------------------------ |
+| [options] | <code>Object</code> | Optional parameters for the fetch request. |
 
 <a name="ApplicationCommandPermission.transformPermissions"></a>
 
-### ApplicationCommandPermission.transformPermissions([permissions]) ⇒
+### ApplicationCommandPermission.transformPermissions(permissions) ⇒ <code>Object</code>
 
-It takes an object with a property called `type` that can be a number or a string, and if it's a
-number, it converts it to a string using a lookup table.
-
-The lookup table is defined in the `ApplicationCommandPermissionType` enum.
-
-The function returns an object with the same properties as the input object, but with the `type`
-property converted to a string if it was a number.
-
-The function is called like this:
+Transforms a permissions object into a formatted object with specific properties.
 
 **Kind**: static method of [<code>ApplicationCommandPermission</code>](#ApplicationCommandPermission)  
-**Returns**: The return value is an object with the following properties:
-id: The id of the permission.
-type: The type of the permission.
-permission: The permission.
+**Returns**: <code>Object</code> - - The transformed permissions object.
 
-| Param         |
-| ------------- |
-| [permissions] |
+| Param       | Type                | Description                          |
+| ----------- | ------------------- | ------------------------------------ |
+| permissions | <code>Object</code> | The permissions object to transform. |
+
+<a name="AuditLogEntry"></a>
+
+## AuditLogEntry ⇐ <code>Base</code>
+
+Represents an entry in the audit log.
+
+**Kind**: global class  
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name       | Type                                     | Description                                                               |
+| ---------- | ---------------------------------------- | ------------------------------------------------------------------------- |
+| targetId   | <code>string</code> \| <code>null</code> | The ID of the target of the audit log entry.                              |
+| changes    | <code>Array.&lt;Object&gt;</code>        | An array of objects representing the changes made in the audit log entry. |
+| userId     | <code>string</code> \| <code>null</code> | The ID of the user who performed the action in the audit log entry.       |
+| id         | <code>string</code> \| <code>null</code> | The ID of the audit log entry.                                            |
+| actionType | <code>string</code> \| <code>null</code> | The type of action performed                                              |
+
+- [AuditLogEntry](#AuditLogEntry) ⇐ <code>Base</code>
+  - [new AuditLogEntry([data], client)](#new_AuditLogEntry_new)
+  - [.executor](#AuditLogEntry+executor) ⇒
+  - [.isUpdate()](#AuditLogEntry+isUpdate) ⇒ <code>boolean</code>
+
+<a name="new_AuditLogEntry_new"></a>
+
+### new AuditLogEntry([data], client)
+
+Constructs a new instance of the class.
+
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| [data] | <code>Object</code> | The data for the audit log entry. |
+| client | <code>Client</code> | The client instance.              |
+
+<a name="AuditLogEntry+executor"></a>
+
+### auditLogEntry.executor ⇒
+
+Retrieves the executor of the action.
+
+**Kind**: instance property of [<code>AuditLogEntry</code>](#AuditLogEntry)  
+**Returns**: The user object representing the executor, or null if not found.  
+<a name="AuditLogEntry+isUpdate"></a>
+
+### auditLogEntry.isUpdate() ⇒ <code>boolean</code>
+
+Checks if the action type of the guild audit log entry is an update action.
+
+**Kind**: instance method of [<code>AuditLogEntry</code>](#AuditLogEntry)  
+**Returns**: <code>boolean</code> - - True if the action type is an update action, false otherwise.
 
 <a name="AutocompleteInteraction"></a>
 
-## AutocompleteInteraction
+## AutocompleteInteraction ⇐ <code>Interaction</code>
 
-**Kind**: global class
+Represents an interaction with an autocomplete component.
 
-- [AutocompleteInteraction](#AutocompleteInteraction)
+**Kind**: global class  
+**Extends**: <code>Interaction</code>
+
+- [AutocompleteInteraction](#AutocompleteInteraction) ⇐ <code>Interaction</code>
   - [new AutocompleteInteraction([data], guildId, client)](#new_AutocompleteInteraction_new)
   - _instance_
     - [.getFocused()](#AutocompleteInteraction+getFocused) ⇒
-    - [.respond(choices)](#AutocompleteInteraction+respond) ⇒
+    - [.respond(choices)](#AutocompleteInteraction+respond) ⇒ <code>Promise</code>
   - _static_
-    - [.transformChoices([choices])](#AutocompleteInteraction.transformChoices) ⇒
+    - [.transformChoices(choices)](#AutocompleteInteraction.transformChoices) ⇒ <code>Object</code>
 
 <a name="new_AutocompleteInteraction_new"></a>
 
 ### new AutocompleteInteraction([data], guildId, client)
 
-It's a constructor for the class.
+Constructs a new instance of the class.
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| [data]  | The data that is passed to the constructor.   |
-| guildId | The ID of the guild the role is in            |
-| client  | The client that the command is being run from |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Client</code> | The client instance associated with the instance. |
 
 <a name="AutocompleteInteraction+getFocused"></a>
 
 ### autocompleteInteraction.getFocused() ⇒
 
-If the data.options array has a focused property, then return the value of that property.
-
-If it doesn't, then return null.
+Retrieves the focused option from the data object.
 
 **Kind**: instance method of [<code>AutocompleteInteraction</code>](#AutocompleteInteraction)  
-**Returns**: The value of the focused option.  
+**Returns**: The value of the focused option, or null if no option is focused or if the value is not available.  
 <a name="AutocompleteInteraction+respond"></a>
 
-### autocompleteInteraction.respond(choices) ⇒
+### autocompleteInteraction.respond(choices) ⇒ <code>Promise</code>
 
-It sends a response to the interaction.
+Sends a response to an autocomplete interaction with the provided choices.
 
 **Kind**: instance method of [<code>AutocompleteInteraction</code>](#AutocompleteInteraction)  
-**Returns**: The response from the API.
+**Returns**: <code>Promise</code> - A promise that resolves when the response is sent.
 
-| Param   | Description                                        |
-| ------- | -------------------------------------------------- |
-| choices | An array of objects with the following properties: |
+| Param   | Type               | Description                                           |
+| ------- | ------------------ | ----------------------------------------------------- |
+| choices | <code>Array</code> | An array of choices for the autocomplete interaction. |
 
 <a name="AutocompleteInteraction.transformChoices"></a>
 
-### AutocompleteInteraction.transformChoices([choices]) ⇒
+### AutocompleteInteraction.transformChoices(choices) ⇒ <code>Object</code>
 
-It takes an object with a name and value property and returns an object with a name and value
-property
+Transforms the given choices object into a new object with the name and value properties.
 
 **Kind**: static method of [<code>AutocompleteInteraction</code>](#AutocompleteInteraction)  
-**Returns**: The transformed choices object.
+**Returns**: <code>Object</code> - - The transformed choices object with name and value properties.  
+**Throws**:
 
-| Param     |
-| --------- |
-| [choices] |
+- <code>RangeError</code> - If the length of the name property is less than 1 or greater than 100.
+
+| Param   | Type                | Description                      |
+| ------- | ------------------- | -------------------------------- |
+| choices | <code>Object</code> | The choices object to transform. |
 
 <a name="BaseGuildChannel"></a>
 
-## BaseGuildChannel
+## BaseGuildChannel ⇐ <code>TextBasedChannels</code>
 
-**Kind**: global class
+Represents a base guild channel that extends the TextBasedChannels class.
 
-- [BaseGuildChannel](#BaseGuildChannel)
+**Kind**: global class  
+**Extends**: <code>TextBasedChannels</code>  
+**Properties**
+
+| Name    | Type                       | Description                          |
+| ------- | -------------------------- | ------------------------------------ |
+| threads | <code>ThreadManager</code> | The thread manager for this channel. |
+
+- [BaseGuildChannel](#BaseGuildChannel) ⇐ <code>TextBasedChannels</code>
   - [new BaseGuildChannel(data, guildId, client)](#new_BaseGuildChannel_new)
-  - [.fetchPrivateThreads([options])](#BaseGuildChannel+fetchPrivateThreads) ⇒
+  - [.fetchPrivateThreads([options])](#BaseGuildChannel+fetchPrivateThreads) ⇒ <code>Promise.&lt;FetchedThreads&gt;</code>
 
 <a name="new_BaseGuildChannel_new"></a>
 
 ### new BaseGuildChannel(data, guildId, client)
 
-It creates a new ThreadManager object and assigns it to the threads property
+Constructs a new instance of the ThreadChannel class.
 
-| Param   | Description                            |
-| ------- | -------------------------------------- |
-| data    | The data from the database.            |
-| guildId | The ID of the guild the channel is in. |
-| client  | The client that the channel belongs to |
+| Param   | Type                | Description                                               |
+| ------- | ------------------- | --------------------------------------------------------- |
+| data    | <code>Object</code> | The data object containing information about the channel. |
+| guildId | <code>string</code> | The ID of the guild that the channel belongs to.          |
+| client  | <code>Client</code> | The client instance.                                      |
 
 <a name="BaseGuildChannel+fetchPrivateThreads"></a>
 
-### baseGuildChannel.fetchPrivateThreads([options]) ⇒
+### baseGuildChannel.fetchPrivateThreads([options]) ⇒ <code>Promise.&lt;FetchedThreads&gt;</code>
 
-`Fetches the private threads in this channel.`
+Fetches private threads for the current channel.
 
 **Kind**: instance method of [<code>BaseGuildChannel</code>](#BaseGuildChannel)  
-**Returns**: A new FetchedThreads object
+**Returns**: <code>Promise.&lt;FetchedThreads&gt;</code> - - A promise that resolves to a FetchedThreads object containing the fetched threads.
 
-| Param     | Description                              |
-| --------- | ---------------------------------------- |
-| [options] | An object with the following properties: |
+| Param            | Type                | Default         | Description                                   |
+| ---------------- | ------------------- | --------------- | --------------------------------------------- |
+| [options]        | <code>Object</code> |                 | Optional parameters for the fetch request.    |
+| [options.before] | <code>string</code> |                 | The ID of the thread to fetch threads before. |
+| [options.limit]  | <code>number</code> | <code>25</code> | The maximum number of threads to fetch.       |
 
 <a name="ButtonInteraction"></a>
 
-## ButtonInteraction
+## ButtonInteraction ⇐ <code>MessageComponentInteraction</code>
+
+Represents a button interaction, extending the MessageComponentInteraction class.
 
 **Kind**: global class  
+**Extends**: <code>MessageComponentInteraction</code>  
 <a name="new_ButtonInteraction_new"></a>
 
 ### new ButtonInteraction([data], guildId, client)
 
-It's a constructor for the class.
+Constructs a new instance of the class.
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| [data]  | The data that is passed to the constructor.   |
-| guildId | The ID of the guild the role is in.           |
-| client  | The client that the command is being run from |
+| Param   | Type                | Description                                                   |
+| ------- | ------------------- | ------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the interaction. |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred.           |
+| client  | <code>Client</code> | The client instance associated with the interaction.          |
 
 <a name="CategoryChannel"></a>
 
-## CategoryChannel
+## CategoryChannel ⇐ <code>Channel</code>
 
-**Kind**: global class
+Represents a category channel in a guild.
 
-- [CategoryChannel](#CategoryChannel)
+**Kind**: global class  
+**Extends**: <code>Channel</code>
+
+- [CategoryChannel](#CategoryChannel) ⇐ <code>Channel</code>
   - [new CategoryChannel([data], guildId, client)](#new_CategoryChannel_new)
-  - [.childrens](#CategoryChannel+childrens) ⇒
+  - [.childrens](#CategoryChannel+childrens) ⇒ <code>Collection.&lt;Snowflake, GuildChannel&gt;</code>
   - [.highest](#CategoryChannel+highest) ⇒
 
 <a name="new_CategoryChannel_new"></a>
 
 ### new CategoryChannel([data], guildId, client)
 
-It's a constructor for the class.
+Constructs a new instance of the class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the role is in.         |
-| client  | The client that instantiated the object.    |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Client</code> | The client instance associated with the instance. |
 
 <a name="CategoryChannel+childrens"></a>
 
-### categoryChannel.childrens ⇒
+### categoryChannel.childrens ⇒ <code>Collection.&lt;Snowflake, GuildChannel&gt;</code>
 
-It returns a collection of channels that are children of the current channel
+Retrieves the child channels of the current channel.
 
 **Kind**: instance property of [<code>CategoryChannel</code>](#CategoryChannel)  
-**Returns**: A collection of channels that are children of this channel.  
+**Returns**: <code>Collection.&lt;Snowflake, GuildChannel&gt;</code> - A collection of child channels.  
 <a name="CategoryChannel+highest"></a>
 
 ### categoryChannel.highest ⇒
 
-It sorts the childrens array by position, and then returns the first element of the sorted array
+Get the highest child element based on their position property.
 
 **Kind**: instance property of [<code>CategoryChannel</code>](#CategoryChannel)  
-**Returns**: The first channel in the array.
+**Returns**: The highest child element.
 
 <a name="Channel"></a>
 
-## Channel
+## Channel ⇐ <code>Base</code>
 
-**Kind**: global class
+Represents a channel in a guild or a direct message.
 
-- [Channel](#Channel)
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [Channel](#Channel) ⇐ <code>Base</code>
   - [new Channel([data], guildId, client)](#new_Channel_new)
-  - [.parent](#Channel+parent) ⇒
+  - [.parent](#Channel+parent) ⇒ [<code>Channel</code>](#Channel) \| <code>null</code>
   - [.guild](#Channel+guild) ⇒
-  - [.fetch([options])](#Channel+fetch) ⇒
-  - [.delete(reason)](#Channel+delete) ⇒
-  - [.edit(options)](#Channel+edit) ⇒
-  - [.fetchInvites()](#Channel+fetchInvites) ⇒
-  - [.createInvite(options)](#Channel+createInvite) ⇒
-  - [.clone()](#Channel+clone) ⇒
-  - [.isGuildText()](#Channel+isGuildText) ⇒
-  - [.isDM()](#Channel+isDM) ⇒
-  - [.isStage()](#Channel+isStage) ⇒
-  - [.isForum()](#Channel+isForum) ⇒
-  - [.isGuildVoice()](#Channel+isGuildVoice) ⇒
-  - [.isNews()](#Channel+isNews) ⇒
-  - [.isCategory()](#Channel+isCategory) ⇒
-  - [.isText()](#Channel+isText) ⇒
-  - [.isThread()](#Channel+isThread) ⇒
-  - [.isVoice()](#Channel+isVoice) ⇒
-  - [.isDirectory()](#Channel+isDirectory) ⇒
-  - [.inGuild()](#Channel+inGuild) ⇒
-  - [.inCachedGuild()](#Channel+inCachedGuild) ⇒
-  - [.isRuleChannel()](#Channel+isRuleChannel) ⇒
-  - [.isSystemChannel()](#Channel+isSystemChannel) ⇒
-  - [.bannerURL([options])](#Channel+bannerURL) ⇒
-  - [.setName(name, reason)](#Channel+setName) ⇒
-  - [.setType(type, reason)](#Channel+setType) ⇒
-  - [.setTopic(topic, reason)](#Channel+setTopic) ⇒
-  - [.setPosition(position, reason)](#Channel+setPosition) ⇒
-  - [.setParent(parent, reason)](#Channel+setParent) ⇒
-  - [.setDefaultAutoArchiveDuration(defaultAutoArchiveDuration, reason)](#Channel+setDefaultAutoArchiveDuration) ⇒
-  - [.setFlags(flags, reason)](#Channel+setFlags) ⇒
-  - [.lockPermissions()](#Channel+lockPermissions) ⇒
-  - [.permissionsFor(userOrRole)](#Channel+permissionsFor) ⇒
-  - [.fetchWebhooks()](#Channel+fetchWebhooks) ⇒
-  - [.createWebhook([options])](#Channel+createWebhook) ⇒
+  - [.fetch([options])](#Channel+fetch) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Channel+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.edit(options)](#Channel+edit) ⇒ <code>Promise</code>
+  - [.fetchInvites()](#Channel+fetchInvites) ⇒ <code>Promise.&lt;RaidenCol&gt;</code>
+  - [.createInvite(options)](#Channel+createInvite) ⇒ <code>Promise.&lt;Invite&gt;</code>
+  - [.clone()](#Channel+clone) ⇒ [<code>Promise.&lt;Channel&gt;</code>](#Channel)
+  - [.isGuildText()](#Channel+isGuildText) ⇒ <code>boolean</code>
+  - [.isDM()](#Channel+isDM) ⇒ <code>boolean</code>
+  - [.isStage()](#Channel+isStage) ⇒ <code>boolean</code>
+  - [.isForum()](#Channel+isForum) ⇒ <code>boolean</code>
+  - [.isGuildVoice()](#Channel+isGuildVoice) ⇒ <code>boolean</code>
+  - [.isNews()](#Channel+isNews) ⇒ <code>boolean</code>
+  - [.isCategory()](#Channel+isCategory) ⇒ <code>boolean</code>
+  - [.isText()](#Channel+isText) ⇒ <code>boolean</code>
+  - [.isThread()](#Channel+isThread) ⇒ <code>boolean</code>
+  - [.isVoice()](#Channel+isVoice) ⇒ <code>boolean</code>
+  - [.isDirectory()](#Channel+isDirectory) ⇒ <code>boolean</code>
+  - [.inGuild()](#Channel+inGuild) ⇒ <code>boolean</code>
+  - [.inCachedGuild()](#Channel+inCachedGuild) ⇒ <code>boolean</code>
+  - [.isRuleChannel()](#Channel+isRuleChannel) ⇒ <code>boolean</code>
+  - [.isSystemChannel()](#Channel+isSystemChannel) ⇒ <code>boolean</code> \| <code>null</code>
+  - [.bannerURL(options)](#Channel+bannerURL) ⇒ <code>string</code> \| <code>null</code>
+  - [.setName(name, reason)](#Channel+setName) ⇒ <code>Promise</code>
+  - [.setType(type, reason)](#Channel+setType) ⇒ <code>Promise.&lt;any&gt;</code>
+  - [.setTopic(topic, reason)](#Channel+setTopic) ⇒ <code>Promise</code>
+  - [.setPosition(position, reason)](#Channel+setPosition) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setParent(parent, reason)](#Channel+setParent) ⇒ <code>Promise</code>
+  - [.setDefaultAutoArchiveDuration(defaultAutoArchiveDuration, reason)](#Channel+setDefaultAutoArchiveDuration) ⇒ <code>Promise</code>
+  - [.setFlags(flags, reason)](#Channel+setFlags) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.lockPermissions()](#Channel+lockPermissions) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.permissionsFor(userOrRole)](#Channel+permissionsFor) ⇒ <code>Permissions</code>
+  - [.fetchWebhooks()](#Channel+fetchWebhooks) ⇒ <code>Promise.&lt;RaidenCol&gt;</code>
+  - [.createWebhook([options])](#Channel+createWebhook) ⇒ <code>Promise.&lt;Webhook&gt;</code>
 
 <a name="new_Channel_new"></a>
 
 ### new Channel([data], guildId, client)
 
-It's a constructor for a class that extends another class
+Constructs a new Channel object.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| [data]  | The data that was received from the API. |
-| guildId | The ID of the guild the channel is in    |
-| client  | DiscordClient                            |
+| Param   | Type                | Description                                      |
+| ------- | ------------------- | ------------------------------------------------ |
+| [data]  | <code>Object</code> | The data for the channel.                        |
+| guildId | <code>string</code> | The ID of the guild that the channel belongs to. |
+| client  | <code>Client</code> | The client instance.                             |
 
 <a name="Channel+parent"></a>
 
-### channel.parent ⇒
+### channel.parent ⇒ [<code>Channel</code>](#Channel) \| <code>null</code>
 
-If the parentId is not null, then return the parentId, otherwise return null.
+Get the parent channel of this channel.
 
 **Kind**: instance property of [<code>Channel</code>](#Channel)  
-**Returns**: The parent channel of the channel.  
+**Returns**: [<code>Channel</code>](#Channel) \| <code>null</code> - The parent channel if it exists, otherwise null.  
 <a name="Channel+guild"></a>
 
 ### channel.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>Channel</code>](#Channel)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="Channel+fetch"></a>
 
-### channel.fetch([options]) ⇒
+### channel.fetch([options]) ⇒ <code>Promise</code>
 
-It fetches the channel
+Fetches the channels using the provided options.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The channel object.
+**Returns**: <code>Promise</code> - - A promise that resolves to the fetched channels.
 
-| Param     | Description                              |
-| --------- | ---------------------------------------- |
-| [options] | An object containing additional options. |
+| Param     | Type                | Description                                       |
+| --------- | ------------------- | ------------------------------------------------- |
+| [options] | <code>Object</code> | The options to be used for fetching the channels. |
 
 <a name="Channel+delete"></a>
 
-### channel.delete(reason) ⇒
+### channel.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes a channel
+Deletes the channel with the specified reason.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The channel object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the channel is deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| reason | <code>string</code> | The reason for deleting the channel. |
 
 <a name="Channel+edit"></a>
 
-### channel.edit(options) ⇒
+### channel.edit(options) ⇒ <code>Promise</code>
 
-It edits the channel
+Edits the properties of a channel using the provided options.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The channel object.
+**Returns**: <code>Promise</code> - A promise that resolves when the channel has been successfully edited.
 
-| Param   | Description |
-| ------- | ----------- |
-| options | Object      |
+| Param   | Type                | Description                                           |
+| ------- | ------------------- | ----------------------------------------------------- |
+| options | <code>Object</code> | The options object containing the properties to edit. |
 
 <a name="Channel+fetchInvites"></a>
 
-### channel.fetchInvites() ⇒
+### channel.fetchInvites() ⇒ <code>Promise.&lt;RaidenCol&gt;</code>
 
-It fetches all the invites for a channel
+Fetches the invites for the channel.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: An array of objects.  
+**Returns**: <code>Promise.&lt;RaidenCol&gt;</code> - A promise that resolves to a collection of invites.  
 <a name="Channel+createInvite"></a>
 
-### channel.createInvite(options) ⇒
+### channel.createInvite(options) ⇒ <code>Promise.&lt;Invite&gt;</code>
 
-It creates an invite for the channel
+Creates an invite for the current channel using the specified options.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The invite object.
+**Returns**: <code>Promise.&lt;Invite&gt;</code> - A promise that resolves to the created invite.
 
-| Param   | Description |
-| ------- | ----------- |
-| options | Object      |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>Object</code> | The options for creating the invite. |
 
 <a name="Channel+clone"></a>
 
-### channel.clone() ⇒
+### channel.clone() ⇒ [<code>Promise.&lt;Channel&gt;</code>](#Channel)
 
-It clones the channel
+Clones the channel.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The channel that was cloned.  
+**Returns**: [<code>Promise.&lt;Channel&gt;</code>](#Channel) - A promise that resolves to the cloned channel.  
 <a name="Channel+isGuildText"></a>
 
-### channel.isGuildText() ⇒
+### channel.isGuildText() ⇒ <code>boolean</code>
 
-If the type is Guild_Text, return true, otherwise return false.
+Checks if the type of the object is "Guild_Text".
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - true if the type is "Guild_Text", false otherwise.  
 <a name="Channel+isDM"></a>
 
-### channel.isDM() ⇒
+### channel.isDM() ⇒ <code>boolean</code>
 
-If the type is Dm, return true, otherwise return false.
+Checks if the type of the object is "Dm".
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The function isDM() is being returned.  
+**Returns**: <code>boolean</code> - - true if the type is "Dm", false otherwise.  
 <a name="Channel+isStage"></a>
 
-### channel.isStage() ⇒
+### channel.isStage() ⇒ <code>boolean</code>
 
-If the type is Guild_Stage_Voice, return true, otherwise return false.
+Checks if the current stage is a Guild Stage Voice.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - True if the current stage is a Guild Stage Voice, false otherwise.  
 <a name="Channel+isForum"></a>
 
-### channel.isForum() ⇒
+### channel.isForum() ⇒ <code>boolean</code>
 
-If the type is Guild_Forum, return true. Otherwise, return false.
+Checks if the current page is a forum page.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - true if the page is a forum page, false otherwise.  
 <a name="Channel+isGuildVoice"></a>
 
-### channel.isGuildVoice() ⇒
+### channel.isGuildVoice() ⇒ <code>boolean</code>
 
-If the type is Guild_Voice, return true, otherwise return false.
+Checks if the type of the object is "Guild_Voice".
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - true if the type is "Guild_Voice", false otherwise.  
 <a name="Channel+isNews"></a>
 
-### channel.isNews() ⇒
+### channel.isNews() ⇒ <code>boolean</code>
 
-If the type is Guild_News, return true. Otherwise, return false.
+Checks if the current type is "Guild_News".
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - Returns true if the type is "Guild_News", otherwise returns false.  
 <a name="Channel+isCategory"></a>
 
-### channel.isCategory() ⇒
+### channel.isCategory() ⇒ <code>boolean</code>
 
-If the type of the channel is Guild_Category, return true. Otherwise, return false
+Checks if the current object is of the category type.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - true if the object is of the category type, false otherwise.  
 <a name="Channel+isText"></a>
 
-### channel.isText() ⇒
+### channel.isText() ⇒ <code>boolean</code>
 
-If the type is one of the following, return true, otherwise return false.
+Checks if the current text is of a specific type.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - True if the text is of a specific type, false otherwise.  
 <a name="Channel+isThread"></a>
 
-### channel.isThread() ⇒
+### channel.isThread() ⇒ <code>boolean</code>
 
-If the type is one of the three types of threads, return true, otherwise return false.
+Checks if the current thread is a private, news, or public guild thread.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - True if the thread is a private, news, or public guild thread, false otherwise.  
 <a name="Channel+isVoice"></a>
 
-### channel.isVoice() ⇒
+### channel.isVoice() ⇒ <code>boolean</code>
 
-If the type is Guild_Voice or Guild_Stage_Voice, return true, otherwise return false.
+Checks if the current object is of type "Guild_Voice" or "Guild_Stage_Voice".
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - true if the object is of type "Guild_Voice" or "Guild_Stage_Voice", false otherwise.  
 <a name="Channel+isDirectory"></a>
 
-### channel.isDirectory() ⇒
+### channel.isDirectory() ⇒ <code>boolean</code>
 
-If the type is Guild_Directory, return true, otherwise return false.
+Checks if the current object is a directory.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - Returns true if the object is a directory, false otherwise.  
 <a name="Channel+inGuild"></a>
 
-### channel.inGuild() ⇒
+### channel.inGuild() ⇒ <code>boolean</code>
 
-If the guildId is defined, return true, otherwise return false.
+Checks if the current context is within a guild.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - True if the context is within a guild, false otherwise.  
 <a name="Channel+inCachedGuild"></a>
 
-### channel.inCachedGuild() ⇒
+### channel.inCachedGuild() ⇒ <code>boolean</code>
 
-If the client has the guild in its cache, return true, otherwise return false.
+Checks if the guild is cached in the client's guild cache.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> - - true if the guild is cached, false otherwise.  
 <a name="Channel+isRuleChannel"></a>
 
-### channel.isRuleChannel() ⇒
+### channel.isRuleChannel() ⇒ <code>boolean</code>
 
-If the guild's rules channel ID is equal to the channel's ID, return true, otherwise return false.
+Checks if the current channel is the rules channel for the guild.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - true if the current channel is the rules channel, false otherwise.  
 <a name="Channel+isSystemChannel"></a>
 
-### channel.isSystemChannel() ⇒
+### channel.isSystemChannel() ⇒ <code>boolean</code> \| <code>null</code>
 
-If the guild doesn't have a system channel, return null. If the guild has a system channel and it's
-the same as the channel, return true. Otherwise, return false.
+Checks if the current channel is the system channel of the guild.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A boolean value.  
+**Returns**: <code>boolean</code> \| <code>null</code> - - Returns true if the channel is the system channel,
+false if it is not, and null if the guild does not have a system channel.  
 <a name="Channel+bannerURL"></a>
 
-### channel.bannerURL([options]) ⇒
+### channel.bannerURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-It returns the URL of the channel banner
+Returns the URL of the channel banner image.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The bannerURL method returns the URL of the channel's banner.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the channel banner image, or null if no banner is set.
 
-| Param     | Description                 |
-| --------- | --------------------------- |
-| [options] | The options for the banner. |
+| Param             | Type                 | Description                                 |
+| ----------------- | -------------------- | ------------------------------------------- |
+| options           | <code>Object</code>  | Optional parameters for generating the URL. |
+| [options.dynamic] | <code>boolean</code> | Whether to generate a dynamic URL.          |
+| [options.size]    | <code>string</code>  | The desired size of the banner image.       |
+| [options.format]  | <code>string</code>  | The desired format of the banner image.     |
 
 <a name="Channel+setName"></a>
 
-### channel.setName(name, reason) ⇒
+### channel.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description                                    |
-| ------ | ---------------------------------------------- |
-| name   | The new name of the channel.                   |
-| reason | The reason for the change (0-1024 characters). |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="Channel+setType"></a>
 
-### channel.setType(type, reason) ⇒
+### channel.setType(type, reason) ⇒ <code>Promise.&lt;any&gt;</code>
 
-It edits the type of the channel.
+Sets the type and reason of an object asynchronously.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The edited message.
+**Returns**: <code>Promise.&lt;any&gt;</code> - - A promise that resolves to the edited object.
 
-| Param  | Description                |
-| ------ | -------------------------- |
-| type   | The type of the channel.   |
-| reason | The reason for the change. |
+| Param  | Type             | Description        |
+| ------ | ---------------- | ------------------ |
+| type   | <code>any</code> | The type to set.   |
+| reason | <code>any</code> | The reason to set. |
 
 <a name="Channel+setTopic"></a>
 
-### channel.setTopic(topic, reason) ⇒
+### channel.setTopic(topic, reason) ⇒ <code>Promise</code>
 
-It sets the topic of the channel
+Sets the topic of the current object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the topic is successfully set.
 
-| Param  | Description                   |
-| ------ | ----------------------------- |
-| topic  | The new topic of the channel. |
-| reason | The reason for the change.    |
+| Param  | Type                | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| topic  | <code>string</code> | The new topic to set.              |
+| reason | <code>string</code> | The reason for changing the topic. |
 
 <a name="Channel+setPosition"></a>
 
-### channel.setPosition(position, reason) ⇒
+### channel.setPosition(position, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It edits the position of a role in a guild
+Sets the position of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the position is successfully set.
 
-| Param    | Description                                |
-| -------- | ------------------------------------------ |
-| position | The position you want to move the role to. |
-| reason   | The reason for the move.                   |
+| Param    | Type                | Description                         |
+| -------- | ------------------- | ----------------------------------- |
+| position | <code>any</code>    | The new position of the object.     |
+| reason   | <code>string</code> | The reason for the position change. |
 
 <a name="Channel+setParent"></a>
 
-### channel.setParent(parent, reason) ⇒
+### channel.setParent(parent, reason) ⇒ <code>Promise</code>
 
-It edits the channel's parent
+Sets the parent of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - A promise that resolves when the parent is successfully set.
 
-| Param  | Description                                   |
-| ------ | --------------------------------------------- |
-| parent | The parent category to move this category to. |
-| reason | The reason for the edit.                      |
+| Param  | Type                | Description                            |
+| ------ | ------------------- | -------------------------------------- |
+| parent | <code>any</code>    | The new parent object.                 |
+| reason | <code>string</code> | The reason for setting the new parent. |
 
 <a name="Channel+setDefaultAutoArchiveDuration"></a>
 
-### channel.setDefaultAutoArchiveDuration(defaultAutoArchiveDuration, reason) ⇒
+### channel.setDefaultAutoArchiveDuration(defaultAutoArchiveDuration, reason) ⇒ <code>Promise</code>
 
-It sets the default auto archive duration of a guild.
-
-Here's a more detailed explanation of the above function:
-
-It sets the default auto archive duration of a guild.
-
-Here's an example of the above function in use:
+Sets the default auto-archive duration for a specific item.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the default auto-archive duration is successfully set.
 
-| Param                      | Description                                      |
-| -------------------------- | ------------------------------------------------ |
-| defaultAutoArchiveDuration | The default auto-archive duration for the guild. |
-| reason                     | The reason for the change.                       |
+| Param                      | Type                | Description                                                   |
+| -------------------------- | ------------------- | ------------------------------------------------------------- |
+| defaultAutoArchiveDuration | <code>number</code> | The new default auto-archive duration to set.                 |
+| reason                     | <code>string</code> | The reason for setting the new default auto-archive duration. |
 
 <a name="Channel+setFlags"></a>
 
-### channel.setFlags(flags, reason) ⇒
+### channel.setFlags(flags, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It edits the message with the given flags and reason
+Sets the flags and reason for an object.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the flags are set.
 
-| Param  | Description              |
-| ------ | ------------------------ |
-| flags  | The flags to set.        |
-| reason | The reason for the edit. |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| flags  | <code>any</code>    | The flags to set.                 |
+| reason | <code>string</code> | The reason for setting the flags. |
 
 <a name="Channel+lockPermissions"></a>
 
-### channel.lockPermissions() ⇒
+### channel.lockPermissions() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It takes the permission overwrites from the parent channel and applies them to the current channel
+Locks the permissions for the current object.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: The permissionOverwrites of the parent channel.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves when the permissions are locked.  
 <a name="Channel+permissionsFor"></a>
 
-### channel.permissionsFor(userOrRole) ⇒
+### channel.permissionsFor(userOrRole) ⇒ <code>Permissions</code>
 
-It takes a user or role and returns the permissions that user or role has in the channel
+Retrieves the permissions for a given user or role in the guild.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A Permissions object.
+**Returns**: <code>Permissions</code> - - The permissions for the user or role.  
+**Throws**:
 
-| Param      | Description                                  |
-| ---------- | -------------------------------------------- |
-| userOrRole | The user or role to get the permissions for. |
+- <code>RangeError</code> - If the user or role is not found in the cache or is invalid.
+
+| Param      | Type                                                                 | Description                                   |
+| ---------- | -------------------------------------------------------------------- | --------------------------------------------- |
+| userOrRole | <code>string</code> \| <code>GuildMember</code> \| <code>Role</code> | The user or role to retrieve permissions for. |
 
 <a name="Channel+fetchWebhooks"></a>
 
-### channel.fetchWebhooks() ⇒
+### channel.fetchWebhooks() ⇒ <code>Promise.&lt;RaidenCol&gt;</code>
 
-It fetches all webhooks in a channel and returns them in a RaidenCol
+Fetches the webhooks associated with the channel.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: An array of webhooks.  
+**Returns**: <code>Promise.&lt;RaidenCol&gt;</code> - A promise that resolves to a collection of webhooks.  
 <a name="Channel+createWebhook"></a>
 
-### channel.createWebhook([options]) ⇒
+### channel.createWebhook([options]) ⇒ <code>Promise.&lt;Webhook&gt;</code>
 
-It creates a webhook for the channel
+Creates a webhook for the current channel.
 
 **Kind**: instance method of [<code>Channel</code>](#Channel)  
-**Returns**: A webhook object.
+**Returns**: <code>Promise.&lt;Webhook&gt;</code> - A promise that resolves with the created webhook.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param            | Type                | Description                                   |
+| ---------------- | ------------------- | --------------------------------------------- |
+| [options]        | <code>Object</code> | Optional parameters for creating the webhook. |
+| [options.reason] | <code>string</code> | The reason for creating the webhook.          |
+| [options.name]   | <code>string</code> | The name of the webhook.                      |
+| [options.avatar] | <code>string</code> | The avatar URL or file path of the webhook.   |
 
 <a name="ClientApplication"></a>
 
-## ClientApplication
+## ClientApplication ⇐ <code>Base</code>
 
-**Kind**: global class
+Represents a client application.
 
-- [ClientApplication](#ClientApplication)
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [ClientApplication](#ClientApplication) ⇐ <code>Base</code>
   - [new ClientApplication([data], client)](#new_ClientApplication_new)
-  - [.commands](#ClientApplication+commands) ⇒
-  - [.fetch()](#ClientApplication+fetch) ⇒
-  - [.iconURL([options])](#ClientApplication+iconURL) ⇒
+  - [.commands](#ClientApplication+commands) ⇒ <code>ApplicationCommandManager</code>
+  - [.fetch()](#ClientApplication+fetch) ⇒ <code>Promise.&lt;Application&gt;</code>
+  - [.iconURL(options)](#ClientApplication+iconURL) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_ClientApplication_new"></a>
 
 ### new ClientApplication([data], client)
 
-It's a constructor for the Application class.
+Constructs a new instance of the Application class.
 
-| Param  | Description   |
-| ------ | ------------- |
-| [data] |               |
-| client | DiscordClient |
+| Param  | Type                | Description                                                          |
+| ------ | ------------------- | -------------------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing information about the client application. |
+| client | <code>Client</code> | The client object associated with the application.                   |
 
 <a name="ClientApplication+commands"></a>
 
-### clientApplication.commands ⇒
+### clientApplication.commands ⇒ <code>ApplicationCommandManager</code>
 
-It returns a new instance of the ApplicationCommandManager class, which is a class that is defined
-in the file ApplicationCommandManager.js.
-The ApplicationCommandManager class is a class that is defined in
+Get the commands for the application.
 
 **Kind**: instance property of [<code>ClientApplication</code>](#ClientApplication)  
-**Returns**: A new instance of the ApplicationCommandManager class.  
+**Returns**: <code>ApplicationCommandManager</code> - - The application command manager.  
 <a name="ClientApplication+fetch"></a>
 
-### clientApplication.fetch() ⇒
+### clientApplication.fetch() ⇒ <code>Promise.&lt;Application&gt;</code>
 
-It fetches the application information from the Discord API and returns it.
+Fetches the application information for the authenticated user.
 
 **Kind**: instance method of [<code>ClientApplication</code>](#ClientApplication)  
-**Returns**: The client.application is being returned.  
+**Returns**: <code>Promise.&lt;Application&gt;</code> - A promise that resolves to the application object.  
 <a name="ClientApplication+iconURL"></a>
 
-### clientApplication.iconURL([options]) ⇒
+### clientApplication.iconURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-"If the application has an icon, return the icon URL, otherwise return null."
-
-The function takes an optional parameter, options, which is an object. If options is not provided,
-it defaults to an empty object.
-
-The function then checks if the application has an icon. If it does, it returns the icon URL,
-otherwise it returns null.
-
-The icon URL is generated by the client.cdn.ApplicationIcon function. This function takes the icon
-ID, the dynamic flag, the size, the format, and the application ID.
-
-The dynamic flag is true if the icon is animated, otherwise it's false.
-
-The size is the size of the icon in pixels.
-
-The format is the image format, either "png" or "gif".
-
-The application ID is the ID of the application.
-
-The client.cdn
+Returns the URL of the icon for this application.
 
 **Kind**: instance method of [<code>ClientApplication</code>](#ClientApplication)  
-**Returns**: The iconURL method returns the URL of the application's icon.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the icon, or null if no icon is available.
 
-| Param     | Description               |
-| --------- | ------------------------- |
-| [options] | The options for the icon. |
+| Param           | Type                 | Description                                                        |
+| --------------- | -------------------- | ------------------------------------------------------------------ |
+| options         | <code>Object</code>  | An optional object containing additional options for the icon URL. |
+| options.dynamic | <code>boolean</code> | Whether the icon should be dynamically generated.                  |
+| options.size    | <code>number</code>  | The desired size of the icon.                                      |
+| options.format  | <code>string</code>  | The desired format of the icon.                                    |
 
 <a name="ClientUser"></a>
 
-## ClientUser
+## ClientUser ⇐ <code>User</code>
 
-**Kind**: global class
+Represents a client user, extending the base User class.
 
-- [ClientUser](#ClientUser)
+**Kind**: global class  
+**Extends**: <code>User</code>
+
+- [ClientUser](#ClientUser) ⇐ <code>User</code>
   - [new ClientUser([data], client)](#new_ClientUser_new)
-  - [.setAvatar(avatar)](#ClientUser+setAvatar) ⇒
-  - [.setUsername(username)](#ClientUser+setUsername) ⇒
-  - [.setAvatarDecorations(avatarDecorations)](#ClientUser+setAvatarDecorations) ⇒
-  - [.setPresence(presence)](#ClientUser+setPresence) ⇒
-  - [.setStatus(status)](#ClientUser+setStatus) ⇒
-  - [.setActivities(activities)](#ClientUser+setActivities) ⇒
+  - [.setAvatar(avatar)](#ClientUser+setAvatar) ⇒ <code>Promise</code>
+  - [.setUsername(username)](#ClientUser+setUsername) ⇒ <code>Promise</code>
+  - [.setAvatarDecorations(avatarDecorations)](#ClientUser+setAvatarDecorations) ⇒ <code>Promise</code>
+  - [.setPresence(presence)](#ClientUser+setPresence) ⇒ <code>void</code>
+  - [.setStatus(status)](#ClientUser+setStatus) ⇒ <code>void</code>
+  - [.setActivities(activities)](#ClientUser+setActivities) ⇒ <code>void</code>
 
 <a name="new_ClientUser_new"></a>
 
 ### new ClientUser([data], client)
 
-It's a constructor function that takes in two parameters, data and client, and sets the data
-parameter to an empty object if it's not passed in, and sets the client parameter to undefined if
-it's not passed in.
+Constructs a new instance of the class.
 
-| Param  | Description                                                          |
-| ------ | -------------------------------------------------------------------- |
-| [data] | The data that was returned from the API.                             |
-| client | The client that instantiated the object. Every Discordie object that |
+| Param  | Type                | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| [data] | <code>Object</code> | The initial data for the instance. |
+| client | <code>Client</code> | The client object.                 |
 
 <a name="ClientUser+setAvatar"></a>
 
-### clientUser.setAvatar(avatar) ⇒
+### clientUser.setAvatar(avatar) ⇒ <code>Promise</code>
 
-It sets the avatar of the bot
+Sets the avatar for the user.
 
 **Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The user object.
+**Returns**: <code>Promise</code> - A promise that resolves when the avatar is successfully set.
 
-| Param  | Description        |
-| ------ | ------------------ |
-| avatar | The avatar to set. |
+| Param  | Type                | Description                                   |
+| ------ | ------------------- | --------------------------------------------- |
+| avatar | <code>string</code> | The URL or file path of the new avatar image. |
 
 <a name="ClientUser+setUsername"></a>
 
-### clientUser.setUsername(username) ⇒
+### clientUser.setUsername(username) ⇒ <code>Promise</code>
 
-It sets the username of the bot
+Asynchronously sets the username for the current user.
 
 **Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The return value is a promise that resolves to the updated user object.
+**Returns**: <code>Promise</code> - A promise that resolves when the username is successfully set.
 
-| Param    | Description                    |
-| -------- | ------------------------------ |
-| username | The new username for the user. |
+| Param    | Type                | Description              |
+| -------- | ------------------- | ------------------------ |
+| username | <code>string</code> | The new username to set. |
 
 <a name="ClientUser+setAvatarDecorations"></a>
 
-### clientUser.setAvatarDecorations(avatarDecorations) ⇒
+### clientUser.setAvatarDecorations(avatarDecorations) ⇒ <code>Promise</code>
 
-It sets the avatar decorations of the user
+Sets the avatar decorations for the user.
 
 **Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The user object.
+**Returns**: <code>Promise</code> - A promise that resolves when the avatar decorations are set.
 
-| Param             | Description                         |
-| ----------------- | ----------------------------------- |
-| avatarDecorations | A string of the avatar decorations. |
+| Param             | Type                | Description                    |
+| ----------------- | ------------------- | ------------------------------ |
+| avatarDecorations | <code>Object</code> | The avatar decorations to set. |
 
 <a name="ClientUser+setPresence"></a>
 
-### clientUser.setPresence(presence) ⇒
+### clientUser.setPresence(presence) ⇒ <code>void</code>
 
-It sets the presence of the bot
+Sets the presence of the client.
 
-**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The presence of the user.
+**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)
 
-| Param    | Description |
-| -------- | ----------- |
-| presence | Presence    |
+| Param    | Type                  | Description                                                      |
+| -------- | --------------------- | ---------------------------------------------------------------- |
+| presence | <code>Presence</code> | The presence object containing the desired presence information. |
 
 <a name="ClientUser+setStatus"></a>
 
-### clientUser.setStatus(status) ⇒
+### clientUser.setStatus(status) ⇒ <code>void</code>
 
-It sets the status of the bot
+Sets the status of the user.
 
-**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The return value of the setPresence method.
+**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)
 
-| Param  | Description                            |
-| ------ | -------------------------------------- |
-| status | The status of the user. Can be one of: |
+| Param  | Type                | Description        |
+| ------ | ------------------- | ------------------ |
+| status | <code>string</code> | The status to set. |
 
 <a name="ClientUser+setActivities"></a>
 
-### clientUser.setActivities(activities) ⇒
+### clientUser.setActivities(activities) ⇒ <code>void</code>
 
-It sets the activities of the client
+Sets the activities for the presence of the user.
 
-**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)  
-**Returns**: The return value is the promise that is returned by the setPresence method.
+**Kind**: instance method of [<code>ClientUser</code>](#ClientUser)
 
-| Param      | Description                                                                        |
-| ---------- | ---------------------------------------------------------------------------------- |
-| activities | An array of objects containing information about what the user is currently doing. |
+| Param      | Type               | Description                   |
+| ---------- | ------------------ | ----------------------------- |
+| activities | <code>Array</code> | An array of activity objects. |
 
 <a name="CommandInteraction"></a>
 
-## CommandInteraction
+## CommandInteraction ⇐ <code>ApplicationCommandInteraction</code>
 
 **Kind**: global class  
+**Extends**: <code>ApplicationCommandInteraction</code>  
 <a name="new_CommandInteraction_new"></a>
 
 ### new CommandInteraction([data], guildId, client)
 
-It's a constructor for the class.
+Constructs a new instance of the class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the role is in          |
-| client  | The client that instantiated the object.    |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the command interaction.               |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred. |
+| client  | <code>Client</code> | The client that received the interaction.           |
+
+## Classes
+
+<dl>
+<dt><a href="#CommandInteractionOptionResolver">CommandInteractionOptionResolver</a> ⇐ <code>Base</code></dt>
+<dd></dd>
+<dt><a href="#CommandInteractionOptionResolver">CommandInteractionOptionResolver</a></dt>
+<dd></dd>
+</dl>
+
+<a name="CommandInteractionOptionResolver"></a>
+
+## CommandInteractionOptionResolver ⇐ <code>Base</code>
+
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [CommandInteractionOptionResolver](#CommandInteractionOptionResolver) ⇐ <code>Base</code>
+  - [new CommandInteractionOptionResolver([data], guildId, channelId, client)](#new_CommandInteractionOptionResolver_new)
+  - [new CommandInteractionOptionResolver([data], guildId, channelId, client)](#new_CommandInteractionOptionResolver_new)
+  - [.guild](#CommandInteractionOptionResolver+guild) ⇒
+  - [.channel](#CommandInteractionOptionResolver+channel) ⇒
+  - [.\_parse([options])](#CommandInteractionOptionResolver+_parse) ⇒ <code>Array</code> \| <code>null</code>
+  - [.getString(name, [required])](#CommandInteractionOptionResolver+getString) ⇒ <code>string</code> \| <code>null</code>
+  - [.getNumber(name, [required])](#CommandInteractionOptionResolver+getNumber) ⇒ <code>number</code> \| <code>null</code>
+  - [.getInteger(name, [required])](#CommandInteractionOptionResolver+getInteger) ⇒ <code>number</code> \| <code>null</code>
+  - [.getBoolean(name, [required])](#CommandInteractionOptionResolver+getBoolean) ⇒ <code>boolean</code> \| <code>null</code>
+  - [.getAttachment([required])](#CommandInteractionOptionResolver+getAttachment) ⇒ <code>MessageAttachment</code> \| <code>null</code>
+  - [.getUser(name, [required])](#CommandInteractionOptionResolver+getUser) ⇒ <code>User</code> \| <code>null</code>
+  - [.getMember(name, [required])](#CommandInteractionOptionResolver+getMember) ⇒ <code>GuildMember</code> \| <code>null</code>
+  - [.getContextUser()](#CommandInteractionOptionResolver+getContextUser) ⇒ <code>User</code> \| <code>null</code>
+  - [.getMessage()](#CommandInteractionOptionResolver+getMessage) ⇒ <code>Message</code> \| <code>null</code>
+  - [.getChannel(name, [required])](#CommandInteractionOptionResolver+getChannel) ⇒ <code>Channel</code> \| <code>null</code>
+  - [.getRole(name, [required])](#CommandInteractionOptionResolver+getRole) ⇒ <code>Role</code> \| <code>null</code>
+  - [.getMentionable(name, [required])](#CommandInteractionOptionResolver+getMentionable) ⇒ <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code>
+  - [.getSubCommand([required])](#CommandInteractionOptionResolver+getSubCommand) ⇒ <code>string</code> \| <code>null</code>
+  - [.getSubCommandGroup([required])](#CommandInteractionOptionResolver+getSubCommandGroup) ⇒ <code>string</code> \| <code>null</code>
+
+<a name="new_CommandInteractionOptionResolver_new"></a>
+
+### new CommandInteractionOptionResolver([data], guildId, channelId, client)
+
+A class that provides methods to resolve command interaction options.
+
+| Param     | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| [data]    | <code>Object</code> | The data object containing the command interaction options.   |
+| guildId   | <code>string</code> | The ID of the guild where the command interaction occurred.   |
+| channelId | <code>string</code> | The ID of the channel where the command interaction occurred. |
+| client    | <code>Client</code> | The client instance.                                          |
+
+<a name="new_CommandInteractionOptionResolver_new"></a>
+
+### new CommandInteractionOptionResolver([data], guildId, channelId, client)
+
+Constructs a new instance of the class.
+
+| Param     | Type                | Description                       |
+| --------- | ------------------- | --------------------------------- |
+| [data]    | <code>Object</code> | The data object for the instance. |
+| guildId   | <code>string</code> | The ID of the guild.              |
+| channelId | <code>string</code> | The ID of the channel.            |
+| client    | <code>Client</code> | The client object.                |
+
+<a name="CommandInteractionOptionResolver+guild"></a>
+
+### commandInteractionOptionResolver.guild ⇒
+
+Get the guild object associated with this guildId.
+
+**Kind**: instance property of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: The guild object.  
+<a name="CommandInteractionOptionResolver+channel"></a>
+
+### commandInteractionOptionResolver.channel ⇒
+
+Get the channel object associated with this instance.
+
+**Kind**: instance property of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: The channel object.  
+<a name="CommandInteractionOptionResolver+_parse"></a>
+
+### commandInteractionOptionResolver.\_parse([options]) ⇒ <code>Array</code> \| <code>null</code>
+
+Parses the options array and returns the parsed result.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>Array</code> \| <code>null</code> - - The parsed options array or null if the data type is 2 or 3, or if the options array is empty.
+
+| Param     | Type               | Default                   | Description                 |
+| --------- | ------------------ | ------------------------- | --------------------------- |
+| [options] | <code>Array</code> | <code>this.options</code> | The options array to parse. |
+
+<a name="CommandInteractionOptionResolver+getString"></a>
+
+### commandInteractionOptionResolver.getString(name, [required]) ⇒ <code>string</code> \| <code>null</code>
+
+Retrieves the value of a string option by its name.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>string</code> \| <code>null</code> - The value of the option, or null if the option is not found and not required.  
+**Throws**:
+
+- <code>RangeError</code> If the option is required and not found, or if the option is found but its type is not string.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
+
+<a name="CommandInteractionOptionResolver+getNumber"></a>
+
+### commandInteractionOptionResolver.getNumber(name, [required]) ⇒ <code>number</code> \| <code>null</code>
+
+Retrieves the value of a number option by its name.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>number</code> \| <code>null</code> - The value of the number option, or null if the option is not found.  
+**Throws**:
+
+- <code>RangeError</code> If the option is required and not found, or if the option type is not Number.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
+
+<a name="CommandInteractionOptionResolver+getInteger"></a>
+
+### commandInteractionOptionResolver.getInteger(name, [required]) ⇒ <code>number</code> \| <code>null</code>
+
+Retrieves the integer value of the specified option name from the options list.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>number</code> \| <code>null</code> - The integer value of the option, or null if the option is not found.  
+**Throws**:
+
+- <code>RangeError</code> If the option is required and not found, or if the option type is not an integer.
+
+| Param      | Type                 | Default            | Description                                                                                                        |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| name       | <code>string</code>  |                    | The name of the option to retrieve.                                                                                |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getBoolean"></a>
+
+### commandInteractionOptionResolver.getBoolean(name, [required]) ⇒ <code>boolean</code> \| <code>null</code>
+
+Retrieves the boolean value of the specified option name from the options list.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>boolean</code> \| <code>null</code> - - The boolean value of the option, or null if the option is not found and not required.  
+**Throws**:
+
+- <code>RangeError</code> - If the option is required and not found, or if the option type is not boolean.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option to retrieve.                                                                           |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
+
+<a name="CommandInteractionOptionResolver+getAttachment"></a>
+
+### commandInteractionOptionResolver.getAttachment([required]) ⇒ <code>MessageAttachment</code> \| <code>null</code>
+
+Retrieves an attachment from the message data based on the provided options.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>MessageAttachment</code> \| <code>null</code> - - The retrieved attachment, or null if no attachment is found and it is not required.  
+**Throws**:
+
+- <code>RangeError</code> - If the required parameter is set to true and no attachment is found.
+
+| Param      | Type                 | Default            | Description                                                                                                           |
+| ---------- | -------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the attachment is required. If set to true and no attachment is found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getUser"></a>
+
+### commandInteractionOptionResolver.getUser(name, [required]) ⇒ <code>User</code> \| <code>null</code>
+
+Retrieves a user based on the given name.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>User</code> \| <code>null</code> - - The retrieved user object, or null if the user is not found and is not required.  
+**Throws**:
+
+- <code>RangeError</code> - If the option type is not User or if the option name does not match the specified option and is required.
+
+| Param      | Type                 | Default            | Description                                                                                                    |
+| ---------- | -------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the user to retrieve.                                                                              |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the user is required. If set to true and the user is not found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getMember"></a>
+
+### commandInteractionOptionResolver.getMember(name, [required]) ⇒ <code>GuildMember</code> \| <code>null</code>
+
+Retrieves a member by name from the guild's options.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>GuildMember</code> \| <code>null</code> - The retrieved member, or null if not found (unless required is set to true).  
+**Throws**:
+
+- <code>RangeError</code> If the option type is not User or if the option name does not match the specified option (if required is set to true).
+
+| Param      | Type                 | Default            | Description                                                                                              |
+| ---------- | -------------------- | ------------------ | -------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the member to retrieve.                                                                      |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the member is required. If set to true and the member is not found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getContextUser"></a>
+
+### commandInteractionOptionResolver.getContextUser() ⇒ <code>User</code> \| <code>null</code>
+
+Retrieves the context user from the data object.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>User</code> \| <code>null</code> - The context user, or null if the data object is not available.  
+**Throws**:
+
+- <code>RangeError</code> If the data object is resolved and its type is not 2 (context user).
+
+<a name="CommandInteractionOptionResolver+getMessage"></a>
+
+### commandInteractionOptionResolver.getMessage() ⇒ <code>Message</code> \| <code>null</code>
+
+Retrieves the message associated with the current context.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>Message</code> \| <code>null</code> - The message object if found, otherwise null.  
+**Throws**:
+
+- <code>RangeError</code> If the message is not of type "Context Message".
+
+<a name="CommandInteractionOptionResolver+getChannel"></a>
+
+### commandInteractionOptionResolver.getChannel(name, [required]) ⇒ <code>Channel</code> \| <code>null</code>
+
+Retrieves a channel based on its name from the available options.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>Channel</code> \| <code>null</code> - - The retrieved channel or null if not found (unless required is set to true).  
+**Throws**:
+
+- <code>RangeError</code> - If the type of option is not Channel or if the name of the option does not match the selected option (if required is set to true).
+
+| Param      | Type                 | Default            | Description                                                                                                |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the channel to retrieve.                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the channel is required. If set to true and the channel is not found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getRole"></a>
+
+### commandInteractionOptionResolver.getRole(name, [required]) ⇒ <code>Role</code> \| <code>null</code>
+
+Retrieves the role with the specified name from the options.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>Role</code> \| <code>null</code> - The role object if found, or null if not found and not required.  
+**Throws**:
+
+- <code>RangeError</code> If the option type is not Role and required is set to true, or if the name of the option does not match the selected option and required is set to true.
+
+| Param      | Type                 | Default            | Description                                                                                          |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the role to retrieve.                                                                    |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the role is required. If set to true and the role is not found, a RangeError will be thrown. |
+
+<a name="CommandInteractionOptionResolver+getMentionable"></a>
+
+### commandInteractionOptionResolver.getMentionable(name, [required]) ⇒ <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code>
+
+Retrieves the mentionable value for the specified option name.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code> - The mentionable value for the option, or null if not found.  
+**Throws**:
+
+- <code>RangeError</code> If the option type is not Mentionable.
+- <code>RangeError</code> If the name of the option does not match the selected option and is required.
+
+| Param      | Type                 | Default            | Description                               |
+| ---------- | -------------------- | ------------------ | ----------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                   |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. |
+
+<a name="CommandInteractionOptionResolver+getSubCommand"></a>
+
+### commandInteractionOptionResolver.getSubCommand([required]) ⇒ <code>string</code> \| <code>null</code>
+
+Retrieves the sub command name from the options array.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>string</code> \| <code>null</code> - - The name of the sub command, or null if not found.  
+**Throws**:
+
+- <code>RangeError</code> - If the sub command is required but not found.
+
+| Param      | Type                 | Default            | Description                                    |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the sub command is required. |
+
+<a name="CommandInteractionOptionResolver+getSubCommandGroup"></a>
+
+### commandInteractionOptionResolver.getSubCommandGroup([required]) ⇒ <code>string</code> \| <code>null</code>
+
+Retrieves the sub command group from the options array.
+
+**Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
+**Returns**: <code>string</code> \| <code>null</code> - - The name of the sub command group, or null if not found.  
+**Throws**:
+
+- <code>RangeError</code> - If the sub command group is required but not found.
+
+| Param      | Type                 | Default            | Description                                          |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the sub command group is required. |
 
 <a name="CommandInteractionOptionResolver"></a>
 
@@ -1007,45 +1402,56 @@ It's a constructor for the class.
 
 - [CommandInteractionOptionResolver](#CommandInteractionOptionResolver)
   - [new CommandInteractionOptionResolver([data], guildId, channelId, client)](#new_CommandInteractionOptionResolver_new)
+  - [new CommandInteractionOptionResolver([data], guildId, channelId, client)](#new_CommandInteractionOptionResolver_new)
   - [.guild](#CommandInteractionOptionResolver+guild) ⇒
   - [.channel](#CommandInteractionOptionResolver+channel) ⇒
-  - [.\_parse([options])](#CommandInteractionOptionResolver+_parse) ⇒
-  - [.getString(name, [required])](#CommandInteractionOptionResolver+getString) ⇒
-  - [.getNumber(name, [required])](#CommandInteractionOptionResolver+getNumber) ⇒
-  - [.getInteger(name, [required])](#CommandInteractionOptionResolver+getInteger) ⇒
-  - [.getBoolean(name, [required])](#CommandInteractionOptionResolver+getBoolean) ⇒
-  - [.getAttachment([required])](#CommandInteractionOptionResolver+getAttachment) ⇒
-  - [.getUser(name, [required])](#CommandInteractionOptionResolver+getUser) ⇒
-  - [.getMember(name, [required])](#CommandInteractionOptionResolver+getMember) ⇒
-  - [.getContextUser()](#CommandInteractionOptionResolver+getContextUser) ⇒
-  - [.getMessage()](#CommandInteractionOptionResolver+getMessage) ⇒
-  - [.getChannel(name, [required])](#CommandInteractionOptionResolver+getChannel) ⇒
-  - [.getRole(name, [required])](#CommandInteractionOptionResolver+getRole) ⇒
-  - [.getMentionable(name, [required])](#CommandInteractionOptionResolver+getMentionable) ⇒
-  - [.getSubCommand([required])](#CommandInteractionOptionResolver+getSubCommand) ⇒
-  - [.getSubCommandGroup([required])](#CommandInteractionOptionResolver+getSubCommandGroup) ⇒
+  - [.\_parse([options])](#CommandInteractionOptionResolver+_parse) ⇒ <code>Array</code> \| <code>null</code>
+  - [.getString(name, [required])](#CommandInteractionOptionResolver+getString) ⇒ <code>string</code> \| <code>null</code>
+  - [.getNumber(name, [required])](#CommandInteractionOptionResolver+getNumber) ⇒ <code>number</code> \| <code>null</code>
+  - [.getInteger(name, [required])](#CommandInteractionOptionResolver+getInteger) ⇒ <code>number</code> \| <code>null</code>
+  - [.getBoolean(name, [required])](#CommandInteractionOptionResolver+getBoolean) ⇒ <code>boolean</code> \| <code>null</code>
+  - [.getAttachment([required])](#CommandInteractionOptionResolver+getAttachment) ⇒ <code>MessageAttachment</code> \| <code>null</code>
+  - [.getUser(name, [required])](#CommandInteractionOptionResolver+getUser) ⇒ <code>User</code> \| <code>null</code>
+  - [.getMember(name, [required])](#CommandInteractionOptionResolver+getMember) ⇒ <code>GuildMember</code> \| <code>null</code>
+  - [.getContextUser()](#CommandInteractionOptionResolver+getContextUser) ⇒ <code>User</code> \| <code>null</code>
+  - [.getMessage()](#CommandInteractionOptionResolver+getMessage) ⇒ <code>Message</code> \| <code>null</code>
+  - [.getChannel(name, [required])](#CommandInteractionOptionResolver+getChannel) ⇒ <code>Channel</code> \| <code>null</code>
+  - [.getRole(name, [required])](#CommandInteractionOptionResolver+getRole) ⇒ <code>Role</code> \| <code>null</code>
+  - [.getMentionable(name, [required])](#CommandInteractionOptionResolver+getMentionable) ⇒ <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code>
+  - [.getSubCommand([required])](#CommandInteractionOptionResolver+getSubCommand) ⇒ <code>string</code> \| <code>null</code>
+  - [.getSubCommandGroup([required])](#CommandInteractionOptionResolver+getSubCommandGroup) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_CommandInteractionOptionResolver_new"></a>
 
 ### new CommandInteractionOptionResolver([data], guildId, channelId, client)
 
-This function is a constructor for the class, and it takes in a data object, a guildId, a
-channelId, and a client. It then sets the data object to the data object passed in, sets the
-options object to the options object in the data object, sets the guildId to the guildId passed
-in, and sets the channelId to the channelId passed in.
+A class that provides methods to resolve command interaction options.
 
-| Param     | Description                                      |
-| --------- | ------------------------------------------------ |
-| [data]    | The data that is passed to the constructor.      |
-| guildId   | The ID of the guild the poll is in.              |
-| channelId | The channel ID of the channel the message is in. |
-| client    | The client that the message was sent from        |
+| Param     | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| [data]    | <code>Object</code> | The data object containing the command interaction options.   |
+| guildId   | <code>string</code> | The ID of the guild where the command interaction occurred.   |
+| channelId | <code>string</code> | The ID of the channel where the command interaction occurred. |
+| client    | <code>Client</code> | The client instance.                                          |
+
+<a name="new_CommandInteractionOptionResolver_new"></a>
+
+### new CommandInteractionOptionResolver([data], guildId, channelId, client)
+
+Constructs a new instance of the class.
+
+| Param     | Type                | Description                       |
+| --------- | ------------------- | --------------------------------- |
+| [data]    | <code>Object</code> | The data object for the instance. |
+| guildId   | <code>string</code> | The ID of the guild.              |
+| channelId | <code>string</code> | The ID of the channel.            |
+| client    | <code>Client</code> | The client object.                |
 
 <a name="CommandInteractionOptionResolver+guild"></a>
 
 ### commandInteractionOptionResolver.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
 **Returns**: The guild object.  
@@ -1053,412 +1459,527 @@ It returns the guild object of the guild ID that is stored in the database
 
 ### commandInteractionOptionResolver.channel ⇒
 
-It returns the channel object of the channel ID that is stored in the message object
+Get the channel object associated with this instance.
 
 **Kind**: instance property of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
 **Returns**: The channel object.  
 <a name="CommandInteractionOptionResolver+_parse"></a>
 
-### commandInteractionOptionResolver.\_parse([options]) ⇒
+### commandInteractionOptionResolver.\_parse([options]) ⇒ <code>Array</code> \| <code>null</code>
 
-If the first element of the array is an object with a type of 2, then return the result of calling
-the function again with the options of the first element.
-
-If the first element of the array is an object with a type of 1, then return the result of calling
-the function again with the options of the first element.
-
-Otherwise, return the array.
+Parses the options array and returns the parsed result.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The first option of the first option of the first option of the first option of the first
-option of the first option of the first option of the first option of the first option of the
-first option of the first option of the first option of the first option of the first option of
-the first option of the first option of the first option of the first option of the first option
-of the first option of
+**Returns**: <code>Array</code> \| <code>null</code> - - The parsed options array or null if the data type is 2 or 3, or if the options array is empty.
 
-| Param     | Description                     |
-| --------- | ------------------------------- |
-| [options] | The options array from the JSON |
+| Param     | Type               | Default                   | Description                 |
+| --------- | ------------------ | ------------------------- | --------------------------- |
+| [options] | <code>Array</code> | <code>this.options</code> | The options array to parse. |
 
 <a name="CommandInteractionOptionResolver+getString"></a>
 
-### commandInteractionOptionResolver.getString(name, [required]) ⇒
+### commandInteractionOptionResolver.getString(name, [required]) ⇒ <code>string</code> \| <code>null</code>
 
-It takes a string, and returns a string
+Retrieves the value of a string option by its name.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The value of the option.
+**Returns**: <code>string</code> \| <code>null</code> - The value of the option, or null if the option is not found and not required.  
+**Throws**:
 
-| Param      | Default            | Description                                          |
-| ---------- | ------------------ | ---------------------------------------------------- |
-| name       |                    | The name of the option you want to get the value of. |
-| [required] | <code>false</code> | boolean                                              |
+- <code>RangeError</code> If the option is required and not found, or if the option is found but its type is not string.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
 
 <a name="CommandInteractionOptionResolver+getNumber"></a>
 
-### commandInteractionOptionResolver.getNumber(name, [required]) ⇒
+### commandInteractionOptionResolver.getNumber(name, [required]) ⇒ <code>number</code> \| <code>null</code>
 
-If the option type is not a number, throw an error, otherwise return the value of the option.
+Retrieves the value of a number option by its name.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The value of the option.
+**Returns**: <code>number</code> \| <code>null</code> - The value of the number option, or null if the option is not found.  
+**Throws**:
 
-| Param      | Default            | Description                             |
-| ---------- | ------------------ | --------------------------------------- |
-| name       |                    | The name of the option to be retrieved. |
-| [required] | <code>false</code> | boolean                                 |
+- <code>RangeError</code> If the option is required and not found, or if the option type is not Number.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
 
 <a name="CommandInteractionOptionResolver+getInteger"></a>
 
-### commandInteractionOptionResolver.getInteger(name, [required]) ⇒
+### commandInteractionOptionResolver.getInteger(name, [required]) ⇒ <code>number</code> \| <code>null</code>
 
-It takes a string and a boolean as parameters, and returns a number or null.
+Retrieves the integer value of the specified option name from the options list.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The value of the option.
+**Returns**: <code>number</code> \| <code>null</code> - The integer value of the option, or null if the option is not found.  
+**Throws**:
 
-| Param      | Default            | Description            |
-| ---------- | ------------------ | ---------------------- |
-| name       |                    | The name of the option |
-| [required] | <code>false</code> | boolean                |
+- <code>RangeError</code> If the option is required and not found, or if the option type is not an integer.
+
+| Param      | Type                 | Default            | Description                                                                                                        |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| name       | <code>string</code>  |                    | The name of the option to retrieve.                                                                                |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getBoolean"></a>
 
-### commandInteractionOptionResolver.getBoolean(name, [required]) ⇒
+### commandInteractionOptionResolver.getBoolean(name, [required]) ⇒ <code>boolean</code> \| <code>null</code>
 
-It takes a string and a boolean as arguments, and returns a boolean.
+Retrieves the boolean value of the specified option name from the options list.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The value of the option.
+**Returns**: <code>boolean</code> \| <code>null</code> - - The boolean value of the option, or null if the option is not found and not required.  
+**Throws**:
 
-| Param      | Default            | Description                             |
-| ---------- | ------------------ | --------------------------------------- |
-| name       |                    | The name of the option to be retrieved. |
-| [required] | <code>false</code> | boolean                                 |
+- <code>RangeError</code> - If the option is required and not found, or if the option type is not boolean.
+
+| Param      | Type                 | Default            | Description                                                                                                   |
+| ---------- | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option to retrieve.                                                                           |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. If set to true and the option is not found, a RangeError is thrown. |
 
 <a name="CommandInteractionOptionResolver+getAttachment"></a>
 
-### commandInteractionOptionResolver.getAttachment([required]) ⇒
+### commandInteractionOptionResolver.getAttachment([required]) ⇒ <code>MessageAttachment</code> \| <code>null</code>
 
-It gets the attachment from the message
+Retrieves an attachment from the message data based on the provided options.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The attachment of the message.
+**Returns**: <code>MessageAttachment</code> \| <code>null</code> - - The retrieved attachment, or null if no attachment is found and it is not required.  
+**Throws**:
 
-| Param      | Default            | Description |
-| ---------- | ------------------ | ----------- |
-| [required] | <code>false</code> | boolean     |
+- <code>RangeError</code> - If the required parameter is set to true and no attachment is found.
+
+| Param      | Type                 | Default            | Description                                                                                                           |
+| ---------- | -------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the attachment is required. If set to true and no attachment is found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getUser"></a>
 
-### commandInteractionOptionResolver.getUser(name, [required]) ⇒
+### commandInteractionOptionResolver.getUser(name, [required]) ⇒ <code>User</code> \| <code>null</code>
 
-It gets a user from the options
+Retrieves a user based on the given name.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The user object.
+**Returns**: <code>User</code> \| <code>null</code> - - The retrieved user object, or null if the user is not found and is not required.  
+**Throws**:
 
-| Param      | Default            | Description                            |
-| ---------- | ------------------ | -------------------------------------- |
-| name       |                    | The name of the option you want to get |
-| [required] | <code>false</code> | boolean                                |
+- <code>RangeError</code> - If the option type is not User or if the option name does not match the specified option and is required.
+
+| Param      | Type                 | Default            | Description                                                                                                    |
+| ---------- | -------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the user to retrieve.                                                                              |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the user is required. If set to true and the user is not found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getMember"></a>
 
-### commandInteractionOptionResolver.getMember(name, [required]) ⇒
+### commandInteractionOptionResolver.getMember(name, [required]) ⇒ <code>GuildMember</code> \| <code>null</code>
 
-It gets a member from the options
+Retrieves a member by name from the guild's options.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The member object.
+**Returns**: <code>GuildMember</code> \| <code>null</code> - The retrieved member, or null if not found (unless required is set to true).  
+**Throws**:
 
-| Param      | Default            | Description            |
-| ---------- | ------------------ | ---------------------- |
-| name       |                    | The name of the option |
-| [required] | <code>false</code> | boolean                |
+- <code>RangeError</code> If the option type is not User or if the option name does not match the specified option (if required is set to true).
+
+| Param      | Type                 | Default            | Description                                                                                              |
+| ---------- | -------------------- | ------------------ | -------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the member to retrieve.                                                                      |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the member is required. If set to true and the member is not found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getContextUser"></a>
 
-### commandInteractionOptionResolver.getContextUser() ⇒
+### commandInteractionOptionResolver.getContextUser() ⇒ <code>User</code> \| <code>null</code>
 
-If the data is not null, and the data is resolved and the data type is not 2, throw a range error.
-If the data is resolved, and the data type is 2, return the user.
+Retrieves the context user from the data object.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The user object.  
+**Returns**: <code>User</code> \| <code>null</code> - The context user, or null if the data object is not available.  
+**Throws**:
+
+- <code>RangeError</code> If the data object is resolved and its type is not 2 (context user).
+
 <a name="CommandInteractionOptionResolver+getMessage"></a>
 
-### commandInteractionOptionResolver.getMessage() ⇒
+### commandInteractionOptionResolver.getMessage() ⇒ <code>Message</code> \| <code>null</code>
 
-It returns a message object from a message ID
+Retrieves the message associated with the current context.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: A MessageManager object.  
+**Returns**: <code>Message</code> \| <code>null</code> - The message object if found, otherwise null.  
+**Throws**:
+
+- <code>RangeError</code> If the message is not of type "Context Message".
+
 <a name="CommandInteractionOptionResolver+getChannel"></a>
 
-### commandInteractionOptionResolver.getChannel(name, [required]) ⇒
+### commandInteractionOptionResolver.getChannel(name, [required]) ⇒ <code>Channel</code> \| <code>null</code>
 
-It gets the channel from the options.
+Retrieves a channel based on its name from the available options.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The channel object.
+**Returns**: <code>Channel</code> \| <code>null</code> - - The retrieved channel or null if not found (unless required is set to true).  
+**Throws**:
 
-| Param      | Default            | Description                             |
-| ---------- | ------------------ | --------------------------------------- |
-| name       |                    | The name of the option you want to get. |
-| [required] | <code>false</code> | boolean                                 |
+- <code>RangeError</code> - If the type of option is not Channel or if the name of the option does not match the selected option (if required is set to true).
+
+| Param      | Type                 | Default            | Description                                                                                                |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the channel to retrieve.                                                                       |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the channel is required. If set to true and the channel is not found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getRole"></a>
 
-### commandInteractionOptionResolver.getRole(name, [required]) ⇒
+### commandInteractionOptionResolver.getRole(name, [required]) ⇒ <code>Role</code> \| <code>null</code>
 
-It gets the role from the options
+Retrieves the role with the specified name from the options.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The role object.
+**Returns**: <code>Role</code> \| <code>null</code> - The role object if found, or null if not found and not required.  
+**Throws**:
 
-| Param      | Default            | Description            |
-| ---------- | ------------------ | ---------------------- |
-| name       |                    | The name of the option |
-| [required] | <code>false</code> | boolean                |
+- <code>RangeError</code> If the option type is not Role and required is set to true, or if the name of the option does not match the selected option and required is set to true.
+
+| Param      | Type                 | Default            | Description                                                                                          |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the role to retrieve.                                                                    |
+| [required] | <code>boolean</code> | <code>false</code> | Whether the role is required. If set to true and the role is not found, a RangeError will be thrown. |
 
 <a name="CommandInteractionOptionResolver+getMentionable"></a>
 
-### commandInteractionOptionResolver.getMentionable(name, [required]) ⇒
+### commandInteractionOptionResolver.getMentionable(name, [required]) ⇒ <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code>
 
-It gets the mentionable object from the options
+Retrieves the mentionable value for the specified option name.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The user, member, or role that was selected.
+**Returns**: <code>User</code> \| <code>GuildMember</code> \| <code>Role</code> \| <code>null</code> - The mentionable value for the option, or null if not found.  
+**Throws**:
 
-| Param      | Default            | Description             |
-| ---------- | ------------------ | ----------------------- |
-| name       |                    | The name of the option. |
-| [required] | <code>false</code> | boolean                 |
+- <code>RangeError</code> If the option type is not Mentionable.
+- <code>RangeError</code> If the name of the option does not match the selected option and is required.
+
+| Param      | Type                 | Default            | Description                               |
+| ---------- | -------------------- | ------------------ | ----------------------------------------- |
+| name       | <code>string</code>  |                    | The name of the option.                   |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the option is required. |
 
 <a name="CommandInteractionOptionResolver+getSubCommand"></a>
 
-### commandInteractionOptionResolver.getSubCommand([required]) ⇒
+### commandInteractionOptionResolver.getSubCommand([required]) ⇒ <code>string</code> \| <code>null</code>
 
-It returns the name of the subcommand if it exists, otherwise it returns null.
+Retrieves the sub command name from the options array.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The name of the sub command.
+**Returns**: <code>string</code> \| <code>null</code> - - The name of the sub command, or null if not found.  
+**Throws**:
 
-| Param      | Default            | Description |
-| ---------- | ------------------ | ----------- |
-| [required] | <code>false</code> | boolean     |
+- <code>RangeError</code> - If the sub command is required but not found.
+
+| Param      | Type                 | Default            | Description                                    |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the sub command is required. |
 
 <a name="CommandInteractionOptionResolver+getSubCommandGroup"></a>
 
-### commandInteractionOptionResolver.getSubCommandGroup([required]) ⇒
+### commandInteractionOptionResolver.getSubCommandGroup([required]) ⇒ <code>string</code> \| <code>null</code>
 
-If the option has a filter, return the filter's name. If the option doesn't have a filter, return
-null
+Retrieves the sub command group from the options array.
 
 **Kind**: instance method of [<code>CommandInteractionOptionResolver</code>](#CommandInteractionOptionResolver)  
-**Returns**: The Sub_Command_Group of the option.
+**Returns**: <code>string</code> \| <code>null</code> - - The name of the sub command group, or null if not found.  
+**Throws**:
 
-| Param      | Default            | Description |
-| ---------- | ------------------ | ----------- |
-| [required] | <code>false</code> | boolean     |
+- <code>RangeError</code> - If the sub command group is required but not found.
+
+| Param      | Type                 | Default            | Description                                          |
+| ---------- | -------------------- | ------------------ | ---------------------------------------------------- |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the sub command group is required. |
 
 <a name="ContextMenuInteraction"></a>
 
-## ContextMenuInteraction
+## ContextMenuInteraction ⇐ <code>ApplicationCommandInteraction</code>
+
+Represents a context menu interaction, extending the base ApplicationCommandInteraction class.
 
 **Kind**: global class  
+**Extends**: <code>ApplicationCommandInteraction</code>  
+**Properties**
+
+| Name     | Type                                     | Description                                            |
+| -------- | ---------------------------------------- | ------------------------------------------------------ |
+| targetId | <code>string</code> \| <code>null</code> | The ID of the target of the interaction, if available. |
+| resolved | <code>Object</code> \| <code>null</code> | The resolved data of the interaction, if available.    |
+
 <a name="new_ContextMenuInteraction_new"></a>
 
 ### new ContextMenuInteraction([data], guildId, client)
 
-It's a constructor function that takes in data, guildId, and client as parameters. It then calls the
-super function, which is a function that is inherited from the parent class. It then sets the
-targetId and resolved properties to the data that is passed in.
+Constructs a new instance of the class.
 
-| Param   | Description                                |
-| ------- | ------------------------------------------ |
-| [data]  | The data that was sent from the API.       |
-| guildId | The ID of the guild the case is in         |
-| client  | The client that the event was emitted from |
+| Param   | Type                | Description                                                   |
+| ------- | ------------------- | ------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the interaction. |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred.           |
+| client  | <code>Client</code> | The client instance associated with the interaction.          |
 
 <a name="ContextMessageInteraction"></a>
 
-## ContextMessageInteraction
+## ContextMessageInteraction ⇐ <code>ContextMenuInteraction</code>
+
+Represents a context menu interaction for a message in a specific context.
 
 **Kind**: global class  
+**Extends**: <code>ContextMenuInteraction</code>  
 <a name="new_ContextMessageInteraction_new"></a>
 
 ### new ContextMessageInteraction([data], guildId, client)
 
-It's a constructor for the class.
+Constructs a new instance of the class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the role is in.         |
-| client  | The client that instantiated the object.    |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Client</code> | The client instance associated with the instance. |
 
 <a name="ContextUserInteraction"></a>
 
-## ContextUserInteraction
+## ContextUserInteraction ⇐ <code>ContextMenuInteraction</code>
+
+Represents a user interaction with a context menu.
 
 **Kind**: global class  
+**Extends**: <code>ContextMenuInteraction</code>  
 <a name="new_ContextUserInteraction_new"></a>
 
 ### new ContextUserInteraction([data], guildId, client)
 
-It's a constructor function that takes in data, guildId, and client as parameters.
+Constructs a new instance of the class.
 
-| Param   | Description                                       |
-| ------- | ------------------------------------------------- |
-| [data]  | The data that the class will be constructed with. |
-| guildId | The ID of the guild the role is in.               |
-| client  | The client that instantiated the object.          |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data associated with the interaction.           |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred. |
+| client  | <code>Client</code> | The client instance that received the interaction.  |
 
 <a name="DirectoryChannel"></a>
 
-## DirectoryChannel
+## DirectoryChannel ⇐ <code>Channel</code>
+
+Represents a directory channel.
 
 **Kind**: global class  
+**Extends**: <code>Channel</code>  
+**Properties**
+
+| Name    | Type                                     | Description                            |
+| ------- | ---------------------------------------- | -------------------------------------- |
+| partial | <code>boolean</code>                     | Whether the channel is partial or not. |
+| name    | <code>string</code> \| <code>null</code> | The name of the directory channel.     |
+
 <a name="new_DirectoryChannel_new"></a>
 
 ### new DirectoryChannel([data], client)
 
-`constructor` is a function that is called when a new instance of the class is created
+Constructs a new instance of the class.
 
-| Param  | Description                                        |
-| ------ | -------------------------------------------------- |
-| [data] | The data that was sent from the API.               |
-| client | The client that created the instance of the class. |
+| Param  | Type                | Description                         |
+| ------ | ------------------- | ----------------------------------- |
+| [data] | <code>Object</code> | The data for the directory channel. |
+| client | <code>Client</code> | The client instance.                |
 
 <a name="DMChannel"></a>
 
-## DMChannel
+## DMChannel ⇐ <code>TextBasedChannels</code>
+
+Represents a direct message channel in Discord.
 
 **Kind**: global class  
+**Extends**: <code>TextBasedChannels</code>  
 <a name="new_DMChannel_new"></a>
 
 ### new DMChannel([data], [guildId], client)
 
-It's a constructor for a class that extends another class
+Constructs a new instance of the class.
 
-| Param     | Default       | Description                                 |
-| --------- | ------------- | ------------------------------------------- |
-| [data]    |               | The data that is passed to the constructor. |
-| [guildId] | <code></code> | The ID of the guild the message is in.      |
-| client    |               | The client instance                         |
+| Param     | Type                                     | Default           | Description                                         |
+| --------- | ---------------------------------------- | ----------------- | --------------------------------------------------- |
+| [data]    | <code>Object</code>                      |                   | The data for the DM channel.                        |
+| [guildId] | <code>string</code> \| <code>null</code> | <code>null</code> | The ID of the guild that the DM channel belongs to. |
+| client    | <code>Client</code>                      |                   | The client that instantiated this DM channel.       |
 
 <a name="Emoji"></a>
 
-## Emoji
+## Emoji ⇐ <code>Base</code>
 
-**Kind**: global class
+Represents an Emoji object.
 
-- [Emoji](#Emoji)
+**Kind**: global class  
+**Extends**: <code>Base</code>
+
+- [Emoji](#Emoji) ⇐ <code>Base</code>
   - [new Emoji([data], guildId, client)](#new_Emoji_new)
-  - [.fetch([options])](#Emoji+fetch) ⇒
-  - [.edit([options])](#Emoji+edit) ⇒
-  - [.setName(name, reason)](#Emoji+setName) ⇒
-  - [.setRoles(roles, reason)](#Emoji+setRoles) ⇒
-  - [.delete(reason)](#Emoji+delete) ⇒
+  - [.guild](#Emoji+guild) ⇒
+  - [.fetch(options)](#Emoji+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#Emoji+edit) ⇒ <code>Promise</code>
+  - [.setName(name, reason)](#Emoji+setName) ⇒ <code>Promise</code>
+  - [.setRoles(roles, reason)](#Emoji+setRoles) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Emoji+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.imageURL(options)](#Emoji+imageURL) ⇒ <code>string</code>
+  - [.equals(emoji)](#Emoji+equals) ⇒ <code>boolean</code>
 
 <a name="new_Emoji_new"></a>
 
 ### new Emoji([data], guildId, client)
 
-It's a constructor for the Emoji class
+Constructs a new instance of the GuildEmoji class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was passed to the constructor. |
-| guildId | The ID of the guild this emoji is in.        |
-| client  | The client that instantiated the Emoji       |
+**Returns**: <code>GuildEmoji</code> - - The newly created GuildEmoji instance.
 
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the emoji information. |
+| guildId | <code>string</code> | The ID of the guild that the emoji belongs to.    |
+| client  | <code>Client</code> | The client instance.                              |
+
+<a name="Emoji+guild"></a>
+
+### emoji.guild ⇒
+
+Get the guild object associated with this guildId.
+
+**Kind**: instance property of [<code>Emoji</code>](#Emoji)  
+**Returns**: The guild object.  
 <a name="Emoji+fetch"></a>
 
-### emoji.fetch([options]) ⇒
+### emoji.fetch(options) ⇒ <code>Promise</code>
 
-`fetch` fetches the emoji from the guild
+Fetches emojis from the guild.
 
 **Kind**: instance method of [<code>Emoji</code>](#Emoji)  
-**Returns**: The emoji object
+**Returns**: <code>Promise</code> - A promise that resolves to the fetched emojis.
 
-| Param     | Description                              |
-| --------- | ---------------------------------------- |
-| [options] | An object with the following properties: |
+| Param   | Type                | Description                                  |
+| ------- | ------------------- | -------------------------------------------- |
+| options | <code>Object</code> | Optional parameters for the fetch operation. |
 
 <a name="Emoji+edit"></a>
 
-### emoji.edit([options]) ⇒
+### emoji.edit(options) ⇒ <code>Promise</code>
 
-`edit` edits the emoji
+Edits the current emoji with the provided options.
 
 **Kind**: instance method of [<code>Emoji</code>](#Emoji)  
-**Returns**: The edited emoji.
+**Returns**: <code>Promise</code> - A promise that resolves with the updated emoji.
 
-| Param     | Description                                           |
-| --------- | ----------------------------------------------------- |
-| [options] | An object containing the new properties of the emoji. |
+| Param   | Type                | Description                           |
+| ------- | ------------------- | ------------------------------------- |
+| options | <code>Object</code> | The options to update the emoji with. |
 
 <a name="Emoji+setName"></a>
 
-### emoji.setName(name, reason) ⇒
+### emoji.setName(name, reason) ⇒ <code>Promise</code>
 
-`setName` sets the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>Emoji</code>](#Emoji)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| name   | The new name of the channel. |
-| reason | The reason for the change.   |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="Emoji+setRoles"></a>
 
-### emoji.setRoles(roles, reason) ⇒
+### emoji.setRoles(roles, reason) ⇒ <code>Promise</code>
 
-It sets the roles of a member
+Sets the roles for the current object.
 
 **Kind**: instance method of [<code>Emoji</code>](#Emoji)  
-**Returns**: The roles of the member.
+**Returns**: <code>Promise</code> - A promise that resolves when the roles are successfully set.
 
-| Param  | Description              |
-| ------ | ------------------------ |
-| roles  | The roles to set.        |
-| reason | The reason for the edit. |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| roles  | <code>Array</code>  | The roles to set.                 |
+| reason | <code>string</code> | The reason for setting the roles. |
 
 <a name="Emoji+delete"></a>
 
-### emoji.delete(reason) ⇒
+### emoji.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-`delete` deletes the emoji
+Deletes the emoji from the guild.
 
 **Kind**: instance method of [<code>Emoji</code>](#Emoji)  
-**Returns**: The emoji object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the emoji is deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| reason | <code>string</code> | The reason for deleting the emoji. |
+
+<a name="Emoji+imageURL"></a>
+
+### emoji.imageURL(options) ⇒ <code>string</code>
+
+Generates the URL for the image of this emoji.
+
+**Kind**: instance method of [<code>Emoji</code>](#Emoji)  
+**Returns**: <code>string</code> - The URL of the image.
+
+| Param           | Type                | Description                         |
+| --------------- | ------------------- | ----------------------------------- |
+| options         | <code>Object</code> | The options for generating the URL. |
+| options.size    | <code>number</code> | The desired size of the image.      |
+| options.format  | <code>string</code> | The desired format of the image.    |
+| options.quality | <code>number</code> | The desired quality of the image.   |
+
+<a name="Emoji+equals"></a>
+
+### emoji.equals(emoji) ⇒ <code>boolean</code>
+
+Checks if the given object is equal to this Emoji object.
+
+**Kind**: instance method of [<code>Emoji</code>](#Emoji)  
+**Returns**: <code>boolean</code> - True if the objects are equal, false otherwise.
+
+| Param | Type                         | Description                            |
+| ----- | ---------------------------- | -------------------------------------- |
+| emoji | [<code>Emoji</code>](#Emoji) | The object to compare with this Emoji. |
 
 <a name="FetchedThreads"></a>
 
 ## FetchedThreads ⇐ <code>Base</code>
 
-A class representing a collection of fetched threads from a guild.
+Represents a collection of fetched threads.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>  
+**Properties**
+
+| Name    | Type                                      | Description                                                                               |
+| ------- | ----------------------------------------- | ----------------------------------------------------------------------------------------- |
+| guildId | <code>string</code>                       | The ID of the guild the threads belong to.                                                |
+| threads | <code>RaidenCol</code>                    | A collection of threads, where each thread is represented by its ID and a channel object. |
+| hasMore | <code>boolean</code> \| <code>null</code> | Indicates whether there are more threads to fetch.                                        |
+
 <a name="new_FetchedThreads_new"></a>
 
-### new FetchedThreads(data, guildId, client)
+### new FetchedThreads([data], guildId, client)
 
-| Param   | Type                | Description                              |
-| ------- | ------------------- | ---------------------------------------- |
-| data    | <code>Object</code> | The data for the fetched threads.        |
-| guildId | <code>string</code> | The ID of the guild.                     |
-| client  | <code>Client</code> | The client that instantiated this class. |
+Constructs a new instance of the class.
+
+| Param   | Type                | Description                                                       |
+| ------- | ------------------- | ----------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the fetched threads. |
+| guildId | <code>string</code> | The ID of the guild the threads belong to.                        |
+| client  | <code>Client</code> | The client instance.                                              |
 
 <a name="ForumChannel"></a>
 
@@ -1477,11 +1998,11 @@ A class representing a forum channel on Discord.
 
 ### new ForumChannel([data], [guildId], [client])
 
-| Param     | Type                | Default         | Description                                     |
-| --------- | ------------------- | --------------- | ----------------------------------------------- |
-| [data]    | <code>Object</code> | <code>{}</code> | The data for the forum channel                  |
-| [guildId] | <code>string</code> |                 | The ID of the guild that the channel belongs to |
-| [client]  | <code>Client</code> |                 | The client that instantiated the channel        |
+| Param     | Type                | Description                                     |
+| --------- | ------------------- | ----------------------------------------------- |
+| [data]    | <code>Object</code> | The data for the forum channel                  |
+| [guildId] | <code>string</code> | The ID of the guild that the channel belongs to |
+| [client]  | <code>Client</code> | The client that instantiated the channel        |
 
 <a name="ForumChannel+createThread"></a>
 
@@ -1492,26 +2013,37 @@ Creates a new thread in the forum channel.
 **Kind**: instance method of [<code>ForumChannel</code>](#ForumChannel)  
 **Returns**: <code>Promise.&lt;Object&gt;</code> - The thread data
 
-| Param                         | Type                 | Default         | Description                                                 |
-| ----------------------------- | -------------------- | --------------- | ----------------------------------------------------------- |
-| [options]                     | <code>Object</code>  | <code>{}</code> | The options for the thread                                  |
-| [options.name]                | <code>string</code>  |                 | The name of the thread                                      |
-| [options.autoArchiveDuration] | <code>number</code>  |                 | The duration in minutes to automatically archive the thread |
-| [options.rateLimitPerUser]    | <code>number</code>  |                 | The rate limit per user for the thread in seconds           |
-| [options.reason]              | <code>string</code>  |                 | The reason for creating the thread                          |
-| [options.message]             | <code>Message</code> |                 | The message to use as a basis for the thread                |
+| Param                         | Type                 | Description                                                 |
+| ----------------------------- | -------------------- | ----------------------------------------------------------- |
+| [options]                     | <code>Object</code>  | The options for the thread                                  |
+| [options.name]                | <code>string</code>  | The name of the thread                                      |
+| [options.autoArchiveDuration] | <code>number</code>  | The duration in minutes to automatically archive the thread |
+| [options.rateLimitPerUser]    | <code>number</code>  | The rate limit per user for the thread in seconds           |
+| [options.reason]              | <code>string</code>  | The reason for creating the thread                          |
+| [options.message]             | <code>Message</code> | The message to use as a basis for the thread                |
 
 <a name="Guild"></a>
 
-## Guild ⇐ <code>BaseGuild</code>
+## Guild ⇐ <code>Base</code>
 
-The Guild structure class
+Represents a guild in Discord.
 
 **Kind**: global class  
-**Extends**: <code>BaseGuild</code>
+**Extends**: <code>Base</code>  
+**Properties**
 
-- [Guild](#Guild) ⇐ <code>BaseGuild</code>
-  - [new Guild(data, client)](#new_Guild_new)
+| Name     | Type                                     | Description                          |
+| -------- | ---------------------------------------- | ------------------------------------ |
+| partial  | <code>boolean</code>                     | Whether the guild is partial or not. |
+| id       | <code>string</code> \| <code>null</code> | The ID of the guild.                 |
+| name     | <code>string</code> \| <code>null</code> | The name of the guild.               |
+| icon     | <code>string</code> \| <code>null</code> | The icon of the guild.               |
+| iconHash | <code>string</code> \| <code>null</code> | The hash of the guild's icon.        |
+| splash   | <code>string</code> \| <code>null</code> | The splash image of the guild.       |
+|          | <code>string</code> \| <code>null</code> |                                      |
+
+- [Guild](#Guild) ⇐ <code>Base</code>
+  - [new Guild([data], client)](#new_Guild_new)
   - [.me](#Guild+me) ⇒ <code>GuildMember</code>
   - [.afkChannel](#Guild+afkChannel) ⇒ <code>VoiceChannel</code>
   - [.widgetChannel](#Guild+widgetChannel) ⇒ [<code>Promise.&lt;Guild&gt;</code>](#Guild)
@@ -1560,14 +2092,14 @@ The Guild structure class
 
 <a name="new_Guild_new"></a>
 
-### new Guild(data, client)
+### new Guild([data], client)
 
-Creates a new Guild object.
+Constructs a new Guild object.
 
-| Param  | Type                | Description                             |
-| ------ | ------------------- | --------------------------------------- |
-| data   | <code>Object</code> | The data for the guild.                 |
-| client | <code>Client</code> | The client that instantiated the guild. |
+| Param  | Type                | Description                                   |
+| ------ | ------------------- | --------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing guild information. |
+| client | <code>Client</code> | The client object associated with the guild.  |
 
 <a name="Guild+me"></a>
 
@@ -1921,7 +2453,7 @@ Returns the URL of the guild's icon.
 
 | Param             | Type                 | Default            | Description                       |
 | ----------------- | -------------------- | ------------------ | --------------------------------- |
-| [options]         | <code>Object</code>  | <code>{}</code>    | Additional options for the URL.   |
+| [options]         | <code>Object</code>  |                    | Additional options for the URL.   |
 | [options.dynamic] | <code>boolean</code> | <code>false</code> | Whether to return a dynamic icon. |
 | [options.size]    | <code>number</code>  |                    | The size of the icon to return.   |
 | [options.format]  | <code>string</code>  |                    | The format of the icon to return. |
@@ -1937,7 +2469,7 @@ Returns the URL of the guild's banner.
 
 | Param             | Type                 | Default            | Description                         |
 | ----------------- | -------------------- | ------------------ | ----------------------------------- |
-| [options]         | <code>Object</code>  | <code>{}</code>    | Additional options for the URL.     |
+| [options]         | <code>Object</code>  |                    | Additional options for the URL.     |
 | [options.dynamic] | <code>boolean</code> | <code>false</code> | Whether to return a dynamic banner. |
 | [options.size]    | <code>number</code>  |                    | The size of the banner to return.   |
 | [options.format]  | <code>string</code>  |                    | The format of the banner to return. |
@@ -1953,7 +2485,7 @@ Returns the URL of the guild's splash.
 
 | Param             | Type                 | Default            | Description                         |
 | ----------------- | -------------------- | ------------------ | ----------------------------------- |
-| [options]         | <code>Object</code>  | <code>{}</code>    | Additional options for the URL.     |
+| [options]         | <code>Object</code>  |                    | Additional options for the URL.     |
 | [options.dynamic] | <code>boolean</code> | <code>false</code> | Whether to return a dynamic splash. |
 | [options.size]    | <code>number</code>  |                    | The size of the splash to return.   |
 | [options.format]  | <code>string</code>  |                    | The format of the splash to return. |
@@ -1969,7 +2501,7 @@ Returns the URL of the guild's discovery splash.
 
 | Param             | Type                 | Default            | Description                                   |
 | ----------------- | -------------------- | ------------------ | --------------------------------------------- |
-| [options]         | <code>Object</code>  | <code>{}</code>    | Additional options for the URL.               |
+| [options]         | <code>Object</code>  |                    | Additional options for the URL.               |
 | [options.dynamic] | <code>boolean</code> | <code>false</code> | Whether to return a dynamic discovery splash. |
 | [options.size]    | <code>number</code>  |                    | The size of the discovery splash to return.   |
 | [options.format]  | <code>string</code>  |                    | The format of the discovery splash to return. |
@@ -2014,7 +2546,7 @@ Fetches the audit logs for the guild.
 
 | Param                | Type                                                      | Default         | Description                                    |
 | -------------------- | --------------------------------------------------------- | --------------- | ---------------------------------------------- |
-| [options]            | <code>Object</code>                                       | <code>{}</code> | The options for fetching audit logs.           |
+| [options]            | <code>Object</code>                                       |                 | The options for fetching audit logs.           |
 | [options.user]       | <code>UserResolvable</code>                               |                 | The user to filter the audit log by.           |
 | [options.actionType] | <code>string</code>                                       |                 | The type of action to filter the audit log by. |
 | [options.before]     | <code>Snowflake</code> \| <code>GuildAuditLogEntry</code> |                 | The entry to get audit logs before.            |
@@ -2105,13 +2637,13 @@ Represents an audit log for a guild.
 
 ### new GuildAuditLog([data], guildId, client)
 
-Constructs a new `GuildAuditLog` object.
+Constructs a new instance of the Guild class.
 
-| Param   | Type                | Default         | Description          |
-| ------- | ------------------- | --------------- | -------------------- |
-| [data]  | <code>Object</code> | <code>{}</code> | The audit log data.  |
-| guildId | <code>string</code> |                 | The ID of the guild. |
-| client  | <code>Client</code> |                 | The client object.   |
+| Param   | Type                | Description                                   |
+| ------- | ------------------- | --------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing guild information. |
+| guildId | <code>string</code> | The ID of the guild.                          |
+| client  | <code>Client</code> | The client instance.                          |
 
 <a name="GuildAuditLog+guild"></a>
 
@@ -2136,11 +2668,11 @@ Represents changes made to a guild audit log.
 
 Constructs a new `GuildAuditLogChanges` object.
 
-| Param   | Type                | Default         | Description                 |
-| ------- | ------------------- | --------------- | --------------------------- |
-| [data]  | <code>Object</code> | <code>{}</code> | The audit log changes data. |
-| guildId | <code>string</code> |                 | The ID of the guild.        |
-| client  | <code>Client</code> |                 | The client object.          |
+| Param   | Type                | Description                 |
+| ------- | ------------------- | --------------------------- |
+| [data]  | <code>Object</code> | The audit log changes data. |
+| guildId | <code>string</code> | The ID of the guild.        |
+| client  | <code>Client</code> | The client object.          |
 
 <a name="GuildAuditLogEntry"></a>
 
@@ -2154,11 +2686,11 @@ Represents an entry in the audit log for a guild.
 
 ### new GuildAuditLogEntry([data], guildId, client)
 
-| Param   | Type                | Default         | Description                              |
-| ------- | ------------------- | --------------- | ---------------------------------------- |
-| [data]  | <code>Object</code> | <code>{}</code> | The data for the audit log entry         |
-| guildId | <code>string</code> |                 | The ID of the guild the entry belongs to |
-| client  | <code>Client</code> |                 | The client that instantiated this entry  |
+| Param   | Type                | Description                              |
+| ------- | ------------------- | ---------------------------------------- |
+| [data]  | <code>Object</code> | The data for the audit log entry         |
+| guildId | <code>string</code> | The ID of the guild the entry belongs to |
+| client  | <code>Client</code> | The client that instantiated this entry  |
 
 ## Classes
 
@@ -3264,250 +3796,250 @@ Returns the URL for the guild discovery splash image.
 
 ## GuildScheduledEvent ⇐ <code>Base</code>
 
-It's a class that represents a scheduled event in a guild.
+Represents a scheduled event in a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [GuildScheduledEvent](#GuildScheduledEvent) ⇐ <code>Base</code>
-  - [new GuildScheduledEvent(data, guildId, client)](#new_GuildScheduledEvent_new)
+  - [new GuildScheduledEvent([data], guildId, client)](#new_GuildScheduledEvent_new)
   - [.guild](#GuildScheduledEvent+guild) ⇒
   - [.creator](#GuildScheduledEvent+creator) ⇒
-  - [.fetch(options)](#GuildScheduledEvent+fetch) ⇒
-  - [.edit([options])](#GuildScheduledEvent+edit) ⇒
-  - [.delete()](#GuildScheduledEvent+delete) ⇒
-  - [.setName(name, reason)](#GuildScheduledEvent+setName) ⇒
-  - [.setDescription(description, reason)](#GuildScheduledEvent+setDescription) ⇒
-  - [.setPrivacyLevel(privacyLevel, reason)](#GuildScheduledEvent+setPrivacyLevel) ⇒
-  - [.setEntityType(entityType, reason)](#GuildScheduledEvent+setEntityType) ⇒
-  - [.setEntityMetadata(entityMetadata, reason)](#GuildScheduledEvent+setEntityMetadata) ⇒
-  - [.setImage(image, reason)](#GuildScheduledEvent+setImage) ⇒
-  - [.setScheduledStartTime(scheduledStartTime, reason)](#GuildScheduledEvent+setScheduledStartTime) ⇒
-  - [.setScheduledEndTime(scheduledEndTime, reason)](#GuildScheduledEvent+setScheduledEndTime) ⇒
-  - [.setStatus(status, reason)](#GuildScheduledEvent+setStatus) ⇒
-  - [.coverImageURL([options])](#GuildScheduledEvent+coverImageURL) ⇒
-  - [.inviteURL()](#GuildScheduledEvent+inviteURL) ⇒
+  - [.fetch(options)](#GuildScheduledEvent+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#GuildScheduledEvent+edit) ⇒ <code>Promise</code>
+  - [.delete()](#GuildScheduledEvent+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setName(name, reason)](#GuildScheduledEvent+setName) ⇒ <code>Promise</code>
+  - [.setDescription(description, reason)](#GuildScheduledEvent+setDescription) ⇒ <code>Promise</code>
+  - [.setPrivacyLevel(privacyLevel, reason)](#GuildScheduledEvent+setPrivacyLevel) ⇒ <code>Promise</code>
+  - [.setEntityType(entityType, reason)](#GuildScheduledEvent+setEntityType) ⇒ <code>Promise</code>
+  - [.setEntityMetadata(entityMetadata, reason)](#GuildScheduledEvent+setEntityMetadata) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setImage(image, reason)](#GuildScheduledEvent+setImage) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setScheduledStartTime(scheduledStartTime, reason)](#GuildScheduledEvent+setScheduledStartTime) ⇒ <code>Promise</code>
+  - [.setScheduledEndTime(scheduledEndTime, reason)](#GuildScheduledEvent+setScheduledEndTime) ⇒ <code>Promise</code>
+  - [.setStatus(status, reason)](#GuildScheduledEvent+setStatus) ⇒ <code>Promise.&lt;any&gt;</code>
+  - [.coverImageURL(options)](#GuildScheduledEvent+coverImageURL) ⇒ <code>string</code> \| <code>null</code>
+  - [.inviteURL()](#GuildScheduledEvent+inviteURL) ⇒ <code>string</code>
 
 <a name="new_GuildScheduledEvent_new"></a>
 
-### new GuildScheduledEvent(data, guildId, client)
+### new GuildScheduledEvent([data], guildId, client)
 
-| Param   | Description                         |
-| ------- | ----------------------------------- |
-| data    | guildId, client                     |
-| guildId | The ID of the guild the event is in |
-| client  | Discord.Client                      |
+Constructs a new GuildScheduledEvent object.
+
+**Returns**: [<code>GuildScheduledEvent</code>](#GuildScheduledEvent) - - The constructed GuildScheduledEvent object.
+
+| Param   | Type                | Description                                    |
+| ------- | ------------------- | ---------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the scheduled event.              |
+| guildId | <code>string</code> | The ID of the guild that the event belongs to. |
+| client  | <code>Client</code> | The client instance.                           |
 
 <a name="GuildScheduledEvent+guild"></a>
 
 ### guildScheduledEvent.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="GuildScheduledEvent+creator"></a>
 
 ### guildScheduledEvent.creator ⇒
 
-It returns the user object of the creator of the guild
+Retrieves the creator of this object.
 
 **Kind**: instance property of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The creator of the guild.  
+**Returns**: The user object representing the creator, or null if the creator is not found.  
 <a name="GuildScheduledEvent+fetch"></a>
 
-### guildScheduledEvent.fetch(options) ⇒
+### guildScheduledEvent.fetch(options) ⇒ <code>Promise</code>
 
-It fetches the event from the guild's event cache
+Fetches events for the guild using the provided options.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The event object.
+**Returns**: <code>Promise</code> - A promise that resolves with the fetched events.
 
-| Param   | Description                                    |
-| ------- | ---------------------------------------------- |
-| options | An object containing the following properties: |
+| Param   | Type                | Description                      |
+| ------- | ------------------- | -------------------------------- |
+| options | <code>object</code> | The options for fetching events. |
 
 <a name="GuildScheduledEvent+edit"></a>
 
-### guildScheduledEvent.edit([options]) ⇒
+### guildScheduledEvent.edit(options) ⇒ <code>Promise</code>
 
-It edits the event
+Edits the guild's events with the given options.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - A promise that resolves when the events have been successfully edited.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>Object</code> | The options to edit the events with. |
 
 <a name="GuildScheduledEvent+delete"></a>
 
-### guildScheduledEvent.delete() ⇒
+### guildScheduledEvent.delete() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the event
+Deletes the current event from the guild's events collection.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the delete method of the events object of the guild object of the
-event object.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves once the event is deleted.  
 <a name="GuildScheduledEvent+setName"></a>
 
-### guildScheduledEvent.setName(name, reason) ⇒
+### guildScheduledEvent.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| name   | The new name of the channel. |
-| reason | The reason for the edit.     |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="GuildScheduledEvent+setDescription"></a>
 
-### guildScheduledEvent.setDescription(description, reason) ⇒
+### guildScheduledEvent.setDescription(description, reason) ⇒ <code>Promise</code>
 
-It edits the description of the channel
+Sets the description of an object and updates it with the provided reason.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The description of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the description is successfully updated.
 
-| Param       | Description                         |
-| ----------- | ----------------------------------- |
-| description | The new description of the channel. |
-| reason      | The reason for the edit.            |
+| Param       | Type                | Description                              |
+| ----------- | ------------------- | ---------------------------------------- |
+| description | <code>string</code> | The new description to set.              |
+| reason      | <code>string</code> | The reason for updating the description. |
 
 <a name="GuildScheduledEvent+setPrivacyLevel"></a>
 
-### guildScheduledEvent.setPrivacyLevel(privacyLevel, reason) ⇒
+### guildScheduledEvent.setPrivacyLevel(privacyLevel, reason) ⇒ <code>Promise</code>
 
-This function sets the privacy level of the current channel to the privacy level specified in the
-first parameter, and sets the reason for the change to the reason specified in the second
-parameter.
+Sets the privacy level for the current user.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the privacy level is successfully set.
 
-| Param        | Description                       |
-| ------------ | --------------------------------- |
-| privacyLevel | The privacy level of the channel. |
-| reason       | The reason for the change.        |
+| Param        | Type                | Description                               |
+| ------------ | ------------------- | ----------------------------------------- |
+| privacyLevel | <code>string</code> | The privacy level to set.                 |
+| reason       | <code>string</code> | The reason for setting the privacy level. |
 
 <a name="GuildScheduledEvent+setEntityType"></a>
 
-### guildScheduledEvent.setEntityType(entityType, reason) ⇒
+### guildScheduledEvent.setEntityType(entityType, reason) ⇒ <code>Promise</code>
 
-It returns a promise that resolves to the result of calling the edit function with the given
-parameters.
+Sets the entity type and reason for the current entity.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the entity type is successfully set.
 
-| Param      | Description                                          |
-| ---------- | ---------------------------------------------------- |
-| entityType | The type of entity you want to change the entity to. |
-| reason     | The reason for the change.                           |
+| Param      | Type                | Description                            |
+| ---------- | ------------------- | -------------------------------------- |
+| entityType | <code>string</code> | The new entity type to set.            |
+| reason     | <code>string</code> | The reason for the entity type change. |
 
 <a name="GuildScheduledEvent+setEntityMetadata"></a>
 
-### guildScheduledEvent.setEntityMetadata(entityMetadata, reason) ⇒
+### guildScheduledEvent.setEntityMetadata(entityMetadata, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It edits the entity metadata of the message
+Sets the metadata of an entity with the given entityMetadata and reason.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the metadata is successfully set.
 
-| Param          | Description                 |
-| -------------- | --------------------------- |
-| entityMetadata | The metadata of the entity. |
-| reason         | The reason for the edit.    |
+| Param          | Type                | Description                          |
+| -------------- | ------------------- | ------------------------------------ |
+| entityMetadata | <code>any</code>    | The metadata to set for the entity.  |
+| reason         | <code>string</code> | The reason for setting the metadata. |
 
 <a name="GuildScheduledEvent+setImage"></a>
 
-### guildScheduledEvent.setImage(image, reason) ⇒
+### guildScheduledEvent.setImage(image, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It edits the image of the embed
+Sets the image of an object and updates it with the given reason.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the image is set and updated.
 
-| Param  | Description                     |
-| ------ | ------------------------------- |
-| image  | The image to set the avatar to. |
-| reason | The reason for the edit.        |
+| Param  | Type                | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| image  | <code>any</code>    | The new image to set.              |
+| reason | <code>string</code> | The reason for updating the image. |
 
 <a name="GuildScheduledEvent+setScheduledStartTime"></a>
 
-### guildScheduledEvent.setScheduledStartTime(scheduledStartTime, reason) ⇒
+### guildScheduledEvent.setScheduledStartTime(scheduledStartTime, reason) ⇒ <code>Promise</code>
 
-It takes a scheduledStartTime and a reason, and then it returns the result of calling the edit
-function with the scheduledStartTime and reason as arguments.
-
-The edit function is defined in the same file, and it looks like this:
+Sets the scheduled start time and reason for an event.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit() method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param              | Description                                          |
-| ------------------ | ---------------------------------------------------- |
-| scheduledStartTime | The time at which the meeting is scheduled to start. |
-| reason             | The reason for the change.                           |
+| Param              | Type                | Description                              |
+| ------------------ | ------------------- | ---------------------------------------- |
+| scheduledStartTime | <code>Date</code>   | The scheduled start time for the event.  |
+| reason             | <code>string</code> | The reason for the scheduled start time. |
 
 <a name="GuildScheduledEvent+setScheduledEndTime"></a>
 
-### guildScheduledEvent.setScheduledEndTime(scheduledEndTime, reason) ⇒
+### guildScheduledEvent.setScheduledEndTime(scheduledEndTime, reason) ⇒ <code>Promise</code>
 
-It takes a time and a reason, and then it edits the event with the time and reason.
+Sets the scheduled end time and reason for a task.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param            | Description                                                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| scheduledEndTime | The time at which the live stream is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. |
-| reason           | The reason for the change.                                                                                                 |
+| Param            | Type                | Description                                      |
+| ---------------- | ------------------- | ------------------------------------------------ |
+| scheduledEndTime | <code>Date</code>   | The new scheduled end time for the task.         |
+| reason           | <code>string</code> | The reason for the change in scheduled end time. |
 
 <a name="GuildScheduledEvent+setStatus"></a>
 
-### guildScheduledEvent.setStatus(status, reason) ⇒
+### guildScheduledEvent.setStatus(status, reason) ⇒ <code>Promise.&lt;any&gt;</code>
 
-It sets the status of the message.
+Sets the status and reason of an object and returns the updated object.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise.&lt;any&gt;</code> - - A promise that resolves to the updated object.
 
-| Param  | Description              |
-| ------ | ------------------------ |
-| status | The status of the embed. |
-| reason | The reason for the edit. |
+| Param  | Type             | Description           |
+| ------ | ---------------- | --------------------- |
+| status | <code>any</code> | The new status value. |
+| reason | <code>any</code> | The new reason value. |
 
 <a name="GuildScheduledEvent+coverImageURL"></a>
 
-### guildScheduledEvent.coverImageURL([options]) ⇒
+### guildScheduledEvent.coverImageURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-It returns the URL of the cover image of the event
+Returns the URL of the cover image for the guild scheduled event.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The coverImageURL is being returned.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the cover image, or null if there is no image.
 
-| Param     |
-| --------- |
-| [options] |
+| Param             | Type                 | Description                                        |
+| ----------------- | -------------------- | -------------------------------------------------- |
+| options           | <code>Object</code>  | Optional parameters for generating the URL.        |
+| [options.dynamic] | <code>boolean</code> | Whether the image should be dynamically generated. |
+| [options.size]    | <code>string</code>  | The desired size of the image.                     |
+| [options.format]  | <code>string</code>  | The desired format of the image.                   |
 
 <a name="GuildScheduledEvent+inviteURL"></a>
 
-### guildScheduledEvent.inviteURL() ⇒
+### guildScheduledEvent.inviteURL() ⇒ <code>string</code>
 
-It returns a URL to the invite
+Generates an invite URL for a user.
 
 **Kind**: instance method of [<code>GuildScheduledEvent</code>](#GuildScheduledEvent)  
-**Returns**: The inviteURL() method returns a string that is the invite URL for the event.
+**Returns**: <code>string</code> - The invite URL.
 
 <a name="GuildScheduledEventUser"></a>
 
 ## GuildScheduledEventUser ⇐ <code>Base</code>
 
-It's a class that represents a user that is going to an event
+Represents a user associated with a scheduled event in a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -3515,43 +4047,43 @@ It's a class that represents a user that is going to an event
 - [GuildScheduledEventUser](#GuildScheduledEventUser) ⇐ <code>Base</code>
   - [new GuildScheduledEventUser([data], guildId, eventId, client)](#new_GuildScheduledEventUser_new)
   - [.guild](#GuildScheduledEventUser+guild) ⇒
-  - [.guildScheduledEvent](#GuildScheduledEventUser+guildScheduledEvent) ⇒
+  - [.guildScheduledEvent](#GuildScheduledEventUser+guildScheduledEvent) ⇒ <code>ScheduledEvent</code> \| <code>null</code>
 
 <a name="new_GuildScheduledEventUser_new"></a>
 
 ### new GuildScheduledEventUser([data], guildId, eventId, client)
 
-This function is used to create a new instance of the class GuildScheduledEventMember.
+Constructs a new instance of the Event class.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| [data]  | The data that was received from the API. |
-| guildId | The ID of the guild the event is in      |
-| eventId | The ID of the event                      |
-| client  | Discord.Client                           |
+| Param   | Type                | Description                                                |
+| ------- | ------------------- | ---------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the user.     |
+| guildId | <code>string</code> | The ID of the guild the user belongs to.                   |
+| eventId | <code>string</code> | The ID of the scheduled event the user is associated with. |
+| client  | <code>Client</code> | The client instance.                                       |
 
 <a name="GuildScheduledEventUser+guild"></a>
 
 ### guildScheduledEventUser.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>GuildScheduledEventUser</code>](#GuildScheduledEventUser)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="GuildScheduledEventUser+guildScheduledEvent"></a>
 
-### guildScheduledEventUser.guildScheduledEvent ⇒
+### guildScheduledEventUser.guildScheduledEvent ⇒ <code>ScheduledEvent</code> \| <code>null</code>
 
-"If the guild exists, add the guildScheduledEventId to the events array, otherwise return null."
+Retrieves the scheduled event associated with the guild.
 
 **Kind**: instance property of [<code>GuildScheduledEventUser</code>](#GuildScheduledEventUser)  
-**Returns**: The guildScheduledEventId is being returned.
+**Returns**: <code>ScheduledEvent</code> \| <code>null</code> - The scheduled event object if found, otherwise null.
 
 <a name="GuildTemplate"></a>
 
 ## GuildTemplate ⇐ <code>Base</code>
 
-It's a class that represents a guild template.
+Represents a guild template.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -3559,115 +4091,114 @@ It's a class that represents a guild template.
 - [GuildTemplate](#GuildTemplate) ⇐ <code>Base</code>
   - [new GuildTemplate([data], client)](#new_GuildTemplate_new)
   - [.guild](#GuildTemplate+guild) ⇒
-  - [.fetch()](#GuildTemplate+fetch) ⇒
-  - [.sync()](#GuildTemplate+sync) ⇒
-  - [.edit([options])](#GuildTemplate+edit) ⇒
-  - [.delete()](#GuildTemplate+delete) ⇒
-  - [.setName(name)](#GuildTemplate+setName) ⇒
-  - [.setDescription(description)](#GuildTemplate+setDescription) ⇒
-  - [.createGuild([options])](#GuildTemplate+createGuild) ⇒
+  - [.fetch()](#GuildTemplate+fetch) ⇒ <code>Promise</code>
+  - [.sync()](#GuildTemplate+sync) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.edit(options)](#GuildTemplate+edit) ⇒ <code>Promise</code>
+  - [.delete()](#GuildTemplate+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setName(name)](#GuildTemplate+setName) ⇒ <code>Promise</code>
+  - [.setDescription(description)](#GuildTemplate+setDescription) ⇒ <code>Promise</code>
+  - [.createGuild(options)](#GuildTemplate+createGuild) ⇒ <code>Promise</code>
 
 <a name="new_GuildTemplate_new"></a>
 
 ### new GuildTemplate([data], client)
 
-It's a constructor for a class called Invite.
+Constructs a new instance of a data object.
 
-| Param  | Description                                  |
-| ------ | -------------------------------------------- |
-| [data] | The data that is passed to the constructor.  |
-| client | The client that the invite was fetched from. |
+| Param  | Type                | Description                      |
+| ------ | ------------------- | -------------------------------- |
+| [data] | <code>Object</code> | The data for the guild template. |
+| client | <code>Client</code> | The client instance.             |
 
 <a name="GuildTemplate+guild"></a>
 
 ### guildTemplate.guild ⇒
 
-It returns the guild object of the guild that the channel is in
+Get the guild object associated with this guild ID.
 
 **Kind**: instance property of [<code>GuildTemplate</code>](#GuildTemplate)  
 **Returns**: The guild object.  
 <a name="GuildTemplate+fetch"></a>
 
-### guildTemplate.fetch() ⇒
+### guildTemplate.fetch() ⇒ <code>Promise</code>
 
-It fetches the guild template from the database
+Fetches a guild template using the provided code.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The return value of the async function is a Promise.  
+**Returns**: <code>Promise</code> - A promise that resolves to the fetched guild template.  
 <a name="GuildTemplate+sync"></a>
 
-### guildTemplate.sync() ⇒
+### guildTemplate.sync() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It syncs the template with the database
+Synchronizes the guild templates with the provided code.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The return value of the sync() method.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the synchronization is complete.  
 <a name="GuildTemplate+edit"></a>
 
-### guildTemplate.edit([options]) ⇒
+### guildTemplate.edit(options) ⇒ <code>Promise</code>
 
-It edits a template
+Edits the guild template with the provided options.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The return value of the function is the return value of the function that is being
-called.
+**Returns**: <code>Promise</code> - A promise that resolves to the result of the template edit.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                                |
+| ------- | ------------------- | ------------------------------------------ |
+| options | <code>Object</code> | The options to apply to the template edit. |
 
 <a name="GuildTemplate+delete"></a>
 
-### guildTemplate.delete() ⇒
+### guildTemplate.delete() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the template from the database
+Deletes the template with the specified code from the guild.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The return value of the delete method of the templates object of the guild object.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves when the template is successfully deleted.  
 <a name="GuildTemplate+setName"></a>
 
-### guildTemplate.setName(name) ⇒
+### guildTemplate.setName(name) ⇒ <code>Promise</code>
 
-It sets the name of the channel
+Sets the name of an object asynchronously.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The return value of the edit() method.
+**Returns**: <code>Promise</code> - A promise that resolves when the name is successfully set.
 
-| Param | Description              |
-| ----- | ------------------------ |
-| name  | The name of the channel. |
+| Param | Type                | Description          |
+| ----- | ------------------- | -------------------- |
+| name  | <code>string</code> | The new name to set. |
 
 <a name="GuildTemplate+setDescription"></a>
 
-### guildTemplate.setDescription(description) ⇒
+### guildTemplate.setDescription(description) ⇒ <code>Promise</code>
 
-It edits the description of the channel
+Sets the description of an object and updates it.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The description of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the description is successfully updated.
 
-| Param       | Description                         |
-| ----------- | ----------------------------------- |
-| description | The new description of the channel. |
+| Param       | Type                | Description                 |
+| ----------- | ------------------- | --------------------------- |
+| description | <code>string</code> | The new description to set. |
 
 <a name="GuildTemplate+createGuild"></a>
 
-### guildTemplate.createGuild([options]) ⇒
+### guildTemplate.createGuild(options) ⇒ <code>Promise</code>
 
-It creates a guild
+Creates a new guild using the provided options.
 
 **Kind**: instance method of [<code>GuildTemplate</code>](#GuildTemplate)  
-**Returns**: The client.generateTemplate function is being returned.
+**Returns**: <code>Promise</code> - A promise that resolves to the generated template for the guild.
 
-| Param     | Description                |
-| --------- | -------------------------- |
-| [options] | The options for the guild. |
+| Param   | Type                | Description                         |
+| ------- | ------------------- | ----------------------------------- |
+| options | <code>Object</code> | The options for creating the guild. |
 
 <a name="GuildVanity"></a>
 
 ## GuildVanity ⇐ <code>Base</code>
 
-It's a class that represents a guild vanity
+Represents a Guild Vanity URL.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -3680,17 +4211,19 @@ It's a class that represents a guild vanity
 
 ### new GuildVanity([data], guildId, client)
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the invite is for.      |
-| client  | The client instance                         |
+Constructs a new instance of the class.
+
+| Param   | Type                | Description                                                     |
+| ------- | ------------------- | --------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the initial values for the instance. |
+| guildId | <code>string</code> | The ID of the guild.                                            |
+| client  | <code>Client</code> | The client instance.                                            |
 
 <a name="GuildVanity+guild"></a>
 
 ### guildVanity.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>GuildVanity</code>](#GuildVanity)  
 **Returns**: The guild object.
@@ -3699,52 +4232,50 @@ It returns the guild object of the guild ID that is stored in the database
 
 ## GuildWidget ⇐ <code>Base</code>
 
-It's a class that represents a guild widget
+Represents a guild widget.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [GuildWidget](#GuildWidget) ⇐ <code>Base</code>
   - [new GuildWidget([data], guildId, client)](#new_GuildWidget_new)
-  - [.guild](#GuildWidget+guild) ⇒
-  - [.fetchSettings()](#GuildWidget+fetchSettings) ⇒
+  - [.guild](#GuildWidget+guild) ⇒ <code>Guild</code> \| <code>null</code>
+  - [.fetchSettings()](#GuildWidget+fetchSettings) ⇒ <code>Promise</code>
 
 <a name="new_GuildWidget_new"></a>
 
 ### new GuildWidget([data], guildId, client)
 
-It takes in a data object, a guild id, and a client, and then it sets the id, name, instantInvite,
-channels, members, and presenceCount properties of the class to the values of the data object, the
-guild id, and the client
+Constructs a new instance of the Guild class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild                         |
-| client  | The client                                  |
+| Param   | Type                | Description                                          |
+| ------- | ------------------- | ---------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing guild widget information. |
+| guildId | <code>string</code> | The ID of the guild.                                 |
+| client  | <code>Client</code> | The client instance.                                 |
 
 <a name="GuildWidget+guild"></a>
 
-### guildWidget.guild ⇒
+### guildWidget.guild ⇒ <code>Guild</code> \| <code>null</code>
 
-It adds the guild to the cache if it's not already there, and then returns the guild
+Retrieves the guild associated with this object.
 
 **Kind**: instance property of [<code>GuildWidget</code>](#GuildWidget)  
-**Returns**: The guild object.  
+**Returns**: <code>Guild</code> \| <code>null</code> - The guild object if found, otherwise null.  
 <a name="GuildWidget+fetchSettings"></a>
 
-### guildWidget.fetchSettings() ⇒
+### guildWidget.fetchSettings() ⇒ <code>Promise</code>
 
-It fetches the settings of the widget
+Fetches the settings for the guild's widgets.
 
 **Kind**: instance method of [<code>GuildWidget</code>](#GuildWidget)  
-**Returns**: The settings of the widget.
+**Returns**: <code>Promise</code> - A promise that resolves to the fetched settings.
 
 <a name="GuildWidgetSettings"></a>
 
 ## GuildWidgetSettings ⇐ <code>Base</code>
 
-It's a class that represents the settings of a guild's widget
+Represents the settings for a guild widget.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -3752,717 +4283,723 @@ It's a class that represents the settings of a guild's widget
 - [GuildWidgetSettings](#GuildWidgetSettings) ⇐ <code>Base</code>
   - [new GuildWidgetSettings([data], guildId, client)](#new_GuildWidgetSettings_new)
   - [.guild](#GuildWidgetSettings+guild) ⇒
-  - [.channel](#GuildWidgetSettings+channel) ⇒
-  - [.edit([options])](#GuildWidgetSettings+edit) ⇒
-  - [.setEnabled(enabled, reason)](#GuildWidgetSettings+setEnabled) ⇒
-  - [.setChannel(channel, reason)](#GuildWidgetSettings+setChannel) ⇒
+  - [.channel](#GuildWidgetSettings+channel) ⇒ <code>Channel</code> \| <code>null</code>
+  - [.edit(options)](#GuildWidgetSettings+edit) ⇒ <code>Promise</code>
+  - [.setEnabled(enabled, reason)](#GuildWidgetSettings+setEnabled) ⇒ <code>Promise</code>
+  - [.setChannel(channel, reason)](#GuildWidgetSettings+setChannel) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_GuildWidgetSettings_new"></a>
 
 ### new GuildWidgetSettings([data], guildId, client)
 
-This function is a constructor that takes in data, guildId, and client as parameters and sets the
-values of the properties of the class to the values of the parameters.
+Constructs a new instance of the class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that is passed to the constructor.  |
-| guildId | The ID of the guild the settings are for.    |
-| client  | The client that the command is being run on. |
+| Param   | Type                | Description                             |
+| ------- | ------------------- | --------------------------------------- |
+| [data]  | <code>Object</code> | The data for the guild widget settings. |
+| guildId | <code>string</code> | The ID of the guild.                    |
+| client  | <code>Client</code> | The client instance.                    |
 
 <a name="GuildWidgetSettings+guild"></a>
 
 ### guildWidgetSettings.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>GuildWidgetSettings</code>](#GuildWidgetSettings)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="GuildWidgetSettings+channel"></a>
 
-### guildWidgetSettings.channel ⇒
+### guildWidgetSettings.channel ⇒ <code>Channel</code> \| <code>null</code>
 
-It returns the channel object of the message
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>GuildWidgetSettings</code>](#GuildWidgetSettings)  
-**Returns**: The channel object.  
+**Returns**: <code>Channel</code> \| <code>null</code> - The channel object, or null if it does not exist.  
 <a name="GuildWidgetSettings+edit"></a>
 
-### guildWidgetSettings.edit([options]) ⇒
+### guildWidgetSettings.edit(options) ⇒ <code>Promise</code>
 
-It edits the widget of the guild
+Edits the guild's widget with the given options.
 
 **Kind**: instance method of [<code>GuildWidgetSettings</code>](#GuildWidgetSettings)  
-**Returns**: The return value is a Promise that resolves to the edited widget.
+**Returns**: <code>Promise</code> - A promise that resolves when the widget is successfully edited.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>Object</code> | The options to edit the widget with. |
 
 <a name="GuildWidgetSettings+setEnabled"></a>
 
-### guildWidgetSettings.setEnabled(enabled, reason) ⇒
+### guildWidgetSettings.setEnabled(enabled, reason) ⇒ <code>Promise</code>
 
-`setEnabled` is an async function that takes two parameters, `enabled` and `reason`, and returns the
-result of calling `edit` with an object containing the `enabled` and `reason` parameters.
-`CommandoCommand`.
+Sets the enabled status of an item and provides a reason for the change.
 
 **Kind**: instance method of [<code>GuildWidgetSettings</code>](#GuildWidgetSettings)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| enabled | Whether the command should be enabled or not. |
-| reason  | The reason for the action                     |
+| Param   | Type                 | Description                                  |
+| ------- | -------------------- | -------------------------------------------- |
+| enabled | <code>boolean</code> | The new enabled status of the item.          |
+| reason  | <code>string</code>  | The reason for the change in enabled status. |
 
 <a name="GuildWidgetSettings+setChannel"></a>
 
-### guildWidgetSettings.setChannel(channel, reason) ⇒
+### guildWidgetSettings.setChannel(channel, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It edits the channel of the voice connection
+Sets the channel for the current object and updates it with the given reason.
 
 **Kind**: instance method of [<code>GuildWidgetSettings</code>](#GuildWidgetSettings)  
-**Returns**: The channel that the message was sent in.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the channel is successfully set.
 
-| Param   | Description                                                              |
-| ------- | ------------------------------------------------------------------------ |
-| channel | The channel to move the member to, can be a voice channel or a category. |
-| reason  | The reason for the edit.                                                 |
+| Param   | Type                 | Description                         |
+| ------- | -------------------- | ----------------------------------- |
+| channel | <code>Channel</code> | The channel to set.                 |
+| reason  | <code>string</code>  | The reason for setting the channel. |
 
 <a name="Interaction"></a>
 
 ## Interaction ⇐ <code>Base</code>
 
-It's a class that handles interactions with the Discord API.
+Represents an interaction with a user in a Discord server.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [Interaction](#Interaction) ⇐ <code>Base</code>
   - [new Interaction(data, guildId, client)](#new_Interaction_new)
-  - [.channel](#Interaction+channel) ⇒
   - [.guild](#Interaction+guild) ⇒
-  - [.user](#Interaction+user) ⇒
-  - [.isChatInput()](#Interaction+isChatInput) ⇒
-  - [.isCommand()](#Interaction+isCommand) ⇒
-  - [.isUser()](#Interaction+isUser) ⇒
-  - [.isMessage()](#Interaction+isMessage) ⇒
-  - [.isButton()](#Interaction+isButton) ⇒
-  - [.isModal()](#Interaction+isModal) ⇒
-  - [.isAutocomplete()](#Interaction+isAutocomplete) ⇒
-  - [.isSelect()](#Interaction+isSelect) ⇒
-  - [.isContext()](#Interaction+isContext) ⇒
-  - [.isDM()](#Interaction+isDM) ⇒
+  - [.user](#Interaction+user) ⇒ <code>User</code> \| <code>null</code>
+  - [.isChatInput()](#Interaction+isChatInput) ⇒ <code>boolean</code>
+  - [.isCommand()](#Interaction+isCommand) ⇒ <code>boolean</code>
+  - [.isUser()](#Interaction+isUser) ⇒ <code>boolean</code>
+  - [.isMessage()](#Interaction+isMessage) ⇒ <code>boolean</code>
+  - [.isButton()](#Interaction+isButton) ⇒ <code>boolean</code>
+  - [.isModal()](#Interaction+isModal) ⇒ <code>boolean</code>
+  - [.isAutocomplete()](#Interaction+isAutocomplete) ⇒ <code>boolean</code>
+  - [.isSelect()](#Interaction+isSelect) ⇒ <code>boolean</code>
+  - [.isContext()](#Interaction+isContext) ⇒ <code>boolean</code>
+  - [.isDM()](#Interaction+isDM) ⇒ <code>boolean</code>
   - [.getValue(name)](#Interaction+getValue) ⇒
-  - [.fetchReply()](#Interaction+fetchReply) ⇒
-  - [.reply(data)](#Interaction+reply) ⇒
-  - [.deferReply(options)](#Interaction+deferReply) ⇒
-  - [.modalSubmit(options)](#Interaction+modalSubmit) ⇒
-  - [.deleteReply()](#Interaction+deleteReply) ⇒
-  - [.editReply(options)](#Interaction+editReply) ⇒
-  - [.followUp(options)](#Interaction+followUp) ⇒
+  - [.fetchReply()](#Interaction+fetchReply) ⇒ <code>Promise.&lt;Message&gt;</code>
+  - [.reply(data)](#Interaction+reply) ⇒ <code>Promise.&lt;(Message\|null)&gt;</code>
+  - [.deferReply(options)](#Interaction+deferReply) ⇒ <code>Promise</code>
+  - [.modalSubmit(options)](#Interaction+modalSubmit) ⇒ <code>Promise</code>
+  - [.deleteReply()](#Interaction+deleteReply) ⇒ <code>Promise.&lt;Message&gt;</code>
+  - [.editReply(options)](#Interaction+editReply) ⇒ <code>Promise.&lt;Message&gt;</code>
+  - [.followUp(options)](#Interaction+followUp) ⇒ <code>Promise.&lt;Message&gt;</code>
 
 <a name="new_Interaction_new"></a>
 
 ### new Interaction(data, guildId, client)
 
-It's a constructor function that takes in data, guildId, and client as parameters.
+Constructs a new instance of the Interaction class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| data    | The data that is passed to the constructor. |
-| guildId | The ID of the guild the user is in.         |
-| client  | Discord.Client                              |
+| Param   | Type                | Description                                                   |
+| ------- | ------------------- | ------------------------------------------------------------- |
+| data    | <code>Object</code> | The data object containing information about the interaction. |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred.           |
+| client  | <code>Client</code> | The client instance.                                          |
 
-<a name="Interaction+channel"></a>
-
-### interaction.channel ⇒
-
-It returns the channel object of the channel ID that is stored in the message object
-
-**Kind**: instance property of [<code>Interaction</code>](#Interaction)  
-**Returns**: The channel object.  
 <a name="Interaction+guild"></a>
 
 ### interaction.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>Interaction</code>](#Interaction)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="Interaction+user"></a>
 
-### interaction.user ⇒
+### interaction.user ⇒ <code>User</code> \| <code>null</code>
 
-It returns the user object of the user who sent the message
+Get the user associated with this instance.
 
 **Kind**: instance property of [<code>Interaction</code>](#Interaction)  
-**Returns**: The user object.  
+**Returns**: <code>User</code> \| <code>null</code> - The user object, or null if it is not available.  
 <a name="Interaction+isChatInput"></a>
 
-### interaction.isChatInput() ⇒
+### interaction.isChatInput() ⇒ <code>boolean</code>
 
-If the commandType is Chat_Input or 1, return true, otherwise return false.
+Checks if the command type is a chat input.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - true if the command type is a chat input, false otherwise.  
 <a name="Interaction+isCommand"></a>
 
-### interaction.isCommand() ⇒
+### interaction.isCommand() ⇒ <code>boolean</code>
 
-If the type is either "Application_Command" or 2, return true, otherwise return false
+Checks if the current object is a command.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - true if the object is a command, false otherwise.  
 <a name="Interaction+isUser"></a>
 
-### interaction.isUser() ⇒
+### interaction.isUser() ⇒ <code>boolean</code>
 
-If the commandType is either "User" or 2, then return true, otherwise return false.
+Checks if the command type is "User" or 2.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - true if the command type is "User" or 2, false otherwise.  
 <a name="Interaction+isMessage"></a>
 
-### interaction.isMessage() ⇒
+### interaction.isMessage() ⇒ <code>boolean</code>
 
-If the command type is either "Message" or 3, then return true, otherwise return false.
+Checks if the command type is "Message" or 3.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - true if the command type is "Message" or 3, false otherwise.  
 <a name="Interaction+isButton"></a>
 
-### interaction.isButton() ⇒
+### interaction.isButton() ⇒ <code>boolean</code>
 
-If the componentType is either "Button" or 2, then return true, otherwise return false.
+Checks if the component type is a button.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - true if the component type is a button, false otherwise.  
 <a name="Interaction+isModal"></a>
 
-### interaction.isModal() ⇒
+### interaction.isModal() ⇒ <code>boolean</code>
 
-If the type is either "Modal_Submit" or 5, then return true, otherwise return false.
+Checks if the current instance is a modal.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - Returns true if the instance is a modal, false otherwise.  
 <a name="Interaction+isAutocomplete"></a>
 
-### interaction.isAutocomplete() ⇒
+### interaction.isAutocomplete() ⇒ <code>boolean</code>
 
-If the type is either "Application_Command_Autocomplete" or 4, return true, otherwise return
-false.
+Checks if the current object is an autocomplete.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - True if the object is an autocomplete, false otherwise.  
 <a name="Interaction+isSelect"></a>
 
-### interaction.isSelect() ⇒
+### interaction.isSelect() ⇒ <code>boolean</code>
 
-If the componentType is either "Select_Menu" or 3, then return true, otherwise return false.
+Checks if the component type is a select menu.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - true if the component type is a select menu, false otherwise.  
 <a name="Interaction+isContext"></a>
 
-### interaction.isContext() ⇒
+### interaction.isContext() ⇒ <code>boolean</code>
 
-If the command type is a user, message, 2, or 3, then return true. Otherwise, return false
+Checks if the current context is valid for the given command type.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The return value is a boolean.  
+**Returns**: <code>boolean</code> - - true if the context is valid, false otherwise.  
 <a name="Interaction+isDM"></a>
 
-### interaction.isDM() ⇒
+### interaction.isDM() ⇒ <code>boolean</code>
 
-If the channel type is a DM, return true, otherwise return false
+Checks if the current channel is a direct message (DM) channel.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: a boolean value.  
+**Returns**: <code>boolean</code> - - True if the channel is a DM channel, false otherwise.  
 <a name="Interaction+getValue"></a>
 
 ### interaction.getValue(name) ⇒
 
-It takes a name as an argument, and returns the value of the option with that name
+Retrieves the value associated with the given name from the options list.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The value of the option that matches the name.
+**Returns**: The value associated with the given name.
 
-| Param | Description                                          |
-| ----- | ---------------------------------------------------- |
-| name  | The name of the option you want to get the value of. |
+| Param | Type                | Description                                       |
+| ----- | ------------------- | ------------------------------------------------- |
+| name  | <code>string</code> | The name of the option to retrieve the value for. |
 
 <a name="Interaction+fetchReply"></a>
 
-### interaction.fetchReply() ⇒
+### interaction.fetchReply() ⇒ <code>Promise.&lt;Message&gt;</code>
 
-It fetches the original message that the webhook was created with
+Fetches the reply message from the Discord API using the provided webhook information.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The message object.  
+**Returns**: <code>Promise.&lt;Message&gt;</code> - A promise that resolves to the fetched reply message.  
 <a name="Interaction+reply"></a>
 
-### interaction.reply(data) ⇒
+### interaction.reply(data) ⇒ <code>Promise.&lt;(Message\|null)&gt;</code>
 
-It sends a reply to the user
+Sends a reply to an interaction with the provided data.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The reply method returns a Promise that resolves to the reply message.
+**Returns**: <code>Promise.&lt;(Message\|null)&gt;</code> - - A promise that resolves to the sent message, or null if fetchReply is false.
 
-| Param | Description                   |
-| ----- | ----------------------------- |
-| data  | The data to send to the user. |
+| Param | Type                | Description                    |
+| ----- | ------------------- | ------------------------------ |
+| data  | <code>Object</code> | The data to send as the reply. |
 
 <a name="Interaction+deferReply"></a>
 
-### interaction.deferReply(options) ⇒
+### interaction.deferReply(options) ⇒ <code>Promise</code>
 
-It takes an object of options, creates a payload from those options, and then sends that payload to
-the API.
+Sends a deferred reply to an interaction.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The response from the API.
+**Returns**: <code>Promise</code> - A promise that resolves when the reply is sent.
 
-| Param   |
-| ------- |
-| options |
+| Param   | Type                | Description                                   |
+| ------- | ------------------- | --------------------------------------------- |
+| options | <code>Object</code> | The options for creating the message payload. |
 
 <a name="Interaction+modalSubmit"></a>
 
-### interaction.modalSubmit(options) ⇒
+### interaction.modalSubmit(options) ⇒ <code>Promise</code>
 
-It takes an object, creates a new object with the original object and a number, and then sends that
-new object to a URL.
+Submits a modal form by sending a POST request to the specified endpoint.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The response from the API.
+**Returns**: <code>Promise</code> - A promise that resolves when the form submission is complete.
 
-| Param   | Description         |
-| ------- | ------------------- |
-| options | The options object. |
+| Param   | Type                | Description                                |
+| ------- | ------------------- | ------------------------------------------ |
+| options | <code>Object</code> | The options for the modal form submission. |
 
 <a name="Interaction+deleteReply"></a>
 
-### interaction.deleteReply() ⇒
+### interaction.deleteReply() ⇒ <code>Promise.&lt;Message&gt;</code>
 
-It deletes the message that was sent to the webhook
+Deletes the reply message associated with the current interaction.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The message that was deleted.  
+**Returns**: <code>Promise.&lt;Message&gt;</code> - A promise that resolves to the deleted message.  
 <a name="Interaction+editReply"></a>
 
-### interaction.editReply(options) ⇒
+### interaction.editReply(options) ⇒ <code>Promise.&lt;Message&gt;</code>
 
-It edits a message that was sent by a webhook
+Edits the reply message of a webhook interaction.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The message object.
+**Returns**: <code>Promise.&lt;Message&gt;</code> - A promise that resolves with the edited message.
 
-| Param   |
-| ------- |
-| options |
+| Param   | Type                | Description                                |
+| ------- | ------------------- | ------------------------------------------ |
+| options | <code>Object</code> | The options for editing the reply message. |
 
 <a name="Interaction+followUp"></a>
 
-### interaction.followUp(options) ⇒
+### interaction.followUp(options) ⇒ <code>Promise.&lt;Message&gt;</code>
 
-It takes an object of options, creates a message payload, and then sends it to the webhook.
+Sends a follow-up message using the provided options.
 
 **Kind**: instance method of [<code>Interaction</code>](#Interaction)  
-**Returns**: The message object.
+**Returns**: <code>Promise.&lt;Message&gt;</code> - A promise that resolves to the sent message.  
+**Throws**:
 
-| Param   |
-| ------- |
-| options |
+- <code>Error</code> If there was an error sending the follow-up message.
+
+| Param   | Type                | Description                            |
+| ------- | ------------------- | -------------------------------------- |
+| options | <code>object</code> | The options for the follow-up message. |
 
 <a name="InteractionWebhook"></a>
 
 ## InteractionWebhook ⇐ <code>WebhookClient</code>
 
-It's a class that extends the WebhookClient class, and it's used to handle interactions
+Represents an interaction webhook.
 
 **Kind**: global class  
 **Extends**: <code>WebhookClient</code>  
 <a name="new_InteractionWebhook_new"></a>
 
-### new InteractionWebhook([data], client)
+### new InteractionWebhook([data], [client])
 
-The constructor function is a special method for creating and initializing an object created
-within a class.
+Constructs a new instance of the class.
 
-| Param  | Description                              |
-| ------ | ---------------------------------------- |
-| [data] | The data that was returned from the API. |
-| client | The client that instantiated the object. |
+| Param    | Type                | Description                                         |
+| -------- | ------------------- | --------------------------------------------------- |
+| [data]   | <code>Object</code> | The data for the interaction webhook.               |
+| [client] | <code>Client</code> | The client associated with the interaction webhook. |
 
 <a name="Invite"></a>
 
 ## Invite ⇐ <code>Base</code>
 
-It's a class that represents an invite.
+Represents an invite to a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [Invite](#Invite) ⇐ <code>Base</code>
-  - [new Invite(data, guild, client)](#new_Invite_new)
-  - [.fetch(options)](#Invite+fetch) ⇒
-  - [.delete(reason)](#Invite+delete) ⇒
+  - [new Invite([data], guild, client)](#new_Invite_new)
+  - [.fetch(options)](#Invite+fetch) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Invite+delete) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_Invite_new"></a>
 
-### new Invite(data, guild, client)
+### new Invite([data], guild, client)
 
-It's a constructor function that takes in data, guild, and client as parameters.
+Constructs a new instance of the Invite class.
 
-| Param  | Description                              |
-| ------ | ---------------------------------------- |
-| data   | The data that was received from the API. |
-| guild  | Guild                                    |
-| client | Discord.Client                           |
+| Param  | Type                | Description                           |
+| ------ | ------------------- | ------------------------------------- |
+| [data] | <code>Object</code> | The data for the invite.              |
+| guild  | <code>Guild</code>  | The guild that the invite belongs to. |
+| client | <code>Client</code> | The client instance.                  |
 
 <a name="Invite+fetch"></a>
 
-### invite.fetch(options) ⇒
+### invite.fetch(options) ⇒ <code>Promise</code>
 
-It fetches the invite from the Discord API
+Fetches an invite using the provided options.
 
 **Kind**: instance method of [<code>Invite</code>](#Invite)  
-**Returns**: The invite object.
+**Returns**: <code>Promise</code> - A promise that resolves to the fetched invite.
 
-| Param   | Description                                    |
-| ------- | ---------------------------------------------- |
-| options | An object containing the following properties: |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>object</code> | The options for fetching the invite. |
 
 <a name="Invite+delete"></a>
 
-### invite.delete(reason) ⇒
+### invite.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the invite
+Deletes the invite associated with the guild.
 
 **Kind**: instance method of [<code>Invite</code>](#Invite)  
-**Returns**: The return value is the invite object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the invite is deleted.
 
-| Param  | Description                         |
-| ------ | ----------------------------------- |
-| reason | The reason for deleting the invite. |
+| Param  | Type                | Description                         |
+| ------ | ------------------- | ----------------------------------- |
+| reason | <code>string</code> | The reason for deleting the invite. |
 
 <a name="Message"></a>
 
 ## Message ⇐ <code>Base</code>
 
-It's a class that extends another class
+Represents a message in a chat channel.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [Message](#Message) ⇐ <code>Base</code>
-  - [new Message([data], guildId, channelId, client)](#new_Message_new)
+  - [new Message(data, guildId, channelId, client)](#new_Message_new)
   - [.channel](#Message+channel) ⇒
   - [.guild](#Message+guild) ⇒
-  - [.system](#Message+system) ⇒
+  - [.system](#Message+system) ⇒ <code>boolean</code> \| <code>null</code>
   - [.author](#Message+author) ⇒
-  - [.edit(options)](#Message+edit) ⇒
-  - [.delete(reason)](#Message+delete) ⇒
-  - [.fetch([options])](#Message+fetch) ⇒
-  - [.crosspost()](#Message+crosspost) ⇒
-  - [.react(emoji)](#Message+react) ⇒
-  - [.removeEmbeds()](#Message+removeEmbeds) ⇒
-  - [.removeAttachments()](#Message+removeAttachments) ⇒
-  - [.removeAttachment(attachment)](#Message+removeAttachment) ⇒
-  - [.reply([options])](#Message+reply) ⇒
-  - [.fetchReference()](#Message+fetchReference) ⇒
-  - [.pin(reason)](#Message+pin) ⇒
-  - [.unpin(reason)](#Message+unpin) ⇒
-  - [.inGuild()](#Message+inGuild) ⇒
-  - [.equals(message)](#Message+equals) ⇒
-  - [.createThread([options])](#Message+createThread) ⇒
-  - [.addAttachments([attachments])](#Message+addAttachments) ⇒
+  - [.edit(options)](#Message+edit) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Message+delete) ⇒ <code>Promise</code>
+  - [.fetch([options])](#Message+fetch) ⇒ <code>Promise</code>
+  - [.crosspost()](#Message+crosspost) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.react(emoji)](#Message+react) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.removeEmbeds()](#Message+removeEmbeds) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.removeAttachments()](#Message+removeAttachments) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.removeAttachment(attachment)](#Message+removeAttachment) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.reply(options)](#Message+reply) ⇒ [<code>Promise.&lt;Message&gt;</code>](#Message)
+  - [.fetchReference()](#Message+fetchReference) ⇒ [<code>Promise.&lt;Message&gt;</code>](#Message)
+  - [.pin(reason)](#Message+pin) ⇒ <code>Promise</code>
+  - [.unpin(reason)](#Message+unpin) ⇒ <code>Promise</code>
+  - [.inGuild()](#Message+inGuild) ⇒ <code>boolean</code>
+  - [.equals(message)](#Message+equals) ⇒ <code>boolean</code> \| <code>null</code>
+  - [.createThread([options])](#Message+createThread) ⇒ <code>Promise.&lt;Thread&gt;</code>
+  - [.addAttachments(attachments)](#Message+addAttachments) ⇒ <code>Promise</code>
 
 <a name="new_Message_new"></a>
 
-### new Message([data], guildId, channelId, client)
+### new Message(data, guildId, channelId, client)
 
-It's a constructor for a class that extends another class
+Constructs a new instance of the Message class.
 
-| Param     | Description                                 |
-| --------- | ------------------------------------------- |
-| [data]    | The data that is passed to the constructor. |
-| guildId   | The ID of the guild the message is in.      |
-| channelId | The channel ID of the message               |
-| client    | RaidenClient                                |
+| Param     | Type                | Description                                               |
+| --------- | ------------------- | --------------------------------------------------------- |
+| data      | <code>Object</code> | The data object containing information about the message. |
+| guildId   | <code>string</code> | The ID of the guild the message belongs to.               |
+| channelId | <code>string</code> | The ID of the channel the message belongs to.             |
+| client    | <code>Client</code> | The client instance.                                      |
 
 <a name="Message+channel"></a>
 
 ### message.channel ⇒
 
-It returns the channel object if it exists, otherwise it returns null
+Retrieves the channel associated with this object.
 
 **Kind**: instance property of [<code>Message</code>](#Message)  
-**Returns**: The channel object.  
+**Returns**: The channel object if found, otherwise null.  
 <a name="Message+guild"></a>
 
 ### message.guild ⇒
 
-It returns the guild object if it exists, otherwise it returns null
+Retrieves the guild associated with this guildId from the client's guild cache.
 
 **Kind**: instance property of [<code>Message</code>](#Message)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="Message+system"></a>
 
-### message.system ⇒
+### message.system ⇒ <code>boolean</code> \| <code>null</code>
 
-If the type is not one of the four types listed, then it's a system type
+Get the system value based on the type of the object.
 
 **Kind**: instance property of [<code>Message</code>](#Message)  
-**Returns**: The value of the property "type" of the object "this".  
+**Returns**: <code>boolean</code> \| <code>null</code> - - The system value. Returns null if the type is not set.  
 <a name="Message+author"></a>
 
 ### message.author ⇒
 
-It returns the author of the message
+Get the author of this object.
 
 **Kind**: instance property of [<code>Message</code>](#Message)  
-**Returns**: The author of the message.  
+**Returns**: The author of this object.  
 <a name="Message+edit"></a>
 
-### message.edit(options) ⇒
+### message.edit(options) ⇒ <code>Promise</code>
 
-It edits a message
+Edits the message with the given options.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: <code>Promise</code> - A promise that resolves when the message has been edited.
 
-| Param   | Description |
-| ------- | ----------- |
-| options | Object      |
+| Param   | Type                | Description                           |
+| ------- | ------------------- | ------------------------------------- |
+| options | <code>Object</code> | The options to edit the message with. |
 
 <a name="Message+delete"></a>
 
-### message.delete(reason) ⇒
+### message.delete(reason) ⇒ <code>Promise</code>
 
-It deletes a message
+Deletes the message from the channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: <code>Promise</code> - A promise that resolves when the message is successfully deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| reason | <code>string</code> | The reason for deleting the message. |
 
 <a name="Message+fetch"></a>
 
-### message.fetch([options]) ⇒
+### message.fetch([options]) ⇒ <code>Promise</code>
 
-It fetches the message from the channel
+Fetches messages from the channel using the given options.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: <code>Promise</code> - - A promise that resolves with the fetched messages.
 
-| Param     | Description                                                    |
-| --------- | -------------------------------------------------------------- |
-| [options] | An object containing additional options to pass to the method. |
+| Param     | Type                | Description                                 |
+| --------- | ------------------- | ------------------------------------------- |
+| [options] | <code>Object</code> | The options to customize the fetch request. |
 
 <a name="Message+crosspost"></a>
 
-### message.crosspost() ⇒
+### message.crosspost() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It crossposts a message
+Crossposts a message to another channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the crossposting is complete.  
 <a name="Message+react"></a>
 
-### message.react(emoji) ⇒
+### message.react(emoji) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It reacts to a message with an emoji
+Reacts to a message with the specified emoji.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the reaction is added.
 
-| Param | Description                                                                    |
-| ----- | ------------------------------------------------------------------------------ |
-| emoji | The emoji to react with. Can be a string (e.g. "🤔") or a custom emoji object. |
+| Param | Type                | Description              |
+| ----- | ------------------- | ------------------------ |
+| emoji | <code>string</code> | The emoji to react with. |
 
 <a name="Message+removeEmbeds"></a>
 
-### message.removeEmbeds() ⇒
+### message.removeEmbeds() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It removes embeds from a message
+Removes embeds from a message.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the embeds are successfully removed.  
 <a name="Message+removeAttachments"></a>
 
-### message.removeAttachments() ⇒
+### message.removeAttachments() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It removes all attachments from a message
+Removes all attachments from the message.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves when the attachments are successfully removed.  
+**Throws**:
+
+- <code>RangeError</code> If there are no attachments in the message.
+
 <a name="Message+removeAttachment"></a>
 
-### message.removeAttachment(attachment) ⇒
+### message.removeAttachment(attachment) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It removes an attachment from a message
+Removes the specified attachment from the message. If no attachment is provided,
+all attachments will be removed.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message is being edited with the new attachments.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves once the attachment is removed.  
+**Throws**:
 
-| Param      | Description               |
-| ---------- | ------------------------- |
-| attachment | The attachment to remove. |
+- <code>RangeError</code> - If the message does not have the specified attachment.
+
+| Param      | Type                                           | Description                                |
+| ---------- | ---------------------------------------------- | ------------------------------------------ |
+| attachment | <code>string</code> \| <code>Attachment</code> | The attachment or attachment ID to remove. |
 
 <a name="Message+reply"></a>
 
-### message.reply([options]) ⇒
+### message.reply(options) ⇒ [<code>Promise.&lt;Message&gt;</code>](#Message)
 
-It sends a message to the channel that the message was sent in
+Sends a reply message to the channel where the original message was received.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: [<code>Promise.&lt;Message&gt;</code>](#Message) - - A promise that resolves to the sent message.
 
-| Param     | Description                             |
-| --------- | --------------------------------------- |
-| [options] | The options to pass to the send method. |
+| Param   | Type                | Description                               |
+| ------- | ------------------- | ----------------------------------------- |
+| options | <code>Object</code> | Additional options for the reply message. |
 
 <a name="Message+fetchReference"></a>
 
-### message.fetchReference() ⇒
+### message.fetchReference() ⇒ [<code>Promise.&lt;Message&gt;</code>](#Message)
 
-It fetches a message from a channel
+Fetches the reference message from the channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: A promise that resolves to a Message object.  
+**Returns**: [<code>Promise.&lt;Message&gt;</code>](#Message) - A promise that resolves to the reference message.  
 <a name="Message+pin"></a>
 
-### message.pin(reason) ⇒
+### message.pin(reason) ⇒ <code>Promise</code>
 
-It pins the message to the channel
+Pins the current message to the channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message object.
+**Returns**: <code>Promise</code> - - A promise that resolves when the message is successfully pinned.
 
-| Param  | Description                          |
-| ------ | ------------------------------------ |
-| reason | The reason for pinning this message. |
+| Param  | Type                | Description                         |
+| ------ | ------------------- | ----------------------------------- |
+| reason | <code>string</code> | The reason for pinning the message. |
 
 <a name="Message+unpin"></a>
 
-### message.unpin(reason) ⇒
+### message.unpin(reason) ⇒ <code>Promise</code>
 
-It unpins a message
+Unpins the current message from the channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The unpinned message.
+**Returns**: <code>Promise</code> - - A promise that resolves when the message is successfully unpinned.
 
-| Param  | Description                           |
-| ------ | ------------------------------------- |
-| reason | The reason for unpinning the message. |
+| Param  | Type                | Description                           |
+| ------ | ------------------- | ------------------------------------- |
+| reason | <code>string</code> | The reason for unpinning the message. |
 
 <a name="Message+inGuild"></a>
 
-### message.inGuild() ⇒
+### message.inGuild() ⇒ <code>boolean</code>
 
-If the guildId is defined, return true, otherwise return false.
+Checks if the current context is within a guild.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The boolean value of the if statement.  
+**Returns**: <code>boolean</code> - - True if the context is within a guild, false otherwise.  
 <a name="Message+equals"></a>
 
-### message.equals(message) ⇒
+### message.equals(message) ⇒ <code>boolean</code> \| <code>null</code>
 
-It returns true if the message is a partial message and the type, guildId, and content are the same
+Checks if the given object is equal to this Message object.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The return value is a boolean.
+**Returns**: <code>boolean</code> \| <code>null</code> - - Returns true if the objects are equal, false if they are not equal, and null if the given object is not an instance of Message.
 
-| Param   | Description                |
-| ------- | -------------------------- |
-| message | The message to compare to. |
+| Param   | Type                | Description                                     |
+| ------- | ------------------- | ----------------------------------------------- |
+| message | <code>Object</code> | The object to compare with this Message object. |
 
 <a name="Message+createThread"></a>
 
-### message.createThread([options]) ⇒
+### message.createThread([options]) ⇒ <code>Promise.&lt;Thread&gt;</code>
 
-It creates a thread
+Creates a new thread in a channel.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The thread object.
+**Returns**: <code>Promise.&lt;Thread&gt;</code> - A promise that resolves with the created thread.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param                         | Type                | Description                                                  |
+| ----------------------------- | ------------------- | ------------------------------------------------------------ |
+| [options]                     | <code>Object</code> | The options for creating the thread.                         |
+| [options.reason]              | <code>string</code> | The reason for creating the thread.                          |
+| [options.name]                | <code>string</code> | The name of the thread.                                      |
+| [options.autoArchiveDuration] | <code>number</code> | The duration in minutes to automatically archive the thread. |
+| [options.ratelimit]           | <code>number</code> | The rate limit per user in the thread.                       |
 
 <a name="Message+addAttachments"></a>
 
-### message.addAttachments([attachments]) ⇒
+### message.addAttachments(attachments) ⇒ <code>Promise</code>
 
-It adds attachments to a message
+Adds attachments to the message.
 
 **Kind**: instance method of [<code>Message</code>](#Message)  
-**Returns**: The message is being edited with the attachments and files.
+**Returns**: <code>Promise</code> - - A promise that resolves when the attachments have been added.  
+**Throws**:
 
-| Param         | Description                            |
-| ------------- | -------------------------------------- |
-| [attachments] | The attachments to add to the message. |
+- <code>RangeError</code> - If the message has no attachments or if one of the specified attachments already exists.
+
+| Param       | Type               | Description                                           |
+| ----------- | ------------------ | ----------------------------------------------------- |
+| attachments | <code>Array</code> | An array of attachment objects to add to the message. |
 
 <a name="MessageComponentInteraction"></a>
 
 ## MessageComponentInteraction ⇐ <code>Interaction</code>
 
-It's a class that represents a message interaction
+Represents a message component interaction.
 
 **Kind**: global class  
 **Extends**: <code>Interaction</code>
 
 - [MessageComponentInteraction](#MessageComponentInteraction) ⇐ <code>Interaction</code>
   - [new MessageComponentInteraction([data], guildId, client)](#new_MessageComponentInteraction_new)
-  - [.deferUpdate([options])](#MessageComponentInteraction+deferUpdate) ⇒
-  - [.update([options])](#MessageComponentInteraction+update) ⇒
+  - [.deferUpdate(options)](#MessageComponentInteraction+deferUpdate) ⇒ <code>Promise</code>
+  - [.update([options])](#MessageComponentInteraction+update) ⇒ <code>Promise.&lt;(null\|Message)&gt;</code>
 
 <a name="new_MessageComponentInteraction_new"></a>
 
 ### new MessageComponentInteraction([data], guildId, client)
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the message is in       |
-| client  | Discord.Client                              |
+Constructs a new instance of the Component class.
+
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing component information. |
+| guildId | <code>string</code> | The ID of the guild the component belongs to.     |
+| client  | <code>Client</code> | The client instance.                              |
 
 <a name="MessageComponentInteraction+deferUpdate"></a>
 
-### messageComponentInteraction.deferUpdate([options]) ⇒
+### messageComponentInteraction.deferUpdate(options) ⇒ <code>Promise</code>
 
-It takes an object as an argument, creates a new MessagePayload object with the options and a 6,
-then posts to the API with the body of the MessagePayload object.
+Defers the update of an interaction callback and sends a response to the interaction.
 
 **Kind**: instance method of [<code>MessageComponentInteraction</code>](#MessageComponentInteraction)  
-**Returns**: The response from the API.
+**Returns**: <code>Promise</code> - A promise that resolves when the update is deferred and the response is sent.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                                 |
+| ------- | ------------------- | ------------------------------------------- |
+| options | <code>Object</code> | Additional options for the deferred update. |
 
 <a name="MessageComponentInteraction+update"></a>
 
-### messageComponentInteraction.update([options]) ⇒
+### messageComponentInteraction.update([options]) ⇒ <code>Promise.&lt;(null\|Message)&gt;</code>
 
-It updates the message with the given options and returns the reply if fetchReply is true
+Updates the interaction with the specified options.
 
 **Kind**: instance method of [<code>MessageComponentInteraction</code>](#MessageComponentInteraction)  
-**Returns**: The return value is the result of the await expression.
+**Returns**: <code>Promise.&lt;(null\|Message)&gt;</code> - - A promise that resolves to null or a Message object.  
+**Throws**:
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+- <code>Error</code> - If there is an error while updating the interaction.
+
+| Param     | Type                | Description                            |
+| --------- | ------------------- | -------------------------------------- |
+| [options] | <code>Object</code> | The options to update the interaction. |
 
 <a name="MessageMentions"></a>
 
 ## MessageMentions ⇐ <code>Base</code>
 
-It's a class that stores mentions in a message
+Represents a message mention object.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -4475,20 +5012,19 @@ It's a class that stores mentions in a message
 
 ### new MessageMentions([data], guildId, client)
 
-It takes in a data object, a guildId, and a client, and then it sets the guildId, users, members,
-roles, channels, and everyone properties of the object
+Constructs a new instance of the class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The guild id                                |
-| client  | The client                                  |
+| Param   | Type                | Description                              |
+| ------- | ------------------- | ---------------------------------------- |
+| [data]  | <code>Object</code> | The data for the message mention object. |
+| guildId | <code>string</code> | The ID of the guild the mention is in.   |
+| client  | <code>Client</code> | The client instance.                     |
 
 <a name="MessageMentions+guild"></a>
 
 ### messageMentions.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>MessageMentions</code>](#MessageMentions)  
 **Returns**: The guild object.
@@ -4497,7 +5033,7 @@ It returns the guild object of the guild ID that is stored in the database
 
 ## MessageReaction ⇐ <code>Base</code>
 
-It's a class that represents a reaction on a message
+Represents a message reaction.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -4506,30 +5042,30 @@ It's a class that represents a reaction on a message
   - [new MessageReaction([data], guildId, channelId, messageId, client)](#new_MessageReaction_new)
   - [.channel](#MessageReaction+channel) ⇒
   - [.guild](#MessageReaction+guild) ⇒
-  - [.fetch()](#MessageReaction+fetch) ⇒
-  - [.remove()](#MessageReaction+remove) ⇒
-  - [.\_addUsers(user)](#MessageReaction+_addUsers) ⇒
-  - [.\_removeUsers(user)](#MessageReaction+_removeUsers) ⇒
+  - [.fetch()](#MessageReaction+fetch) ⇒ <code>Promise.&lt;(Reaction\|null)&gt;</code>
+  - [.remove()](#MessageReaction+remove) ⇒ <code>Promise.&lt;this&gt;</code>
+  - [.\_addUsers(user)](#MessageReaction+_addUsers) ⇒ <code>void</code>
+  - [.\_removeUsers(user)](#MessageReaction+_removeUsers) ⇒ <code>void</code>
 
 <a name="new_MessageReaction_new"></a>
 
 ### new MessageReaction([data], guildId, channelId, messageId, client)
 
-It's a constructor for a class called Reaction.
+Constructs a Reaction object.
 
-| Param     | Description                                    |
-| --------- | ---------------------------------------------- |
-| [data]    | The data that is passed to the constructor.    |
-| guildId   | The guild ID of the message                    |
-| channelId | The channel ID of the message                  |
-| messageId | The ID of the message that the reaction is on. |
-| client    | The client                                     |
+| Param     | Type                | Description                                    |
+| --------- | ------------------- | ---------------------------------------------- |
+| [data]    | <code>Object</code> | The data for the message reaction.             |
+| guildId   | <code>string</code> | The ID of the guild the reaction belongs to.   |
+| channelId | <code>string</code> | The ID of the channel the reaction belongs to. |
+| messageId | <code>string</code> | The ID of the message the reaction belongs to. |
+| client    | <code>Client</code> | The client instance.                           |
 
 <a name="MessageReaction+channel"></a>
 
 ### messageReaction.channel ⇒
 
-It returns the channel object of the channel ID that is stored in the message object
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>MessageReaction</code>](#MessageReaction)  
 **Returns**: The channel object.  
@@ -4537,91 +5073,94 @@ It returns the channel object of the channel ID that is stored in the message ob
 
 ### messageReaction.guild ⇒
 
-It returns the guild object of the channel
+Get the guild associated with this channel.
 
 **Kind**: instance property of [<code>MessageReaction</code>](#MessageReaction)  
-**Returns**: The guild object.  
+**Returns**: The guild object associated with this channel.  
 <a name="MessageReaction+fetch"></a>
 
-### messageReaction.fetch() ⇒
+### messageReaction.fetch() ⇒ <code>Promise.&lt;(Reaction\|null)&gt;</code>
 
-It fetches the message, gets the reaction, and returns the reaction
+Fetches a message from a channel and retrieves a reaction associated with it.
 
 **Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)  
-**Returns**: The reaction object.  
+**Returns**: <code>Promise.&lt;(Reaction\|null)&gt;</code> - A Promise that resolves to the Reaction object if found, or null if not found.  
 <a name="MessageReaction+remove"></a>
 
-### messageReaction.remove() ⇒
+### messageReaction.remove() ⇒ <code>Promise.&lt;this&gt;</code>
 
-It removes a reaction from a message
+Removes the reaction associated with this message.
 
 **Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)  
-**Returns**: The reaction object.  
+**Returns**: <code>Promise.&lt;this&gt;</code> - - A promise that resolves to the current instance of the class.  
 <a name="MessageReaction+_addUsers"></a>
 
-### messageReaction.\_addUsers(user) ⇒
+### messageReaction.\_addUsers(user) ⇒ <code>void</code>
 
-**Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)  
-**Returns**: the value of the if statement.
+Adds a user to the list of users.
 
-| Param | Description                             |
-| ----- | --------------------------------------- |
-| user  | The user that was added to the channel. |
+**Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)
+
+| Param | Type              | Description      |
+| ----- | ----------------- | ---------------- |
+| user  | <code>User</code> | The user to add. |
 
 <a name="MessageReaction+_removeUsers"></a>
 
-### messageReaction.\_removeUsers(user) ⇒
+### messageReaction.\_removeUsers(user) ⇒ <code>void</code>
 
-**Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)  
-**Returns**: the value of the variable "this.me"
+Removes a user from the list of users.
 
-| Param | Description                                       |
-| ----- | ------------------------------------------------- |
-| user  | The user that was removed from the voice channel. |
+**Kind**: instance method of [<code>MessageReaction</code>](#MessageReaction)
+
+| Param | Type              | Description         |
+| ----- | ----------------- | ------------------- |
+| user  | <code>User</code> | The user to remove. |
 
 <a name="MessageReference"></a>
 
 ## MessageReference ⇐ <code>Base</code>
 
-It's a class that takes in a data object and a client, and then sets the properties of the class to
-the values of the data object.
+Represents a reference to a message.
 
 **Kind**: global class  
-**Extends**: <code>Base</code>
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name            | Type                                      | Description                                             |
+| --------------- | ----------------------------------------- | ------------------------------------------------------- |
+| messageId       | <code>string</code> \| <code>null</code>  | The ID of the message.                                  |
+| channelId       | <code>string</code> \| <code>null</code>  | The ID of the channel.                                  |
+| guildId         | <code>string</code> \| <code>null</code>  | The ID of the guild.                                    |
+| failIfNotExists | <code>boolean</code> \| <code>null</code> | Indicates whether to fail if the entity does not exist. |
 
 - [MessageReference](#MessageReference) ⇐ <code>Base</code>
   - [new MessageReference([data], client)](#new_MessageReference_new)
-  - [.toJSON()](#MessageReference+toJSON) ⇒
+  - [.toJSON()](#MessageReference+toJSON) ⇒ <code>Object</code>
 
 <a name="new_MessageReference_new"></a>
 
 ### new MessageReference([data], client)
 
-It's a constructor function that takes in two parameters, data and client, and sets the value of
-this.messageId to data.message_id if it exists, otherwise it sets it to data.messageId if it exists,
-otherwise it sets it to null.
+Constructs a new instance of the class.
 
-It does the same thing for the other three variables.
-
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | The client that is sending the request      |
+| Param  | Type                | Description                                                 |
+| ------ | ------------------- | ----------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the properties for the instance. |
+| client | <code>Client</code> | The client object associated with the instance.             |
 
 <a name="MessageReference+toJSON"></a>
 
-### messageReference.toJSON() ⇒
+### messageReference.toJSON() ⇒ <code>Object</code>
 
-It returns an object with the message ID, channel ID, guild ID, and fail if not exists
+Converts the current object to a JSON representation.
 
 **Kind**: instance method of [<code>MessageReference</code>](#MessageReference)  
-**Returns**: The message ID, channel ID, guild ID, and fail if not exists.
+**Returns**: <code>Object</code> - - The JSON representation of the object.
 
 <a name="ModalInteraction"></a>
 
 ## ModalInteraction ⇐ <code>MessageComponentInteraction</code>
-
-It's a class that allows you to get the values of a modal
 
 **Kind**: global class  
 **Extends**: <code>MessageComponentInteraction</code>
@@ -4629,294 +5168,237 @@ It's a class that allows you to get the values of a modal
 - [ModalInteraction](#ModalInteraction) ⇐ <code>MessageComponentInteraction</code>
   - [new ModalInteraction([data], guildId, client)](#new_ModalInteraction_new)
   - _instance_
-    - [.getTextInput(customId, [required])](#ModalInteraction+getTextInput) ⇒
-    - [.getSelect(customId, [required])](#ModalInteraction+getSelect) ⇒
+    - [.getTextInput(customId, [required])](#ModalInteraction+getTextInput) ⇒ <code>string</code> \| <code>null</code>
+    - [.getSelect(customId, [required])](#ModalInteraction+getSelect) ⇒ <code>Array.&lt;string&gt;</code> \| <code>null</code>
   - _static_
-    - [.transformResolvedFields([fields])](#ModalInteraction.transformResolvedFields) ⇒
+    - [.transformResolvedFields(fields)](#ModalInteraction.transformResolvedFields) ⇒ <code>Object</code>
 
 <a name="new_ModalInteraction_new"></a>
 
 ### new ModalInteraction([data], guildId, client)
 
-It takes a JSON object, and returns a new object with the same properties, but with the values
-transformed.
+Constructs a new instance of the Input_Text component.
 
-| Param   | Description                                           |
-| ------- | ----------------------------------------------------- |
-| [data]  | The data that is passed to the constructor.           |
-| guildId | The guild ID of the guild the modal is being sent to. |
-| client  | Discord.Client                                        |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object for the interaction.                |
+| guildId | <code>string</code> | The ID of the guild where the interaction occurred. |
+| client  | <code>Client</code> | The client instance.                                |
 
 <a name="ModalInteraction+getTextInput"></a>
 
-### modalInteraction.getTextInput(customId, [required]) ⇒
+### modalInteraction.getTextInput(customId, [required]) ⇒ <code>string</code> \| <code>null</code>
 
-It takes a customId and returns the value of the first component in the modal with that customId
+Retrieves the value of a text input field with the specified custom ID.
 
 **Kind**: instance method of [<code>ModalInteraction</code>](#ModalInteraction)  
-**Returns**: The value of the text input.
+**Returns**: <code>string</code> \| <code>null</code> - The value of the text input field, or null if the field is not found and not required.  
+**Throws**:
 
-| Param      | Default            | Description                                |
-| ---------- | ------------------ | ------------------------------------------ |
-| customId   |                    | The custom id of the modal                 |
-| [required] | <code>false</code> | boolean - If the modal is required or not. |
+- <code>RangeError</code> If the specified custom ID is not found or if the field is not of type "Input_Text".
+
+| Param      | Type                 | Default            | Description                                                                                                                 |
+| ---------- | -------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| customId   | <code>string</code>  |                    | The custom ID of the text input field.                                                                                      |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the text input field is required. If set to true and the field is not found, a RangeError will be thrown. |
 
 <a name="ModalInteraction+getSelect"></a>
 
-### modalInteraction.getSelect(customId, [required]) ⇒
+### modalInteraction.getSelect(customId, [required]) ⇒ <code>Array.&lt;string&gt;</code> \| <code>null</code>
 
-It takes a customId and returns the values of the first component in the module with that
-customId.
+Retrieves the values of a Select component with the specified custom ID.
 
 **Kind**: instance method of [<code>ModalInteraction</code>](#ModalInteraction)  
-**Returns**: The return value is a string.
+**Returns**: <code>Array.&lt;string&gt;</code> \| <code>null</code> - - The values of the Select component, or null if not found and not required.  
+**Throws**:
 
-| Param      | Default            | Description                                                                     |
-| ---------- | ------------------ | ------------------------------------------------------------------------------- |
-| customId   |                    | The custom id of the module you want to get the select from.                    |
-| [required] | <code>false</code> | boolean - If the module is required, it will throw an error if it is not found. |
+- <code>RangeError</code> - If the Select component is not found and is required, or if the mode type selected is not String_Select.
+
+| Param      | Type                 | Default            | Description                                         |
+| ---------- | -------------------- | ------------------ | --------------------------------------------------- |
+| customId   | <code>string</code>  |                    | The custom ID of the Select component.              |
+| [required] | <code>boolean</code> | <code>false</code> | Indicates whether the Select component is required. |
 
 <a name="ModalInteraction.transformResolvedFields"></a>
 
-### ModalInteraction.transformResolvedFields([fields]) ⇒
+### ModalInteraction.transformResolvedFields(fields) ⇒ <code>Object</code>
 
-It takes an object with a property called "type" and a property called "components" and returns an
-object with a property called "type" and a property called "components"
+Transforms the resolved fields object by converting the "type" property from a number to its corresponding string value from the ComponentType enum.
+Also, maps the "components" array and transforms each object by converting the "type" property from a number to its corresponding string value from the ComponentType enum.
 
 **Kind**: static method of [<code>ModalInteraction</code>](#ModalInteraction)  
-**Returns**: An object with the following properties:
+**Returns**: <code>Object</code> - - The transformed fields object.
 
-| Param    |
-| -------- |
-| [fields] |
+| Param  | Type                | Description                              |
+| ------ | ------------------- | ---------------------------------------- |
+| fields | <code>Object</code> | The resolved fields object to transform. |
 
 <a name="NewsChannel"></a>
 
 ## NewsChannel ⇐ <code>BaseGuildChannel</code>
 
-It's a class that extends BaseGuildChannel, and it has two methods: follow and crosspost
+Represents a news channel in a guild.
 
 **Kind**: global class  
 **Extends**: <code>BaseGuildChannel</code>
 
 - [NewsChannel](#NewsChannel) ⇐ <code>BaseGuildChannel</code>
   - [new NewsChannel([data], guildId, client)](#new_NewsChannel_new)
-  - [.follow([options])](#NewsChannel+follow) ⇒
-  - [.crosspost(message)](#NewsChannel+crosspost) ⇒
+  - [.follow(options)](#NewsChannel+follow) ⇒ <code>Promise</code>
+  - [.crosspost(message)](#NewsChannel+crosspost) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_NewsChannel_new"></a>
 
 ### new NewsChannel([data], guildId, client)
 
-It's a constructor function that takes in three parameters, data, guildId, and client.
+Constructs a new instance of the class.
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| [data]  | The data that the role is being created with. |
-| guildId | The ID of the guild the role is in.           |
-| client  | The client that instantiated the object.      |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Client</code> | The client instance associated with the instance. |
 
 <a name="NewsChannel+follow"></a>
 
-### newsChannel.follow([options]) ⇒
+### newsChannel.follow(options) ⇒ <code>Promise</code>
 
-This function is used to follow a channel
+Follows the channel using the specified options.
 
 **Kind**: instance method of [<code>NewsChannel</code>](#NewsChannel)  
-**Returns**: The channel object.
+**Returns**: <code>Promise</code> - A promise that resolves when the channel is successfully followed.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                            |
+| ------- | ------------------- | -------------------------------------- |
+| options | <code>Object</code> | The options for following the channel. |
 
 <a name="NewsChannel+crosspost"></a>
 
-### newsChannel.crosspost(message) ⇒
+### newsChannel.crosspost(message) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It takes a message object and returns a promise that resolves to the message object
+Crossposts a message to another channel.
 
 **Kind**: instance method of [<code>NewsChannel</code>](#NewsChannel)  
-**Returns**: The return value of the function is the return value of the function that is being
-called.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the crossposting is complete.
 
-| Param   | Description               |
-| ------- | ------------------------- |
-| message | The message to crosspost. |
+| Param   | Type                 | Description               |
+| ------- | -------------------- | ------------------------- |
+| message | <code>Message</code> | The message to crosspost. |
 
 <a name="PartialSticker"></a>
 
 ## PartialSticker ⇐ <code>Base</code>
 
-It's a class that represents a partial sticker
+Represents a partial sticker object.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [PartialSticker](#PartialSticker) ⇐ <code>Base</code>
   - [new PartialSticker([data], client)](#new_PartialSticker_new)
-  - [.fetch()](#PartialSticker+fetch) ⇒
+  - [.fetch()](#PartialSticker+fetch) ⇒ <code>Promise</code>
 
 <a name="new_PartialSticker_new"></a>
 
 ### new PartialSticker([data], client)
 
-This function is a constructor for the Sticker class, which is a subclass of the Base class, and it
-takes in a data object and a client object, and it sets the id, name, formatType, createdAt, and
-createdTimestamp properties of the Sticker class to the values of the id, name, format_type, id,
-and createdAt properties of the data object, respectively, and it returns the Sticker class.
+Constructs a new instance of the Sticker class.
 
-| Param  | Description                                  |
-| ------ | -------------------------------------------- |
-| [data] | The data that was passed to the constructor. |
-| client | The client that instantiated the object.     |
+| Param  | Type                | Description                                         |
+| ------ | ------------------- | --------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the sticker information. |
+| client | <code>Client</code> | The client instance.                                |
 
 <a name="PartialSticker+fetch"></a>
 
-### partialSticker.fetch() ⇒
+### partialSticker.fetch() ⇒ <code>Promise</code>
 
-It fetches the sticker
+Fetches a sticker using the client's fetchSticker method.
 
 **Kind**: instance method of [<code>PartialSticker</code>](#PartialSticker)  
-**Returns**: The sticker object itself.
-
-## Classes
-
-<dl>
-<dt><a href="#PermissionOverwrite">PermissionOverwrite</a> ⇐ <code>Base</code></dt>
-<dd></dd>
-<dt><a href="#PermissionOverwrite">PermissionOverwrite</a></dt>
-<dd></dd>
-</dl>
+**Returns**: <code>Promise</code> - A promise that resolves with the fetched sticker.
 
 <a name="PermissionOverwrite"></a>
 
 ## PermissionOverwrite ⇐ <code>Base</code>
 
+Represents a permission overwrite for a channel in Discord.
+
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [PermissionOverwrite](#PermissionOverwrite) ⇐ <code>Base</code>
-  - [new PermissionOverwrite()](#new_PermissionOverwrite_new)
   - [new PermissionOverwrite([data], channelId, client)](#new_PermissionOverwrite_new)
   - [.channel](#PermissionOverwrite+channel) ⇒
-  - [.delete(reason)](#PermissionOverwrite+delete) ⇒
-
-<a name="new_PermissionOverwrite_new"></a>
-
-### new PermissionOverwrite()
-
-It's a class that represents a permission overwrite for a channel
+  - [.delete(reason)](#PermissionOverwrite+delete) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
 <a name="new_PermissionOverwrite_new"></a>
 
 ### new PermissionOverwrite([data], channelId, client)
 
-It's a constructor for a class called Overwrite.
+Constructs a new instance of the Overwrite class.
 
-| Param     | Description                                  |
-| --------- | -------------------------------------------- |
-| [data]    | The data that was received from the API.     |
-| channelId | The ID of the channel this overwrite is for. |
-| client    | Discord.Client                               |
-
-<a name="PermissionOverwrite+channel"></a>
-
-### permissionOverwrite.channel ⇒
-
-It returns the channel object of the channel ID that is stored in the message object
-
-**Kind**: instance property of [<code>PermissionOverwrite</code>](#PermissionOverwrite)  
-**Returns**: The channel object.  
-<a name="PermissionOverwrite+delete"></a>
-
-### permissionOverwrite.delete(reason) ⇒
-
-It deletes a permission overwrite from a channel
-
-**Kind**: instance method of [<code>PermissionOverwrite</code>](#PermissionOverwrite)  
-**Returns**: The return value is a Promise that resolves with a Collection&lt;Snowflake,
-PermissionOverwrite&gt;.
-
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
-
-<a name="PermissionOverwrite"></a>
-
-## PermissionOverwrite
-
-**Kind**: global class
-
-- [PermissionOverwrite](#PermissionOverwrite)
-  - [new PermissionOverwrite()](#new_PermissionOverwrite_new)
-  - [new PermissionOverwrite([data], channelId, client)](#new_PermissionOverwrite_new)
-  - [.channel](#PermissionOverwrite+channel) ⇒
-  - [.delete(reason)](#PermissionOverwrite+delete) ⇒
-
-<a name="new_PermissionOverwrite_new"></a>
-
-### new PermissionOverwrite()
-
-It's a class that represents a permission overwrite for a channel
-
-<a name="new_PermissionOverwrite_new"></a>
-
-### new PermissionOverwrite([data], channelId, client)
-
-It's a constructor for a class called Overwrite.
-
-| Param     | Description                                  |
-| --------- | -------------------------------------------- |
-| [data]    | The data that was received from the API.     |
-| channelId | The ID of the channel this overwrite is for. |
-| client    | Discord.Client                               |
+| Param     | Type                | Description                                                     |
+| --------- | ------------------- | --------------------------------------------------------------- |
+| [data]    | <code>Object</code> | The data for the permission overwrite.                          |
+| channelId | <code>string</code> | The ID of the channel that the permission overwrite belongs to. |
+| client    | <code>Client</code> | The client instance.                                            |
 
 <a name="PermissionOverwrite+channel"></a>
 
 ### permissionOverwrite.channel ⇒
 
-It returns the channel object of the channel ID that is stored in the message object
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>PermissionOverwrite</code>](#PermissionOverwrite)  
 **Returns**: The channel object.  
 <a name="PermissionOverwrite+delete"></a>
 
-### permissionOverwrite.delete(reason) ⇒
+### permissionOverwrite.delete(reason) ⇒ <code>Promise.&lt;boolean&gt;</code>
 
-It deletes a permission overwrite from a channel
+Deletes the permission overwrite for this channel.
 
 **Kind**: instance method of [<code>PermissionOverwrite</code>](#PermissionOverwrite)  
-**Returns**: The return value is a Promise that resolves with a Collection&lt;Snowflake,
-PermissionOverwrite&gt;.
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - - A promise that resolves to true if the deletion was successful, or false otherwise.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                                       |
+| ------ | ------------------- | ------------------------------------------------- |
+| reason | <code>string</code> | The reason for deleting the permission overwrite. |
 
 <a name="Presence"></a>
 
 ## Presence ⇐ <code>Base</code>
 
-It's a class that represents a user's presence
+Represents the presence of a user.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>  
+**Properties**
+
+| Name         | Type                                     | Description                             |
+| ------------ | ---------------------------------------- | --------------------------------------- |
+| partial      | <code>boolean</code>                     | Whether the presence is partial or not. |
+| user         | <code>User</code>                        | The user associated with the presence.  |
+| status       | <code>string</code> \| <code>null</code> | The status of the user.                 |
+| activities   | <code>Array.&lt;Activity&gt;</code>      | The activities of the user.             |
+| clientStatus | <code>Object</code> \| <code>null</code> | The client status of the user.          |
+
 <a name="new_Presence_new"></a>
 
 ### new Presence([data], client)
 
-This function is a constructor for the class Presence.
+Constructs a new instance of the class.
 
-| Param  | Description                              |
-| ------ | ---------------------------------------- |
-| [data] | The data that was received from the API. |
-| client | DiscordClient                            |
+| Param  | Type                | Description                                      |
+| ------ | ------------------- | ------------------------------------------------ |
+| [data] | <code>Object</code> | The data object containing presence information. |
+| client | <code>Client</code> | The client instance.                             |
 
 <a name="Role"></a>
 
 ## Role ⇐ <code>Base</code>
 
-It's a class that represents a role in a guild
+Represents a role in a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -4924,313 +5406,320 @@ It's a class that represents a role in a guild
 - [Role](#Role) ⇐ <code>Base</code>
   - [new Role([data], guildId, client)](#new_Role_new)
   - [.guild](#Role+guild) ⇒
-  - [.members](#Role+members) ⇒
-  - [.fetch([options])](#Role+fetch) ⇒
-  - [.edit([options])](#Role+edit) ⇒
-  - [.delete(reason)](#Role+delete) ⇒
-  - [.clone()](#Role+clone) ⇒
-  - [.setName(name, reason)](#Role+setName) ⇒
-  - [.setPermissions(permissions, reason)](#Role+setPermissions) ⇒
-  - [.setColor(color, reason)](#Role+setColor) ⇒
-  - [.setHoist(hoist, reason)](#Role+setHoist) ⇒
-  - [.setIcon(icon, reason)](#Role+setIcon) ⇒
-  - [.setUnicodeEmoji(unicodeEmoji, reason)](#Role+setUnicodeEmoji) ⇒
-  - [.setMentionable(mentionable, reason)](#Role+setMentionable) ⇒
-  - [.setPosition(position, reason)](#Role+setPosition) ⇒
-  - [.permissionsIn(channel)](#Role+permissionsIn) ⇒
-  - [.deniedPermissionsIn(channel)](#Role+deniedPermissionsIn) ⇒
-  - [.iconURL([options])](#Role+iconURL) ⇒
+  - [.members](#Role+members) ⇒ <code>Collection.&lt;Snowflake, GuildMember&gt;</code>
+  - [.fetch([options])](#Role+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#Role+edit) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Role+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.clone()](#Role+clone) ⇒ [<code>Promise.&lt;Role&gt;</code>](#Role)
+  - [.setName(name, reason)](#Role+setName) ⇒ <code>Promise</code>
+  - [.setPermissions(permissions, reason)](#Role+setPermissions) ⇒ <code>Promise</code>
+  - [.setColor(color, reason)](#Role+setColor) ⇒ <code>Promise</code>
+  - [.setHoist(hoist, reason)](#Role+setHoist) ⇒ <code>Promise</code>
+  - [.setIcon(icon, reason)](#Role+setIcon) ⇒ <code>Promise</code>
+  - [.setUnicodeEmoji(unicodeEmoji, reason)](#Role+setUnicodeEmoji) ⇒ <code>Promise</code>
+  - [.setMentionable(mentionable, reason)](#Role+setMentionable) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setPosition(position, reason)](#Role+setPosition) ⇒ [<code>Promise.&lt;Role&gt;</code>](#Role)
+  - [.permissionsIn(channel)](#Role+permissionsIn) ⇒ <code>Permissions</code>
+  - [.deniedPermissionsIn(channel)](#Role+deniedPermissionsIn) ⇒ <code>PermissionFlags</code> \| <code>null</code>
+  - [.iconURL(options)](#Role+iconURL) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_Role_new"></a>
 
 ### new Role([data], guildId, client)
 
-It's a constructor for a class called Role.
+Constructs a new Role object.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| [data]  | The data that was received from the API. |
-| guildId | The ID of the guild the role is in       |
-| client  | Discord.Client                           |
+| Param   | Type                | Description                                   |
+| ------- | ------------------- | --------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the role.                        |
+| guildId | <code>string</code> | The ID of the guild that the role belongs to. |
+| client  | <code>Client</code> | The client instance.                          |
 
 <a name="Role+guild"></a>
 
 ### role.guild ⇒
 
-If the guild is not in the cache, add it to the cache. If it is in the cache, return it. If it is
-not in the cache and cannot be added to the cache, return null.
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>Role</code>](#Role)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="Role+members"></a>
 
-### role.members ⇒
+### role.members ⇒ <code>Collection.&lt;Snowflake, GuildMember&gt;</code>
 
-It returns an array of all the members that have the role
+Retrieves the members of the guild who have the specified role.
 
 **Kind**: instance property of [<code>Role</code>](#Role)  
-**Returns**: A collection of members that have the role.  
+**Returns**: <code>Collection.&lt;Snowflake, GuildMember&gt;</code> - A collection of guild members who have the role.  
 <a name="Role+fetch"></a>
 
-### role.fetch([options]) ⇒
+### role.fetch([options]) ⇒ <code>Promise</code>
 
-It fetches the role from the guild
+Fetches the roles for the guild.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The role object.
+**Returns**: <code>Promise</code> - A promise that resolves with the fetched roles.
 
-| Param     | Description    |
-| --------- | -------------- |
-| [options] | Fetch options. |
+| Param     | Type                | Description                                  |
+| --------- | ------------------- | -------------------------------------------- |
+| [options] | <code>Object</code> | Optional parameters for the fetch operation. |
 
 <a name="Role+edit"></a>
 
-### role.edit([options]) ⇒
+### role.edit(options) ⇒ <code>Promise</code>
 
-It edits the role
+Edits the role with the specified options.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The return value is the edited role.
+**Returns**: <code>Promise</code> - A promise that resolves when the role has been edited.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                        |
+| ------- | ------------------- | ---------------------------------- |
+| options | <code>Object</code> | The options to edit the role with. |
 
 <a name="Role+delete"></a>
 
-### role.delete(reason) ⇒
+### role.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the role
+Deletes the role from the guild.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The role object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the role is deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| reason | <code>string</code> | The reason for deleting the role. |
 
 <a name="Role+clone"></a>
 
-### role.clone() ⇒
+### role.clone() ⇒ [<code>Promise.&lt;Role&gt;</code>](#Role)
 
-It clones the role
+Clones the current role.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The cloned role.  
+**Returns**: [<code>Promise.&lt;Role&gt;</code>](#Role) - A promise that resolves to the cloned role.  
 <a name="Role+setName"></a>
 
-### role.setName(name, reason) ⇒
+### role.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - A promise that resolves when the name is successfully set.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| name   | The new name of the channel. |
-| reason | The reason for the edit.     |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| name   | <code>string</code> | The new name to set.              |
+| reason | <code>string</code> | The reason for changing the name. |
 
 <a name="Role+setPermissions"></a>
 
-### role.setPermissions(permissions, reason) ⇒
+### role.setPermissions(permissions, reason) ⇒ <code>Promise</code>
 
-It edits the permissions of a role
+Sets the permissions for an entity with the given reason.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The permissions object.
+**Returns**: <code>Promise</code> - - A promise that resolves when the permissions are set.
 
-| Param       | Description                         |
-| ----------- | ----------------------------------- |
-| permissions | The permissions to set on the role. |
-| reason      | The reason for the update.          |
+| Param       | Type                | Description                             |
+| ----------- | ------------------- | --------------------------------------- |
+| permissions | <code>Object</code> | The permissions to set for the entity.  |
+| reason      | <code>string</code> | The reason for setting the permissions. |
 
 <a name="Role+setColor"></a>
 
-### role.setColor(color, reason) ⇒
+### role.setColor(color, reason) ⇒ <code>Promise</code>
 
-It sets the color of the embed
+Sets the color of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The color and reason.
+**Returns**: <code>Promise</code> - - A promise that resolves when the color is successfully set.
 
-| Param  | Description                           |
-| ------ | ------------------------------------- |
-| color  | The color of the embed.               |
-| reason | The reason for the role color change. |
+| Param  | Type                | Description                      |
+| ------ | ------------------- | -------------------------------- |
+| color  | <code>string</code> | The new color to set.            |
+| reason | <code>string</code> | The reason for the color change. |
 
 <a name="Role+setHoist"></a>
 
-### role.setHoist(hoist, reason) ⇒
+### role.setHoist(hoist, reason) ⇒ <code>Promise</code>
 
-It sets the role's hoist property to the value of the hoist parameter
+Sets the hoist value and reason for a specific item.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The role object.
+**Returns**: <code>Promise</code> - - A promise that resolves when the hoist value is set.
 
-| Param  | Description                                                  |
-| ------ | ------------------------------------------------------------ |
-| hoist  | Boolean - Whether or not to hoist the role in the user list. |
-| reason | The reason for the role update.                              |
+| Param  | Type                 | Description                             |
+| ------ | -------------------- | --------------------------------------- |
+| hoist  | <code>boolean</code> | The hoist value to set.                 |
+| reason | <code>string</code>  | The reason for setting the hoist value. |
 
 <a name="Role+setIcon"></a>
 
-### role.setIcon(icon, reason) ⇒
+### role.setIcon(icon, reason) ⇒ <code>Promise</code>
 
-It sets the icon of the guild
+Sets the icon of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - A promise that resolves when the icon is successfully set.
 
-| Param  | Description                                        |
-| ------ | -------------------------------------------------- |
-| icon   | The icon of the guild.                             |
-| reason | The reason for the change (maximum 256 characters) |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| icon   | <code>any</code>    | The new icon to set.              |
+| reason | <code>string</code> | The reason for changing the icon. |
 
 <a name="Role+setUnicodeEmoji"></a>
 
-### role.setUnicodeEmoji(unicodeEmoji, reason) ⇒
+### role.setUnicodeEmoji(unicodeEmoji, reason) ⇒ <code>Promise</code>
 
-This function edits the emoji with the unicode emoji and reason.
+Sets the unicode emoji for an entity.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - A promise that resolves when the unicode emoji is set.
 
-| Param        | Description               |
-| ------------ | ------------------------- |
-| unicodeEmoji | The unicode emoji to set. |
-| reason       | The reason for the edit.  |
+| Param        | Type                | Description                               |
+| ------------ | ------------------- | ----------------------------------------- |
+| unicodeEmoji | <code>string</code> | The unicode emoji to set.                 |
+| reason       | <code>string</code> | The reason for setting the unicode emoji. |
 
 <a name="Role+setMentionable"></a>
 
-### role.setMentionable(mentionable, reason) ⇒
+### role.setMentionable(mentionable, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the role to be mentionable or not.
+Sets the mentionable status of an entity.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The role object.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the mentionable status is set.
 
-| Param       | Description                                             |
-| ----------- | ------------------------------------------------------- |
-| mentionable | Boolean - Whether the role should be mentionable or not |
-| reason      | The reason for the role update.                         |
+| Param       | Type                 | Description                                      |
+| ----------- | -------------------- | ------------------------------------------------ |
+| mentionable | <code>boolean</code> | Whether the entity should be mentionable or not. |
+| reason      | <code>string</code>  | The reason for setting the mentionable status.   |
 
 <a name="Role+setPosition"></a>
 
-### role.setPosition(position, reason) ⇒
+### role.setPosition(position, reason) ⇒ [<code>Promise.&lt;Role&gt;</code>](#Role)
 
-It sets the position of a role
+Sets the position of the role within the guild's role hierarchy.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The role object.
+**Returns**: [<code>Promise.&lt;Role&gt;</code>](#Role) - - A promise that resolves to the modified Role object.
 
-| Param    | Description                               |
-| -------- | ----------------------------------------- |
-| position | The position you want to set the role to. |
-| reason   | The reason for the change.                |
+| Param    | Type                | Description                                   |
+| -------- | ------------------- | --------------------------------------------- |
+| position | <code>number</code> | The new position of the role.                 |
+| reason   | <code>string</code> | The reason for modifying the role's position. |
 
 <a name="Role+permissionsIn"></a>
 
-### role.permissionsIn(channel) ⇒
+### role.permissionsIn(channel) ⇒ <code>Permissions</code>
 
-It returns the permissions of a user in a channel
+Retrieves the permissions of the bot in the specified channel.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The permissions of the user in the channel.
+**Returns**: <code>Permissions</code> - - The permissions of the bot in the channel.  
+**Throws**:
 
-| Param   | Description                             |
-| ------- | --------------------------------------- |
-| channel | The channel to get the permissions for. |
+- <code>RangeError</code> - If the channel is not cached.
+
+| Param   | Type                                        | Description                          |
+| ------- | ------------------------------------------- | ------------------------------------ |
+| channel | <code>string</code> \| <code>Channel</code> | The channel to check permissions in. |
 
 <a name="Role+deniedPermissionsIn"></a>
 
-### role.deniedPermissionsIn(channel) ⇒
+### role.deniedPermissionsIn(channel) ⇒ <code>PermissionFlags</code> \| <code>null</code>
 
-It returns the permissions that the role is denied in the channel
+Retrieves the denied permissions for the specified channel.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The permissions that are denied to the role.
+**Returns**: <code>PermissionFlags</code> \| <code>null</code> - - The denied permissions for the channel, or null if no permissions are found.  
+**Throws**:
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| channel | The channel to check the permissions in. |
+- <code>RangeError</code> - If the channel is not cached.
+
+| Param   | Type                                        | Description                                                 |
+| ------- | ------------------------------------------- | ----------------------------------------------------------- |
+| channel | <code>string</code> \| <code>Channel</code> | The channel or channel ID to retrieve the permissions from. |
 
 <a name="Role+iconURL"></a>
 
-### role.iconURL([options]) ⇒
+### role.iconURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-"If the role has an icon, return the role's icon URL, otherwise return null."
-
-The function takes an optional parameter, options, which is an object
+Returns the URL of the icon for this role.
 
 **Kind**: instance method of [<code>Role</code>](#Role)  
-**Returns**: The URL of the role's icon.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the icon, or null if no icon is available.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param             | Type                 | Description                                                        |
+| ----------------- | -------------------- | ------------------------------------------------------------------ |
+| options           | <code>Object</code>  | An optional object containing additional options for the icon URL. |
+| [options.dynamic] | <code>boolean</code> | Whether the icon should be dynamically generated.                  |
+| [options.size]    | <code>number</code>  | The desired size of the icon.                                      |
+| [options.format]  | <code>string</code>  | The desired format of the icon.                                    |
 
 <a name="RolePrompts"></a>
 
 ## RolePrompts ⇐ <code>Base</code>
 
-It's a class that takes in data, guildId, and client.
+Represents a RolePrompts object that extends the Base class.
 
 **Kind**: global class  
-**Extends**: <code>Base</code>
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name        | Type                                      | Description                                            |
+| ----------- | ----------------------------------------- | ------------------------------------------------------ |
+| partial     | <code>boolean</code>                      | Indicates if the RolePrompts object is partial or not. |
+| guildId     | <code>string</code>                       | The ID of the guild associated with the RolePrompts.   |
+| description | <code>string</code> \| <code>null</code>  | The description of the RolePrompts.                    |
+|             | <code>boolean</code> \| <code>null</code> |                                                        |
 
 - [RolePrompts](#RolePrompts) ⇐ <code>Base</code>
   - [new RolePrompts([data], guildId, client)](#new_RolePrompts_new)
   - _instance_
     - [.guild](#RolePrompts+guild) ⇒
   - _static_
-    - [.transformRolesData([roles])](#RolePrompts.transformRolesData) ⇒
+    - [.transformRolesData(roles)](#RolePrompts.transformRolesData) ⇒ <code>Object</code>
 
 <a name="new_RolePrompts_new"></a>
 
 ### new RolePrompts([data], guildId, client)
 
-It's a constructor for a class that takes in data, guildId, and client.
+Constructs a new instance of the class.
 
-| Param   | Description                       |
-| ------- | --------------------------------- |
-| [data]  | The data that is being passed in. |
-| guildId | The guild ID                      |
-| client  | The client                        |
+| Param   | Type                | Description                                                   |
+| ------- | ------------------- | ------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the properties of the RolePrompts. |
+| guildId | <code>string</code> | The ID of the guild associated with the RolePrompts.          |
+| client  | <code>Client</code> | The client object associated with the RolePrompts.            |
 
 <a name="RolePrompts+guild"></a>
 
 ### rolePrompts.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>RolePrompts</code>](#RolePrompts)  
 **Returns**: The guild object.  
 <a name="RolePrompts.transformRolesData"></a>
 
-### RolePrompts.transformRolesData([roles]) ⇒
+### RolePrompts.transformRolesData(roles) ⇒ <code>Object</code>
 
-It takes an object with keys that are either camelCase or snake_case and returns an object with keys
-that are camelCase
+Transforms the roles data object by extracting specific properties and assigning default values if necessary.
 
 **Kind**: static method of [<code>RolePrompts</code>](#RolePrompts)  
-**Returns**: An object with the following properties:
+**Returns**: <code>Object</code> - - The transformed roles data object with extracted properties and default values.
 
-- emojiId
-- emojiName
-- name
-- rolesId
-
-| Param   | Description                                                     |
-| ------- | --------------------------------------------------------------- |
-| [roles] | The object that contains the data that needs to be transformed. |
+| Param | Type                | Description            |
+| ----- | ------------------- | ---------------------- |
+| roles | <code>Object</code> | The roles data object. |
 
 <a name="SelectMenuInteraction"></a>
 
 ## SelectMenuInteraction ⇐ <code>MessageComponentInteraction</code>
 
-It's a class that extends another class, and it has a constructor that takes in some data, a
-guildId, and a client, and it has a property called values that is set to an array of values
+Represents an interaction with a select menu component.
 
 **Kind**: global class  
 **Extends**: <code>MessageComponentInteraction</code>  
@@ -5238,169 +5727,207 @@ guildId, and a client, and it has a property called values that is set to an arr
 
 ### new SelectMenuInteraction([data], guildId, client)
 
-The above function is a constructor function that takes in three parameters, data, guildId, and
-client. The data parameter is an object that has a property called data, which has a property
-called values. The guildId parameter is a string, and the client parameter is an object. The
-function returns an object that has a property called values, which is an array
+Constructs a new instance of the class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was passed to the constructor. |
-| guildId | The ID of the guild the data is for.         |
-| client  | The client instance                          |
+| Param   | Type                | Description                       |
+| ------- | ------------------- | --------------------------------- |
+| [data]  | <code>Object</code> | The data object for the instance. |
+| guildId | <code>string</code> | The ID of the guild.              |
+| client  | <code>Client</code> | The client instance.              |
 
 <a name="Slash"></a>
 
-## Slash
+## Slash ⇐ <code>Base</code>
+
+Represents a Slash command.
 
 **Kind**: global class  
+**Extends**: <code>Base</code>  
+**Constructor.**:  
+**Properties**
+
+| Name                     | Type                                   | Description                                          |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------- |
+| type                     | <code>string</code>                    | The type of the Slash command.                       |
+| name                     | <code>string</code>                    | The name of the Slash command.                       |
+| description              | <code>string</code>                    | The description of the Slash command.                |
+| options                  | <code>Array.&lt;SlashOption&gt;</code> | The options of the Slash command.                    |
+| defaultMemberPermissions | <code>boolean</code>                   | The default member permissions of the Slash command. |
+
 <a name="new_Slash_new"></a>
 
 ### new Slash([data], client)
 
-It takes in a data object and a client object, and then it sets the type, name, description,
-options, and defaultPermission properties of the class to the values of the data object's type,
-name, description, options, and defaultPermission properties, respectively
+Constructs a new instance of the ApplicationCommand class
 
-| Param  | Description                                    |
-| ------ | ---------------------------------------------- |
-| [data] | The data object that is returned from the API. |
-| client | The client instance.                           |
+| Param  | Type                | Description                                                     |
+| ------ | ------------------- | --------------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing information about the Slash command. |
+| client | <code>Client</code> | The client object.                                              |
 
 <a name="SlashOption"></a>
 
-## SlashOption
+## SlashOption ⇐ <code>Base</code>
 
-**Kind**: global class
+Represents a slash command option.
 
-- [SlashOption](#SlashOption)
+**Kind**: global class  
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name         | Type                              | Description                                      |
+| ------------ | --------------------------------- | ------------------------------------------------ |
+| type         | <code>string</code>               | The type of the option.                          |
+| name         | <code>string</code>               | The name of the option.                          |
+| description  | <code>string</code>               | The description of the option.                   |
+| required     | <code>boolean</code>              | Whether the option is required or not.           |
+| choices      | <code>Array.&lt;Object&gt;</code> | The choices available for the option.            |
+| channelTypes | <code>Array.&lt;string&gt;</code> | The types of channels the option can be used in. |
+| minValue     | <code>number</code>               |                                                  |
+
+- [SlashOption](#SlashOption) ⇐ <code>Base</code>
   - [new SlashOption([data], client)](#new_SlashOption_new)
-  - [.transformChoices([o])](#SlashOption.transformChoices) ⇒
-  - [.transformChannelTypes([channel])](#SlashOption.transformChannelTypes) ⇒
+  - [.transformChoices(o)](#SlashOption.transformChoices) ⇒ <code>Object</code>
+  - [.transformChannelTypes(channel)](#SlashOption.transformChannelTypes) ⇒ <code>string</code> \| <code>object</code>
 
 <a name="new_SlashOption_new"></a>
 
 ### new SlashOption([data], client)
 
-It takes in a JSON object and returns a SlashOption object
+Constructs a new instance of the SlashOption class.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | The client that instantiated the object.    |
+| Param  | Type                | Description                                       |
+| ------ | ------------------- | ------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the option properties. |
+| client | <code>Client</code> | The client object.                                |
 
 <a name="SlashOption.transformChoices"></a>
 
-### SlashOption.transformChoices([o]) ⇒
+### SlashOption.transformChoices(o) ⇒ <code>Object</code>
 
-It takes an object and returns a new object with the same keys but with the values transformed
+Transforms an object into a new object with the properties "name" and "value".
+If the original object does not have a "name" or "value" property, the corresponding
+property in the new object will be set to undefined.
 
 **Kind**: static method of [<code>SlashOption</code>](#SlashOption)  
-**Returns**: An object with the properties name and value.
+**Returns**: <code>Object</code> - - The transformed object with "name" and "value" properties.
 
-| Param | Description              |
-| ----- | ------------------------ |
-| [o]   | The object to transform. |
+| Param | Type                | Description                       |
+| ----- | ------------------- | --------------------------------- |
+| o     | <code>Object</code> | The original object to transform. |
 
 <a name="SlashOption.transformChannelTypes"></a>
 
-### SlashOption.transformChannelTypes([channel]) ⇒
+### SlashOption.transformChannelTypes(channel) ⇒ <code>string</code> \| <code>object</code>
 
-It takes a channel object and returns the channel type
+Transforms the channel type from a number to its corresponding string representation.
 
 **Kind**: static method of [<code>SlashOption</code>](#SlashOption)  
-**Returns**: The channel type is being returned.
+**Returns**: <code>string</code> \| <code>object</code> - - The transformed channel type.
 
-| Param     | Description               |
-| --------- | ------------------------- |
-| [channel] | The channel to transform. |
+| Param   | Type                                       | Description                                                                                                                                         |
+| ------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| channel | <code>number</code> \| <code>object</code> | The channel type to transform. If it is a number, it will be converted to its string representation. If it is an object, it will be returned as is. |
 
 <a name="SlashSubCommand"></a>
 
-## SlashSubCommand
+## SlashSubCommand ⇐ <code>Base</code>
+
+Represents a sub-command for a slash command.
 
 **Kind**: global class  
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name        | Type                                          | Description                         |
+| ----------- | --------------------------------------------- | ----------------------------------- |
+| type        | <code>string</code>                           | The type of the sub-command.        |
+| name        | <code>string</code> \| <code>undefined</code> | The name of the sub-command.        |
+| description | <code>string</code> \| <code>undefined</code> | The description of the sub-command. |
+| options     | <code>RaidenCol</code>                        | The options for the sub-command.    |
+
 <a name="new_SlashSubCommand_new"></a>
 
 ### new SlashSubCommand([data], client)
 
-It creates a new SlashCommand object, and if the data object is not empty, it sets the name,
-description, and options properties to the values in the data object
+Constructs a new Sub_Command object.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | The client object.                          |
+| Param  | Type                | Description                   |
+| ------ | ------------------- | ----------------------------- |
+| [data] | <code>Object</code> | The data for the sub-command. |
+| client | <code>Client</code> | The client object.            |
 
 <a name="SlashSubCommandGroups"></a>
 
-## SlashSubCommandGroups
+## SlashSubCommandGroups ⇐ <code>Base</code>
+
+Represents a sub-command group for a slash command.
 
 **Kind**: global class  
+**Extends**: <code>Base</code>  
 <a name="new_SlashSubCommandGroups_new"></a>
 
 ### new SlashSubCommandGroups([data], client)
 
-It creates a new SlashSubCommandGroup object, which is a collection of SlashSubCommand objects
+Constructs a new instance of the Sub_Command_Group class.
 
-| Param  | Description                                         |
-| ------ | --------------------------------------------------- |
-| [data] | The data that is passed to the constructor.         |
-| client | The client that the command is being registered to. |
+| Param  | Type                | Description                         |
+| ------ | ------------------- | ----------------------------------- |
+| [data] | <code>Object</code> | The data for the sub-command group. |
+| client | <code>Client</code> | The client object.                  |
 
 <a name="StageChannel"></a>
 
 ## StageChannel ⇐ <code>VoiceBasedChannels</code>
 
-It's a class that extends the VoiceBasedChannels class, and adds a few extra methods to it.
+Represents a stage channel, which is a type of voice-based channel.
 
 **Kind**: global class  
 **Extends**: <code>VoiceBasedChannels</code>
 
 - [StageChannel](#StageChannel) ⇐ <code>VoiceBasedChannels</code>
   - [new StageChannel([data], guildId, client)](#new_StageChannel_new)
-  - [.stageInstance](#StageChannel+stageInstance) ⇒
-  - [.createStageInstance([options])](#StageChannel+createStageInstance) ⇒
+  - [.stageInstance](#StageChannel+stageInstance) ⇒ <code>StageInstance</code> \| <code>null</code>
+  - [.createStageInstance(options)](#StageChannel+createStageInstance) ⇒ <code>Promise.&lt;StageInstance&gt;</code>
 
 <a name="new_StageChannel_new"></a>
 
 ### new StageChannel([data], guildId, client)
 
-It's a constructor function that takes in three parameters, data, guildId, and client.
+Constructs a new instance of the class.
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| [data]  | The data that the role is being created with. |
-| guildId | The ID of the guild the role is in.           |
-| client  | The client that instantiated the object.      |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Client</code> | The client instance associated with the instance. |
 
 <a name="StageChannel+stageInstance"></a>
 
-### stageChannel.stageInstance ⇒
+### stageChannel.stageInstance ⇒ <code>StageInstance</code> \| <code>null</code>
 
-If the guild exists, return the stage instance that has the same channel ID as the current
-channel, otherwise return null
+Retrieves the stage instance associated with the channel.
 
 **Kind**: instance property of [<code>StageChannel</code>](#StageChannel)  
-**Returns**: The stageInstance is being returned.  
+**Returns**: <code>StageInstance</code> \| <code>null</code> - The stage instance object if found, otherwise null.  
 <a name="StageChannel+createStageInstance"></a>
 
-### stageChannel.createStageInstance([options]) ⇒
+### stageChannel.createStageInstance(options) ⇒ <code>Promise.&lt;StageInstance&gt;</code>
 
-It creates a new stage instance in the guild, and sets the channel to the current channel
+Creates a stage instance in the specified channel.
 
 **Kind**: instance method of [<code>StageChannel</code>](#StageChannel)  
-**Returns**: The stage instance that was created.
+**Returns**: <code>Promise.&lt;StageInstance&gt;</code> - A promise that resolves to the created stage instance.
 
-| Param     | Description                                |
-| --------- | ------------------------------------------ |
-| [options] | The options to pass to the stage instance. |
+| Param   | Type                | Description                                  |
+| ------- | ------------------- | -------------------------------------------- |
+| options | <code>Object</code> | The options for creating the stage instance. |
 
 <a name="StageInstance"></a>
 
 ## StageInstance ⇐ <code>Base</code>
 
-It's a class that represents a stage instance.
+Represents a Stage Instance in a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -5409,122 +5936,121 @@ It's a class that represents a stage instance.
   - [new StageInstance([data], guildId, client)](#new_StageInstance_new)
   - [.guild](#StageInstance+guild) ⇒
   - [.channel](#StageInstance+channel) ⇒
-  - [.guildScheduledEvent](#StageInstance+guildScheduledEvent) ⇒
-  - [.fetch(options)](#StageInstance+fetch) ⇒
-  - [.edit(options)](#StageInstance+edit) ⇒
-  - [.delete(reason)](#StageInstance+delete) ⇒
-  - [.setTopic(topic, reason)](#StageInstance+setTopic) ⇒
-  - [.setPrivacyLevel(privacyLevel, reason)](#StageInstance+setPrivacyLevel) ⇒
+  - [.guildScheduledEvent](#StageInstance+guildScheduledEvent) ⇒ <code>ScheduledEvent</code> \| <code>null</code>
+  - [.fetch(options)](#StageInstance+fetch) ⇒ [<code>Promise.&lt;StageInstance&gt;</code>](#StageInstance)
+  - [.edit(options)](#StageInstance+edit) ⇒ <code>Promise</code>
+  - [.delete(reason)](#StageInstance+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setTopic(topic, reason)](#StageInstance+setTopic) ⇒ <code>Promise</code>
+  - [.setPrivacyLevel(privacyLevel, reason)](#StageInstance+setPrivacyLevel) ⇒ <code>Promise</code>
 
 <a name="new_StageInstance_new"></a>
 
 ### new StageInstance([data], guildId, client)
 
-| Param   | Description                                   |
-| ------- | --------------------------------------------- |
-| [data]  | The data that was passed into the constructor |
-| guildId | The ID of the guild the voice channel is in.  |
-| client  | Discord.Client                                |
+Constructs a new instance of a Channel object.
+
+| Param   | Type                | Description                                        |
+| ------- | ------------------- | -------------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the Stage Instance.                   |
+| guildId | <code>string</code> | The ID of the guild the Stage Instance belongs to. |
+| client  | <code>Client</code> | The client instance.                               |
 
 <a name="StageInstance+guild"></a>
 
 ### stageInstance.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="StageInstance+channel"></a>
 
 ### stageInstance.channel ⇒
 
-It returns the channel object of the message
+Retrieves the channel associated with this object.
 
 **Kind**: instance property of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The channel object.  
+**Returns**: The channel object if found, otherwise null.  
 <a name="StageInstance+guildScheduledEvent"></a>
 
-### stageInstance.guildScheduledEvent ⇒
+### stageInstance.guildScheduledEvent ⇒ <code>ScheduledEvent</code> \| <code>null</code>
 
-If the guild exists, return the event with the id of the guildScheduledEventId, otherwise return
-null.
+Retrieves the scheduled event associated with the guild.
 
 **Kind**: instance property of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The guildScheduledEventId is being returned.  
+**Returns**: <code>ScheduledEvent</code> \| <code>null</code> - The scheduled event object if found, otherwise null.  
 <a name="StageInstance+fetch"></a>
 
-### stageInstance.fetch(options) ⇒
+### stageInstance.fetch(options) ⇒ [<code>Promise.&lt;StageInstance&gt;</code>](#StageInstance)
 
-It fetches the stage instance from the guild's stage instances.
+Fetches the stage instance for the given channel ID using the provided options.
 
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The stage instance.
+**Returns**: [<code>Promise.&lt;StageInstance&gt;</code>](#StageInstance) - A promise that resolves with the fetched stage instance.
 
-| Param   | Description                                    |
-| ------- | ---------------------------------------------- |
-| options | An object containing the following properties: |
+| Param   | Type                | Description                               |
+| ------- | ------------------- | ----------------------------------------- |
+| options | <code>Object</code> | The options to pass to the fetch request. |
 
 <a name="StageInstance+edit"></a>
 
-### stageInstance.edit(options) ⇒
+### stageInstance.edit(options) ⇒ <code>Promise</code>
 
-It edits the stage instance
+Edits the stage instance with the given options.
 
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - A promise that resolves when the stage instance is successfully edited.
 
-| Param   |
-| ------- |
-| options |
+| Param   | Type                | Description                             |
+| ------- | ------------------- | --------------------------------------- |
+| options | <code>Object</code> | The options to edit the stage instance. |
 
 <a name="StageInstance+delete"></a>
 
-### stageInstance.delete(reason) ⇒
+### stageInstance.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the stage instance
+Deletes the stage instance associated with the channel.
 
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The return value of the delete method of the StageInstances class.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the stage instance is deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                                 |
+| ------ | ------------------- | ------------------------------------------- |
+| reason | <code>string</code> | The reason for deleting the stage instance. |
 
 <a name="StageInstance+setTopic"></a>
 
-### stageInstance.setTopic(topic, reason) ⇒
+### stageInstance.setTopic(topic, reason) ⇒ <code>Promise</code>
 
-It sets the topic of the channel
+Sets the topic of the current object and provides a reason for the change.
 
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the topic is successfully set.
 
-| Param  | Description                                    |
-| ------ | ---------------------------------------------- |
-| topic  | The new topic of the channel.                  |
-| reason | The reason for the change (0-1024 characters). |
+| Param  | Type                | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| topic  | <code>string</code> | The new topic to set.              |
+| reason | <code>string</code> | The reason for changing the topic. |
 
 <a name="StageInstance+setPrivacyLevel"></a>
 
-### stageInstance.setPrivacyLevel(privacyLevel, reason) ⇒
+### stageInstance.setPrivacyLevel(privacyLevel, reason) ⇒ <code>Promise</code>
 
-This function sets the privacy level of the current channel to the privacy level specified in the
-first parameter, and sets the reason for the change to the reason specified in the second
-parameter.
+Sets the privacy level for the current user.
 
 **Kind**: instance method of [<code>StageInstance</code>](#StageInstance)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the privacy level is successfully set.
 
-| Param        | Description                       |
-| ------------ | --------------------------------- |
-| privacyLevel | The privacy level of the channel. |
-| reason       | The reason for the change.        |
+| Param        | Type                | Description                               |
+| ------------ | ------------------- | ----------------------------------------- |
+| privacyLevel | <code>string</code> | The privacy level to set.                 |
+| reason       | <code>string</code> | The reason for setting the privacy level. |
 
 <a name="Sticker"></a>
 
 ## Sticker ⇐ <code>Base</code>
 
-It's a class that represents a sticker in a guild
+Represents a Sticker object, extending the Base class.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -5532,260 +6058,278 @@ It's a class that represents a sticker in a guild
 - [Sticker](#Sticker) ⇐ <code>Base</code>
   - [new Sticker([data], guildId, client)](#new_Sticker_new)
   - [.guild](#Sticker+guild) ⇒
-  - [.fetch(options)](#Sticker+fetch) ⇒
-  - [.edit(options)](#Sticker+edit) ⇒
-  - [.delete(reason)](#Sticker+delete) ⇒
-  - [.setName(name, reason)](#Sticker+setName) ⇒
-  - [.setDescription(description, reason)](#Sticker+setDescription) ⇒
-  - [.setTags(tags, reason)](#Sticker+setTags) ⇒
-  - [.fetchPack()](#Sticker+fetchPack) ⇒
-  - [.imageURL([options])](#Sticker+imageURL) ⇒
-  - [.equals(sticker)](#Sticker+equals) ⇒
+  - [.fetch(options)](#Sticker+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#Sticker+edit) ⇒ <code>Promise</code>
+  - [.delete(reason)](#Sticker+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setName(name, reason)](#Sticker+setName) ⇒ <code>Promise</code>
+  - [.setDescription(description, reason)](#Sticker+setDescription) ⇒ <code>Promise</code>
+  - [.setTags(tags, reason)](#Sticker+setTags) ⇒ <code>Promise</code>
+  - [.fetchPack()](#Sticker+fetchPack) ⇒ <code>Promise.&lt;(NitroPack\|null)&gt;</code>
+  - [.imageURL(options)](#Sticker+imageURL) ⇒ <code>string</code>
+  - [.equals(sticker)](#Sticker+equals) ⇒ <code>boolean</code>
 
 <a name="new_Sticker_new"></a>
 
 ### new Sticker([data], guildId, client)
 
-This function is used to create a new instance of the Sticker class, which is used to represent a
-sticker in a guild.
+Constructs a Sticker object.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| [data]  | The data that was received from the API. |
-| guildId | The ID of the guild the sticker is in    |
-| client  | Discord.Client                           |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the sticker information. |
+| guildId | <code>string</code> | The ID of the guild the sticker belongs to.         |
+| client  | <code>Client</code> | The client instance.                                |
 
 <a name="Sticker+guild"></a>
 
 ### sticker.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>Sticker</code>](#Sticker)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="Sticker+fetch"></a>
 
-### sticker.fetch(options) ⇒
+### sticker.fetch(options) ⇒ <code>Promise</code>
 
-It fetches the sticker from the server
+Fetches stickers from the guild using the provided options.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The sticker object.
+**Returns**: <code>Promise</code> - - A promise that resolves to the fetched stickers.
 
-| Param   | Description                                    |
-| ------- | ---------------------------------------------- |
-| options | An object containing the following properties: |
+| Param   | Type                | Description                            |
+| ------- | ------------------- | -------------------------------------- |
+| options | <code>Object</code> | The options for fetching the stickers. |
 
 <a name="Sticker+edit"></a>
 
-### sticker.edit(options) ⇒
+### sticker.edit(options) ⇒ <code>Promise</code>
 
-It edits the sticker
+Edits the sticker with the given options.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The sticker object.
+**Returns**: <code>Promise</code> - A promise that resolves when the sticker is successfully edited.
 
-| Param   | Description |
-| ------- | ----------- |
-| options | Object      |
+| Param   | Type                | Description                      |
+| ------- | ------------------- | -------------------------------- |
+| options | <code>Object</code> | The options to edit the sticker. |
 
 <a name="Sticker+delete"></a>
 
-### sticker.delete(reason) ⇒
+### sticker.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes the sticker
+Deletes the sticker from the guild.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The return value of the delete method in the StickerManager class.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the sticker is deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| reason | <code>string</code> | The reason for deleting the sticker. |
 
 <a name="Sticker+setName"></a>
 
-### sticker.setName(name, reason) ⇒
+### sticker.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description               |
-| ------ | ------------------------- |
-| name   | The new name of the role. |
-| reason | The reason for the edit.  |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="Sticker+setDescription"></a>
 
-### sticker.setDescription(description, reason) ⇒
+### sticker.setDescription(description, reason) ⇒ <code>Promise</code>
 
-It edits the description of the channel
+Sets the description of an object and updates it with the provided reason.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The description of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the description is successfully updated.
 
-| Param       | Description                         |
-| ----------- | ----------------------------------- |
-| description | The new description of the channel. |
-| reason      | The reason for the edit.            |
+| Param       | Type                | Description                              |
+| ----------- | ------------------- | ---------------------------------------- |
+| description | <code>string</code> | The new description to set.              |
+| reason      | <code>string</code> | The reason for updating the description. |
 
 <a name="Sticker+setTags"></a>
 
-### sticker.setTags(tags, reason) ⇒
+### sticker.setTags(tags, reason) ⇒ <code>Promise</code>
 
-It edits the tags of a message
+Sets the tags of an object and provides a reason for the change.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the tags are successfully set.
 
-| Param  | Description               |
-| ------ | ------------------------- |
-| tags   | The new tags of the user. |
-| reason | The reason for the edit.  |
+| Param  | Type                | Description                |
+| ------ | ------------------- | -------------------------- |
+| tags   | <code>Array</code>  | The new tags to set.       |
+| reason | <code>string</code> | The reason for the change. |
 
 <a name="Sticker+fetchPack"></a>
 
-### sticker.fetchPack() ⇒
+### sticker.fetchPack() ⇒ <code>Promise.&lt;(NitroPack\|null)&gt;</code>
 
-It fetches the Nitro Pack from the Discord API and returns it
+Fetches the Nitro Pack with the specified packId from the client.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The pack object.  
+**Returns**: <code>Promise.&lt;(NitroPack\|null)&gt;</code> - A promise that resolves to the Nitro Pack object if found, or null if not found.  
 <a name="Sticker+imageURL"></a>
 
-### sticker.imageURL([options]) ⇒
+### sticker.imageURL(options) ⇒ <code>string</code>
 
-It returns the URL of the sticker image
+Generates the URL for the sticker image with the specified options.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: The URL of the sticker image.
+**Returns**: <code>string</code> - The URL of the sticker image.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param            | Type                | Description                         |
+| ---------------- | ------------------- | ----------------------------------- |
+| options          | <code>Object</code> | The options for generating the URL. |
+| [options.size]   | <code>string</code> | The desired size of the image.      |
+| [options.format] | <code>string</code> | The desired format of the image.    |
 
 <a name="Sticker+equals"></a>
 
-### sticker.equals(sticker) ⇒
+### sticker.equals(sticker) ⇒ <code>boolean</code>
 
-If the object passed in is not an instance of the Sticker class, return false. Otherwise, return
-true if the name, description, or tags of the object passed in are equal to the name, description,
-or tags of the object calling the function.
+Checks if the given object is equal to this sticker.
 
 **Kind**: instance method of [<code>Sticker</code>](#Sticker)  
-**Returns**: a boolean value.
+**Returns**: <code>boolean</code> - - True if the objects are equal, false otherwise.
 
-| Param   | Description                |
-| ------- | -------------------------- |
-| sticker | The sticker to compare to. |
+| Param   | Type                             | Description                              |
+| ------- | -------------------------------- | ---------------------------------------- |
+| sticker | [<code>Sticker</code>](#Sticker) | The object to compare with this sticker. |
 
 <a name="StickerPack"></a>
 
 ## StickerPack ⇐ <code>Base</code>
 
-It's a class that represents a sticker pack
+Represents a sticker pack.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [StickerPack](#StickerPack) ⇐ <code>Base</code>
   - [new StickerPack([data], client)](#new_StickerPack_new)
-  - [.fetch()](#StickerPack+fetch) ⇒
-  - [.bannerURL(options)](#StickerPack+bannerURL) ⇒
+  - [.fetch()](#StickerPack+fetch) ⇒ <code>Promise.&lt;(Sticker\|null)&gt;</code>
+  - [.bannerURL(options)](#StickerPack+bannerURL) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_StickerPack_new"></a>
 
 ### new StickerPack([data], client)
 
-It's a constructor function that takes in data and a client, and then sets the data to the class
-properties.
+Constructs a new instance of the class.
 
-| Param  | Description       |
-| ------ | ----------------- |
-| [data] |                   |
-| client | Discord.js Client |
+| Param  | Type                | Description                                                 |
+| ------ | ------------------- | ----------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the properties for the instance. |
+| client | <code>Client</code> | The client object.                                          |
 
 <a name="StickerPack+fetch"></a>
 
-### stickerPack.fetch() ⇒
+### stickerPack.fetch() ⇒ <code>Promise.&lt;(Sticker\|null)&gt;</code>
 
-It fetches the sticker pack from Discord's API and returns it
+Fetches the nitro pack with the specified ID from the client's nitro packs.
 
 **Kind**: instance method of [<code>StickerPack</code>](#StickerPack)  
-**Returns**: The sticker object.  
+**Returns**: <code>Promise.&lt;(Sticker\|null)&gt;</code> - A promise that resolves to the found nitro pack or null if not found.  
 <a name="StickerPack+bannerURL"></a>
 
-### stickerPack.bannerURL(options) ⇒
+### stickerPack.bannerURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-It returns the URL of the banner image of the sticker pack.
+Retrieves the URL of the banner image for the sticker pack.
 
 **Kind**: instance method of [<code>StickerPack</code>](#StickerPack)  
-**Returns**: The URL of the banner image.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the banner image, or null if the bannerAssetId is not set.
 
-| Param   |
-| ------- |
-| options |
+| Param          | Type                | Description                             |
+| -------------- | ------------------- | --------------------------------------- |
+| options        | <code>Object</code> | The options for the banner image.       |
+| options.size   | <code>string</code> | The desired size of the banner image.   |
+| options.format | <code>string</code> | The desired format of the banner image. |
 
 <a name="Team"></a>
 
 ## Team ⇐ <code>Base</code>
 
-It's a class that represents a team in the Discord API
+Represents a team object.
 
 **Kind**: global class  
-**Extends**: <code>Base</code>
+**Extends**: <code>Base</code>  
+**Properties**
+
+| Name             | Type                                          | Description                                |
+| ---------------- | --------------------------------------------- | ------------------------------------------ |
+| icon             | <code>string</code> \| <code>undefined</code> | The icon of the team.                      |
+| id               | <code>string</code> \| <code>undefined</code> | The ID of the team.                        |
+| members          | <code>RaidenCol</code>                        | A collection of team members.              |
+| createdAt        | <code>Date</code> \| <code>undefined</code>   | The creation date of the team.             |
+| createdTimestamp | <code>number</code> \| <code>undefined</code> | The timestamp of the team's creation date. |
+| name             | <code>string</code> \| <code>undefined</code> | The name of the team.                      |
 
 - [Team](#Team) ⇐ <code>Base</code>
   - [new Team([data], client)](#new_Team_new)
-  - [.iconURL([options])](#Team+iconURL) ⇒
+  - [.iconURL(options)](#Team+iconURL) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_Team_new"></a>
 
 ### new Team([data], client)
 
-It's a constructor for a class that extends another class
+Constructs a new instance of the class.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that was passed to the constructor |
-| client | The client that instantiated the object.    |
+| Param  | Type                | Description                                      |
+| ------ | ------------------- | ------------------------------------------------ |
+| [data] | <code>Object</code> | The data object containing the team information. |
+| client | <code>Client</code> | The client object.                               |
 
 <a name="Team+iconURL"></a>
 
-### team.iconURL([options]) ⇒
+### team.iconURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-"If the team has an icon, return the icon URL, otherwise return null."
-
-The function takes an optional parameter, options, which is an object
+Returns the URL of the icon for this team.
 
 **Kind**: instance method of [<code>Team</code>](#Team)  
-**Returns**: The URL of the team icon.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the team's icon, or null if no icon is available.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param             | Type                 | Description                                       |
+| ----------------- | -------------------- | ------------------------------------------------- |
+| options           | <code>Object</code>  | Optional parameters for customizing the icon URL. |
+| [options.dynamic] | <code>boolean</code> | Whether to use a dynamic icon.                    |
+| [options.size]    | <code>number</code>  | The desired size of the icon.                     |
+| [options.format]  | <code>string</code>  | The desired format of the icon.                   |
 
 <a name="TeamMember"></a>
 
 ## TeamMember ⇐ <code>Base</code>
 
-It's a class that represents a team member
+Represents a team member.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>  
+**Properties**
+
+| Name        | Type                                              | Description                                    |
+| ----------- | ------------------------------------------------- | ---------------------------------------------- |
+| state       | <code>MembershipState</code> \| <code>null</code> | The membership state of the team member.       |
+| permissions | <code>Object</code> \| <code>undefined</code>     | The permissions of the team member.            |
+| teamId      | <code>string</code> \| <code>null</code>          | The ID of the team that the member belongs to. |
+| user        | <code>User</code> \| <code>null</code>            | The user object representing the team member.  |
+
 <a name="new_TeamMember_new"></a>
 
 ### new TeamMember([data], client)
 
-It's a constructor for a class that takes in a data object and a client object, and sets the
-state, permissions, teamId, and user properties of the class to the values of the state,
-permissions, teamId, and user properties of the data object, respectively
+Constructs a new instance of the class.
 
-| Param  | Description                              |
-| ------ | ---------------------------------------- |
-| [data] | The data that was received from the API. |
-| client | The client that instantiated the object. |
+| Param  | Type                | Description                                                   |
+| ------ | ------------------- | ------------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing information about the team member. |
+| client | <code>Client</code> | The client object.                                            |
 
 <a name="TextBasedChannels"></a>
 
@@ -5795,105 +6339,102 @@ permissions, teamId, and user properties of the data object, respectively
 
 - [TextBasedChannels](#TextBasedChannels)
   - [new TextBasedChannels([data], guildId, client)](#new_TextBasedChannels_new)
-  - [.messages](#TextBasedChannels+messages) ⇒
-  - [.send(options)](#TextBasedChannels+send) ⇒
-  - [.bulkDelete(messages, reason)](#TextBasedChannels+bulkDelete) ⇒
-  - [.setNsfw(nsfw, reason)](#TextBasedChannels+setNsfw) ⇒
-  - [.setRateLimitPerUser(ratelimit, reason)](#TextBasedChannels+setRateLimitPerUser) ⇒
-  - [.triggerTyping()](#TextBasedChannels+triggerTyping) ⇒
+  - [.messages](#TextBasedChannels+messages) ⇒ <code>MessageManager</code>
+  - [.send(options)](#TextBasedChannels+send) ⇒ <code>Promise</code>
+  - [.bulkDelete(messages, reason)](#TextBasedChannels+bulkDelete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setNsfw(nsfw, reason)](#TextBasedChannels+setNsfw) ⇒ <code>Promise</code>
+  - [.setRateLimitPerUser(ratelimit, reason)](#TextBasedChannels+setRateLimitPerUser) ⇒ <code>Promise</code>
+  - [.triggerTyping()](#TextBasedChannels+triggerTyping) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_TextBasedChannels_new"></a>
 
 ### new TextBasedChannels([data], guildId, client)
 
-It's a constructor function that takes in a data object, a guildId, and a client, and then sets the
-rateLimitPerUser, lastPinnedAt, lastPinnedTimestamp, lastMessageId, and nsfw properties of the
-object to the values of the corresponding keys in the data object, or null if the key doesn't exist.
+Constructs a new instance of the Channel class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was passed to the constructor. |
-| guildId | The ID of the guild the channel is in.       |
-| client  | The client that instantiated the channel.    |
+| Param   | Type                | Description                                         |
+| ------- | ------------------- | --------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the channel information. |
+| guildId | <code>string</code> | The ID of the guild that the channel belongs to.    |
+| client  | <code>Client</code> | The client instance.                                |
 
 <a name="TextBasedChannels+messages"></a>
 
-### textBasedChannels.messages ⇒
+### textBasedChannels.messages ⇒ <code>MessageManager</code>
 
-It returns a new MessageManager object, which is a class that manages messages
+Get the message manager for this channel.
 
 **Kind**: instance property of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: A new instance of the MessageManager class.  
+**Returns**: <code>MessageManager</code> - The message manager object for this channel.  
 <a name="TextBasedChannels+send"></a>
 
-### textBasedChannels.send(options) ⇒
+### textBasedChannels.send(options) ⇒ <code>Promise</code>
 
-It sends a message to the channel
+Sends a message using the specified options.
 
 **Kind**: instance method of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: The return value of the send() method.
+**Returns**: <code>Promise</code> - A promise that resolves when the message is sent.
 
-| Param   | Description                               |
-| ------- | ----------------------------------------- |
-| options | An object containing the message to send. |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>object</code> | The options for sending the message. |
 
 <a name="TextBasedChannels+bulkDelete"></a>
 
-### textBasedChannels.bulkDelete(messages, reason) ⇒
+### textBasedChannels.bulkDelete(messages, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes messages in bulk
+Bulk deletes the specified messages from the channel.
 
 **Kind**: instance method of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: The return value of the function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves when the messages are deleted.
 
-| Param    | Description                     |
-| -------- | ------------------------------- |
-| messages | The messages to delete.         |
-| reason   | The reason for the bulk delete. |
+| Param    | Type                               | Description                           |
+| -------- | ---------------------------------- | ------------------------------------- |
+| messages | <code>Array.&lt;Message&gt;</code> | The messages to delete.               |
+| reason   | <code>string</code>                | The reason for deleting the messages. |
 
 <a name="TextBasedChannels+setNsfw"></a>
 
-### textBasedChannels.setNsfw(nsfw, reason) ⇒
+### textBasedChannels.setNsfw(nsfw, reason) ⇒ <code>Promise</code>
 
-It edits the channel's nsfw property
+Sets the NSFW (Not Safe for Work) flag for the current item.
 
 **Kind**: instance method of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the NSFW flag is successfully set.
 
-| Param  | Description                                   |
-| ------ | --------------------------------------------- |
-| nsfw   | Boolean - Whether the channel is nsfw or not. |
-| reason | The reason for the edit.                      |
+| Param  | Type                 | Description                           |
+| ------ | -------------------- | ------------------------------------- |
+| nsfw   | <code>boolean</code> | The NSFW flag value to set.           |
+| reason | <code>string</code>  | The reason for setting the NSFW flag. |
 
 <a name="TextBasedChannels+setRateLimitPerUser"></a>
 
-### textBasedChannels.setRateLimitPerUser(ratelimit, reason) ⇒
+### textBasedChannels.setRateLimitPerUser(ratelimit, reason) ⇒ <code>Promise</code>
 
-It edits the ratelimit of the command
+Sets the rate limit per user for a specific action.
 
 **Kind**: instance method of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the rate limit is successfully set.
 
-| Param     | Description                   |
-| --------- | ----------------------------- |
-| ratelimit | The ratelimit to set.         |
-| reason    | The reason for the ratelimit. |
+| Param     | Type                | Description                            |
+| --------- | ------------------- | -------------------------------------- |
+| ratelimit | <code>number</code> | The new rate limit value to set.       |
+| reason    | <code>string</code> | The reason for setting the rate limit. |
 
 <a name="TextBasedChannels+triggerTyping"></a>
 
-### textBasedChannels.triggerTyping() ⇒
+### textBasedChannels.triggerTyping() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It triggers typing in the channel
+Triggers a typing indicator in the channel where this method is called.
 
 **Kind**: instance method of [<code>TextBasedChannels</code>](#TextBasedChannels)  
-**Returns**: The return value of the function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the typing indicator is triggered.
 
 <a name="TextChannel"></a>
 
 ## TextChannel ⇐ <code>BaseGuildChannel</code>
 
-It's a class that extends another class, and it has a constructor that takes in a data object, a
-guildId, and a client
+Represents a text channel in a guild.
 
 **Kind**: global class  
 **Extends**: <code>BaseGuildChannel</code>  
@@ -5901,175 +6442,171 @@ guildId, and a client
 
 ### new TextChannel([data], guildId, client)
 
-It's a constructor function that takes in three parameters, data, guildId, and client.
+Constructs a new instance of the class.
 
-| Param   | Description                                       |
-| ------- | ------------------------------------------------- |
-| [data]  | The data that the class will be constructed with. |
-| guildId | The ID of the guild the role is in.               |
-| client  | The client that instantiated the object.          |
+| Param   | Type                | Description                                           |
+| ------- | ------------------- | ----------------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the text channel.                        |
+| guildId | <code>string</code> | The ID of the guild that the text channel belongs to. |
+| client  | <code>Client</code> | The client instance.                                  |
 
 <a name="ThreadChannel"></a>
 
 ## ThreadChannel ⇐ <code>TextBasedChannels</code>
 
-It's a class that represents a Discord Thread Channel
+Represents a thread channel in Discord.
 
 **Kind**: global class  
 **Extends**: <code>TextBasedChannels</code>
 
 - [ThreadChannel](#ThreadChannel) ⇐ <code>TextBasedChannels</code>
   - [new ThreadChannel([data], guildId, client)](#new_ThreadChannel_new)
-  - [.join()](#ThreadChannel+join) ⇒
-  - [.add(member)](#ThreadChannel+add) ⇒
-  - [.remove(user)](#ThreadChannel+remove) ⇒
-  - [.fetchOwner(options)](#ThreadChannel+fetchOwner) ⇒
-  - [.setArchived(archived, reason)](#ThreadChannel+setArchived) ⇒
-  - [.setLocked(locked, reason)](#ThreadChannel+setLocked) ⇒
-  - [.setAutoArchiveDuration(autoArchiveDuration, reason)](#ThreadChannel+setAutoArchiveDuration) ⇒
-  - [.setInvitable(invitable, reason)](#ThreadChannel+setInvitable) ⇒
-  - [.setFlags(flags, reason)](#ThreadChannel+setFlags) ⇒
+  - [.join()](#ThreadChannel+join) ⇒ <code>Promise.&lt;Group&gt;</code>
+  - [.add(member)](#ThreadChannel+add) ⇒ <code>Promise</code>
+  - [.remove(user)](#ThreadChannel+remove) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.fetchOwner(options)](#ThreadChannel+fetchOwner) ⇒ <code>Promise.&lt;(Object\|null)&gt;</code>
+  - [.setArchived(archived, reason)](#ThreadChannel+setArchived) ⇒ <code>Promise</code>
+  - [.setLocked(locked, reason)](#ThreadChannel+setLocked) ⇒ <code>Promise</code>
+  - [.setAutoArchiveDuration(autoArchiveDuration, reason)](#ThreadChannel+setAutoArchiveDuration) ⇒ <code>Promise</code>
+  - [.setInvitable(invitable, reason)](#ThreadChannel+setInvitable) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setFlags(flags, reason)](#ThreadChannel+setFlags) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_ThreadChannel_new"></a>
 
 ### new ThreadChannel([data], guildId, client)
 
-"This function is used to create a new instance of the Thread class."
+Constructs a new instance of the ThreadChannel class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild the channel is in.      |
-| client  | Discord.Client                              |
+| Param   | Type                | Description                                                      |
+| ------- | ------------------- | ---------------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing information about the thread channel. |
+| guildId | <code>string</code> | The ID of the guild that the thread channel belongs to.          |
+| client  | <code>Client</code> | The client instance.                                             |
 
 <a name="ThreadChannel+join"></a>
 
-### threadChannel.join() ⇒
+### threadChannel.join() ⇒ <code>Promise.&lt;Group&gt;</code>
 
-It returns a promise that resolves to the current object
+Asynchronously joins all members of a group.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The members array.  
+**Returns**: <code>Promise.&lt;Group&gt;</code> - A promise that resolves to the joined group.  
 <a name="ThreadChannel+add"></a>
 
-### threadChannel.add(member) ⇒
+### threadChannel.add(member) ⇒ <code>Promise</code>
 
-It adds a member to the members collection.
+Adds a member to the collection asynchronously.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value is a Promise that resolves to the result of the add() method.
+**Returns**: <code>Promise</code> - A promise that resolves when the member is added.
 
-| Param  | Description                   |
-| ------ | ----------------------------- |
-| member | The member to add to the set. |
+| Param  | Type                     | Description        |
+| ------ | ------------------------ | ------------------ |
+| member | <code>GuildMember</code> | The member to add. |
 
 <a name="ThreadChannel+remove"></a>
 
-### threadChannel.remove(user) ⇒
+### threadChannel.remove(user) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It removes a user from the members array.
+Removes a user from the members list.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value is the result of the remove method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the user is successfully removed.
 
-| Param | Description                        |
-| ----- | ---------------------------------- |
-| user  | The user to remove from the guild. |
+| Param | Type              | Description         |
+| ----- | ----------------- | ------------------- |
+| user  | <code>User</code> | The user to remove. |
 
 <a name="ThreadChannel+fetchOwner"></a>
 
-### threadChannel.fetchOwner(options) ⇒
+### threadChannel.fetchOwner(options) ⇒ <code>Promise.&lt;(Object\|null)&gt;</code>
 
-It fetches the owner of the guild
+Fetches the owner of the object.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The owner of the guild.
+**Returns**: <code>Promise.&lt;(Object\|null)&gt;</code> - - A promise that resolves to the owner object if found, or null if the ownerId is not set.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| options | An object with the following properties: |
+| Param   | Type                | Description                                 |
+| ------- | ------------------- | ------------------------------------------- |
+| options | <code>Object</code> | Additional options for the fetch operation. |
 
 <a name="ThreadChannel+setArchived"></a>
 
-### threadChannel.setArchived(archived, reason) ⇒
+### threadChannel.setArchived(archived, reason) ⇒ <code>Promise</code>
 
-It edits the channel's archived property to the value of the archived parameter, and the reason
-property to the value of the reason parameter
+Sets the archived status and reason for an item.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the item is successfully edited.
 
-| Param    | Description                                              |
-| -------- | -------------------------------------------------------- |
-| archived | Boolean - Whether the channel should be archived or not. |
-| reason   | The reason for the edit.                                 |
+| Param    | Type                 | Description                        |
+| -------- | -------------------- | ---------------------------------- |
+| archived | <code>boolean</code> | The archived status to set.        |
+| reason   | <code>string</code>  | The reason for archiving the item. |
 
 <a name="ThreadChannel+setLocked"></a>
 
-### threadChannel.setLocked(locked, reason) ⇒
+### threadChannel.setLocked(locked, reason) ⇒ <code>Promise</code>
 
-It sets the locked property of a channel to true or false
+Sets the locked status and reason for an item.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param  | Description                                           |
-| ------ | ----------------------------------------------------- |
-| locked | Boolean - Whether the channel should be locked or not |
-| reason | The reason for the lock.                              |
+| Param  | Type                 | Description                      |
+| ------ | -------------------- | -------------------------------- |
+| locked | <code>boolean</code> | The locked status to set.        |
+| reason | <code>string</code>  | The reason for locking the item. |
 
 <a name="ThreadChannel+setAutoArchiveDuration"></a>
 
-### threadChannel.setAutoArchiveDuration(autoArchiveDuration, reason) ⇒
+### threadChannel.setAutoArchiveDuration(autoArchiveDuration, reason) ⇒ <code>Promise</code>
 
-It sets the autoArchiveDuration of a channel
+Sets the auto archive duration for a specific item and provides a reason for the change.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise</code> - - A promise that resolves when the operation is complete.
 
-| Param               | Description                                                                     |
-| ------------------- | ------------------------------------------------------------------------------- |
-| autoArchiveDuration | The duration in seconds after which the channel will be automatically archived. |
-| reason              | The reason for the edit.                                                        |
+| Param               | Type                | Description                                        |
+| ------------------- | ------------------- | -------------------------------------------------- |
+| autoArchiveDuration | <code>number</code> | The new auto archive duration in seconds.          |
+| reason              | <code>string</code> | The reason for changing the auto archive duration. |
 
 <a name="ThreadChannel+setInvitable"></a>
 
-### threadChannel.setInvitable(invitable, reason) ⇒
+### threadChannel.setInvitable(invitable, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the invitable property of the guild.
+Sets the invitable property and reason for the object.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the edit is complete.
 
-| Param     | Description                                            |
-| --------- | ------------------------------------------------------ |
-| invitable | Boolean - Whether the role should be invitable or not. |
-| reason    | The reason for the change (0-1024 characters)          |
+| Param     | Type                 | Description                               |
+| --------- | -------------------- | ----------------------------------------- |
+| invitable | <code>boolean</code> | The new value for the invitable property. |
+| reason    | <code>string</code>  | The reason for the change.                |
 
 <a name="ThreadChannel+setFlags"></a>
 
-### threadChannel.setFlags(flags, reason) ⇒
+### threadChannel.setFlags(flags, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the flags of a message
+Sets the flags and reason for an object.
 
 **Kind**: instance method of [<code>ThreadChannel</code>](#ThreadChannel)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the flags are set.
 
-| Param  | Description              |
-| ------ | ------------------------ |
-| flags  | The flags to set.        |
-| reason | The reason for the edit. |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| flags  | <code>any</code>    | The flags to set.                 |
+| reason | <code>string</code> | The reason for setting the flags. |
 
 <a name="ThreadMember"></a>
 
-## ThreadMember ⇐ <code>Base</code>
+## ThreadMember
 
-It's a class that represents a user in a thread
+**Kind**: global class
 
-**Kind**: global class  
-**Extends**: <code>Base</code>
-
-- [ThreadMember](#ThreadMember) ⇐ <code>Base</code>
+- [ThreadMember](#ThreadMember)
   - [new ThreadMember([data], guildId, threadId, client)](#new_ThreadMember_new)
   - [.guild](#ThreadMember+guild) ⇒
   - [.thread](#ThreadMember+thread) ⇒
@@ -6127,7 +6664,7 @@ It removes a user from a thread
 
 ## TriggeredAutoModRule ⇐ <code>Base</code>
 
-It's a class that represents a triggered automod rule.
+Represents a triggered auto moderation rule.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -6138,35 +6675,34 @@ It's a class that represents a triggered automod rule.
   - [.channel](#TriggeredAutoModRule+channel) ⇒
   - [.user](#TriggeredAutoModRule+user) ⇒
   - [.message](#TriggeredAutoModRule+message) ⇒
-  - [.fetch([options])](#TriggeredAutoModRule+fetch) ⇒
-  - [.edit([options])](#TriggeredAutoModRule+edit) ⇒
-  - [.delete(reason)](#TriggeredAutoModRule+delete) ⇒
-  - [.setName(name, reason)](#TriggeredAutoModRule+setName) ⇒
-  - [.setEventType(eventType, reason)](#TriggeredAutoModRule+setEventType) ⇒
-  - [.setTriggerMetadata(triggerMetadata, reason)](#TriggeredAutoModRule+setTriggerMetadata) ⇒
-  - [.setActions(actions, reason)](#TriggeredAutoModRule+setActions) ⇒
-  - [.setEnabled(enabled, reason)](#TriggeredAutoModRule+setEnabled) ⇒
-  - [.setExemptRoles(exemptRoles, reason)](#TriggeredAutoModRule+setExemptRoles) ⇒
-  - [.setExemptChannels(exemptChannels, reason)](#TriggeredAutoModRule+setExemptChannels) ⇒
+  - [.fetch(options)](#TriggeredAutoModRule+fetch) ⇒ <code>Promise</code>
+  - [.edit(options)](#TriggeredAutoModRule+edit) ⇒ <code>Promise</code>
+  - [.delete(reason)](#TriggeredAutoModRule+delete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setName(name, reason)](#TriggeredAutoModRule+setName) ⇒ <code>Promise</code>
+  - [.setEventType(eventType, reason)](#TriggeredAutoModRule+setEventType) ⇒ <code>Promise</code>
+  - [.setTriggerMetadata(triggerMetadata, reason)](#TriggeredAutoModRule+setTriggerMetadata) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setActions(actions, reason)](#TriggeredAutoModRule+setActions) ⇒ <code>Promise.&lt;any&gt;</code>
+  - [.setEnabled(enabled, reason)](#TriggeredAutoModRule+setEnabled) ⇒ <code>Promise</code>
+  - [.setExemptRoles(exemptRoles, reason)](#TriggeredAutoModRule+setExemptRoles) ⇒ <code>Promise</code>
+  - [.setExemptChannels(exemptChannels, reason)](#TriggeredAutoModRule+setExemptChannels) ⇒ <code>Promise</code>
 
 <a name="new_TriggeredAutoModRule_new"></a>
 
 ### new TriggeredAutoModRule([data], guildId, client)
 
-"This function is used to create a new instance of the GuildAutoModRule class, which is used to
-represent a rule that is used to automatically moderate a guild."
+Constructs a GuildAutoModRule object.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| [data]  | The data that is passed in from the API. |
-| guildId | The ID of the guild the alert is for.    |
-| client  | Discord.Client                           |
+| Param   | Type                | Description                                      |
+| ------- | ------------------- | ------------------------------------------------ |
+| [data]  | <code>Object</code> | The data for the triggered auto moderation rule. |
+| guildId | <code>string</code> | The ID of the guild that the rule belongs to.    |
+| client  | <code>Client</code> | The client instance.                             |
 
 <a name="TriggeredAutoModRule+guild"></a>
 
 ### triggeredAutoModRule.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
 **Returns**: The guild object.  
@@ -6174,7 +6710,7 @@ It returns the guild object of the guild ID that is stored in the database
 
 ### triggeredAutoModRule.channel ⇒
 
-It returns the channel object of the channel ID that is stored in the message object
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
 **Returns**: The channel object.  
@@ -6182,7 +6718,7 @@ It returns the channel object of the channel ID that is stored in the message ob
 
 ### triggeredAutoModRule.user ⇒
 
-It returns the user object of the user who sent the message
+Get the user object associated with this instance.
 
 **Kind**: instance property of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
 **Returns**: The user object.  
@@ -6190,521 +6726,535 @@ It returns the user object of the user who sent the message
 
 ### triggeredAutoModRule.message ⇒
 
-It returns a message object from the messageId
+Retrieves the message from the channel using the specified message ID.
 
 **Kind**: instance property of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The message object.  
+**Returns**: The retrieved message object.  
 <a name="TriggeredAutoModRule+fetch"></a>
 
-### triggeredAutoModRule.fetch([options]) ⇒
+### triggeredAutoModRule.fetch(options) ⇒ <code>Promise</code>
 
-It fetches the rule from the database
+Fetches the automod rule with the specified ruleId from the guild.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The rule object.
+**Returns**: <code>Promise</code> - A promise that resolves to the fetched automod rule.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                                |
+| ------- | ------------------- | ------------------------------------------ |
+| options | <code>object</code> | Optional parameters for the fetch request. |
 
 <a name="TriggeredAutoModRule+edit"></a>
 
-### triggeredAutoModRule.edit([options]) ⇒
+### triggeredAutoModRule.edit(options) ⇒ <code>Promise</code>
 
-It edits a rule in the guild's automod
+Edits the automod rule with the specified options.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value is the edited rule.
+**Returns**: <code>Promise</code> - A promise that resolves when the automod rule has been successfully edited.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                             |
+| ------- | ------------------- | --------------------------------------- |
+| options | <code>Object</code> | The options to update the automod rule. |
 
 <a name="TriggeredAutoModRule+delete"></a>
 
-### triggeredAutoModRule.delete(reason) ⇒
+### triggeredAutoModRule.delete(reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes a rule from the database
+Deletes the automod rule with the specified reason.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the delete method.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the rule is successfully deleted.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| reason | The reason for the deletion. |
+| Param  | Type                | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| reason | <code>string</code> | The reason for deleting the rule. |
 
 <a name="TriggeredAutoModRule+setName"></a>
 
-### triggeredAutoModRule.setName(name, reason) ⇒
+### triggeredAutoModRule.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| name   | The new name of the channel. |
-| reason | The reason for the edit.     |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="TriggeredAutoModRule+setEventType"></a>
 
-### triggeredAutoModRule.setEventType(eventType, reason) ⇒
+### triggeredAutoModRule.setEventType(eventType, reason) ⇒ <code>Promise</code>
 
-It returns a promise that resolves to the result of calling the edit function with the eventType
-and reason parameters.
+Sets the event type and reason for the current object.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param     | Description               |
-| --------- | ------------------------- |
-| eventType | The event type to set.    |
-| reason    | The reason for the event. |
+| Param     | Type                | Description               |
+| --------- | ------------------- | ------------------------- |
+| eventType | <code>string</code> | The type of event to set. |
+| reason    | <code>string</code> | The reason for the event. |
 
 <a name="TriggeredAutoModRule+setTriggerMetadata"></a>
 
-### triggeredAutoModRule.setTriggerMetadata(triggerMetadata, reason) ⇒
+### triggeredAutoModRule.setTriggerMetadata(triggerMetadata, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the triggerMetadata property of the current object to the value of the triggerMetadata
-parameter
+Sets the trigger metadata for the current object and updates it with the given reason.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the trigger metadata is successfully set.
 
-| Param           | Description                  |
-| --------------- | ---------------------------- |
-| triggerMetadata | The metadata of the trigger. |
-| reason          | The reason for the edit.     |
+| Param           | Type                | Description                                   |
+| --------------- | ------------------- | --------------------------------------------- |
+| triggerMetadata | <code>any</code>    | The new trigger metadata to set.              |
+| reason          | <code>string</code> | The reason for updating the trigger metadata. |
 
 <a name="TriggeredAutoModRule+setActions"></a>
 
-### triggeredAutoModRule.setActions(actions, reason) ⇒
+### triggeredAutoModRule.setActions(actions, reason) ⇒ <code>Promise.&lt;any&gt;</code>
 
-It edits the message with the given actions and reason
+Sets the actions and reason for editing a resource.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit method.
+**Returns**: <code>Promise.&lt;any&gt;</code> - - A promise that resolves to the result of the edit operation.
 
-| Param   | Description                 |
-| ------- | --------------------------- |
-| actions | An array of actions to set. |
-| reason  | The reason for the edit.    |
+| Param   | Type                | Description              |
+| ------- | ------------------- | ------------------------ |
+| actions | <code>any</code>    | The actions to be set.   |
+| reason  | <code>string</code> | The reason for the edit. |
 
 <a name="TriggeredAutoModRule+setEnabled"></a>
 
-### triggeredAutoModRule.setEnabled(enabled, reason) ⇒
+### triggeredAutoModRule.setEnabled(enabled, reason) ⇒ <code>Promise</code>
 
-This function sets the enabled property of the command to the value of the enabled parameter, and
-the reason property of the command to the value of the reason parameter.
+Sets the enabled status of an item and provides a reason for the change.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param   | Description                                                  |
-| ------- | ------------------------------------------------------------ |
-| enabled | Boolean - Whether the command should be enabled or disabled. |
-| reason  | The reason for the change (0-1024 characters).               |
+| Param   | Type                 | Description                                  |
+| ------- | -------------------- | -------------------------------------------- |
+| enabled | <code>boolean</code> | The new enabled status of the item.          |
+| reason  | <code>string</code>  | The reason for the change in enabled status. |
 
 <a name="TriggeredAutoModRule+setExemptRoles"></a>
 
-### triggeredAutoModRule.setExemptRoles(exemptRoles, reason) ⇒
+### triggeredAutoModRule.setExemptRoles(exemptRoles, reason) ⇒ <code>Promise</code>
 
-It sets the exempt roles of a role
+Sets the exempt roles for a certain action and provides a reason for the change.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the exempt roles are successfully set.
 
-| Param       | Description                                           |
-| ----------- | ----------------------------------------------------- |
-| exemptRoles | An array of role IDs that are exempt from the filter. |
-| reason      | The reason for the edit.                              |
+| Param       | Type                | Description                                |
+| ----------- | ------------------- | ------------------------------------------ |
+| exemptRoles | <code>Array</code>  | The roles that are exempt from the action. |
+| reason      | <code>string</code> | The reason for setting the exempt roles.   |
 
 <a name="TriggeredAutoModRule+setExemptChannels"></a>
 
-### triggeredAutoModRule.setExemptChannels(exemptChannels, reason) ⇒
+### triggeredAutoModRule.setExemptChannels(exemptChannels, reason) ⇒ <code>Promise</code>
 
-It edits the channel overwrites for a role
+Sets the exempt channels for a specific action and provides a reason.
 
 **Kind**: instance method of [<code>TriggeredAutoModRule</code>](#TriggeredAutoModRule)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the exempt channels are set.
 
-| Param          | Description                                              |
-| -------------- | -------------------------------------------------------- |
-| exemptChannels | An array of channel IDs that are exempt from the filter. |
-| reason         | The reason for the edit.                                 |
+| Param          | Type                | Description                                 |
+| -------------- | ------------------- | ------------------------------------------- |
+| exemptChannels | <code>Array</code>  | The channels to exempt from the action.     |
+| reason         | <code>string</code> | The reason for setting the exempt channels. |
 
 <a name="User"></a>
 
 ## User ⇐ <code>Base</code>
 
-It's a class that represents a user
+Represents a user in the application.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [User](#User) ⇐ <code>Base</code>
   - [new User([data], client)](#new_User_new)
-  - [.fetch(options)](#User+fetch) ⇒
-  - [.createDM()](#User+createDM) ⇒
-  - [.send([options])](#User+send) ⇒
-  - [.defaultAvatarURL()](#User+defaultAvatarURL) ⇒
-  - [.displayAvatarURL([options])](#User+displayAvatarURL) ⇒
-  - [.bannerURL([options])](#User+bannerURL) ⇒
-  - [.avatarDecorationURL([options])](#User+avatarDecorationURL) ⇒
-  - [.hexAccentColor()](#User+hexAccentColor) ⇒
+  - [.fetch(options)](#User+fetch) ⇒ <code>Promise</code>
+  - [.createDM()](#User+createDM) ⇒ <code>Promise.&lt;DMChannel&gt;</code>
+  - [.send(options)](#User+send) ⇒ <code>Promise</code>
+  - [.defaultAvatarURL(format)](#User+defaultAvatarURL) ⇒ <code>string</code> \| <code>null</code>
+  - [.displayAvatarURL(options)](#User+displayAvatarURL) ⇒ <code>string</code>
+  - [.bannerURL(options)](#User+bannerURL) ⇒ <code>string</code> \| <code>null</code>
+  - [.avatarDecorationURL(options)](#User+avatarDecorationURL) ⇒ <code>string</code> \| <code>null</code>
+  - [.hexAccentColor()](#User+hexAccentColor) ⇒ <code>string</code> \| <code>null</code>
 
 <a name="new_User_new"></a>
 
 ### new User([data], client)
 
-It's a constructor for a class that extends another class.
+Constructs a new User object.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | DiscordClient                               |
+| Param  | Type                | Description                                  |
+| ------ | ------------------- | -------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing user information. |
+| client | <code>Client</code> | The client object.                           |
 
 <a name="User+fetch"></a>
 
-### user.fetch(options) ⇒
+### user.fetch(options) ⇒ <code>Promise</code>
 
-It fetches the user from the Discord API
+Fetches user data using the provided options.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The user object.
+**Returns**: <code>Promise</code> - A promise that resolves with the fetched user data.
 
-| Param   | Description                              |
-| ------- | ---------------------------------------- |
-| options | An object with the following properties: |
+| Param   | Type                | Description                         |
+| ------- | ------------------- | ----------------------------------- |
+| options | <code>Object</code> | The options for fetching user data. |
 
 <a name="User+createDM"></a>
 
-### user.createDM() ⇒
+### user.createDM() ⇒ <code>Promise.&lt;DMChannel&gt;</code>
 
-It creates a DM channel with the user
+Creates a direct message (DM) channel with the user associated with this instance of the client.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The user object.  
+**Returns**: <code>Promise.&lt;DMChannel&gt;</code> - A promise that resolves to the created DM channel.  
 <a name="User+send"></a>
 
-### user.send([options]) ⇒
+### user.send(options) ⇒ <code>Promise</code>
 
-It sends a message to a user
+Sends a message to the user using the client's user send method.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The user object.
+**Returns**: <code>Promise</code> - A promise that resolves when the message is sent.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                                  |
+| ------- | ------------------- | -------------------------------------------- |
+| options | <code>object</code> | Optional parameters for sending the message. |
 
 <a name="User+defaultAvatarURL"></a>
 
-### user.defaultAvatarURL() ⇒
+### user.defaultAvatarURL(format) ⇒ <code>string</code> \| <code>null</code>
 
-It returns the default avatar URL of the user
+Returns the URL of the default avatar for the user in the specified format.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The default avatar URL for the user.  
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the default avatar image, or null if it is not available.
+
+| Param  | Type                | Description                                                |
+| ------ | ------------------- | ---------------------------------------------------------- |
+| format | <code>string</code> | The format of the avatar image (e.g. "png", "jpg", "gif"). |
+
 <a name="User+displayAvatarURL"></a>
 
-### user.displayAvatarURL([options]) ⇒
+### user.displayAvatarURL(options) ⇒ <code>string</code>
 
-"If the user doesn't have an avatar, return the default avatar URL, otherwise return the user's
-avatar URL."
+Returns the URL of the avatar for the user.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The avatar URL of the user.
+**Returns**: <code>string</code> - The URL of the user's avatar.
 
-| Param     | Description           |
-| --------- | --------------------- |
-| [options] | dynamic, size, format |
+| Param             | Type                 | Description                                |
+| ----------------- | -------------------- | ------------------------------------------ |
+| options           | <code>Object</code>  | The options for generating the avatar URL. |
+| [options.dynamic] | <code>boolean</code> | Whether to generate a dynamic avatar URL.  |
+| [options.size]    | <code>number</code>  | The size of the avatar.                    |
+| [options.format]  | <code>string</code>  | The format of the avatar image.            |
 
 <a name="User+bannerURL"></a>
 
-### user.bannerURL([options]) ⇒
+### user.bannerURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-"If the user has a banner, return the banner URL, otherwise return null."
-
-The function is called like this:
+Generates the URL for the user's banner image.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The user's banner URL.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the user's banner image, or null if no banner is set.
 
-| Param     | Description                 |
-| --------- | --------------------------- |
-| [options] | The options for the banner. |
+| Param             | Type                 | Description                                    |
+| ----------------- | -------------------- | ---------------------------------------------- |
+| options           | <code>Object</code>  | Optional parameters for customizing the URL.   |
+| [options.dynamic] | <code>boolean</code> | Whether to include dynamic content in the URL. |
+| [options.size]    | <code>string</code>  | The desired size of the banner image.          |
+| [options.format]  | <code>string</code>  | The desired format of the banner image.        |
 
 <a name="User+avatarDecorationURL"></a>
 
-### user.avatarDecorationURL([options]) ⇒
+### user.avatarDecorationURL(options) ⇒ <code>string</code> \| <code>null</code>
 
-"If the user has an avatar decoration, return the URL of the avatar decoration, otherwise return
-null."
-
-The function is called avatarDecorationURL because it returns the URL of the avatar decoration
+Returns the URL of the avatar decoration for the user.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The avatar decoration URL.
+**Returns**: <code>string</code> \| <code>null</code> - The URL of the avatar decoration, or null if no decoration is set.
 
-| Param     |
-| --------- |
-| [options] |
+| Param          | Type                | Description                                  |
+| -------------- | ------------------- | -------------------------------------------- |
+| options        | <code>Object</code> | Optional parameters for the URL generation.  |
+| options.size   | <code>number</code> | The desired size of the avatar decoration.   |
+| options.format | <code>string</code> | The desired format of the avatar decoration. |
 
 <a name="User+hexAccentColor"></a>
 
-### user.hexAccentColor() ⇒
+### user.hexAccentColor() ⇒ <code>string</code> \| <code>null</code>
 
-If the accentColor property is not null, return a string that starts with a hash symbol and is
-followed by the accentColor property converted to a string in base 16.
+Returns the hexadecimal representation of the accent color.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-**Returns**: The accent color in hexadecimal format.
+**Returns**: <code>string</code> \| <code>null</code> - - The hexadecimal representation of the accent color, or null if the accent color is not set.
 
 <a name="VerificationFormFields"></a>
 
 ## VerificationFormFields ⇐ <code>Base</code>
 
-This class is used to create a new verification form field
+Represents a set of form fields for verification.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>  
+**Properties**
+
+| Name        | Type                                      | Description                                |
+| ----------- | ----------------------------------------- | ------------------------------------------ |
+| description | <code>string</code> \| <code>null</code>  | The description of the form field.         |
+| fieldType   | <code>string</code> \| <code>null</code>  | The type of the form field.                |
+| label       | <code>string</code> \| <code>null</code>  | The label of the form field.               |
+| required    | <code>boolean</code> \| <code>null</code> | Indicates if the form field is required.   |
+| values      | <code>Array</code>                        | The values associated with the form field. |
+
 <a name="new_VerificationFormFields_new"></a>
 
 ### new VerificationFormFields([data], client)
 
-The above function is a constructor function that takes in two parameters, data and client, and
-returns an object with the properties description, fieldType, label, required, and values.
+Constructs a new instance of a class.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | The client that instantiated the object.    |
+| Param  | Type                | Description                                      |
+| ------ | ------------------- | ------------------------------------------------ |
+| [data] | <code>object</code> | The data object containing the field properties. |
+| client | <code>object</code> | The client object used for making API requests.  |
 
 <a name="VoiceBasedChannels"></a>
 
-## VoiceBasedChannels
+## VoiceBasedChannels ⇐ <code>Channel</code>
 
-**Kind**: global class
+Represents a voice-based channel in a guild.
 
-- [VoiceBasedChannels](#VoiceBasedChannels)
+**Kind**: global class  
+**Extends**: <code>Channel</code>
+
+- [VoiceBasedChannels](#VoiceBasedChannels) ⇐ <code>Channel</code>
   - [new VoiceBasedChannels([data], guildId, client)](#new_VoiceBasedChannels_new)
-  - [.members](#VoiceBasedChannels+members) ⇒
-  - [.join([options])](#VoiceBasedChannels+join) ⇒
-  - [.disconnect()](#VoiceBasedChannels+disconnect) ⇒
-  - [.setRtcRegion(rtcRegion, reason)](#VoiceBasedChannels+setRtcRegion) ⇒
-  - [.setBitrate(bitrate, reason)](#VoiceBasedChannels+setBitrate) ⇒
+  - [.members](#VoiceBasedChannels+members) ⇒ <code>Collection.&lt;Snowflake, GuildMember&gt;</code> \| <code>null</code>
+  - [.join([options])](#VoiceBasedChannels+join) ⇒ <code>VoiceConnection</code>
+  - [.disconnect()](#VoiceBasedChannels+disconnect) ⇒ <code>this</code>
+  - [.setRtcRegion(rtcRegion, reason)](#VoiceBasedChannels+setRtcRegion) ⇒ <code>Promise</code>
+  - [.setBitrate(bitrate, reason)](#VoiceBasedChannels+setBitrate) ⇒ <code>Promise</code>
 
 <a name="new_VoiceBasedChannels_new"></a>
 
 ### new VoiceBasedChannels([data], guildId, client)
 
-It's a constructor function that takes in a data object, a guildId, and a client, and then sets the
-userLimit, bitrate, rtcRegion, and videoQualityMode properties of the object to the values of the
-corresponding properties of the data object, or null if the data object doesn't have those
-properties.
+Constructs a new instance of a class, extending the base class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was sent from the Discord API. |
-| guildId | The ID of the guild the voice channel is in. |
-| client  | Discord.Client                               |
+| Param   | Type                | Description                                       |
+| ------- | ------------------- | ------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object to initialize the instance with.  |
+| guildId | <code>string</code> | The ID of the guild associated with the instance. |
+| client  | <code>Object</code> | The client object associated with the instance.   |
 
 <a name="VoiceBasedChannels+members"></a>
 
-### voiceBasedChannels.members ⇒
+### voiceBasedChannels.members ⇒ <code>Collection.&lt;Snowflake, GuildMember&gt;</code> \| <code>null</code>
 
-It returns an array of members in the voice channel
+Retrieves the members in the voice channel associated with the current guild.
 
 **Kind**: instance property of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
-**Returns**: The members in the voice channel.  
+**Returns**: <code>Collection.&lt;Snowflake, GuildMember&gt;</code> \| <code>null</code> - - A collection of guild members in the voice channel, or null if no members are found.  
 <a name="VoiceBasedChannels+join"></a>
 
-### voiceBasedChannels.join([options]) ⇒
+### voiceBasedChannels.join([options]) ⇒ <code>VoiceConnection</code>
 
-It sends a packet to the Discord API to join the voice channel
+Joins the voice channel associated with this VoiceConnection.
 
 **Kind**: instance method of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
-**Returns**: The VoiceChannel object.
+**Returns**: <code>VoiceConnection</code> - - The VoiceConnection instance.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param              | Type                 | Default            | Description                                        |
+| ------------------ | -------------------- | ------------------ | -------------------------------------------------- |
+| [options]          | <code>Object</code>  |                    | Optional parameters for joining the voice channel. |
+| [options.selfMute] | <code>boolean</code> | <code>false</code> | Whether to mute the user's own audio.              |
+| [options.selfDeaf] | <code>boolean</code> | <code>false</code> | Whether to deafen the user's own audio.            |
 
 <a name="VoiceBasedChannels+disconnect"></a>
 
-### voiceBasedChannels.disconnect() ⇒
+### voiceBasedChannels.disconnect() ⇒ <code>this</code>
 
-It sends a packet to the Discord API to disconnect the bot from the voice channel
+Disconnects the voice connection by sending a voice state update to the server with a null channel ID.
 
 **Kind**: instance method of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
-**Returns**: The VoiceConnection object.  
+**Returns**: <code>this</code> - - Returns the current instance of the class.  
 <a name="VoiceBasedChannels+setRtcRegion"></a>
 
-### voiceBasedChannels.setRtcRegion(rtcRegion, reason) ⇒
+### voiceBasedChannels.setRtcRegion(rtcRegion, reason) ⇒ <code>Promise</code>
 
-This function sets the rtcRegion of the guild.
+Sets the RTC (Real-Time Communication) region for the object.
 
 **Kind**: instance method of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the RTC region is successfully set.
 
-| Param     | Description                            |
-| --------- | -------------------------------------- |
-| rtcRegion | The region to set the voice server to. |
-| reason    | The reason for the change.             |
+| Param     | Type                | Description                            |
+| --------- | ------------------- | -------------------------------------- |
+| rtcRegion | <code>string</code> | The RTC region to set.                 |
+| reason    | <code>string</code> | The reason for setting the RTC region. |
 
 <a name="VoiceBasedChannels+setBitrate"></a>
 
-### voiceBasedChannels.setBitrate(bitrate, reason) ⇒
+### voiceBasedChannels.setBitrate(bitrate, reason) ⇒ <code>Promise</code>
 
-It sets the bitrate of the voice channel
+Sets the bitrate of the current object.
 
 **Kind**: instance method of [<code>VoiceBasedChannels</code>](#VoiceBasedChannels)  
-**Returns**: The bitrate of the voice channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the bitrate is successfully set.
 
-| Param   | Description                               |
-| ------- | ----------------------------------------- |
-| bitrate | The bitrate of the voice channel in bits. |
-| reason  | The reason for the change.                |
+| Param   | Type                | Description                         |
+| ------- | ------------------- | ----------------------------------- |
+| bitrate | <code>number</code> | The new bitrate value to set.       |
+| reason  | <code>string</code> | The reason for setting the bitrate. |
 
 <a name="VoiceChannel"></a>
 
-## VoiceChannel
+## VoiceChannel ⇐ <code>VoiceBasedChannels</code>
 
-**Kind**: global class
+Represents a voice channel in a guild.
 
-- [VoiceChannel](#VoiceChannel)
+**Kind**: global class  
+**Extends**: <code>VoiceBasedChannels</code>
+
+- [VoiceChannel](#VoiceChannel) ⇐ <code>VoiceBasedChannels</code>
   - [new VoiceChannel([data], guildId, client)](#new_VoiceChannel_new)
-  - [.messages](#VoiceChannel+messages) ⇒
-  - [.send([options])](#VoiceChannel+send) ⇒
-  - [.bulkDelete(messages, reason)](#VoiceChannel+bulkDelete) ⇒
-  - [.setNsfw(nsfw, reason)](#VoiceChannel+setNsfw) ⇒
-  - [.setRateLimitPerUser(ratelimit, reason)](#VoiceChannel+setRateLimitPerUser) ⇒
-  - [.setUserLimit(userLimit, reason)](#VoiceChannel+setUserLimit) ⇒
-  - [.setVideoQualityMode(videoQualityMode, reason)](#VoiceChannel+setVideoQualityMode) ⇒
-  - [.triggerTyping()](#VoiceChannel+triggerTyping) ⇒
+  - [.messages](#VoiceChannel+messages) ⇒ <code>MessageManager</code>
+  - [.send(options)](#VoiceChannel+send) ⇒ <code>Promise</code>
+  - [.bulkDelete(messages, reason)](#VoiceChannel+bulkDelete) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setNsfw(nsfw, reason)](#VoiceChannel+setNsfw) ⇒ <code>Promise</code>
+  - [.setRateLimitPerUser(ratelimit, reason)](#VoiceChannel+setRateLimitPerUser) ⇒ <code>Promise</code>
+  - [.setUserLimit(userLimit, reason)](#VoiceChannel+setUserLimit) ⇒ <code>Promise</code>
+  - [.setVideoQualityMode(videoQualityMode, reason)](#VoiceChannel+setVideoQualityMode) ⇒ <code>Promise</code>
+  - [.triggerTyping()](#VoiceChannel+triggerTyping) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_VoiceChannel_new"></a>
 
 ### new VoiceChannel([data], guildId, client)
 
-The above function is a constructor function that takes in data, guildId, and client as parameters
-and sets the rateLimitPerUser, lastMessageId, and nsfw properties to the data.rate_limit_per_user,
-data.last_message_id, and data.nsfw properties respectively.
+Constructs a new instance of the class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was passed to the constructor. |
-| guildId | The ID of the guild the channel is in.       |
-| client  | The client that instantiated the channel.    |
+| Param   | Type                | Description                                                 |
+| ------- | ------------------- | ----------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the properties for the instance. |
+| guildId | <code>string</code> | The ID of the guild associated with the instance.           |
+| client  | <code>Client</code> | The client object associated with the instance.             |
 
 <a name="VoiceChannel+messages"></a>
 
-### voiceChannel.messages ⇒
+### voiceChannel.messages ⇒ <code>MessageManager</code>
 
-It returns a new MessageManager object, which is a class that manages messages
+Get the message manager for this channel.
 
 **Kind**: instance property of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: A new instance of the MessageManager class.  
+**Returns**: <code>MessageManager</code> - The message manager object for this channel.  
 <a name="VoiceChannel+send"></a>
 
-### voiceChannel.send([options]) ⇒
+### voiceChannel.send(options) ⇒ <code>Promise</code>
 
-It sends a message to the channel
+Sends a message using the specified options.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The return value is the result of the send() method.
+**Returns**: <code>Promise</code> - A promise that resolves when the message is sent.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                          |
+| ------- | ------------------- | ------------------------------------ |
+| options | <code>object</code> | The options for sending the message. |
 
 <a name="VoiceChannel+bulkDelete"></a>
 
-### voiceChannel.bulkDelete(messages, reason) ⇒
+### voiceChannel.bulkDelete(messages, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It deletes messages in bulk
+Bulk deletes the specified messages with the given reason.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The return value of the function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves when the messages are deleted.
 
-| Param    | Description                     |
-| -------- | ------------------------------- |
-| messages | The messages to delete.         |
-| reason   | The reason for the bulk delete. |
+| Param    | Type                               | Description                           |
+| -------- | ---------------------------------- | ------------------------------------- |
+| messages | <code>Array.&lt;Message&gt;</code> | The messages to be deleted.           |
+| reason   | <code>string</code>                | The reason for deleting the messages. |
 
 <a name="VoiceChannel+setNsfw"></a>
 
-### voiceChannel.setNsfw(nsfw, reason) ⇒
+### voiceChannel.setNsfw(nsfw, reason) ⇒ <code>Promise</code>
 
-It edits the channel's nsfw property
+Sets the NSFW (Not Safe for Work) flag for the current item.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The edited channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the NSFW flag is set.
 
-| Param  | Description                                   |
-| ------ | --------------------------------------------- |
-| nsfw   | Boolean - Whether the channel is nsfw or not. |
-| reason | The reason for the edit.                      |
+| Param  | Type                 | Description                           |
+| ------ | -------------------- | ------------------------------------- |
+| nsfw   | <code>boolean</code> | The NSFW flag value to set.           |
+| reason | <code>string</code>  | The reason for setting the NSFW flag. |
 
 <a name="VoiceChannel+setRateLimitPerUser"></a>
 
-### voiceChannel.setRateLimitPerUser(ratelimit, reason) ⇒
+### voiceChannel.setRateLimitPerUser(ratelimit, reason) ⇒ <code>Promise</code>
 
-It edits the ratelimit of a command
+Sets the rate limit per user for a specific action.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the rate limit is successfully set.
 
-| Param     | Description                   |
-| --------- | ----------------------------- |
-| ratelimit | The ratelimit to set.         |
-| reason    | The reason for the ratelimit. |
+| Param     | Type                | Description                            |
+| --------- | ------------------- | -------------------------------------- |
+| ratelimit | <code>number</code> | The new rate limit value to set.       |
+| reason    | <code>string</code> | The reason for setting the rate limit. |
 
 <a name="VoiceChannel+setUserLimit"></a>
 
-### voiceChannel.setUserLimit(userLimit, reason) ⇒
+### voiceChannel.setUserLimit(userLimit, reason) ⇒ <code>Promise</code>
 
-It sets the user limit of a channel
+Sets the user limit for the current channel and provides a reason for the change.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The userLimit and reason are being returned.
+**Returns**: <code>Promise</code> - - A promise that resolves when the user limit is successfully set.
 
-| Param     | Description                        |
-| --------- | ---------------------------------- |
-| userLimit | The new user limit of the channel. |
-| reason    | The reason for the edit.           |
+| Param     | Type                | Description                             |
+| --------- | ------------------- | --------------------------------------- |
+| userLimit | <code>number</code> | The new user limit for the channel.     |
+| reason    | <code>string</code> | The reason for changing the user limit. |
 
 <a name="VoiceChannel+setVideoQualityMode"></a>
 
-### voiceChannel.setVideoQualityMode(videoQualityMode, reason) ⇒
+### voiceChannel.setVideoQualityMode(videoQualityMode, reason) ⇒ <code>Promise</code>
 
-This function sets the video quality mode to the given value, and returns a promise that resolves
-to the new value of the video quality mode.
+Sets the video quality mode with the given parameters.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the video quality mode is set.
 
-| Param            | Description                    |
-| ---------------- | ------------------------------ |
-| videoQualityMode | The video quality mode to set. |
-| reason           | The reason for the change.     |
+| Param            | Type                | Description                                    |
+| ---------------- | ------------------- | ---------------------------------------------- |
+| videoQualityMode | <code>string</code> | The video quality mode to set.                 |
+| reason           | <code>string</code> | The reason for setting the video quality mode. |
 
 <a name="VoiceChannel+triggerTyping"></a>
 
-### voiceChannel.triggerTyping() ⇒
+### voiceChannel.triggerTyping() ⇒ <code>Promise.&lt;void&gt;</code>
 
-It triggers typing in the channel
+Triggers a typing indicator in the channel where this method is called.
 
 **Kind**: instance method of [<code>VoiceChannel</code>](#VoiceChannel)  
-**Returns**: The return value of the function.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the typing indicator is triggered.
 
 <a name="VoiceRegion"></a>
 
 ## VoiceRegion ⇐ <code>Base</code>
 
-It's a class that represents a Discord voice region
+Represents a voice region.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>  
@@ -6712,19 +7262,18 @@ It's a class that represents a Discord voice region
 
 ### new VoiceRegion([data], client)
 
-It's a constructor function that takes in data and a client, and then sets the data to the class
-properties
+Constructs a new instance of the class.
 
-| Param  | Description                                 |
-| ------ | ------------------------------------------- |
-| [data] | The data that is passed to the constructor. |
-| client | The client that instantiated the object.    |
+| Param  | Type                | Description                                                 |
+| ------ | ------------------- | ----------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the properties for the instance. |
+| client | <code>Client</code> | The client object.                                          |
 
 <a name="VoiceState"></a>
 
 ## VoiceState ⇐ <code>Base</code>
 
-It's a class that represents a user's voice state in a guild
+Represents the state of a voice connection for a user in a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -6732,366 +7281,376 @@ It's a class that represents a user's voice state in a guild
 - [VoiceState](#VoiceState) ⇐ <code>Base</code>
   - [new VoiceState([data], guildId, client)](#new_VoiceState_new)
   - [.guild](#VoiceState+guild) ⇒
-  - [.channel](#VoiceState+channel) ⇒
-  - [.user](#VoiceState+user) ⇒
-  - [.edit(options)](#VoiceState+edit) ⇒
-  - [.setChannel(channel, reason)](#VoiceState+setChannel) ⇒
-  - [.setDeaf(deaf, reason)](#VoiceState+setDeaf) ⇒
-  - [.setMute(mute, reason)](#VoiceState+setMute) ⇒
-  - [.setSuppress(suppress)](#VoiceState+setSuppress) ⇒
-  - [.setRequestToSpeak(requestToSpeak)](#VoiceState+setRequestToSpeak) ⇒
+  - [.channel](#VoiceState+channel) ⇒ <code>Channel</code> \| <code>null</code>
+  - [.user](#VoiceState+user) ⇒ <code>User</code> \| <code>null</code>
+  - [.edit(options)](#VoiceState+edit) ⇒ <code>Promise</code>
+  - [.setChannel(channel, reason)](#VoiceState+setChannel) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setDeaf(deaf, reason)](#VoiceState+setDeaf) ⇒ <code>Promise</code>
+  - [.setMute(mute, reason)](#VoiceState+setMute) ⇒ <code>Promise</code>
+  - [.setSuppress(suppress)](#VoiceState+setSuppress) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.setRequestToSpeak(requestToSpeak)](#VoiceState+setRequestToSpeak) ⇒ <code>Promise.&lt;void&gt;</code>
 
 <a name="new_VoiceState_new"></a>
 
 ### new VoiceState([data], guildId, client)
 
-It's a constructor for a class that is used to store voice state data.
+Constructs a new instance of the class.
 
-| Param   | Description                                      |
-| ------- | ------------------------------------------------ |
-| [data]  | The data that was received from the Discord API. |
-| guildId | The ID of the guild the voice state is in.       |
-| client  | Discord.Client                                   |
+| Param   | Type                | Description                                     |
+| ------- | ------------------- | ----------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the voice state.                   |
+| guildId | <code>string</code> | The ID of the guild the voice state belongs to. |
+| client  | <code>Client</code> | The client instance.                            |
 
 <a name="VoiceState+guild"></a>
 
 ### voiceState.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="VoiceState+channel"></a>
 
-### voiceState.channel ⇒
+### voiceState.channel ⇒ <code>Channel</code> \| <code>null</code>
 
-It returns the channel object of the channel ID that is stored in the message object
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The channel object.  
+**Returns**: <code>Channel</code> \| <code>null</code> - The channel object, or null if it does not exist.  
 <a name="VoiceState+user"></a>
 
-### voiceState.user ⇒
+### voiceState.user ⇒ <code>User</code> \| <code>null</code>
 
-It returns the user object of the user who sent the message
+Retrieves the user associated with this instance.
 
 **Kind**: instance property of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The user object.  
+**Returns**: <code>User</code> \| <code>null</code> - The user object if found, otherwise null.  
 <a name="VoiceState+edit"></a>
 
-### voiceState.edit(options) ⇒
+### voiceState.edit(options) ⇒ <code>Promise</code>
 
-It edits the member's settings
+Edits the user's guild member profile with the given options.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The return value is a Promise that resolves to the edited member.
+**Returns**: <code>Promise</code> - A promise that resolves when the edit is complete.
 
-| Param   | Description                                               |
-| ------- | --------------------------------------------------------- |
-| options | An object containing the options to edit the member with. |
+| Param   | Type                | Description                                   |
+| ------- | ------------------- | --------------------------------------------- |
+| options | <code>Object</code> | The options to edit the guild member profile. |
 
 <a name="VoiceState+setChannel"></a>
 
-### voiceState.setChannel(channel, reason) ⇒
+### voiceState.setChannel(channel, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the channel of the invite
+Sets the channel for the current object and updates it with the given reason.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The channel that the message was sent in.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the channel is successfully set.
 
-| Param   | Description                                                                      |
-| ------- | -------------------------------------------------------------------------------- |
-| channel | The channel to move the member to, can be a voice channel or a category channel. |
-| reason  | The reason for the update.                                                       |
+| Param   | Type                 | Description                         |
+| ------- | -------------------- | ----------------------------------- |
+| channel | <code>Channel</code> | The channel to set.                 |
+| reason  | <code>string</code>  | The reason for setting the channel. |
 
 <a name="VoiceState+setDeaf"></a>
 
-### voiceState.setDeaf(deaf, reason) ⇒
+### voiceState.setDeaf(deaf, reason) ⇒ <code>Promise</code>
 
-It sets the deaf property of the member to deaf, and the reason property of the member to reason
+Sets the deaf status of the user.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The deaf status of the member.
+**Returns**: <code>Promise</code> - - A promise that resolves when the deaf status is set.
 
-| Param  | Description                                            |
-| ------ | ------------------------------------------------------ |
-| deaf   | Boolean - Whether or not the member should be deafened |
-| reason | The reason for the change.                             |
+| Param  | Type                 | Description                                 |
+| ------ | -------------------- | ------------------------------------------- |
+| deaf   | <code>boolean</code> | Whether the user should be deafened or not. |
+| reason | <code>string</code>  | The reason for setting the deaf status.     |
 
 <a name="VoiceState+setMute"></a>
 
-### voiceState.setMute(mute, reason) ⇒
+### voiceState.setMute(mute, reason) ⇒ <code>Promise</code>
 
-It sets the mute status of a user
+Sets the mute status and reason for an object.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The mute status and the reason for the mute.
+**Returns**: <code>Promise</code> - - A promise that resolves when the mute status and reason are set.
 
-| Param  | Description                                          |
-| ------ | ---------------------------------------------------- |
-| mute   | Boolean - Whether or not the member should be muted. |
-| reason | The reason for the mute.                             |
+| Param  | Type                 | Description             |
+| ------ | -------------------- | ----------------------- |
+| mute   | <code>boolean</code> | The mute status to set. |
+| reason | <code>string</code>  | The reason for muting.  |
 
 <a name="VoiceState+setSuppress"></a>
 
-### voiceState.setSuppress(suppress) ⇒
+### voiceState.setSuppress(suppress) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the user's voice state to suppress
+Sets the suppress property of the voice state for the user in the guild.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The voice state of the user.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the suppress property is set.
 
-| Param    | Description |
-| -------- | ----------- |
-| suppress | Boolean     |
+| Param    | Type                 | Description                                 |
+| -------- | -------------------- | ------------------------------------------- |
+| suppress | <code>boolean</code> | The value to set for the suppress property. |
 
 <a name="VoiceState+setRequestToSpeak"></a>
 
-### voiceState.setRequestToSpeak(requestToSpeak) ⇒
+### voiceState.setRequestToSpeak(requestToSpeak) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the request to speak status of a user in a voice channel
+Sets the "request to speak" status for the user in the guild's voice channel.
 
 **Kind**: instance method of [<code>VoiceState</code>](#VoiceState)  
-**Returns**: The return value is a Promise that resolves to the updated VoiceState.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the request to speak status is set.
 
-| Param          | Description |
-| -------------- | ----------- |
-| requestToSpeak | boolean     |
+| Param          | Type                 | Description                                                      |
+| -------------- | -------------------- | ---------------------------------------------------------------- |
+| requestToSpeak | <code>boolean</code> | The value indicating whether the user wants to request to speak. |
 
 <a name="Webhook"></a>
 
 ## Webhook ⇐ <code>Base</code>
 
-It's a class that represents a webhook
+Represents a webhook.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [Webhook](#Webhook) ⇐ <code>Base</code>
   - [new Webhook([data], guildId, client)](#new_Webhook_new)
-  - [.fetch(token)](#Webhook+fetch) ⇒
-  - [.edit([options])](#Webhook+edit) ⇒
-  - [.setName(name, reason)](#Webhook+setName) ⇒
-  - [.setAvatar(avatar, reason)](#Webhook+setAvatar) ⇒
-  - [.setChannel(channel, reason)](#Webhook+setChannel) ⇒
-  - [.delete([options])](#Webhook+delete) ⇒
-  - [.defaultAvatarURL()](#Webhook+defaultAvatarURL) ⇒
-  - [.displayAvatarURL([options])](#Webhook+displayAvatarURL) ⇒
+  - [.fetch(token)](#Webhook+fetch) ⇒ [<code>Promise.&lt;Webhook&gt;</code>](#Webhook)
+  - [.edit(options)](#Webhook+edit) ⇒ [<code>Webhook</code>](#Webhook)
+  - [.setName(name, reason)](#Webhook+setName) ⇒ <code>Promise</code>
+  - [.setAvatar(avatar, reason)](#Webhook+setAvatar) ⇒ <code>Promise</code>
+  - [.setChannel(channel, reason)](#Webhook+setChannel) ⇒ <code>Promise.&lt;void&gt;</code>
+  - [.delete([options])](#Webhook+delete) ⇒ <code>Promise</code>
+  - [.defaultAvatarURL()](#Webhook+defaultAvatarURL) ⇒ <code>string</code>
+  - [.displayAvatarURL(options)](#Webhook+displayAvatarURL) ⇒ <code>string</code>
 
 <a name="new_Webhook_new"></a>
 
 ### new Webhook([data], guildId, client)
 
-This function is used to create a new webhook object, and it takes in a data object, a guildId,
-and a client object.
+Constructs a new instance of the Webhook class.
 
-| Param   | Description                           |
-| ------- | ------------------------------------- |
-| [data]  | The data that was passed in.          |
-| guildId | The ID of the guild the webhook is in |
-| client  | Discord.Client                        |
+| Param   | Type                | Description                                 |
+| ------- | ------------------- | ------------------------------------------- |
+| [data]  | <code>Object</code> | The data for the webhook.                   |
+| guildId | <code>string</code> | The ID of the guild the webhook belongs to. |
+| client  | <code>Client</code> | The client that instantiated this webhook.  |
 
 <a name="Webhook+fetch"></a>
 
-### webhook.fetch(token) ⇒
+### webhook.fetch(token) ⇒ [<code>Promise.&lt;Webhook&gt;</code>](#Webhook)
 
-It fetches a webhook from the Discord API
+Fetches a webhook using the provided token.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: A new instance of the Webhook class.
+**Returns**: [<code>Promise.&lt;Webhook&gt;</code>](#Webhook) - A promise that resolves to the fetched webhook.
 
-| Param | Description               |
-| ----- | ------------------------- |
-| token | The token of the webhook. |
+| Param | Type                | Description                                 |
+| ----- | ------------------- | ------------------------------------------- |
+| token | <code>string</code> | The token used to authenticate the webhook. |
 
 <a name="Webhook+edit"></a>
 
-### webhook.edit([options]) ⇒
+### webhook.edit(options) ⇒ [<code>Webhook</code>](#Webhook)
 
-It edits a webhook
+Edits the webhook with the specified options.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: A new instance of the Webhook class.
+**Returns**: [<code>Webhook</code>](#Webhook) - - The edited webhook.
 
-| Param     |
-| --------- |
-| [options] |
+| Param             | Type                                        | Description                          |
+| ----------------- | ------------------------------------------- | ------------------------------------ |
+| options           | <code>Object</code>                         | The options for editing the webhook. |
+| [options.reason]  | <code>string</code>                         | The reason for the edit.             |
+| [options.name]    | <code>string</code>                         | The new name for the webhook.        |
+| [options.avatar]  | <code>string</code> \| <code>File</code>    | The new avatar for the webhook.      |
+| [options.channel] | <code>string</code> \| <code>Channel</code> | The new channel for the webhook.     |
+| [options.token]   | <code>string</code>                         | The token of the webhook.            |
 
 <a name="Webhook+setName"></a>
 
-### webhook.setName(name, reason) ⇒
+### webhook.setName(name, reason) ⇒ <code>Promise</code>
 
-It edits the name of the channel
+Sets the name and reason for an object.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The name of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the name and reason are successfully set.
 
-| Param  | Description                  |
-| ------ | ---------------------------- |
-| name   | The new name of the channel. |
-| reason | The reason for the edit.     |
+| Param  | Type                | Description                          |
+| ------ | ------------------- | ------------------------------------ |
+| name   | <code>string</code> | The new name to set.                 |
+| reason | <code>string</code> | The reason for setting the new name. |
 
 <a name="Webhook+setAvatar"></a>
 
-### webhook.setAvatar(avatar, reason) ⇒
+### webhook.setAvatar(avatar, reason) ⇒ <code>Promise</code>
 
-It sets the avatar of the bot
+Sets the avatar for the user.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The avatar of the user.
+**Returns**: <code>Promise</code> - - A promise that resolves when the avatar is successfully set.
 
-| Param  | Description                                   |
-| ------ | --------------------------------------------- |
-| avatar | The new avatar of the bot.                    |
-| reason | The reason for the change (0-1024 characters) |
+| Param  | Type                | Description                                   |
+| ------ | ------------------- | --------------------------------------------- |
+| avatar | <code>string</code> | The URL or file path of the new avatar image. |
+| reason | <code>string</code> | The reason for setting the new avatar.        |
 
 <a name="Webhook+setChannel"></a>
 
-### webhook.setChannel(channel, reason) ⇒
+### webhook.setChannel(channel, reason) ⇒ <code>Promise.&lt;void&gt;</code>
 
-It sets the channel of the invite
+Sets the channel for the current object and updates it with the given reason.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The channel that the message was sent in.
+**Returns**: <code>Promise.&lt;void&gt;</code> - - A promise that resolves when the channel is successfully set.
 
-| Param   | Description                                                                      |
-| ------- | -------------------------------------------------------------------------------- |
-| channel | The channel to move the member to, can be a voice channel or a category channel. |
-| reason  | The reason for the update.                                                       |
+| Param   | Type                 | Description                         |
+| ------- | -------------------- | ----------------------------------- |
+| channel | <code>Channel</code> | The channel to set.                 |
+| reason  | <code>string</code>  | The reason for setting the channel. |
 
 <a name="Webhook+delete"></a>
 
-### webhook.delete([options]) ⇒
+### webhook.delete([options]) ⇒ <code>Promise</code>
 
-It deletes a webhook
+Deletes the webhook.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The webhook object.
+**Returns**: <code>Promise</code> - A promise that resolves to the deleted webhook.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param            | Type                | Description                            |
+| ---------------- | ------------------- | -------------------------------------- |
+| [options]        | <code>Object</code> | Optional parameters for the deletion.  |
+| [options.token]  | <code>string</code> | The token associated with the webhook. |
+| [options.reason] | <code>string</code> | The reason for the deletion.           |
 
 <a name="Webhook+defaultAvatarURL"></a>
 
-### webhook.defaultAvatarURL() ⇒
+### webhook.defaultAvatarURL() ⇒ <code>string</code>
 
-It returns the default avatar URL.
+Returns the default URL for an avatar image.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The default avatar URL.  
+**Returns**: <code>string</code> - The URL of the default avatar image.  
 <a name="Webhook+displayAvatarURL"></a>
 
-### webhook.displayAvatarURL([options]) ⇒
+### webhook.displayAvatarURL(options) ⇒ <code>string</code>
 
-If the avatar is not set, return the default avatar URL, otherwise return the avatar URL.
+Returns the URL of the avatar for the user or webhook.
 
 **Kind**: instance method of [<code>Webhook</code>](#Webhook)  
-**Returns**: The avatar URL of the webhook.
+**Returns**: <code>string</code> - The URL of the avatar.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param             | Type                 | Description                                |
+| ----------------- | -------------------- | ------------------------------------------ |
+| options           | <code>Object</code>  | The options for generating the avatar URL. |
+| [options.dynamic] | <code>boolean</code> | Whether to generate a dynamic avatar URL.  |
+| [options.size]    | <code>number</code>  | The size of the avatar in pixels.          |
+| [options.format]  | <code>string</code>  | The format of the avatar image.            |
 
 <a name="WebhookClient"></a>
 
 ## WebhookClient ⇐ <code>Base</code>
 
-It's a class that allows you to send messages to a channel using a webhook.
+Represents a webhook client that can interact with webhooks.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [WebhookClient](#WebhookClient) ⇐ <code>Base</code>
   - [new WebhookClient([data], client)](#new_WebhookClient_new)
-  - [.fetchWebhook()](#WebhookClient+fetchWebhook) ⇒
-  - [.send([options])](#WebhookClient+send) ⇒
-  - [.delete(message, thread)](#WebhookClient+delete) ⇒
-  - [.edit(message, [options], thread)](#WebhookClient+edit) ⇒
-  - [.fetch(message, thread)](#WebhookClient+fetch) ⇒
+  - [.fetchWebhook()](#WebhookClient+fetchWebhook) ⇒ <code>Promise.&lt;Webhook&gt;</code>
+  - [.send([options])](#WebhookClient+send) ⇒ <code>Promise.&lt;(Message\|undefined)&gt;</code>
+  - [.delete(message, thread)](#WebhookClient+delete) ⇒ <code>void</code>
+  - [.edit(message, [options], [thread])](#WebhookClient+edit) ⇒ <code>void</code>
+  - [.fetch(message, thread)](#WebhookClient+fetch) ⇒ <code>Promise.&lt;(Message\|undefined)&gt;</code>
 
 <a name="new_WebhookClient_new"></a>
 
 ### new WebhookClient([data], client)
 
-The above function is a constructor function that takes in two parameters, data and client, and
-sets the id, token, and url properties of the object to the values of the data object's id, token,
-and url properties, or null if the data object doesn't have those properties.
+Constructs a new instance of the class.
 
-| Param  | Description                                       |
-| ------ | ------------------------------------------------- |
-| [data] | The data that is passed to the constructor.       |
-| client | The client that the webhook is being created for. |
+| Param  | Type                | Description                                                 |
+| ------ | ------------------- | ----------------------------------------------------------- |
+| [data] | <code>Object</code> | The data object containing the properties for the instance. |
+| client | <code>Client</code> | The client object associated with the instance.             |
 
 <a name="WebhookClient+fetchWebhook"></a>
 
-### webhookClient.fetchWebhook() ⇒
+### webhookClient.fetchWebhook() ⇒ <code>Promise.&lt;Webhook&gt;</code>
 
-It fetches the webhook from the API and returns a new Webhook instance
+Fetches a webhook from the server.
 
 **Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)  
-**Returns**: A new Webhook object.  
+**Returns**: <code>Promise.&lt;Webhook&gt;</code> - A promise that resolves to a Webhook object.  
 <a name="WebhookClient+send"></a>
 
-### webhookClient.send([options]) ⇒
+### webhookClient.send([options]) ⇒ <code>Promise.&lt;(Message\|undefined)&gt;</code>
 
-It sends a message to a channel using a webhook
+Sends a message using a webhook.
 
 **Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)  
-**Returns**: The message object.
+**Returns**: <code>Promise.&lt;(Message\|undefined)&gt;</code> - - A promise that resolves to the sent message, or undefined if the message failed to send.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param            | Type                                       | Description                                            |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------ |
+| [options]        | <code>Object</code>                        | The options for sending the message.                   |
+| [options.wait]   | <code>number</code>                        | The time to wait before sending the message.           |
+| [options.thread] | <code>string</code> \| <code>Object</code> | The thread ID or thread object to send the message to. |
 
 <a name="WebhookClient+delete"></a>
 
-### webhookClient.delete(message, thread) ⇒
+### webhookClient.delete(message, thread) ⇒ <code>void</code>
 
-It deletes a message from a thread.
+Deletes a message from a thread.
 
-**Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)  
-**Returns**: Nothing.
+**Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)
 
-| Param   | Description                                                      |
-| ------- | ---------------------------------------------------------------- |
-| message | The message object or message ID to delete.                      |
-| thread  | The thread ID of the thread you want to delete the message from. |
+| Param   | Type                                        | Description                                               |
+| ------- | ------------------------------------------- | --------------------------------------------------------- |
+| message | <code>string</code> \| <code>Message</code> | The ID or the message object to delete.                   |
+| thread  | <code>string</code> \| <code>Thread</code>  | The ID or the thread object where the message is located. |
 
 <a name="WebhookClient+edit"></a>
 
-### webhookClient.edit(message, [options], thread) ⇒
+### webhookClient.edit(message, [options], [thread]) ⇒ <code>void</code>
 
-It edits a message sent by a webhook
+Edits a message in a channel using the Discord API.
 
 **Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)  
-**Returns**: The message that was edited.
+**Throws**:
 
-| Param     | Description                           |
-| --------- | ------------------------------------- |
-| message   | The message to edit.                  |
-| [options] | The options to send to the message.   |
-| thread    | The thread ID of the message to edit. |
+- <code>RangeError</code> If the channel is not cached.
+
+| Param     | Type                                              | Description                                                       |
+| --------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| message   | <code>string</code> \| <code>Message</code>       | The ID or the message object to edit.                             |
+| [options] | <code>Object</code>                               | The options for editing the message.                              |
+| [thread]  | <code>string</code> \| <code>ThreadChannel</code> | The ID or the thread channel object where the message is located. |
 
 <a name="WebhookClient+fetch"></a>
 
-### webhookClient.fetch(message, thread) ⇒
+### webhookClient.fetch(message, thread) ⇒ <code>Promise.&lt;(Message\|undefined)&gt;</code>
 
-It fetches a message from a webhook
+Fetches a webhook message from the specified thread.
 
 **Kind**: instance method of [<code>WebhookClient</code>](#WebhookClient)  
-**Returns**: The message object.
+**Returns**: <code>Promise.&lt;(Message\|undefined)&gt;</code> - - A promise that resolves to the fetched message, or undefined if the channel is not found.
 
-| Param   | Description                                                                    |
-| ------- | ------------------------------------------------------------------------------ |
-| message | The message to fetch. Can be a message object, a message ID, or a message URL. |
-| thread  | The thread ID of the message.                                                  |
+| Param   | Type                                              | Description                                            |
+| ------- | ------------------------------------------------- | ------------------------------------------------------ |
+| message | <code>string</code> \| <code>Message</code>       | The ID or the message object to fetch.                 |
+| thread  | <code>string</code> \| <code>ThreadChannel</code> | The ID or the thread object to fetch the message from. |
 
 <a name="WelcomeScreen"></a>
 
 ## WelcomeScreen ⇐ <code>Base</code>
 
-It's a class that represents a welcome screen for a guild
+Represents a welcome screen for a guild.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
@@ -7099,126 +7658,125 @@ It's a class that represents a welcome screen for a guild
 - [WelcomeScreen](#WelcomeScreen) ⇐ <code>Base</code>
   - [new WelcomeScreen([data], guildId, client)](#new_WelcomeScreen_new)
   - [.guild](#WelcomeScreen+guild) ⇒
-  - [.edit([options])](#WelcomeScreen+edit) ⇒
-  - [.setEnabled(enabled, reason)](#WelcomeScreen+setEnabled) ⇒
-  - [.setWelcomeChannels(channels, reason)](#WelcomeScreen+setWelcomeChannels) ⇒
-  - [.setDescription(description, reason)](#WelcomeScreen+setDescription) ⇒
+  - [.edit(options)](#WelcomeScreen+edit) ⇒ <code>Promise</code>
+  - [.setEnabled(enabled, reason)](#WelcomeScreen+setEnabled) ⇒ <code>Promise</code>
+  - [.setWelcomeChannels(channels, reason)](#WelcomeScreen+setWelcomeChannels) ⇒ <code>Promise</code>
+  - [.setDescription(description, reason)](#WelcomeScreen+setDescription) ⇒ <code>Promise</code>
 
 <a name="new_WelcomeScreen_new"></a>
 
 ### new WelcomeScreen([data], guildId, client)
 
-It's a constructor for a class that takes in a data object, a guildId, and a client
+Constructs a new instance of the WelcomeScreen class.
 
-| Param   | Description                                 |
-| ------- | ------------------------------------------- |
-| [data]  | The data that is passed to the constructor. |
-| guildId | The ID of the guild                         |
-| client  | The client                                  |
+| Param   | Type                | Description                      |
+| ------- | ------------------- | -------------------------------- |
+| [data]  | <code>Object</code> | The data for the welcome screen. |
+| guildId | <code>string</code> | The ID of the guild.             |
+| client  | <code>Client</code> | The client instance.             |
 
 <a name="WelcomeScreen+guild"></a>
 
 ### welcomeScreen.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Retrieves the guild associated with this guildId.
 
 **Kind**: instance property of [<code>WelcomeScreen</code>](#WelcomeScreen)  
-**Returns**: The guild object.  
+**Returns**: The guild object if found, otherwise null.  
 <a name="WelcomeScreen+edit"></a>
 
-### welcomeScreen.edit([options]) ⇒
+### welcomeScreen.edit(options) ⇒ <code>Promise</code>
 
-It edits the welcome screen
+Edits the welcome screen of the guild with the provided options.
 
 **Kind**: instance method of [<code>WelcomeScreen</code>](#WelcomeScreen)  
-**Returns**: The return value is the result of the edit function.
+**Returns**: <code>Promise</code> - A promise that resolves when the welcome screen is successfully edited.
 
-| Param     | Description |
-| --------- | ----------- |
-| [options] | Object      |
+| Param   | Type                | Description                                    |
+| ------- | ------------------- | ---------------------------------------------- |
+| options | <code>Object</code> | The options to update the welcome screen with. |
 
 <a name="WelcomeScreen+setEnabled"></a>
 
-### welcomeScreen.setEnabled(enabled, reason) ⇒
+### welcomeScreen.setEnabled(enabled, reason) ⇒ <code>Promise</code>
 
-This function sets the enabled property of the command to the value of the enabled parameter, and
-the reason property of the command to the value of the reason parameter.
+Sets the enabled status of an item and provides a reason for the change.
 
 **Kind**: instance method of [<code>WelcomeScreen</code>](#WelcomeScreen)  
-**Returns**: The return value of the edit function.
+**Returns**: <code>Promise</code> - - A promise that resolves when the edit is complete.
 
-| Param   | Description                                                  |
-| ------- | ------------------------------------------------------------ |
-| enabled | Boolean - Whether the command should be enabled or disabled. |
-| reason  | The reason for the change (0-1024 characters).               |
+| Param   | Type                 | Description                                  |
+| ------- | -------------------- | -------------------------------------------- |
+| enabled | <code>boolean</code> | The new enabled status of the item.          |
+| reason  | <code>string</code>  | The reason for the change in enabled status. |
 
 <a name="WelcomeScreen+setWelcomeChannels"></a>
 
-### welcomeScreen.setWelcomeChannels(channels, reason) ⇒
+### welcomeScreen.setWelcomeChannels(channels, reason) ⇒ <code>Promise</code>
 
-It sets the welcome channels of the guild
+Sets the welcome channels for a specific entity.
 
 **Kind**: instance method of [<code>WelcomeScreen</code>](#WelcomeScreen)  
-**Returns**: The return value is the updated guild.
+**Returns**: <code>Promise</code> - - A promise that resolves when the welcome channels are set.
 
-| Param    | Description                                  |
-| -------- | -------------------------------------------- |
-| channels | The channels to set the welcome channels to. |
-| reason   | The reason for the edit.                     |
+| Param    | Type                | Description                                  |
+| -------- | ------------------- | -------------------------------------------- |
+| channels | <code>Array</code>  | The channels to set as welcome channels.     |
+| reason   | <code>string</code> | The reason for setting the welcome channels. |
 
 <a name="WelcomeScreen+setDescription"></a>
 
-### welcomeScreen.setDescription(description, reason) ⇒
+### welcomeScreen.setDescription(description, reason) ⇒ <code>Promise</code>
 
-It edits the description of the channel
+Sets the description of an object and updates it with the provided reason.
 
 **Kind**: instance method of [<code>WelcomeScreen</code>](#WelcomeScreen)  
-**Returns**: The description of the channel.
+**Returns**: <code>Promise</code> - - A promise that resolves when the description is successfully updated.
 
-| Param       | Description                         |
-| ----------- | ----------------------------------- |
-| description | The new description of the channel. |
-| reason      | The reason for the edit.            |
+| Param       | Type                | Description                              |
+| ----------- | ------------------- | ---------------------------------------- |
+| description | <code>string</code> | The new description to set.              |
+| reason      | <code>string</code> | The reason for updating the description. |
 
 <a name="WelcomeScreenChannel"></a>
 
 ## WelcomeScreenChannel ⇐ <code>Base</code>
 
-It's a class that represents a welcome screen channel
+Represents a welcome screen channel.
 
 **Kind**: global class  
 **Extends**: <code>Base</code>
 
 - [WelcomeScreenChannel](#WelcomeScreenChannel) ⇐ <code>Base</code>
   - [new WelcomeScreenChannel([data], guildId, client)](#new_WelcomeScreenChannel_new)
-  - [.channel](#WelcomeScreenChannel+channel) ⇒
+  - [.channel](#WelcomeScreenChannel+channel) ⇒ <code>Channel</code> \| <code>null</code>
   - [.guild](#WelcomeScreenChannel+guild) ⇒
 
 <a name="new_WelcomeScreenChannel_new"></a>
 
 ### new WelcomeScreenChannel([data], guildId, client)
 
-This function is a constructor for the class ReactionRole.
+Constructs a new instance of the class.
 
-| Param   | Description                                  |
-| ------- | -------------------------------------------- |
-| [data]  | The data that was sent from the API.         |
-| guildId | The ID of the guild the reaction role is in. |
-| client  | The client that the event was emitted from   |
+| Param   | Type                | Description                                                 |
+| ------- | ------------------- | ----------------------------------------------------------- |
+| [data]  | <code>Object</code> | The data object containing the properties for the instance. |
+| guildId | <code>string</code> | The ID of the guild associated with the instance.           |
+| client  | <code>Client</code> | The client object used to interact with the Discord API.    |
 
 <a name="WelcomeScreenChannel+channel"></a>
 
-### welcomeScreenChannel.channel ⇒
+### welcomeScreenChannel.channel ⇒ <code>Channel</code> \| <code>null</code>
 
-It returns the channel object of the channel ID that is stored in the message object
+Retrieves the channel object associated with this instance.
 
 **Kind**: instance property of [<code>WelcomeScreenChannel</code>](#WelcomeScreenChannel)  
-**Returns**: The channel object.  
+**Returns**: <code>Channel</code> \| <code>null</code> - The channel object, or null if it does not exist.  
 <a name="WelcomeScreenChannel+guild"></a>
 
 ### welcomeScreenChannel.guild ⇒
 
-It returns the guild object of the guild ID that is stored in the database
+Get the guild object associated with this guildId.
 
 **Kind**: instance property of [<code>WelcomeScreenChannel</code>](#WelcomeScreenChannel)  
 **Returns**: The guild object.

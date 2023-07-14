@@ -652,9 +652,9 @@ A class representing a message button.
 
 Creates a new message button instance.
 
-| Param  | Type                | Default         | Description                                     |
-| ------ | ------------------- | --------------- | ----------------------------------------------- |
-| [data] | <code>Object</code> | <code>{}</code> | The data to initialize the message button with. |
+| Param  | Type                | Description                                     |
+| ------ | ------------------- | ----------------------------------------------- |
+| [data] | <code>Object</code> | The data to initialize the message button with. |
 
 <a name="MessageButton+setLabel"></a>
 
@@ -778,7 +778,7 @@ Constructs a new MessageEmbed object.
 
 | Param              | Type                              | Default                                     | Description                           |
 | ------------------ | --------------------------------- | ------------------------------------------- | ------------------------------------- |
-| [data]             | <code>Object</code>               | <code>{}</code>                             | The data for the message embed.       |
+| [data]             | <code>Object</code>               |                                             | The data for the message embed.       |
 | [data.title]       | <code>string</code>               |                                             | The title of the message embed.       |
 | [data.type]        | <code>string</code>               | <code>&quot;\&quot;rich\&quot;&quot;</code> | The type of the message embed.        |
 | [data.description] | <code>string</code>               |                                             | The description of the message embed. |
@@ -1050,15 +1050,18 @@ Represents a Discord role select component that allows users to select one or mo
 
 Create a role select component.
 
-| Param              | Type                              | Default         | Description                                        |
-| ------------------ | --------------------------------- | --------------- | -------------------------------------------------- |
-| [data]             | <code>Object</code>               | <code>{}</code> | The data to set in the component.                  |
-| [data.custom_id]   | <code>string</code>               |                 | The custom ID of the component.                    |
-| [data.options]     | <code>Array.&lt;Object&gt;</code> |                 | The options of the component.                      |
-| [data.placeholder] | <code>string</code>               |                 | The placeholder text of the component.             |
-| [data.min_values]  | <code>number</code>               |                 | The minimum number of values that can be selected. |
-| [data.max_values]  | <code>number</code>               |                 | The maximum number of values that can be selected. |
-| [data.disabled]    | <code>boolean</code>              |                 | Whether the component is disabled or not.          |
+| Param              | Type                              | Description                                        |
+| ------------------ | --------------------------------- | -------------------------------------------------- |
+| [data]             | <code>Object</code>               | The data to set in the component.                  |
+| [data.custom_id]   | <code>string</code>               | The custom ID of the component.                    |
+| [data.customId]    | <code>string</code>               | The custom ID of the component.                    |
+| [data.options]     | <code>Array.&lt;Object&gt;</code> | The options of the component.                      |
+| [data.placeholder] | <code>string</code>               | The placeholder text of the component.             |
+| [data.min_values]  | <code>number</code>               | The minimum number of values that can be selected. |
+| [data.max_values]  | <code>number</code>               | The maximum number of values that can be selected. |
+| [data.minValues]   | <code>number</code>               | The minimum number of values that can be selected. |
+| [data.maxValues]   | <code>number</code>               | The maximum number of values that can be selected. |
+| [data.disabled]    | <code>boolean</code>              | Whether the component is disabled or not.          |
 
 <a name="RoleSelect+setCustomId"></a>
 
@@ -1193,10 +1196,10 @@ A row of buttons to be added to a message component.
 
 ### new Row([data])
 
-| Param             | Type                              | Default         | Description                                              |
-| ----------------- | --------------------------------- | --------------- | -------------------------------------------------------- |
-| [data]            | <code>Object</code>               | <code>{}</code> | The data for the row.                                    |
-| [data.components] | <code>Array.&lt;Object&gt;</code> |                 | An array of button components to be included in the row. |
+| Param             | Type                              | Description                                              |
+| ----------------- | --------------------------------- | -------------------------------------------------------- |
+| [data]            | <code>Object</code>               | The data for the row.                                    |
+| [data.components] | <code>Array.&lt;Object&gt;</code> | An array of button components to be included in the row. |
 
 <a name="Row+components"></a>
 
@@ -1260,7 +1263,7 @@ A class representing a Discord Slash Command.
 
 | Param                             | Type                                       | Default                             | Description                                         |
 | --------------------------------- | ------------------------------------------ | ----------------------------------- | --------------------------------------------------- |
-| [data]                            | <code>Object</code>                        | <code>{}</code>                     | The data for the Slash Command.                     |
+| [data]                            | <code>Object</code>                        |                                     | The data for the Slash Command.                     |
 | [data.type]                       | <code>number</code> \| <code>string</code> | <code>&quot;Chat_Input&quot;</code> | The type of the command.                            |
 | [data.name]                       | <code>string</code>                        |                                     | The name of the command.                            |
 | [data.name_localizations]         | <code>Object</code>                        |                                     | The localizations of the command name.              |
@@ -1318,9 +1321,9 @@ Sets the localizations of the name of the Slash Command.
 **Kind**: instance method of [<code>Slash</code>](#Slash)  
 **Returns**: [<code>Slash</code>](#Slash) - The Slash instance.
 
-| Param           | Type                | Default         | Description                            |
-| --------------- | ------------------- | --------------- | -------------------------------------- |
-| [localizations] | <code>Object</code> | <code>{}</code> | The localizations of the command name. |
+| Param           | Type                | Description                            |
+| --------------- | ------------------- | -------------------------------------- |
+| [localizations] | <code>Object</code> | The localizations of the command name. |
 
 <a name="Slash+setDescription"></a>
 
@@ -1463,7 +1466,7 @@ Creates a new instance of the SlashOption class.
 
 | Param                            | Type                                       | Default                                       | Description                                         |
 | -------------------------------- | ------------------------------------------ | --------------------------------------------- | --------------------------------------------------- |
-| [data]                           | <code>Object</code>                        | <code>{}</code>                               | The data for the option.                            |
+| [data]                           | <code>Object</code>                        |                                               | The data for the option.                            |
 | [data.type]                      | <code>string</code> \| <code>number</code> | <code>&quot;\&quot;String\&quot;&quot;</code> | The type of the option.                             |
 | [data.name]                      | <code>string</code>                        |                                               | The name of the option.                             |
 | [data.name_localizations]        | <code>Object</code>                        |                                               | The localized names of the option.                  |
@@ -1552,9 +1555,9 @@ Sets the localized names of the option.
 **Kind**: instance method of [<code>SlashOption</code>](#SlashOption)  
 **Returns**: [<code>SlashOption</code>](#SlashOption) - The updated instance of the SlashOption class.
 
-| Param           | Type                | Default         | Description                        |
-| --------------- | ------------------- | --------------- | ---------------------------------- |
-| [localizations] | <code>Object</code> | <code>{}</code> | The localized names of the option. |
+| Param           | Type                | Description                        |
+| --------------- | ------------------- | ---------------------------------- |
+| [localizations] | <code>Object</code> | The localized names of the option. |
 
 <a name="SlashOption+setChoices"></a>
 
@@ -1731,14 +1734,14 @@ Represents a sub-command group for a slash command.
 
 ### new SlashSubCommandGroups([data])
 
-| Param                           | Type                              | Default         | Description                                             |
-| ------------------------------- | --------------------------------- | --------------- | ------------------------------------------------------- |
-| [data]                          | <code>Object</code>               | <code>{}</code> | The data for the sub-command group.                     |
-| [data.name]                     | <code>string</code>               |                 | The name of the sub-command group.                      |
-| [data.description]              | <code>string</code>               |                 | The description of the sub-command group.               |
-| [data.nameLocalizations]        | <code>Object</code>               |                 | The name localizations of the sub-command group.        |
-| [data.descriptionLocalizations] | <code>Object</code>               |                 | The description localizations of the sub-command group. |
-| [data.options]                  | <code>Array.&lt;Object&gt;</code> |                 | The sub-commands of the sub-command group.              |
+| Param                           | Type                              | Description                                             |
+| ------------------------------- | --------------------------------- | ------------------------------------------------------- |
+| [data]                          | <code>Object</code>               | The data for the sub-command group.                     |
+| [data.name]                     | <code>string</code>               | The name of the sub-command group.                      |
+| [data.description]              | <code>string</code>               | The description of the sub-command group.               |
+| [data.nameLocalizations]        | <code>Object</code>               | The name localizations of the sub-command group.        |
+| [data.descriptionLocalizations] | <code>Object</code>               | The description localizations of the sub-command group. |
+| [data.options]                  | <code>Array.&lt;Object&gt;</code> | The sub-commands of the sub-command group.              |
 
 <a name="SlashSubCommandGroups+setName"></a>
 
@@ -1788,9 +1791,9 @@ Sets the name localizations of the sub-command group.
 **Kind**: instance method of [<code>SlashSubCommandGroups</code>](#SlashSubCommandGroups)  
 **Returns**: [<code>SlashSubCommandGroups</code>](#SlashSubCommandGroups) - The sub-command group object.
 
-| Param           | Type                | Default         | Description                                      |
-| --------------- | ------------------- | --------------- | ------------------------------------------------ |
-| [localizations] | <code>Object</code> | <code>{}</code> | The name localizations of the sub-command group. |
+| Param           | Type                | Description                                      |
+| --------------- | ------------------- | ------------------------------------------------ |
+| [localizations] | <code>Object</code> | The name localizations of the sub-command group. |
 
 <a name="SlashSubCommandGroups+addSubCommands"></a>
 
@@ -1950,9 +1953,9 @@ Represents a select menu with string options.
 
 ### new StringSelect([data])
 
-| Param  | Type                | Default         | Description                   |
-| ------ | ------------------- | --------------- | ----------------------------- |
-| [data] | <code>Object</code> | <code>{}</code> | The data for the select menu. |
+| Param  | Type                | Description                   |
+| ------ | ------------------- | ----------------------------- |
+| [data] | <code>Object</code> | The data for the select menu. |
 
 <a name="StringSelect+setCustomId"></a>
 
@@ -2072,9 +2075,9 @@ Transforms an option object for a string select component into a simpler format.
 
 - <code>RangeError</code> - If the option object is missing the label or value properties, or if the default property is not a boolean.
 
-| Param     | Type                | Default         | Description                     |
-| --------- | ------------------- | --------------- | ------------------------------- |
-| [options] | <code>Object</code> | <code>{}</code> | The option object to transform. |
+| Param     | Type                | Description                     |
+| --------- | ------------------- | ------------------------------- |
+| [options] | <code>Object</code> | The option object to transform. |
 
 <a name="StringSelect.transformEmoji"></a>
 
@@ -2117,23 +2120,23 @@ Represents a user select component in a Discord interaction.
 
 Creates a new instance of UserSelect.
 
-| Param                         | Type                                       | Default         | Description                                        |
-| ----------------------------- | ------------------------------------------ | --------------- | -------------------------------------------------- |
-| [data]                        | <code>Object</code>                        | <code>{}</code> | The data to create the UserSelect instance.        |
-| [data.custom_id]              | <code>string</code>                        |                 | The custom ID of the user select.                  |
-| [data.options]                | <code>Array.&lt;Object&gt;</code>          |                 | The options for the user select.                   |
-| [data.options.label]          | <code>string</code>                        |                 | The label for the option.                          |
-| [data.options.value]          | <code>string</code>                        |                 | The value for the option.                          |
-| [data.options.description]    | <code>string</code>                        |                 | The description for the option.                    |
-| [data.options.emoji]          | <code>string</code> \| <code>Object</code> |                 | The emoji for the option.                          |
-| [data.options.emoji.name]     | <code>string</code>                        |                 | The name of the emoji.                             |
-| [data.options.emoji.id]       | <code>string</code>                        |                 | The ID of the emoji.                               |
-| [data.options.emoji.animated] | <code>boolean</code>                       |                 | Whether the emoji is animated.                     |
-| [data.options.default]        | <code>boolean</code>                       |                 | Whether the option is the default one.             |
-| [data.placeholder]            | <code>string</code>                        |                 | The placeholder text for the user select.          |
-| [data.min_values]             | <code>number</code>                        |                 | The minimum number of values that can be selected. |
-| [data.max_values]             | <code>number</code>                        |                 | The maximum number of values that can be selected. |
-| [data.disabled]               | <code>boolean</code>                       |                 | Whether the user select is disabled.               |
+| Param                         | Type                                       | Description                                        |
+| ----------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| [data]                        | <code>Object</code>                        | The data to create the UserSelect instance.        |
+| [data.custom_id]              | <code>string</code>                        | The custom ID of the user select.                  |
+| [data.options]                | <code>Array.&lt;Object&gt;</code>          | The options for the user select.                   |
+| [data.options.label]          | <code>string</code>                        | The label for the option.                          |
+| [data.options.value]          | <code>string</code>                        | The value for the option.                          |
+| [data.options.description]    | <code>string</code>                        | The description for the option.                    |
+| [data.options.emoji]          | <code>string</code> \| <code>Object</code> | The emoji for the option.                          |
+| [data.options.emoji.name]     | <code>string</code>                        | The name of the emoji.                             |
+| [data.options.emoji.id]       | <code>string</code>                        | The ID of the emoji.                               |
+| [data.options.emoji.animated] | <code>boolean</code>                       | Whether the emoji is animated.                     |
+| [data.options.default]        | <code>boolean</code>                       | Whether the option is the default one.             |
+| [data.placeholder]            | <code>string</code>                        | The placeholder text for the user select.          |
+| [data.min_values]             | <code>number</code>                        | The minimum number of values that can be selected. |
+| [data.max_values]             | <code>number</code>                        | The maximum number of values that can be selected. |
+| [data.disabled]               | <code>boolean</code>                       | Whether the user select is disabled.               |
 
 <a name="UserSelect+setCustomId"></a>
 
@@ -2230,9 +2233,9 @@ Transforms an option object for a user select component into a simpler format.
 **Kind**: static method of [<code>UserSelect</code>](#UserSelect)  
 **Returns**: <code>Object</code> - - The transformed option object.
 
-| Param     | Type                | Default         | Description                     |
-| --------- | ------------------- | --------------- | ------------------------------- |
-| [options] | <code>Object</code> | <code>{}</code> | The option object to transform. |
+| Param     | Type                | Description                     |
+| --------- | ------------------- | ------------------------------- |
+| [options] | <code>Object</code> | The option object to transform. |
 
 <a name="UserSelect.transformEmoji"></a>
 

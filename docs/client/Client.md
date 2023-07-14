@@ -146,7 +146,7 @@ Generates a template using the provided code and options.
 Generates an invite URL for the bot with the specified options.
 
 **Kind**: instance method of [<code>Client</code>](#Client)  
-**Returns**: <code>string</code> \| <code>undefined</code> - - The
+**Returns**: <code>string</code> \| <code>undefined</code>
 
 | Param                  | Type                                      | Description                                           |
 | ---------------------- | ----------------------------------------- | ----------------------------------------------------- |

@@ -1,10 +1,23 @@
 <a name="Button"></a>
 
 ## Button
+Represents a button element with various properties.
+
 **Kind**: global class  
 <a name="new_Button_new"></a>
 
-### new Button()
-It takes in an object with the properties of emoji, label, url, customid, style, and disabled, andreturns an object with the properties of type, custom_id, style, label, emoji, disabled, and url.
+### new Button(options)
+Constructs a button object with the provided properties.
 
-**Returns**: The button object.  
+**Returns**: <code>Object</code> - - The constructed button object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | The options object containing the button properties. |
+| options.emoji | <code>Object</code> | The emoji object for the button. |
+| options.label | <code>string</code> | The label text for the button. |
+| options.url | <code>string</code> | The URL to open when the button is clicked. |
+| options.customid | <code>string</code> | The custom ID for the button. |
+| options.style | <code>number</code> | The style of the button. |
+| options.disabled | <code>boolean</code> | Whether the button is disabled or not. |
+

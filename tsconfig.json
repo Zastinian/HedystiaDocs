@@ -1,7 +1,3 @@
 {
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
-  "compilerOptions": {
-    "jsx": "react",
-    "baseUrl": "."
-  }
+  "extends": "astro/tsconfigs/strict"
 }

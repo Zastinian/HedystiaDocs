@@ -19,5 +19,6 @@ Make a log with or without color
 
 **Example**  
 ```js
-log('Something')log('Something', listLogColor.FgRed)
+log('Something')
+log('Something', listLogColor.FgRed)
 ```

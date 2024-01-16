@@ -4,11 +4,7 @@ sidebar:
   order: 2
 ---
 
----
-title: Number
-sidebar:
-  order: 2
----
+
 
 ## Functions
 
@@ -127,5 +123,10 @@ Formats a date as a string with a customizable order of day, month and year.
 
 **Example**  
 ```js
-console.log(formats.DateFor(new Date(), "dmy"))console.log(formats.DateFor(new Date(), "mdy"))console.log(formats.DateFor(new Date(), "ymd"))console.log(formats.DateFor(new Date(), "ydm"))console.log(formats.DateFor(new Date(), "myd"))console.log(formats.DateFor(new Date(), "dym"))
+console.log(formats.DateFor(new Date(), "dmy"))
+console.log(formats.DateFor(new Date(), "mdy"))
+console.log(formats.DateFor(new Date(), "ymd"))
+console.log(formats.DateFor(new Date(), "ydm"))
+console.log(formats.DateFor(new Date(), "myd"))
+console.log(formats.DateFor(new Date(), "dym"))
 ```

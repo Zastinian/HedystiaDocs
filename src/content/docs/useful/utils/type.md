@@ -18,5 +18,9 @@ Check what type is provided
 
 **Example**  
 ```js
-console.log(type(null))console.log(type(undefined))console.log(type(5))console.log(type(true))console.log(type('str'))
+console.log(type(null))
+console.log(type(undefined))
+console.log(type(5))
+console.log(type(true))
+console.log(type('str'))
 ```

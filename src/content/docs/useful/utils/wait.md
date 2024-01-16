@@ -17,5 +17,9 @@ A function that returns a promise that resolves after a specified delay.
 
 **Example**  
 ```js
-async function async() { await wait(2000) console.log("Something")}async()
+async function async() {
+ await wait(2000)
+ console.log("Something")
+}
+async()
 ```

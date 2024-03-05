@@ -54,6 +54,22 @@ export default defineConfig({
           ],
         },
         {
+          label: "DataBase",
+          collapsed: true,
+          items: [
+            {
+              label: "Start",
+              link: "/db/start",
+              collapsed: true,
+            },
+            {
+              label: "Example",
+              link: "/db/example",
+              collapsed: true,
+            },
+          ],
+        },
+        {
           label: "Github Stats",
           collapsed: true,
           items: [

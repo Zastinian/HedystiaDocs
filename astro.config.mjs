@@ -1,7 +1,5 @@
 import {defineConfig} from "astro/config";
 import starlight from "@astrojs/starlight";
-import min from "astro-min";
-import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
@@ -183,10 +181,6 @@ export default defineConfig({
             },
           ],
         },
-        min(),
-        compress({
-          HTML: false,
-        }),
       ],
     }),
   ],

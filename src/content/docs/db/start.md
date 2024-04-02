@@ -8,12 +8,16 @@ title: Start
 ```
 npm i hedystia.db
 
+pnpm install hedystia.db
+
+bun install hedystia.db
+
 yarn add hedystia.db
 ```
 
 ## Nodejs Version
 
-- `v16.9.0` or higher
+- `v20.0.0` or higher
 
 ## Links
 

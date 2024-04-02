@@ -17,7 +17,7 @@ yarn add hedystia.db
 
 ## Nodejs Version
 
-- `v20.0.0` or higher
+- `v18.0.0` or higher
 
 ## Links
 

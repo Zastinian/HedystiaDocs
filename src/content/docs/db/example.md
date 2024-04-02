@@ -4,9 +4,9 @@ title: Example
 ---
 
 ```js
-const db = require("../Package/index");
+const db = require("hedystia.db");
 
-const database =  new db("./database.ht", "password");
+const database = new db("./database.ht", "password");
 
 database.createTable("users", ["id", "name", "email"]);
 

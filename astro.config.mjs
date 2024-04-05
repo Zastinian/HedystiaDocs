@@ -91,6 +91,22 @@ export default defineConfig({
           ],
         },
         {
+          label: "StrangeApi",
+          collapsed: true,
+          items: [
+            {
+              label: "Start",
+              link: "/strange/start",
+              collapsed: true,
+            },
+            {
+              label: "Functions",
+              link: "/strange/functions",
+              collapsed: true,
+            },
+          ],
+        },
+        {
           label: "Hedystia.js",
           collapsed: true,
           items: [

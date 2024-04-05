@@ -27,6 +27,8 @@ yarn add strange.api
 - [Discord_Bot](https://hedystia.com) [Hedystia Bot]
 - [Strange_Support](https://discord.gg/Pt97u5MkAr) [Strange Support]
 - [Strange_Docs](https://strangeapi.hostz.me/docs) [Strange Docs]
+- [Strange_Api_Key](https://strangeapi.hostz.me/dasbboard) [Strange Dashboard]
+- [Strange_Api_Key](https://discord.gg/Pt97u5MkAr) [Strange Support]
 - [Npm_Docs](https://docs.hedystia.com) [Strange.Api docs]
 
 ## Example

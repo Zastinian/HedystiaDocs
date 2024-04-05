@@ -29,7 +29,7 @@ yarn add strange.api
 - [Strange_Docs](https://strangeapi.hostz.me/docs) [Strange Docs]
 - [Strange_Api_Key](https://strangeapi.hostz.me/dasbboard) [Strange Dashboard]
 - [Strange_Api_Key](https://discord.gg/Pt97u5MkAr) [Strange Support]
-- [Npm_Docs](https://docs.hedystia.com) [Strange.Api docs]
+- [Npm_Docs](https://docs.hedystia.com/strange/start) [Strange.Api docs]
 
 ## Example
 

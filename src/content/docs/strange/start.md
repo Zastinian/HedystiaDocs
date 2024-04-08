@@ -10,11 +10,11 @@ keywords: [Hedystia, github readme stats, readme stats, github stats, stats for 
 ## Installation
 
 ```
-npm i strange.api
+npm i @hedystia/strange
 
-pnpm i strange.api
+pnpm i @hedystia/strange
 
-yarn add strange.api
+yarn add @hedystia/strange
 ```
 
 ## Nodejs Version
@@ -29,17 +29,17 @@ yarn add strange.api
 - [Strange_Docs](https://strangeapi.hostz.me/docs) [Strange Docs]
 - [Strange_Api_Key](https://strangeapi.hostz.me/dasbboard) [Strange Dashboard]
 - [Strange_Api_Key](https://discord.gg/Pt97u5MkAr) [Strange Support]
-- [Npm_Docs](https://docs.hedystia.com/strange/start) [Strange.Api docs]
+- [Npm_Docs](https://docs.hedystia.com/strange/start) [Strange Npm docs]
 
 ## Example
 
 ```js
-const Strange = require("strange.api");
+const Strange = require("@hedystia/strange");
 const {Buffer} = require("buffer");
 
 // or
 
-import Strange from "strange.api";
+import Strange from "@hedystia/strange";
 import {Buffer} from "buffer";
 
 process.loadEnvFile("./.env");

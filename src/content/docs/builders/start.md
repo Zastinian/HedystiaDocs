@@ -6,9 +6,9 @@ title: Start
 ## Installation
 
 ```
-npm i hedystia-builders
+npm i @hedystia/builders
 
-yarn add hedystia-builders
+yarn add @hedystia/builders
 ```
 
 ## Nodejs Version

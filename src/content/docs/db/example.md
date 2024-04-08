@@ -4,7 +4,7 @@ title: Example
 ---
 
 ```js
-const db = require("hedystia.db");
+const db = require("@hedystia/db");
 
 const database = new db("./database.ht", "password");
 

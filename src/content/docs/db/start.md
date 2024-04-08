@@ -6,13 +6,13 @@ title: Start
 ## Installation
 
 ```
-npm i hedystia.db
+npm i @hedystia/db
 
-pnpm install hedystia.db
+pnpm install @hedystia/db
 
-bun install hedystia.db
+bun install @hedystia/db
 
-yarn add hedystia.db
+yarn add @hedystia/db
 ```
 
 ## Nodejs Version

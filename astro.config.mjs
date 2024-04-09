@@ -100,8 +100,28 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: "Functions",
-              link: "/strange/functions",
+              label: "Api",
+              link: "/strange/api",
+              collapsed: true,
+            },
+            {
+              label: "Filters",
+              link: "/strange/filters",
+              collapsed: true,
+            },
+            {
+              label: "Generators",
+              link: "/strange/generators",
+              collapsed: true,
+            },
+            {
+              label: "Overlays",
+              link: "/strange/overlays",
+              collapsed: true,
+            },
+            {
+              label: "Utils",
+              link: "/strange/utils",
               collapsed: true,
             },
           ],

@@ -6,10 +6,7 @@ sidebar:
   order: 6
 keywords: [Hedystia, strang, strange-api, strange-api-wrapper, wrapper, api-wrapper]
 ---
-
 <a name="Utils"></a>
-
-## Utils
 
 **Kind**: global class
 

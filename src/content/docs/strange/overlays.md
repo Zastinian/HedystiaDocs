@@ -6,10 +6,7 @@ sidebar:
   order: 5
 keywords: [Hedystia, strang, strange-api, strange-api-wrapper, wrapper, api-wrapper]
 ---
-
 <a name="Overlays"></a>
-
-## Overlays
 
 **Kind**: global class
 

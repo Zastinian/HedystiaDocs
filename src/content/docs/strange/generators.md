@@ -6,10 +6,7 @@ sidebar:
   order: 4
 keywords: [Hedystia, strang, strange-api, strange-api-wrapper, wrapper, api-wrapper]
 ---
-
 <a name="Generators"></a>
-
-## Generators
 
 **Kind**: global class
 

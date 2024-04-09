@@ -1,15 +1,12 @@
 ---
 id: api
-title: Api
+title: StrangeApi
 description: StrangeApi Class
 sidebar:
   order: 2
 keywords: [Hedystia, strang, strange-api, strange-api-wrapper, wrapper, api-wrapper]
 ---
-
 <a name="StrangeApi"></a>
-
-## StrangeApi
 
 **Kind**: global class
 

@@ -13,7 +13,7 @@ sidebar:
 <dd></dd>
 </dl>
 
-
+<a name="CommandInteractionOptionResolver"></a>
 
 ## CommandInteractionOptionResolver ⇐ <code>Base</code>
 **Kind**: global class  

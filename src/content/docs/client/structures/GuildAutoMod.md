@@ -26,7 +26,7 @@ sidebar:
 </dd>
 </dl>
 
-
+<a name="GuildAutoMod"></a>
 
 ## GuildAutoMod ⇐ <code>Base</code>
 Represents an auto-mod configuration for a guild.

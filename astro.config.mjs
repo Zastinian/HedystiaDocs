@@ -1,5 +1,6 @@
 import {defineConfig} from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightDocSearch from "@astrojs/starlight-docsearch";
 
 // https://astro.build/config
 export default defineConfig({
@@ -217,6 +218,13 @@ export default defineConfig({
             },
           ],
         },
+      ],
+      plugins: [
+        starlightDocSearch({
+          appId: process.env.APP_ID,
+          apiKey: process.env.SEARCH_API_KEY,
+          indexName: process.env.INDEX_NAME,
+        }),
       ],
     }),
   ],

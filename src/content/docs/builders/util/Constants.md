@@ -1,5 +1,5 @@
 ---
-title: module_Colors
+title: Colors
 sidebar:
   order: 3
 ---

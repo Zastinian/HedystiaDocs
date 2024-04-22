@@ -1,5 +1,5 @@
 ---
-title: module_ButtonStyle
+title: ButtonStyle
 sidebar:
   order: 2
 ---

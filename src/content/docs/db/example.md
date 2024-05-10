@@ -4,15 +4,17 @@ title: Example
 ---
 
 ```js
-const db = require("@hedystia/db");
+const Database = require("@hedystia/db");
 
-const database = new db("./database.ht", "password");
+// Create a file named database.ht and enter the password
+const database = new Database("./database.ht", "password");
 
+// You can only use it once to create the table after that you can no longer use it.
 database.createTable("users", ["id", "name", "email"]);
 
-database.insert("users", {id: "1", name: "John Doe", email: "jdoe@example.com"});
+database.insert("users", { id: "1", name: "John Doe", email: "jdoe@example.com" });
 
-database.insert("users", {id: "2", name: "María", email: "maria@example.com"});
+database.insert("users", { id: "2", name: "María", email: "maria@example.com" });
 
 const users = database.select("users");
 
@@ -20,19 +22,43 @@ console.log("----------------------------------");
 
 console.log(users);
 
-const userJohn = database.select("users", {name: "John Doe"});
+database.addColumn("users", "phone");
+
+database.addColumn("users", "lang", "en-US");
+
+const newUsersPhone = database.select("users");
+
 console.log("----------------------------------");
+
+console.log(newUsersPhone);
+
+database.deleteColumn("users", "phone");
+
+const oldUsersPhone = database.select("users");
+
+console.log("----------------------------------");
+
+console.log(oldUsersPhone);
+
+const userJohn = database.select("users", { name: "John Doe" });
+
+console.log("----------------------------------");
+
 console.log(userJohn);
 
-database.delete("users", {name: "María"});
+database.delete("users", { name: "María" });
 
 const users2 = database.select("users");
+
 console.log("----------------------------------");
+
 console.log(users2);
 
-database.update("users", {id: "1"}, {name: "Jane Doe"});
+database.update("users", { id: "1" }, { name: "Jane Doe", lang: "es-ES" });
 
 const users3 = database.select("users");
+
 console.log("----------------------------------");
+
 console.log(users3);
 ```

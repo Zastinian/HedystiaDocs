@@ -71,6 +71,22 @@ export default defineConfig({
           ],
         },
         {
+          label: "DataBase Rust",
+          collapsed: true,
+          items: [
+            {
+              label: "Start",
+              link: "/dbrs/start",
+              collapsed: true,
+            },
+            {
+              label: "Example",
+              link: "/dbrs/example",
+              collapsed: true,
+            },
+          ],
+        },
+        {
           label: "Github Stats",
           collapsed: true,
           items: [

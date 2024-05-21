@@ -11,9 +11,7 @@ keywords: [Hedystia, github readme stats, readme stats, github stats, stats for 
 
 ```
 npm i strange.api
-
 pnpm i strange.api
-
 yarn add strange.api
 ```
 

@@ -8,7 +8,6 @@ sidebar:
 
 ```
 npm i @hedystia/discord
-
 yarn add @hedystia/discord
 ```
 

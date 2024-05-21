@@ -7,11 +7,8 @@ title: Start
 
 ```
 npm i @hedystia/db
-
 pnpm install @hedystia/db
-
 bun add @hedystia/db
-
 yarn add @hedystia/db
 ```
 

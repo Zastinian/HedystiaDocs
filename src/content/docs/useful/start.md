@@ -7,7 +7,6 @@ title: Start
 
 ```
 npm i @hedystia/useful
-
 yarn add @hedystia/useful
 ```
 

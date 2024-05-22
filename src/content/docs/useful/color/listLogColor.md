@@ -4,18 +4,18 @@ sidebar:
   order: 3
 ---
 
-
-
 ## listLogColor ⇒ <code>String</code>
+
 Contains the colors for the log section
 
-**Returns**: <code>String</code> - String  
+**Returns**: <code>String</code> - String
 
-| Param | Type |
-| --- | --- |
-| listLogColor.Color | <code>String</code> | 
+| Param              | Type                |
+| ------------------ | ------------------- |
+| listLogColor.Color | <code>String</code> |
 
-**Example**  
+**Example**
+
 ```js
-log('Something', listLogColor.FgRed)
+log("Something", listLogColor.FgRed);
 ```

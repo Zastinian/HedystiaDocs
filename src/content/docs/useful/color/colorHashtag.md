@@ -4,18 +4,18 @@ sidebar:
   order: 1
 ---
 
-
-
 ## colorHashtag ⇒ <code>String</code>
+
 Contains all hex colors starting with #
 
-**Returns**: <code>String</code> - String  
+**Returns**: <code>String</code> - String
 
-| Param | Type |
-| --- | --- |
-| colorHashtag.Color | <code>String</code> | 
+| Param              | Type                |
+| ------------------ | ------------------- |
+| colorHashtag.Color | <code>String</code> |
 
-**Example**  
+**Example**
+
 ```js
-console.log(colorHashtag.Red)
+console.log(colorHashtag.Red);
 ```

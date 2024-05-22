@@ -4,18 +4,18 @@ sidebar:
   order: 2
 ---
 
-
-
 ## colorZero ⇒ <code>String</code>
+
 Contains all hex colors starting with 0x
 
-**Returns**: <code>String</code> - String  
+**Returns**: <code>String</code> - String
 
-| Param | Type |
-| --- | --- |
-| colorZero.Color | <code>String</code> | 
+| Param           | Type                |
+| --------------- | ------------------- |
+| colorZero.Color | <code>String</code> |
 
-**Example**  
+**Example**
+
 ```js
-console.log(colorZero.Red)
+console.log(colorZero.Red);
 ```

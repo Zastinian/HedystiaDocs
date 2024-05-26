@@ -4,19 +4,19 @@ sidebar:
   order: 2
 ---
 
-
-
 ## generateKey([prefix]) ⇒ <code>string</code>
+
 Generates a unique key with the specified prefix.
 
 **Kind**: global function  
-**Returns**: <code>string</code> - The generated key.  
+**Returns**: <code>string</code> - The generated key.
 
-| Param | Type | Description |
-| --- | --- | --- |
+| Param    | Type                | Description                                           |
+| -------- | ------------------- | ----------------------------------------------------- |
 | [prefix] | <code>string</code> | The prefix to use for the key (defaults to "PREFIX"). |
 
-**Example**  
+**Example**
+
 ```js
-console.log(generateKey('PREFIX'))
+console.log(generateKey("PREFIX"));
 ```

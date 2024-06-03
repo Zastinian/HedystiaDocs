@@ -20,6 +20,49 @@ export default defineConfig({
           link: "/welcome",
         },
         {
+          label: "Billing",
+          collapsed: true,
+          items: [
+            {
+              label: "Start",
+              link: "/billing/start",
+              collapsed: true,
+            },
+            {
+              label: "Installation",
+              collapsed: true,
+              autogenerate: {
+                directory: "billing/installation",
+                collapsed: true,
+              },
+            },
+            {
+              label: "Upgrade",
+              collapsed: true,
+              autogenerate: {
+                directory: "billing/upgrade",
+                collapsed: true,
+              },
+            },
+            {
+              label: "Admin",
+              collapsed: true,
+              autogenerate: {
+                directory: "billing/admin",
+                collapsed: true,
+              },
+            },
+            {
+              label: "Extensions",
+              collapsed: true,
+              autogenerate: {
+                directory: "billing/extensions",
+                collapsed: true,
+              },
+            },
+          ],
+        },
+        {
           label: "Builders",
           collapsed: true,
           items: [

@@ -60,10 +60,16 @@ export default defineConfig({
                   label: "Introduction",
                   link: "/billing/extensions/intro",
                   collapsed: true,
-                  autogenerate: {
-                    directory: "billing/extensions/gateways",
-                    collapsed: true,
-                  }
+                  items: [
+                    {
+                      label: "Gateways",
+                      collapsed: true,
+                      autogenerate: {
+                        directory: "billing/extensions/gateways",
+                        collapsed: true,
+                      }
+                    }
+                  ]
                 }
               ],
             },

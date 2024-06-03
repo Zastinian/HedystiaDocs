@@ -10,11 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
     "@astrojs/starlight": "^0.23.2",
     "@astrojs/starlight-docsearch": "^0.1.0",
     "astro": "^4.9.2",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.7.0",
     "typescript": "^5.4.5"
   }
 }

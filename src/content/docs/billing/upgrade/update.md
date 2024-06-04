@@ -49,7 +49,7 @@ chown -R nginx:nginx /var/www/billing/*
 chown -R apache:apache /var/www/billing/*
 ```
 
-## Install
+## Final Commands
 
 ```bash
 php artisan queue:restart

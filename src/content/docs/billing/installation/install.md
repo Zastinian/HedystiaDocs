@@ -55,15 +55,6 @@ php artisan migrate --seed --force
 php artisan p:update:settings
 ```
 
-## Optimize Performance
-
-Cache the configurations and views to optimize the performance.
-
-```shell
-php artisan config:cache
-php artisan view:cache
-```
-
 ## Set Up Cron Job
 
 Then, let's set up a cron job. Run the following command to open the crontab configuration.
@@ -76,6 +67,17 @@ Copy and paste the following line to the file.
 
 ```shell
 * * * * * php /var/www/billing/artisan schedule:run >> /dev/null 2>&1
+```
+
+## Optimize Performance
+
+Cache the configurations and views to optimize the performance.
+
+```shell
+php artisan config:cache
+php artisan view:cache
+chown -R www-data:www-data /var/www/billing/*
+php artisan queue:restart
 ```
 
 ## Admin User

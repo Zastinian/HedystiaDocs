@@ -69,14 +69,28 @@ Copy and paste the following line to the file.
 * * * * * php /var/www/billing/artisan schedule:run >> /dev/null 2>&1
 ```
 
+## Set Permissions
+
+```bash
+# If using NGINX or Apache (not on CentOS):
+chown -R www-data:www-data /var/www/billing/*
+
+# If using NGINX on CentOS:
+chown -R nginx:nginx /var/www/billing/*
+
+# If using Apache on CentOS
+chown -R apache:apache /var/www/billing/*
+```
+
 ## Optimize Performance
 
 Cache the configurations and views to optimize the performance.
 
 ```shell
 php artisan config:cache
+
 php artisan view:cache
-chown -R www-data:www-data /var/www/billing/*
+
 php artisan queue:restart
 ```
 

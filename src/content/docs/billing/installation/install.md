@@ -55,6 +55,19 @@ php artisan migrate --seed --force
 php artisan p:update:settings
 ```
 
+## Set Permissions
+
+```bash
+# If using NGINX or Apache (not on CentOS):
+chown -R www-data:www-data /var/www/billing/*
+
+# If using NGINX on CentOS:
+chown -R nginx:nginx /var/www/billing/*
+
+# If using Apache on CentOS
+chown -R apache:apache /var/www/billing/*
+```
+
 ## Set Up Cron Job
 
 Then, let's set up a cron job. Run the following command to open the crontab configuration.
@@ -67,19 +80,6 @@ Copy and paste the following line to the file.
 
 ```shell
 * * * * * php /var/www/billing/artisan schedule:run >> /dev/null 2>&1
-```
-
-## Set Permissions
-
-```bash
-# If using NGINX or Apache (not on CentOS):
-chown -R www-data:www-data /var/www/billing/*
-
-# If using NGINX on CentOS:
-chown -R nginx:nginx /var/www/billing/*
-
-# If using Apache on CentOS
-chown -R apache:apache /var/www/billing/*
 ```
 
 ## Optimize Performance

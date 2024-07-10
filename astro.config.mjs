@@ -26,11 +26,9 @@ export default defineConfig({
             {
               label: "Start",
               link: "/billing/start",
-              collapsed: true,
             },
             {
               label: "Installation",
-              collapsed: true,
               autogenerate: {
                 directory: "billing/installation",
                 collapsed: true,
@@ -38,7 +36,6 @@ export default defineConfig({
             },
             {
               label: "Upgrade",
-              collapsed: true,
               autogenerate: {
                 directory: "billing/upgrade",
                 collapsed: true,
@@ -46,7 +43,6 @@ export default defineConfig({
             },
             {
               label: "Admin",
-              collapsed: true,
               autogenerate: {
                 directory: "billing/admin",
                 collapsed: true,
@@ -54,7 +50,6 @@ export default defineConfig({
             },
             {
               label: "Extensions",
-              collapsed: true,
               autogenerate: {
                 directory: "billing/extensions",
                 collapsed: true,
@@ -69,11 +64,9 @@ export default defineConfig({
             {
               label: "Start",
               link: "/builders/start",
-              collapsed: true,
             },
             {
               label: "Builder",
-              collapsed: true,
               autogenerate: {
                 directory: "builders/builder",
                 collapsed: true,
@@ -81,7 +74,6 @@ export default defineConfig({
             },
             {
               label: "Normal",
-              collapsed: true,
               autogenerate: {
                 directory: "builders/normal",
                 collapsed: true,
@@ -89,7 +81,6 @@ export default defineConfig({
             },
             {
               label: "Util",
-              collapsed: true,
               autogenerate: {
                 directory: "builders/util",
                 collapsed: true,
@@ -104,12 +95,10 @@ export default defineConfig({
             {
               label: "Start",
               link: "/db/start",
-              collapsed: true,
             },
             {
               label: "Example",
               link: "/db/example",
-              collapsed: true,
             },
           ],
         },
@@ -120,12 +109,10 @@ export default defineConfig({
             {
               label: "Start",
               link: "/dbrs/start",
-              collapsed: true,
             },
             {
               label: "Example",
               link: "/dbrs/example",
-              collapsed: true,
             },
           ],
         },
@@ -136,17 +123,14 @@ export default defineConfig({
             {
               label: "Start",
               link: "/stats/start",
-              collapsed: true,
             },
             {
               label: "Usage",
               link: "/stats/usage",
-              collapsed: true,
             },
             {
               label: "Themes",
               link: "/stats/themes",
-              collapsed: true,
             },
           ],
         },
@@ -157,32 +141,26 @@ export default defineConfig({
             {
               label: "Start",
               link: "/strange/start",
-              collapsed: true,
             },
             {
               label: "Api",
               link: "/strange/api",
-              collapsed: true,
             },
             {
               label: "Filters",
               link: "/strange/filters",
-              collapsed: true,
             },
             {
               label: "Generators",
               link: "/strange/generators",
-              collapsed: true,
             },
             {
               label: "Overlays",
               link: "/strange/overlays",
-              collapsed: true,
             },
             {
               label: "Utils",
               link: "/strange/utils",
-              collapsed: true,
             },
           ],
         },
@@ -193,16 +171,13 @@ export default defineConfig({
             {
               label: "Start",
               link: "/client/start",
-              collapsed: true,
             },
             {
               label: "Client",
               link: "/client/client",
-              collapsed: true,
             },
             {
               label: "Builders",
-              collapsed: true,
               autogenerate: {
                 directory: "client/builders",
                 collapsed: true,
@@ -210,7 +185,6 @@ export default defineConfig({
             },
             {
               label: "Managers",
-              collapsed: true,
               autogenerate: {
                 directory: "client/managers",
                 collapsed: true,
@@ -218,7 +192,6 @@ export default defineConfig({
             },
             {
               label: "Structures",
-              collapsed: true,
               autogenerate: {
                 directory: "client/structures",
                 collapsed: true,
@@ -226,7 +199,6 @@ export default defineConfig({
             },
             {
               label: "Util",
-              collapsed: true,
               autogenerate: {
                 directory: "client/util",
                 collapsed: true,
@@ -241,11 +213,9 @@ export default defineConfig({
             {
               label: "Start",
               link: "/useful/start",
-              collapsed: true,
             },
             {
               label: "Color",
-              collapsed: true,
               autogenerate: {
                 directory: "useful/color",
                 collapsed: true,
@@ -253,7 +223,6 @@ export default defineConfig({
             },
             {
               label: "Gen",
-              collapsed: true,
               autogenerate: {
                 directory: "useful/gen",
                 collapsed: true,
@@ -261,7 +230,6 @@ export default defineConfig({
             },
             {
               label: "Utils",
-              collapsed: true,
               autogenerate: {
                 directory: "useful/utils",
                 collapsed: true,
@@ -269,7 +237,6 @@ export default defineConfig({
             },
             {
               label: "Validation",
-              collapsed: true,
               autogenerate: {
                 directory: "useful/validation",
                 collapsed: true,

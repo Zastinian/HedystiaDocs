@@ -25,6 +25,7 @@ yarn add @hedystia/db
 
 | Function                 | Description                                    |
 | ------------------------ | ---------------------------------------------- |
+| `dropAll`                | To drop all the tables from the database       |
 | `readTables`             | To read the tables from the database           |
 | `createTable`            | To create a table                              |
 | `deleteTable`            | To delete a table                              |

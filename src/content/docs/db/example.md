@@ -61,4 +61,12 @@ const users3 = database.select("users");
 console.log("----------------------------------");
 
 console.log(users3);
+
+database.dropAll();
+
+const users4 = database.select("users");
+
+console.log("----------------------------------");
+
+console.log(users4);
 ```

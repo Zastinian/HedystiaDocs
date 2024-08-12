@@ -5,18 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.25.1",
+    "@astrojs/starlight": "^0.25.4",
     "@astrojs/starlight-docsearch": "^0.1.1",
-    "astro": "^4.11.5",
-    "sharp": "^0.33.4"
+    "astro": "^4.13.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.8.1",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }

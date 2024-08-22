@@ -27,6 +27,8 @@ yarn add @hedystia/db
 | ------------------------ | ---------------------------------------------- |
 | `dropAll`                | To drop all the tables from the database       |
 | `readTables`             | To read the tables from the database           |
+| `enableMigrations`       | To enable migrations                           |
+| `createMigration`        | To create a migration                          |
 | `createTable`            | To create a table                              |
 | `deleteTable`            | To delete a table                              |
 | `createTableIfNotExists` | To create a table if it does not exist         |

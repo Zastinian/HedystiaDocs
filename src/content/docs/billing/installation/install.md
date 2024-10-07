@@ -13,9 +13,9 @@ cd /var/www/billing
 ```
 
 ```shell
-curl -Lo HedystiaBilling.zip https://github.com/Zastinian/HedystiaBilling/releases/latest/download/HedystiaBilling.zip
-unzip HedystiaBilling.zip
-rm HedystiaBilling.zip
+curl -Lo Billing.zip https://github.com/Zastinian/Billing/releases/latest/download/Billing.zip
+unzip Billing.zip
+rm Billing.zip
 chmod -R 755 storage/* bootstrap/cache/
 ```
 
@@ -25,9 +25,9 @@ chmod -R 755 storage/* bootstrap/cache/
 mysql -u root -p
 
 # Remember to change 'yourPassword' below to be a unique password
-CREATE USER 'HedystiaBilling'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
+CREATE USER 'BillingUser'@'127.0.0.1' IDENTIFIED BY 'yourPassword';
 CREATE DATABASE billing;
-GRANT ALL PRIVILEGES ON billing.* TO 'HedystiaBilling'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON billing.* TO 'BillingUser'@'127.0.0.1' WITH GRANT OPTION;
 exit
 ```
 

@@ -20,11 +20,11 @@ cd /var/www/billing
 
 php artisan down
 
-curl -Lo HedystiaBilling.zip https://github.com/Zastinian/HedystiaBilling/releases/latest/download/HedystiaBilling.zip
+curl -Lo Billing.zip https://github.com/Zastinian/Billing/releases/latest/download/Billing.zip
 
-unzip HedystiaBilling.zip
+unzip Billing.zip
 
-rm HedystiaBilling.zip
+rm Billing.zip
 
 chmod -R 755 storage/* bootstrap/cache
 

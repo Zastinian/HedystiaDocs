@@ -11,4 +11,4 @@ Have a Discord account? Join our [Discord server](https://discord.gg/aXvuUpvRQs)
 
 ## License
 
-HedystiaBilling are licensed under the MIT license. Please take a look at the `LICENSE` files.
+Billing are licensed under the MIT license. Please take a look at the `LICENSE` files.

@@ -9,7 +9,7 @@ sidebar:
 
 ## Production Credentials
 
-Log into MercadoPago account and go to this page: [https://www.mercadopago.com/settings/account/credentials](https://www.mercadopago.com/settings/account/credentials). Then, go to the **Production Credentials** section and copy the **Access Token** and paste them into the MercadoPago settings page in HedystiaBilling. After that, click `Save Changes` and `Reload Config`.
+Log into MercadoPago account and go to this page: [https://www.mercadopago.com/settings/account/credentials](https://www.mercadopago.com/settings/account/credentials). Then, go to the **Production Credentials** section and copy the **Access Token** and paste them into the MercadoPago settings page in Billing. After that, click `Save Changes` and `Reload Config`.
 
 (If you don't have a MercadoPago account, you can create one [here](https://www.mercadopago.com/signup).)
 
@@ -21,7 +21,7 @@ Log into MercadoPago account and go to this page: [https://www.mercadopago.com/s
 
 **NOTE:** You should always test the billing system with Testing credentials before accepting payments from your clients.
 
-Log into MercadoPago account and go to this page: [https://www.mercadopago.com/settings/account/credentials](https://www.mercadopago.com/settings/account/credentials). Then, go to the **Testing Credentials** section and copy the **Access Token** and paste them into the MercadoPago settings page in HedystiaBilling. After that, click `Save Changes` and `Reload Config`.
+Log into MercadoPago account and go to this page: [https://www.mercadopago.com/settings/account/credentials](https://www.mercadopago.com/settings/account/credentials). Then, go to the **Testing Credentials** section and copy the **Access Token** and paste them into the MercadoPago settings page in Billing. After that, click `Save Changes` and `Reload Config`.
 
 (If you don't have a MercadoPago account, you can create one [here](https://www.mercadopago.com/signup).)
 

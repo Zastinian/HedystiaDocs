@@ -9,12 +9,22 @@ const Database = require("@hedystia/db");
 // Create a file named database.ht and enter the password
 const database = new Database("./database.ht", "password");
 
-// You can only use it once to create the table after that you can no longer use it.
+// Delete the table if it exists
+database.deleteTableIfExists("users");
+// Create a table if it doesn't exist with the specified columns
 database.createTable("users", ["id", "name", "email"]);
 
-database.insert("users", { id: "1", name: "John Doe", email: "jdoe@example.com" });
+database.insert("users", {
+	id: "1",
+	name: "John Doe",
+	email: "jdoe@example.com",
+});
 
-database.insert("users", { id: "2", name: "María", email: "maria@example.com" });
+database.insert("users", {
+	id: "2",
+	name: "María",
+	email: "maria@example.com",
+});
 
 const users = database.select("users");
 
@@ -62,13 +72,36 @@ console.log("----------------------------------");
 
 console.log(users3);
 
-database.dropAll();
+database.renameTable("users", "customers");
 
-const users4 = database.select("users");
+const users4 = database.select("customers");
 
 console.log("----------------------------------");
 
 console.log(users4);
+
+database.renameTable("customers", "users");
+
+database.renameColumn("users", "name", "fullName");
+
+const users5 = database.select("users");
+
+console.log("----------------------------------");
+
+console.log(users5);
+
+database.renameColumn("users", "fullName", "name");
+
+database.dropAll();
+
+const users6 = database.select("users");
+
+console.log("----------------------------------");
+
+console.log(users6);
+
+database.deleteTableIfExists("test_migration");
+database.deleteTableIfExists("migrations");
 
 database.enableMigrations();
 
@@ -95,4 +128,22 @@ const testMigration = database.select("test_migration");
 console.log("----------------------------------");
 
 console.log(testMigration);
+
+const tableNames = database.getTableNames();
+
+console.log("----------------------------------");
+
+console.log(tableNames);
+
+const columnNames = database.getColumnNames("users");
+
+console.log("----------------------------------");
+
+console.log(columnNames);
+
+const recordCount = database.getRecordCount("users");
+
+console.log("----------------------------------");
+
+console.log(recordCount);
 ```

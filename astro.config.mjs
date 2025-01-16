@@ -91,6 +91,20 @@ export default defineConfig({
           ],
         },
         {
+          label: "Cache",
+          collapsed: true,
+          items: [
+            {
+              label: "Start",
+              link: "/cache/start",
+            },
+            {
+              label: "Methods",
+              link: "/cache/methods",
+            },
+          ],
+        },
+        {
           label: "DataBase",
           collapsed: true,
           items: [

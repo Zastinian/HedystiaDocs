@@ -5,11 +5,13 @@ import starlightDocSearch from "@astrojs/starlight-docsearch";
 // https://astro.build/config
 export default defineConfig({
   site: "https://docs.hedystia.com",
+  prefetch: true,
   integrations: [
     starlight({
       title: "Docs",
       customCss: ["./src/styles/custom.css"],
       favicon: "/favicon.ico",
+      prerender: true,
       social: {
         github: "https://github.com/Zastinian",
         discord: "https://discord.gg/aXvuUpvRQs",

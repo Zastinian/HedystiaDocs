@@ -9,7 +9,8 @@ import {
   BarChart3,
   ChevronDown,
   ShieldCheck,
-  Eye
+  Eye,
+  Rocket
 } from 'lucide-vue-next'
 
 const route = useRoute()
@@ -25,6 +26,7 @@ const packages = [
   { name: 'Billing', id: 'billing', icon: CreditCard, path: '/billing/start' },
   { name: 'Cache', id: 'cache', icon: Zap, path: '/cache/start' },
   { name: 'Stats', id: 'stats', icon: BarChart3, path: '/stats/start' },
+  { name: 'WebSocket', id: 'websocket', icon: Rocket, path: '/websocket/start' },
 ]
 
 const currentPackage = computed(() => {
@@ -34,6 +36,7 @@ const currentPackage = computed(() => {
   if (route.path.includes('/billing')) return packages[4]
   if (route.path.includes('/cache')) return packages[5]
   if (route.path.includes('/stats')) return packages[6]
+  if (route.path.includes('/websocket')) return packages[7]
   return packages[0]
 })
 

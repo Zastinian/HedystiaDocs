@@ -273,6 +273,7 @@ export default defineConfig({
           items: [
             { text: "SQLite", link: "/db/drivers/sqlite" },
             { text: "MySQL", link: "/db/drivers/mysql" },
+            { text: "PostgreSQL", link: "/db/drivers/postgres" },
             { text: "File (Local)", link: "/db/drivers/file" },
             { text: "S3 (Cloud)", link: "/db/drivers/s3" },
           ],
@@ -289,6 +290,12 @@ export default defineConfig({
           text: "Guides",
           collapsed: false,
           items: [{ text: "Full Example", link: "/db/example" }],
+        },
+      ],
+      "/websocket/": [
+        {
+          text: "WebSocket",
+          items: [{ text: "Getting Started", link: "/websocket/start" }],
         },
       ],
       "/validations/": [

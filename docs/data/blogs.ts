@@ -8,6 +8,22 @@ export interface Blog {
 
 export const blogs: Blog[] = [
   {
+    title: "Hedystia 2.3 - Universal WebSocket, PostgreSQL, and Enhanced Validations",
+    href: "/blog/2.3",
+    cover: "/blog/2.3/cover.png",
+    detail:
+      "Native Node.js support, @hedystia/ws package, PostgreSQL driver, and 20+ new validation schema factories",
+    date: "09 May 2026",
+  },
+  {
+    title: "Hedystia 2.2 - Ecosystem Integrations",
+    href: "/blog/2.2",
+    cover: "/blog/2.2/cover.png",
+    detail:
+      "Astro integration for @hedystia/view and Better Auth adapter for @hedystia/db",
+    date: "28 Apr 2026",
+  },
+  {
     title: "Hedystia 2.1 - Reactive UI Engine",
     href: "/blog/2.1",
     cover: "/blog/2.1/cover.png",

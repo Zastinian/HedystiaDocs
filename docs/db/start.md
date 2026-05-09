@@ -5,7 +5,7 @@ description: Introduction to the @hedystia/db package.
 
 # Getting Started
 
-`@hedystia/db` is a type-safe, lightweight, and incredibly fast ORM designed for the Hedystia framework. It provides first-class TypeScript support, an intuitive API, and multiple database drivers including SQLite, MySQL, File, and S3.
+`@hedystia/db` is a type-safe, lightweight, and incredibly fast ORM designed for the Hedystia framework. It provides first-class TypeScript support, an intuitive API, and multiple database drivers including SQLite, MySQL, PostgreSQL, File, and S3.
 
 ## Installation
 
@@ -26,6 +26,11 @@ bun add better-sqlite3
 **For MySQL:**
 ```bash
 bun add mysql2
+```
+
+**For PostgreSQL:**
+```bash
+bun add pg
 ```
 
 ## Creating Your First Database

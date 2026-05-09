@@ -65,6 +65,59 @@ import { h } from 'hedystia'
 h.any()
 ```
 
+### `h.unknown()`
+
+Accepts any value, typed as `unknown` (safer than `any`).
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.unknown()
+```
+
+### `h.never()`
+
+Always fails validation. Useful for exhaustiveness checks.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.never()
+```
+
+### `h.bigint()`
+
+Validates a bigint value.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.bigint()                // any bigint
+h.bigint().min(0n)        // >= 0n
+h.bigint().max(100n)      // <= 100n
+h.bigint().coerce()       // coerce string/number → bigint
+```
+
+### `h.undefined()`
+
+Accepts only `undefined`.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.undefined()
+```
+
+### `h.void()`
+
+Accepts `void` (undefined).
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.void()
+```
+
 ## Composite Types
 
 ### `h.object()`
@@ -220,6 +273,197 @@ app.get(
     }),
   }
 )
+```
+
+### `h.union(...schemas)`
+
+Alias for `h.options`. Validates a union of multiple schemas.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.union(h.string(), h.number())
+```
+
+### `h.tuple(a, b, ...)`
+
+Fixed-length positional array with typed elements.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.tuple(h.string(), h.number())
+// [string, number]
+
+// With rest items
+h.tuple(h.string()).rest_(h.number())
+// [string, ...number[]]
+```
+
+### `h.record(v)`
+
+Object with dynamic string keys and typed values.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.record(h.number())
+// { [key: string]: number }
+```
+
+### `h.map(k, v)`
+
+Validates a native `Map` with typed key and value.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.map(h.string(), h.number())
+// Map<string, number>
+```
+
+### `h.set(v)`
+
+Validates a native `Set` with typed values.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.set(h.string())
+// Set<string>
+```
+
+### `h.intersection(a, b, ...)`
+
+Combines multiple schemas via deep merge of object outputs.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.intersection(
+  h.object({ a: h.string() }),
+  h.object({ b: h.number() })
+)
+// { a: string; b: number }
+```
+
+### `h.discriminatedUnion(d, [...])`
+
+Tagged union with O(1) discriminator lookup for performance.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.discriminatedUnion('type', [
+  h.object({ type: h.literal('a'), value: h.string() }),
+  h.object({ type: h.literal('b'), count: h.number() }),
+])
+```
+
+### `h.lazy(() => schema)`
+
+Recursive schemas for self-referencing types.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+interface Category {
+  name: string
+  children: Category[]
+}
+const categorySchema = h.object({
+  name: h.string(),
+  children: h.lazy(() => categorySchema).array(),
+})
+```
+
+## Transform & Refine
+
+### `h.default(schema, value)`
+
+Fills in a default when input is `undefined` or `null`.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.default(h.string(), 'hello')
+```
+
+### `h.transform(schema, fn)`
+
+Post-process the validated value.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.transform(h.string(), (s) => s.toUpperCase())
+```
+
+### `h.refine(schema, check, msg?)`
+
+Custom validation. Return `true` (pass), `false`, or a string/Issue array.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.refine(h.string(), (s) => s.length > 3, 'Must be > 3 chars')
+```
+
+### `h.pipe(a, b)`
+
+Chain two schemas sequentially, passing output of `a` as input to `b`.
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.pipe(h.string(), h.transform(h.string(), (s) => s.length))
+```
+
+## Coercion Shortcuts
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.coerce.string()     // h.string().coerce()
+h.coerce.number()     // h.number().coerce()
+h.coerce.boolean()    // h.boolean().coerce()
+h.coerce.bigint()     // h.bigint().coerce()
+```
+
+## Object Schema Methods
+
+Object schemas have additional methods for manipulation:
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+const obj = h.object({ name: h.string(), age: h.number(), bio: h.string().optional() })
+
+obj.strict()          // Reject unknown keys
+obj.passthrough()     // Allow unknown keys
+obj.pick(['name'])    // { name: string }
+obj.omit(['age'])     // { name: string; bio: string | undefined }
+obj.partial()         // All keys become optional
+obj.extend({ role: h.string() })   // Add more fields
+obj.merge(other)      // Deep merge with another object schema
+```
+
+## Array Schema Methods
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.string().array().min(1)     // At least 1 item
+h.string().array().max(10)    // At most 10 items
+h.string().array().nonEmpty() // Alias for min(1)
+```
+
+## Number Schema Methods
+
+```ts twoslash
+// @noErrors
+import { h } from 'hedystia'
+h.number().int()     // Must be an integer
 ```
 
 ## Standard Schema Compatibility

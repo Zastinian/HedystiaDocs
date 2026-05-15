@@ -20,13 +20,13 @@ description: Render children outside the component hierarchy with Portal.
 import { sig, val, set, mount, Portal, Show } from "@hedystia/view";
 
 function App() {
-  const showModal = sig(false);
+  const [showModal, setShowModal] = sig(false);
 
   return (
     <div>
-      <button onClick={() => set(showModal, true)}>Open Modal</button>
+      <button onClick={() => setShowModal(true)}>Open Modal</button>
 
-      <Show when={() => val(showModal)}>
+      <Show when={showModal}>
         <Portal>
           <div
             style={{
@@ -37,7 +37,7 @@ function App() {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onClick={() => set(showModal, false)}
+            onClick={() => setShowModal(false)}
           >
             <div
               style={{
@@ -49,7 +49,7 @@ function App() {
             >
               <h2>Modal</h2>
               <p>This is rendered in document.body via Portal.</p>
-              <button onClick={() => set(showModal, false)}>Close</button>
+              <button onClick={() => setShowModal(false)}>Close</button>
             </div>
           </div>
         </Portal>

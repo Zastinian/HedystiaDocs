@@ -33,15 +33,15 @@ Configure your `tsconfig.json` to use the `@hedystia/view` JSX runtime:
 ## Your First Component
 
 ```tsx
-import { sig, val, set, mount } from "@hedystia/view";
+import { sig, mount } from "@hedystia/view";
 
 function Counter() {
-  const count = sig(0);
+  const [count, setCount] = sig(0);
 
   return (
     <div>
-      <p>Count: {() => val(count)}</p>
-      <button onClick={() => set(count, val(count) + 1)}>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>
         Increment
       </button>
     </div>
@@ -55,9 +55,9 @@ mount(Counter, document.getElementById("root")!);
 
 **Components run once.** The `Counter` function above executes a single time. After that, only the reactive expressions update the DOM.
 
-- **Reactive text**: Use `{() => val(signal)}` as a child — the function wrapper creates an effect that updates the text node when the signal changes.
-- **Reactive style**: Use `style={() => ({ color: val(active) ? "red" : "blue" })}` — the function creates an effect that updates the element's style.
-- **Static capture**: `{val(count)}` reads the signal once at component creation and never updates.
+- **Reactive text**: Pass a signal accessor like `{count}` or `{() => count()}` as a child — the runtime creates an effect that updates the text node when the signal changes.
+- **Reactive style**: Use `style={() => ({ color: active() ? "red" : "blue" })}` — the function creates an effect that updates the element's style.
+- **Static capture**: `{count()}` read during component execution (not inside an accessor/child function) captures the value once and never updates.
 
 ## Mounting
 

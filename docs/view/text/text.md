@@ -55,13 +55,13 @@ interface TextItem {
 }
 
 function TextPreview() {
-  const item = sig<TextItem>({ content: "Hello, world!", font: "16px sans-serif" });
-  const width = sig(300);
+  const [item, setItem] = sig<TextItem>({ content: "Hello, world!", font: "16px sans-serif" });
+  const [width, setWidth] = sig(300);
 
   const result = reactiveLayout(
-    () => val(item),
+    item,
     (i) => prepare(i.content, i.font),
-    val(width),
+    width(),
     20,
   );
 
@@ -71,21 +71,21 @@ function TextPreview() {
         type="range"
         min="100"
         max="600"
-        value={() => val(width)}
-        onInput={(e) => set(width, Number((e.target as HTMLInputElement).value))}
+        value={width}
+        onInput={(e) => setWidth(Number((e.target as HTMLInputElement).value))}
       />
-      <p>Width: {() => val(width)}px</p>
+      <p>Width: {width}px</p>
       <p>Lines: {() => result().lineCount}</p>
       <p>Height: {() => result().height}px</p>
       <div
         style={() => ({
-          width: `${val(width)}px`,
+          width: `${width()}px`,
           border: "1px solid #ccc",
           padding: "8px",
-          font: val(item).font,
+          font: item().font,
         })}
       >
-        {() => val(item).content}
+        {() => item().content}
       </div>
     </div>
   );

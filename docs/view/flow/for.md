@@ -13,9 +13,9 @@ description: Keyed list rendering with the For component.
 |------|------|-------------|
 | `each` | `T[] \| () => T[]` | The array to iterate — static or accessor |
 | `key` | `(item: T) => string \| number` | Optional key function. Defaults to index |
-| `children` | `(item: () => T, index: () => number) => JSX.Element` | Render function for each item |
+| `children` | `(item: T, index: number) => JSX.Element` | Render function for each item |
 
-The `children` render function receives accessors (not raw values) so individual items can update reactively.
+The `children` render function receives raw values. Individual item properties can still be reactive if they were signals in the original data.
 
 ## Example
 
@@ -54,8 +54,8 @@ function TodoList() {
         >
           {(todo, index) => (
             <li>
-              {() => `${val(index) + 1}. ${val(todo).text}`}
-              <button onClick={() => removeTodo(val(todo).id)}>✕</button>
+              {() => `${index + 1}. ${todo.text}`}
+              <button onClick={() => removeTodo(todo.id)}>✕</button>
             </li>
           )}
         </For>
@@ -63,6 +63,6 @@ function TodoList() {
     </div>
   );
 }
-
+```
 mount(TodoList, document.getElementById("root")!);
 ```

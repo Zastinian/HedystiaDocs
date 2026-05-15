@@ -14,39 +14,42 @@ The critical distinction:
 <div v-pre>
 
 ```tsx
-import { sig, val, set } from "@hedystia/view";
+import { sig, val } from "@hedystia/view";
 
 const count = sig(0);
+const [c] = sig(0);
 
 // ❌ STATIC — captures the value once, never updates
 <span>{val(count)}</span>
+<span>{c()}</span>
 
 // ✅ REACTIVE — creates an effect, updates when count changes
 <span>{() => val(count)}</span>
+<span>{c}</span>
 ```
 
 </div>
 
-The first example reads `count` at component creation time and inserts that number as a static text node. The second wraps the read in a function — the JSX runtime creates an effect that re-runs the function and updates the text node whenever `count` changes.
+The first examples read the signal at component creation time and insert that value as a static text node. The reactive examples pass the signal accessor (or a function wrapping the read) — the JSX runtime creates an effect that re-runs the function and updates the text node whenever the signal changes.
 
 ## Reactive Text
 
-Use a function child to create reactive text content:
+Use a signal accessor or a function child to create reactive text content:
 
 <div v-pre>
 
 ```tsx
-import { sig, val, set, mount } from "@hedystia/view";
+import { sig, mount } from "@hedystia/view";
 
 function Greeting() {
-  const name = sig("world");
+  const [name, setName] = sig("world");
 
   return (
     <div>
-      <h1>Hello, {() => val(name)}!</h1>
+      <h1>Hello, {name}!</h1>
       <input
-        value={() => val(name)}
-        onInput={(e) => set(name, (e.target as HTMLInputElement).value)}
+        value={name}
+        onInput={(e) => setName((e.target as HTMLInputElement).value)}
       />
     </div>
   );
@@ -64,20 +67,20 @@ Pass a function to `style` to make it reactive:
 <div v-pre>
 
 ```tsx
-import { sig, val, set, mount } from "@hedystia/view";
+import { sig, mount } from "@hedystia/view";
 
 function ToggleColor() {
-  const active = sig(false);
+  const [active, setActive] = sig(false);
 
   return (
     <div
       style={() => ({
-        color: val(active) ? "green" : "gray",
-        fontWeight: val(active) ? "bold" : "normal",
+        color: active() ? "green" : "gray",
+        fontWeight: active() ? "bold" : "normal",
       })}
-      onClick={() => set(active, !val(active))}
+      onClick={() => setActive(!active())}
     >
-      {() => val(active) ? "Active" : "Inactive"}
+      {() => active() ? "Active" : "Inactive"}
     </div>
   );
 }
@@ -94,19 +97,19 @@ Any non-event prop that receives a function becomes reactive:
 <div v-pre>
 
 ```tsx
-import { sig, val, set, mount } from "@hedystia/view";
+import { sig, mount } from "@hedystia/view";
 
 function DynamicInput() {
-  const text = sig("");
+  const [text, setText] = sig("");
 
   return (
     <div>
       <input
-        value={() => val(text)}
-        onInput={(e) => set(text, (e.target as HTMLInputElement).value)}
+        value={text}
+        onInput={(e) => setText((e.target as HTMLInputElement).value)}
       />
-      <p class={() => val(text).length > 10 ? "long" : "short"}>
-        {() => val(text).length} characters
+      <p class={() => text().length > 10 ? "long" : "short"}>
+        {() => text().length} characters
       </p>
     </div>
   );
@@ -127,16 +130,16 @@ Return an array from a function child to render a reactive list:
 import { sig, val, set, mount } from "@hedystia/view";
 
 function TodoList() {
-  const items = sig(["Buy milk", "Walk dog"]);
+  const [items, setItems] = sig(["Buy milk", "Walk dog"]);
 
   const addItem = () => {
-    set(items, [...val(items), `Item ${val(items).length + 1}`]);
+    setItems((curr) => [...curr, `Item ${curr.length + 1}`]);
   };
 
   return (
     <div>
       <ul>
-        {() => val(items).map((item) => <li>{item}</li>)}
+        {() => items().map((item) => <li>{item}</li>)}
       </ul>
       <button onClick={addItem}>Add</button>
     </div>
@@ -157,15 +160,15 @@ Return different elements from a function child for conditional rendering:
 <div v-pre>
 
 ```tsx
-import { sig, val, set, mount } from "@hedystia/view";
+import { sig, mount } from "@hedystia/view";
 
 function Toggle() {
-  const show = sig(true);
+  const [show, setShow] = sig(true);
 
   return (
     <div>
-      <button onClick={() => set(show, !val(show))}>Toggle</button>
-      {() => val(show)
+      <button onClick={() => setShow(!show())}>Toggle</button>
+      {() => show()
         ? <p>Content is visible</p>
         : <p style={{ color: "gray" }}>Content is hidden</p>
       }
@@ -184,11 +187,11 @@ For cleaner conditional rendering, use the [`Show`](/view/flow/show) component.
 
 | Pattern | Syntax | Creates Effect? |
 |---------|--------|----------------|
-| Static text | `{val(count)}` | No — read once |
-| Reactive text | `{() => val(count)}` | Yes |
+| Static text | `{val(count)}` or `{c()}` | No — read once |
+| Reactive text | `{() => val(count)}` or `{c}` | Yes |
 | Static style | `style={ { color: "red" }}` | No |
-| Reactive style | `style={() => ({ color: val(c) })}` | Yes |
+| Reactive style | `style={() => ({ color: c() })}` | Yes |
 | Static prop | `value={val(text)}` | No — set once |
-| Reactive prop | `value={() => val(text)}` | Yes |
-| Reactive list | `{() => val(items).map(...)}` | Yes |
-| Reactive cond | `{() => val(show) ? <A /> : <B />}` | Yes |
+| Reactive prop | `value={text}` | Yes |
+| Reactive list | `{() => items().map(...)}` | Yes |
+| Reactive cond | `{() => show() ? <A /> : <B />}` | Yes |

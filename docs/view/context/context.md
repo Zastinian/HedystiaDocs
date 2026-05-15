@@ -86,13 +86,13 @@ function UserBadge() {
 }
 
 function App() {
-  const user = sig("Alice");
+  const [user, setUser] = sig("Alice");
 
   return (
     <AuthCtx.Provider
       value={{
-        user: val(user),
-        logout: () => set(user, "Guest"),
+        user: user(),
+        logout: () => setUser("Guest"),
       }}
     >
       <UserBadge />

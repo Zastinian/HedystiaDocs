@@ -5,7 +5,7 @@ description: Core reactive signals API — sig, val, set, update, peek.
 
 # Signals
 
-Signals are the foundation of reactivity in `@hedystia/view`. They hold mutable state with automatic dependency tracking. Components run once — use `() => val(signal)` in JSX to create reactive bindings.
+Signals are the foundation of reactivity in `@hedystia/view`. They hold mutable state with automatic dependency tracking. Components run once — use signal accessors or `() => val(signal)` in JSX to create reactive bindings.
 
 ## `sig<T>(value, options?)`
 
@@ -19,6 +19,23 @@ const name = sig("Alice");
 const items = sig<string[]>([]);
 ```
 
+### Destructuring (Recommended)
+
+Signals can be destructured into a `[getter, setter]` tuple:
+
+```tsx
+const [count, setCount] = sig(0);
+
+// Read
+count();
+
+// Write
+setCount(5);
+
+// Update
+setCount((prev) => prev + 1);
+```
+
 ## `val<T>(signal)`
 
 Read the current value of a signal. Inside a reactive context (effects, memos, JSX function children), this registers a dependency so the context re-runs when the signal changes.
@@ -30,6 +47,12 @@ const count = sig(0);
 
 function Display() {
   return <span>{() => val(count)}</span>;
+}
+
+// Or with destructuring:
+const [value] = sig(0);
+function DisplayDestructured() {
+  return <span>{value}</span>;
 }
 ```
 
@@ -46,6 +69,16 @@ function Counter() {
   return (
     <button onClick={() => set(count, val(count) + 1)}>
       Clicked {() => val(count)} times
+    </button>
+  );
+}
+
+// Or with destructuring:
+const [c, setC] = sig(0);
+function CounterDestructured() {
+  return (
+    <button onClick={() => setC((v) => v + 1)}>
+      Clicked {c} times
     </button>
   );
 }

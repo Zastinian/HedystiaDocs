@@ -21,16 +21,16 @@ description: Conditional rendering with the Show component.
 import { sig, val, set, mount, Show } from "@hedystia/view";
 
 function App() {
-  const loggedIn = sig(false);
+  const [loggedIn, setLoggedIn] = sig(false);
 
   return (
     <div>
-      <button onClick={() => set(loggedIn, !val(loggedIn))}>
-        {() => val(loggedIn) ? "Log out" : "Log in"}
+      <button onClick={() => setLoggedIn(!loggedIn())}>
+        {() => loggedIn() ? "Log out" : "Log in"}
       </button>
 
       <Show
-        when={() => val(loggedIn)}
+        when={loggedIn}
         fallback={<p>Please log in to continue.</p>}
       >
         <div>

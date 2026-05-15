@@ -79,7 +79,7 @@ Property names are automatically converted from camelCase to kebab-case.
 import { sig, val, set, style, merge, mount } from "@hedystia/view";
 
 function ThemedCard() {
-  const dark = sig(false);
+  const [dark, setDark] = sig(false);
 
   const baseStyle = style({
     padding: "16px",
@@ -91,13 +91,13 @@ function ThemedCard() {
     <div
       style={() =>
         merge(baseStyle(), {
-          backgroundColor: val(dark) ? "#1a1a1a" : "#ffffff",
-          color: val(dark) ? "#ffffff" : "#1a1a1a",
+          backgroundColor: dark() ? "#1a1a1a" : "#ffffff",
+          color: dark() ? "#ffffff" : "#1a1a1a",
         })
       }
     >
       <p>Themed card content</p>
-      <button onClick={() => set(dark, !val(dark))}>
+      <button onClick={() => setDark(!dark())}>
         Toggle theme
       </button>
     </div>

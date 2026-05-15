@@ -48,23 +48,23 @@ watch(count, (value, prev) => console.log(value, prev));
 ## Example: Sync to localStorage
 
 ```tsx
-import { sig, set, watch, mount } from "@hedystia/view";
+import { sig, watch, mount } from "@hedystia/view";
 
 function Settings() {
-  const theme = sig(localStorage.getItem("theme") ?? "light");
+  const [theme, setTheme] = sig(localStorage.getItem("theme") ?? "light");
 
   watch(theme, (t) => localStorage.setItem("theme", t));
 
   return (
     <div>
-      <p>Theme: {() => val(theme)}</p>
-      <button onClick={() => set(theme, val(theme) === "light" ? "dark" : "light")}>
+      <p>Theme: {theme}</p>
+      <button onClick={() => setTheme(theme() === "light" ? "dark" : "light")}>
         Toggle
       </button>
     </div>
   );
 }
-
+```
 mount(Settings, document.getElementById("root")!);
 ```
 

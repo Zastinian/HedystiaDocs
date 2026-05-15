@@ -42,8 +42,8 @@ interface SaveResult {
 }
 
 function SaveForm() {
-  const name = sig("");
-  const email = sig("");
+  const [name, setName] = sig("");
+  const [email, setEmail] = sig("");
 
   const save = action(async (data: { name: string; email: string }): Promise<SaveResult> => {
     const res = await fetch("/api/users", {
@@ -56,22 +56,22 @@ function SaveForm() {
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
-    save.run({ name: val(name), email: val(email) });
+    save.run({ name: name(), email: email() });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        value={() => val(name)}
-        onInput={(e) => set(name, (e.target as HTMLInputElement).value)}
+        value={name}
+        onInput={(e) => setName((e.target as HTMLInputElement).value)}
         placeholder="Name"
       />
       <input
-        value={() => val(email)}
-        onInput={(e) => set(email, (e.target as HTMLInputElement).value)}
+        value={email}
+        onInput={(e) => setEmail((e.target as HTMLInputElement).value)}
         placeholder="Email"
       />
-      <button disabled={() => val(save.loading)}>
+      <button disabled={save.loading}>
         {() => val(save.loading) ? "Saving..." : "Save"}
       </button>
 

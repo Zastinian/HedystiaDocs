@@ -54,26 +54,26 @@ const dispose = on(
 ## Example: Sync to localStorage
 
 ```tsx
-import { sig, val, set, on, mount } from "@hedystia/view";
+import { sig, on, mount } from "@hedystia/view";
 
 function Settings() {
-  const theme = sig(localStorage.getItem("theme") ?? "light");
+  const [theme, setTheme] = sig(localStorage.getItem("theme") ?? "light");
 
   on(
-    () => val(theme),
+    theme, // track the signal accessor
     (t) => localStorage.setItem("theme", t),
   );
 
   return (
     <div>
-      <p>Theme: {() => val(theme)}</p>
-      <button onClick={() => set(theme, val(theme) === "light" ? "dark" : "light")}>
+      <p>Theme: {theme}</p>
+      <button onClick={() => setTheme(theme() === "light" ? "dark" : "light")}>
         Toggle
       </button>
     </div>
   );
 }
-
+```
 mount(Settings, document.getElementById("root")!);
 ```
 

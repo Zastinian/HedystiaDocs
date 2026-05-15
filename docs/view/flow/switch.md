@@ -29,12 +29,12 @@ import { sig, val, set, mount, Switch, Match } from "@hedystia/view";
 type Status = "loading" | "error" | "success";
 
 function StatusView() {
-  const status = sig<Status>("loading");
+  const [status, setStatus] = sig<Status>("loading");
 
   return (
     <div>
       <select
-        onInput={(e) => set(status, (e.target as HTMLSelectElement).value as Status)}
+        onInput={(e) => setStatus((e.target as HTMLSelectElement).value as Status)}
       >
         <option value="loading">Loading</option>
         <option value="error">Error</option>
@@ -42,13 +42,13 @@ function StatusView() {
       </select>
 
       <Switch fallback={<p>Unknown state</p>}>
-        <Match when={() => val(status) === "loading"}>
+        <Match when={() => status() === "loading"}>
           <p>Loading data...</p>
         </Match>
-        <Match when={() => val(status) === "error"}>
+        <Match when={() => status() === "error"}>
           <p style={{ color: "red" }}>Something went wrong!</p>
         </Match>
-        <Match when={() => val(status) === "success"}>
+        <Match when={() => status() === "success"}>
           <p style={{ color: "green" }}>Data loaded successfully.</p>
         </Match>
       </Switch>

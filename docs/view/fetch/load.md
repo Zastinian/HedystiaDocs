@@ -57,10 +57,10 @@ interface User {
 }
 
 function UserCard() {
-  const userId = sig(1);
+  const [userId, setUserId] = sig(1);
 
   const user = load(
-    () => val(userId),
+    userId,
     async (id): Promise<User> => {
       const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
       return res.json();
@@ -70,8 +70,8 @@ function UserCard() {
   return (
     <div>
       <div>
-        <button onClick={() => set(userId, val(userId) - 1)}>Previous</button>
-        <button onClick={() => set(userId, val(userId) + 1)}>Next</button>
+        <button onClick={() => setUserId(userId() - 1)}>Previous</button>
+        <button onClick={() => setUserId(userId() + 1)}>Next</button>
       </div>
 
       {() => {

@@ -12,9 +12,9 @@ description: Index-based list rendering with the Index component.
 | Prop | Type | Description |
 |------|------|-------------|
 | `each` | `T[] \| () => T[]` | The array to iterate — static or accessor |
-| `children` | `(item: () => T, index: number) => JSX.Element` | Render function receiving an item accessor and a static index |
+| `children` | `(item: T, index: number) => JSX.Element` | Render function receiving a raw item value and a static index |
 
-Note that `index` is a plain number (not an accessor) since the node is always at the same position.
+Note that `index` is a plain number since the node is always at the same position.
 
 ## Example
 
@@ -39,7 +39,7 @@ function ColorPalette() {
               style={() => ({
                 width: "48px",
                 height: "48px",
-                backgroundColor: val(color),
+                backgroundColor: color,
                 borderRadius: "4px",
               })}
               title={`Color ${index}`}
@@ -50,7 +50,7 @@ function ColorPalette() {
     </div>
   );
 }
-
+```
 mount(ColorPalette, document.getElementById("root")!);
 ```
 

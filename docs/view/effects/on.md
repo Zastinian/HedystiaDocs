@@ -10,10 +10,12 @@ description: Create reactive side effects with on().
 ## `on<T>(track, run)`
 
 ```tsx
-import { on } from "@hedystia/view";
+import { on, sig } from "@hedystia/view";
+
+const [count, setCount] = sig(0);
 
 const dispose = on(
-  () => val(signal),              // track: dependencies are tracked here
+  count,                          // track: signal accessor
   (value, prevValue) => {         // run: executes untracked
     console.log(value, prevValue);
     return () => { /* cleanup */ };
@@ -25,7 +27,7 @@ const dispose = on(
 
 | Parameter | Description |
 |-----------|-------------|
-| `track` | A function whose signal reads are tracked as dependencies |
+| `track` | A function or accessor whose signal reads are tracked as dependencies |
 | `run` | Callback receiving `(value, prevValue)`. Runs untracked. May return a cleanup function |
 
 ### Return Value

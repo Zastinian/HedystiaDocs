@@ -9,19 +9,18 @@ Signals are the foundation of reactivity in `@hedystia/view`. They hold mutable 
 
 ## `sig<T>(value, options?)`
 
-Create a reactive signal with an initial value.
+Create a reactive signal with an initial value. Signals are **functions** (accessors) that return their current value when called.
 
 ```tsx
 import { sig } from "@hedystia/view";
 
 const count = sig(0);
-const name = sig("Alice");
-const items = sig<string[]>([]);
+console.log(count()); // 0
 ```
 
 ### Destructuring (Recommended)
 
-Signals can be destructured into a `[getter, setter]` tuple:
+Signals can be destructured into a `[getter, setter]` tuple for a cleaner API:
 
 ```tsx
 const [count, setCount] = sig(0);
@@ -38,50 +37,37 @@ setCount((prev) => prev + 1);
 
 ## `val<T>(signal)`
 
-Read the current value of a signal. Inside a reactive context (effects, memos, JSX function children), this registers a dependency so the context re-runs when the signal changes.
+Read the value of a signal, accessor, or static value. `val()` is a **universal unwrapper**:
+
+1. If passed a **Signal** or **Computed**, it returns the value and registers a dependency.
+2. If passed a **Function** (Accessor), it calls it and returns the result (also tracking if the function reads signals).
+3. If passed any **Other Value**, it returns it as-is.
 
 ```tsx
 import { sig, val } from "@hedystia/view";
 
-const count = sig(0);
+const [count] = sig(0);
 
-function Display() {
-  return <span>{() => val(count)}</span>;
-}
-
-// Or with destructuring:
-const [value] = sig(0);
-function DisplayDestructured() {
-  return <span>{value}</span>;
-}
+val(count);     // 0 (tracked)
+val(() => 10);  // 10
+val("hello");   // "hello"
 ```
+
+In JSX, passing a signal or accessor directly is enough to create a reactive binding: `<span>{count}</span>`.
 
 ## `set<T>(signal, value)`
 
-Write a new value to a signal, notifying all dependents.
+Write a new value to a signal, notifying all dependents. You can pass the signal object or the destructured setter.
 
 ```tsx
-import { sig, val, set } from "@hedystia/view";
+import { sig, set } from "@hedystia/view";
 
 const count = sig(0);
-
-function Counter() {
-  return (
-    <button onClick={() => set(count, val(count) + 1)}>
-      Clicked {() => val(count)} times
-    </button>
-  );
-}
+set(count, 1);
 
 // Or with destructuring:
 const [c, setC] = sig(0);
-function CounterDestructured() {
-  return (
-    <button onClick={() => setC((v) => v + 1)}>
-      Clicked {c} times
-    </button>
-  );
-}
+setC(2);
 ```
 
 ## `update<T>(signal, fn)`

@@ -335,6 +335,7 @@ export default defineConfig({
           text: "Effects",
           collapsed: false,
           items: [
+            { text: "effect", link: "/view/effects/effect" },
             { text: "on", link: "/view/effects/on" },
             { text: "once", link: "/view/effects/once" },
             { text: "watch", link: "/view/effects/watch" },

@@ -76,7 +76,7 @@ app.dispose();
 
 - **[Signals](/view/signals/signals)**: `sig`, `val`, `set`, `update`, `peek`
 - **[Memo](/view/signals/memo)**: Derived/computed signals
-- **[Effects](/view/effects/on)**: Reactive side effects with `on` and `once`
+- **[Effects](/view/effects/on)**: Reactive side effects with `effect`, `on` and `once`
 - **[Reactive JSX](/view/jsx/reactive)**: Patterns for reactive rendering
 - **[Flow Components](/view/flow/show)**: `Show`, `For`, `Index`, `Switch`, `Portal`
 - **[Data Fetching](/view/fetch/load)**: `load` and `action`

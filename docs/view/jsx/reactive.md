@@ -9,7 +9,7 @@ Reactivity in @hedystia/view comes from wrapping expressions in functions. The J
 
 ## Static vs Reactive
 
-The critical distinction:
+The critical distinction: **JSX expressions must be functions to be reactive.**
 
 <div v-pre>
 
@@ -19,18 +19,22 @@ import { sig, val } from "@hedystia/view";
 const count = sig(0);
 const [c] = sig(0);
 
-// ❌ STATIC — captures the value once, never updates
+// ❌ STATIC — values are read once at render time
 <span>{val(count)}</span>
 <span>{c()}</span>
 
-// ✅ REACTIVE — creates an effect, updates when count changes
+// ✅ REACTIVE — functions are wrapped in effects
 <span>{() => val(count)}</span>
 <span>{c}</span>
 ```
 
 </div>
 
-The first examples read the signal at component creation time and insert that value as a static text node. The reactive examples pass the signal accessor (or a function wrapping the read) — the JSX runtime creates an effect that re-runs the function and updates the text node whenever the signal changes.
+The first examples read the signal at component execution time and insert the resulting value as a static text node. 
+
+The reactive examples pass a **function**. The JSX runtime detects function children and creates an `effect` that re-runs the function whenever its dependencies change. Since a destructured signal accessor (like `c`) is already a function `() => T`, you can pass it directly.
+
+> **Note:** If you need to perform an operation on the value, you must wrap it in a new arrow function: `<span>{() => c() + 1}</span>`. Passing `{c() + 1}` would pass a static number.
 
 ## Reactive Text
 
@@ -54,7 +58,7 @@ function Greeting() {
     </div>
   );
 }
-
+```
 mount(Greeting, document.getElementById("root")!);
 ```
 

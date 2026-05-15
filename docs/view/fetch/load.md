@@ -29,10 +29,10 @@ const resource = load(
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `data` | `Signal<T \| undefined>` | The fetched data |
-| `loading` | `Signal<boolean>` | Whether a fetch is in progress |
-| `error` | `Signal<Error \| undefined>` | The error, if any |
-| `state` | `Signal<string>` | `"pending"`, `"ready"`, `"refreshing"`, or `"errored"` |
+| `data` | `Accessor<T \| undefined>` | The fetched data |
+| `loading` | `Accessor<boolean>` | Whether a fetch is in progress |
+| `error` | `Accessor<Error \| undefined>` | The error, if any |
+| `state` | `Accessor<string>` | `"pending"`, `"ready"`, `"refreshing"`, or `"errored"` |
 | `ready` | `boolean` | Getter — `true` when state is `"ready"` |
 
 ### State Transitions
@@ -48,7 +48,7 @@ const resource = load(
 ## JSX Example
 
 ```tsx
-import { sig, val, set, load, mount } from "@hedystia/view";
+import { sig, load, mount } from "@hedystia/view";
 
 interface User {
   id: number;
@@ -75,10 +75,10 @@ function UserCard() {
       </div>
 
       {() => {
-        if (val(user.loading)) return <p>Loading...</p>;
-        if (val(user.error)) return <p>Error: {val(user.error)!.message}</p>;
+        if (user.loading()) return <p>Loading...</p>;
+        if (user.error()) return <p>Error: {user.error()!.message}</p>;
 
-        const data = val(user.data);
+        const data = user.data();
         if (!data) return <p>No user</p>;
 
         return (
@@ -91,6 +91,7 @@ function UserCard() {
     </div>
   );
 }
+```
 
 mount(UserCard, document.getElementById("root")!);
 ```

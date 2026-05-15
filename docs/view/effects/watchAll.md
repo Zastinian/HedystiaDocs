@@ -25,7 +25,7 @@ const dispose = watchAll(
 
 | Parameter | Description |
 |-----------|-------------|
-| `signals` | An array of `Signal` or `Computed` signals to track |
+| `signals` | An array of signals or accessors to track |
 | `run` | Callback receiving `(values, prevValues)` as tuples matching the signal array. Runs untracked. May return a cleanup function |
 
 ### Return Value

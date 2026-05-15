@@ -27,14 +27,14 @@ const saveUser = action(async (data: { name: string; email: string }) => {
 | Property | Type | Description |
 |----------|------|-------------|
 | `run(args)` | `(args: A) => Promise<T>` | Execute the action |
-| `loading` | `Signal<boolean>` | Whether the action is in progress |
-| `error` | `Signal<Error \| undefined>` | The error, if the action failed |
-| `data` | `Signal<T \| undefined>` | The result of the last successful run |
+| `loading` | `Accessor<boolean>` | Whether the action is in progress |
+| `error` | `Accessor<Error \| undefined>` | The error, if the action failed |
+| `data` | `Accessor<T \| undefined>` | The result of the last successful run |
 
 ## JSX Example
 
 ```tsx
-import { sig, val, set, action, mount } from "@hedystia/view";
+import { sig, action, mount } from "@hedystia/view";
 
 interface SaveResult {
   id: number;
@@ -72,20 +72,21 @@ function SaveForm() {
         placeholder="Email"
       />
       <button disabled={save.loading}>
-        {() => val(save.loading) ? "Saving..." : "Save"}
+        {() => save.loading() ? "Saving..." : "Save"}
       </button>
 
-      {() => val(save.error)
-        ? <p style={{ color: "red" }}>Error: {val(save.error)!.message}</p>
+      {() => save.error()
+        ? <p style={{ color: "red" }}>Error: {save.error()!.message}</p>
         : null
       }
-      {() => val(save.data)
+      {() => save.data()
         ? <p style={{ color: "green" }}>Saved successfully!</p>
         : null
       }
     </form>
   );
 }
+```
 
 mount(SaveForm, document.getElementById("root")!);
 ```

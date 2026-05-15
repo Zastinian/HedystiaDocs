@@ -24,7 +24,7 @@ const dispose = once(
 
 | Parameter | Description |
 |-----------|-------------|
-| `track` | A function whose signal reads are tracked |
+| `track` | A function or accessor whose signal reads are tracked |
 | `run` | Callback receiving the tracked value. Executes only once |
 
 ### Return Value

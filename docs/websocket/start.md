@@ -1,6 +1,9 @@
 # WebSocket
 
-`@hedystia/ws` is a universal WebSocket library that works on **Bun**, **Node.js**, and **Deno**. It provides runtime-aware client construction, a portable server with topic-based pub/sub, and runtime detection utilities.
+`@hedystia/ws` is a universal WebSocket library that works on **Bun**, **Node.js**,
+and **Deno**. It provides a standalone server with runtime auto-detection, a
+portable low-level `WebSocketServer`, a runtime-aware client, and topic-based
+pub/sub — all with zero third-party dependencies.
 
 ## Installation
 
@@ -10,9 +13,54 @@ bun add @hedystia/ws
 
 ## Server
 
-### `WebSocketServer`
+### `serve()` — standalone (recommended)
 
-Portable WebSocket server that consumes raw HTTP upgrade tuples. Uses the [`ws`](https://github.com/websockets/ws) package internally and works on any runtime.
+Auto-detects the runtime and starts a full HTTP+WebSocket server:
+
+- **Bun:** delegates to `Bun.serve()` with native WebSocket support.
+- **Node / Deno:** creates a `node:http` server with the built-in upgrade handler.
+
+```ts
+import { serve } from "@hedystia/ws";
+
+const server = await serve({
+  open: (ws) => {
+    ws.subscribe("room:general");
+    ws.send("welcome");
+  },
+  message: (ws, msg) => {
+    ws.publish("room:general", msg);
+  },
+  close: (ws, code, reason) => {
+    console.log("client left", ws.data);
+  },
+});
+
+console.log(`Listening on ${server.url}`); // e.g. http://0.0.0.0:57321
+
+// Broadcast from anywhere
+server.publish("room:general", "server message");
+
+// Graceful shutdown
+await server.stop(true);
+```
+
+Pass `port` / `hostname` / `resolveData` via the second argument:
+
+```ts
+const server = await serve(handlers, {
+  port: 8080,
+  hostname: "127.0.0.1",
+  resolveData: (req) => ({
+    userId: new URL(req.url, "http://localhost").searchParams.get("token"),
+  }),
+});
+```
+
+### `WebSocketServer` — low-level
+
+Does **not** open a port. Plug it into any HTTP runtime that exposes raw
+upgrade tuples (`req`, `socket`, `head`).
 
 ```ts
 import { createServer } from "node:http";
@@ -44,21 +92,28 @@ http.listen(3000);
 |---------|-------------|
 | `open(ws)` | Called when a new connection opens |
 | `message(ws, msg)` | Called when a message arrives |
-| `close(ws, code?, reason?)` | Called when connection closes |
-| `drain(ws)` | Called when the socket becomes writable (backpressure) |
-| `ping(ws, data?)` | Called on ping frames |
-| `pong(ws, data?)` | Called on pong frames |
+| `close(ws, code, reason)` | Called when connection closes |
+| `error(ws, error)` | Called on transport errors |
+| `drain(ws)` | Called when back-pressure is relieved (Bun only) |
 
-### `upgrade(options, data?)`
+### `upgrade(req, options?)`
 
-Accepts `{ rawRequest, socket, head }` from Node's `upgrade` event. Attaches `data` to the socket for handler access.
+Accepts `{ rawRequest, socket, head }` from Node's `upgrade` event. Attaches
+`data` to the socket for handler access.
 
 ```ts
 wss.upgrade(
   { rawRequest: req, socket, head },
-  { data: { userId: "abc123" } }
+  { data: { userId: "abc123" } },
 );
 ```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `maxPayload` | `number` | 100 MiB | Maximum allowed frame payload |
+| `resolveData` | `(req) => Record<string, any>` | — | Per-connection data factory (used by `serve()`) |
 
 ### ServerWebSocket API
 
@@ -70,9 +125,9 @@ Each connection wrapper exposes topic-based pub/sub:
 | `close(code?, reason?)` | Close connection |
 | `subscribe(topic)` | Subscribe to a topic |
 | `unsubscribe(topic)` | Unsubscribe from a topic |
-| `publish(topic, message, compress?)` | Publish to all subscribers |
+| `publish(topic, message, compress?)` | Publish to all subscribers (excludes self) |
 | `isSubscribed(topic)` | Check if subscribed |
-| `cork()` | Batch outgoing writes |
+| `cork(cb)` | Batch outgoing writes |
 | `data` | User-attached state |
 
 ```ts
@@ -85,7 +140,8 @@ ws.publish("updates", { event: "refresh" });
 
 ### `createWebSocket(url, options?)`
 
-Runtime-aware WebSocket constructor. Uses `globalThis.WebSocket` on Bun, Deno, browsers, and Node >= 22; falls back to the `ws` package on older Node.
+Runtime-aware WebSocket constructor. Uses `globalThis.WebSocket` on Bun, Deno,
+browsers, and Node >= 22.
 
 ```ts
 import { createWebSocket } from "@hedystia/ws/client";
@@ -109,6 +165,20 @@ const WS = resolveWebSocket();
 const socket = new WS("ws://localhost:3000");
 ```
 
+### `WebSocketClient`
+
+Lightweight wrapper with property-based event handlers:
+
+```ts
+import { WebSocketClient } from "@hedystia/ws/client";
+
+const client = new WebSocketClient("ws://localhost:3000");
+client.onopen = () => client.send("hello");
+client.onmessage = (event) => console.log(event.data);
+client.onclose = () => console.log("closed");
+client.onerror = (err) => console.error(err);
+```
+
 ## Runtime Detection
 
 ```ts
@@ -124,8 +194,8 @@ isBrowser();     // true | false
 ## Subpath Exports
 
 ```ts
-import { WebSocketServer } from "@hedystia/ws/server";
-import { createWebSocket, resolveWebSocket } from "@hedystia/ws/client";
+import { WebSocketServer, serve, type ServeInfo } from "@hedystia/ws/server";
+import { createWebSocket, resolveWebSocket, WebSocketClient } from "@hedystia/ws/client";
 import { detectRuntime, isBun } from "@hedystia/ws";
 ```
 
@@ -135,10 +205,11 @@ import { detectRuntime, isBun } from "@hedystia/ws";
 |------|-------------|
 | `ServerWebSocket<Data>` | Wrapper around a connection |
 | `WebSocketHandlers<Data>` | Handler map for server events |
-| `WebSocketServerOptions<Data>` | Server constructor options |
+| `WebSocketServerOptions` | Server constructor options |
+| `ServeInfo` | Return type of `serve()` |
 | `ClientWebSocketOptions` | Client connection options |
-| `UpgradeOptions` | Raw upgrade tuple input |
-| `UpgradeRequest` | Type for raw Node request |
+| `UpgradeRequest` | Raw upgrade tuple type |
+| `UpgradeOptions<Data>` | Upgrade call options |
 | `WSData` | User-attached state shape |
 | `WSMessage` | `string \| ArrayBuffer \| Uint8Array` |
 | `Runtime` | `"bun" \| "node" \| "deno" \| "browser" \| "unknown"` |

@@ -106,3 +106,22 @@ const products = table("products", {
   productName: varchar(255).name("title").notNull(),
 });
 ```
+
+## Insert Type Inference
+
+The `InferInsert` type (returned by `db.users.insert()`) understands which columns are required at compile time. Columns that are auto-incrementing, have a `.default()`, or are `.nullable()` are optional. Columns marked `.notNull()` without a default remain required.
+
+```typescript
+import type { InferInsert } from "@hedystia/db";
+
+const users = table("users", {
+  id: integer().primaryKey().autoIncrement(),  // optional in inserts
+  name: varchar(255).notNull(),                 // required in inserts
+  email: varchar(255).notNull(),                // required in inserts
+  role: varchar(50).default("user"),            // optional (has default)
+  bio: text().nullable(),                        // optional (nullable)
+});
+
+type InsertType = InferInsert<typeof users>;
+// { name: string; email: string; role?: string; bio?: string | null }
+```

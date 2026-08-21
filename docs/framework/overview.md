@@ -31,8 +31,63 @@ const app = new Hedystia({
   sse: false,             // Use SSE instead of WebSocket for subscriptions
   debugLevel: 'none',     // Logging level: 'none' | 'debug' | 'warn' | 'log' | 'error'
   headers: h.object({ 'x-api-key': h.string() }),     // Global headers schema
+  security: {                // Request security controls (see below)
+    bodyLimit: 1_024 * 1_024,
+    headers: { preset: 'recommended' },
+    requestId: true,
+  },
 })
 ```
+
+## Security
+
+Hedystia 2.4 introduces built-in request security controls that can be enabled globally and overridden per route. The available options are:
+
+| Option | Type | Description |
+|---|---|---|
+| `bodyLimit` | `number` | Maximum request body size in bytes |
+| `maxQueryParameters` | `number` | Maximum number of URL query parameters |
+| `maxQueryDepth` | `number` | Maximum nesting depth in query keys |
+| `sanitize` | `boolean \| SanitizationOptions` | Remove or reject prototype-pollution keys and apply resource limits |
+| `headers` | `false \| SecurityHeadersOptions` | Add security response headers (`basic`, `recommended`, or `strict` preset) |
+| `requestId` | `boolean \| { header?: string }` | Add a stable `X-Request-ID` header and expose it on `ctx.requestId` |
+| `rateLimit` | `false \| RateLimitOptions` | Limit requests globally or per client with a custom or built-in store |
+| `timeout` | `number` | Maximum milliseconds for handler + middleware processing |
+
+```ts twoslash
+// @noErrors
+import Hedystia from 'hedystia'
+const app = new Hedystia({
+  security: {
+    bodyLimit: 1_024 * 1_024,
+    maxQueryParameters: 30,
+    sanitize: { mode: 'strip', trimStrings: true },
+    headers: { preset: 'recommended' },
+    requestId: true,
+    rateLimit: {
+      windowMs: 60_000,
+      limit: 100,
+      key: 'ip',
+      trustProxy: true,
+    },
+    timeout: 10_000,
+  },
+})
+```
+
+Security options can be overridden per route by passing `security` in the route schema:
+
+```ts twoslash
+// @noErrors
+import Hedystia, { h } from 'hedystia'
+const app = new Hedystia({ security: { requestId: true } })
+app.get('/admin', () => ({ admin: true }), {
+  security: { rateLimit: false },  // disable rate limiting for this route
+})
+app.get('/public', () => 'open', { security: false })  // disable all inherited security
+```
+
+The built-in rate-limit store is suitable for a single process. Multi-instance deployments should provide a shared, atomic `RateLimitStore`.
 
 ## CORS
 

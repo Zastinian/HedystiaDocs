@@ -58,6 +58,23 @@ const db = database({
 });
 ```
 
+## Indexes
+
+The MySQL driver supports creating and dropping indexes via migrations:
+
+```typescript
+export const addEmailIndex = migration("users_email_index", {
+  async up({ schema }) {
+    await schema.addIndex("users", ["email"], true);
+  },
+  async down({ schema }) {
+    await schema.dropIndex("users", "users_email_index");
+  },
+});
+```
+
+The generated index name follows `${table}_${columns.join("_")}_index`.
+
 ## Connection Pooling
 
 By default, `@hedystia/db` implements connection pooling for the MySQL driver, which ensures performance scales under concurrent loads.

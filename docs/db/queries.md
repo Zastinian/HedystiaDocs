@@ -41,15 +41,18 @@ const user = await db.users.findFirst({ where: { email: "alice@example.com" } })
 
 ## insert
 
-Insert a single row and return the inserted data.
+Insert a single row and return the inserted data. Required `notNull()` fields without a default must be provided; auto-increment, defaulted, and nullable fields are optional.
 
 ```ts
 const user = await db.users.insert({
   name: "Alice",
   email: "alice@example.com",
-  age: 25,
+  role: "admin",    // optional — has a default value
+  bio: null,         // optional — nullable
 });
 ```
+
+On PostgreSQL, the returned row includes the generated primary key via `RETURNING`.
 
 ### Inserting array and JSON data
 
@@ -63,7 +66,7 @@ const user = await db.users.insert({
 
 ## insertMany
 
-Insert multiple rows at once.
+Insert multiple rows at once. All rows share the same type inference as `insert`.
 
 ```ts
 const users = await db.users.insertMany([

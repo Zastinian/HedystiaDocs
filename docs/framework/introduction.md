@@ -13,6 +13,7 @@ Hedystia provides:
 - **Real-time subscriptions** — WebSocket and SSE-based pub/sub built in
 - **A validation library** — `h` schemas for input/output typing
 - **Swagger/OpenAPI** — auto-generated API documentation via plugin
+- **Built-in security** — request limits, input sanitization, security headers, request IDs, rate limiting, and timeouts
 
 Hedystia runs on [Bun](https://bun.sh), a fast JavaScript runtime, and is designed to be productive for solo developers as well as teams building production-grade services.
 
@@ -80,6 +81,9 @@ Hedystia is organized into focused packages:
 | `@hedystia/validations` | The `h` schema builder |
 | `@hedystia/swagger` | Swagger/OpenAPI documentation plugin |
 | `@hedystia/adapter` | Run Hedystia outside Bun (Node.js, etc.) |
+| `@hedystia/db` | Type-safe ORM with SQLite, MySQL, PostgreSQL, File, and S3 drivers |
+| `@hedystia/ws` | Universal WebSocket primitives for Bun, Node.js, and Deno |
+| `@hedystia/view` | Fine-grained reactive UI engine |
 
 ## What's Next?
 

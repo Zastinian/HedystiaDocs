@@ -8,6 +8,14 @@ export interface Blog {
 
 export const blogs: Blog[] = [
   {
+    title: "Hedystia 2.4 - Secure APIs, Dialect-Aware Data, and Stronger Types",
+    href: "/blog/2.4",
+    cover: "/blog/2.4/cover.png",
+    detail:
+      "Built-in request security, portable database migrations, smarter inserts, safer routing, and async validation",
+    date: "15 August 2026",
+  },
+  {
     title: "Hedystia 2.3 - Universal WebSocket, PostgreSQL, and Enhanced Validations",
     href: "/blog/2.3",
     cover: "/blog/2.3/cover.png",

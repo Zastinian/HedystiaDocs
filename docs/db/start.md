@@ -70,6 +70,45 @@ const newUser = await db.users.insert({
 console.log(await db.users.find());
 ```
 
+## Typed Inserts
+
+Insert types are inferred from the schema definition. Auto-increment, defaulted, and nullable columns are optional while required fields without defaults remain mandatory at compile time and runtime.
+
+```typescript
+import { database, table, integer, varchar } from "@hedystia/db";
+
+const users = table("users", {
+  id: integer().primaryKey().autoIncrement(),
+  name: varchar(255).notNull(),
+  email: varchar(255).unique(),
+});
+
+const db = database({ schemas: { users }, database: "sqlite", connection: { filename: "./data.db" }, syncSchemas: true });
+await db.initialize();
+
+// ✅ `name` is required, `id` is auto-generated and optional
+await db.users.insert({ name: "Alice", email: "alice@example.com" });
+```
+
+## Migrations with Indexes
+
+Migrations now support `addIndex` and `dropIndex` on SQLite, MySQL, and PostgreSQL:
+
+```typescript
+import { migration } from "@hedystia/db";
+
+export const addEmailIndex = migration("users_email_index", {
+  async up({ schema }) {
+    await schema.addIndex("users", ["email"], true);
+  },
+  async down({ schema }) {
+    await schema.dropIndex("users", "users_email_index");
+  },
+});
+```
+
+File and S3 drivers reject index operations explicitly.
+
 ## Next Steps
 
 Now that you have your database running, you can explore the following topics more deeply:

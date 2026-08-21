@@ -56,6 +56,21 @@ The `sqlite` driver allows you to select which underlying provider package to us
 
 If you don't specify a provider, `@hedystia/db` will try to detect the best available one in your environment automatically.
 
+## Indexes
+
+The SQLite driver supports creating and dropping indexes via migrations:
+
+```typescript
+export const addEmailIndex = migration("users_email_index", {
+  async up({ schema }) {
+    await schema.addIndex("users", ["email"], true);
+  },
+  async down({ schema }) {
+    await schema.dropIndex("users", "users_email_index");
+  },
+});
+```
+
 ## Memory Database
 
 If you want an ephemeral database that lives only in RAM and resets when the application stops, you can pass `:memory:` as the filename:

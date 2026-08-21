@@ -204,6 +204,18 @@ The matched route path string.
 
 The HTTP method of the request.
 
+### `requestId`
+
+When `security.requestId` is enabled, this contains the unique `X-Request-ID` assigned to the request.
+
+```ts twoslash
+// @noErrors
+import Hedystia from 'hedystia'
+const app = new Hedystia({ security: { requestId: true } })
+// ---cut---
+app.get('/id', ({ requestId }) => ({ requestId }))
+```
+
 ### `publish`
 
 The publish function for WebSocket subscriptions. See [Subscriptions](/framework/subscriptions).

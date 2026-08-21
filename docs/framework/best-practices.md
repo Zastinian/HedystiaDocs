@@ -141,6 +141,28 @@ const app = new Hedystia({
 })
 ```
 
+## Security Controls
+
+Always enable at least the `recommended` header preset and request-ID tracking in production:
+
+```typescript
+const app = new Hedystia({
+  security: {
+    bodyLimit: 1_024 * 1_024,
+    sanitize: { mode: 'strip' },
+    headers: { preset: 'recommended' },
+    requestId: true,
+    rateLimit: { windowMs: 60_000, limit: 100, key: 'ip' },
+  },
+})
+```
+
+Override security per route only when the reason is explicit:
+
+```typescript
+app.get('/public', () => 'open', { security: false })
+```
+
 ## Error Handling Strategy
 
 Define a global error handler early and handle edge cases explicitly:

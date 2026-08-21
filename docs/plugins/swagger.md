@@ -125,7 +125,10 @@ app.static(
 
 ## Subscription Routes
 
-WebSocket subscription routes also appear in the spec:
+WebSocket and subscription routes appear in the OpenAPI spec using vendor extensions instead of pretending they are standard HTTP verbs:
+
+- `x-hedystia-websocket` for `.ws()` routes
+- `x-hedystia-subscription` for `.subscription()` routes
 
 ```ts twoslash
 // @noErrors
@@ -140,7 +143,39 @@ app.subscription(
     error: h.object({ message: h.string() }),
   }
 )
+app.ws('/chat', { message: (ws, msg) => ws.send('Echo: ' + msg) })
 ```
+
+These extensions are excluded from tag grouping and rendered as custom operations in the Swagger UI.
+
+## Security in OpenAPI
+
+When `security` is configured on the server or on individual routes, the OpenAPI spec reflects those constraints:
+
+```ts twoslash
+// @noErrors
+import Hedystia, { h } from 'hedystia'
+import { swagger } from '@hedystia/swagger'
+
+const swaggerPlugin = swagger({
+  title: 'Secure API',
+  version: '1.0.0',
+})
+
+const app = new Hedystia({
+  security: {
+    rateLimit: { windowMs: 60_000, limit: 100, key: 'ip' },
+    requestId: true,
+  },
+})
+  .get('/health', () => ({ ok: true }))
+  .get('/admin', () => ({ admin: true }), {
+    security: { rateLimit: false },
+  })
+  .get('/public', () => 'open', { security: false })
+```
+
+Routes with `security: false` are treated as explicitly public in the spec.
 
 ## Full Example
 

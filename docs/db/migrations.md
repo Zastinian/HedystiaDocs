@@ -50,7 +50,12 @@ The migration context provides:
 | `schema.addColumn(table, name, column)` | Add a column to a table |
 | `schema.dropColumn(table, name)` | Drop a column from a table |
 | `schema.renameColumn(table, old, new)` | Rename a column |
+| `schema.addIndex(table, columns, unique?)` | Create an index on one or more columns |
+| `schema.dropIndex(table, indexName)` | Drop an index by name |
 | `sql(query, params?)` | Execute raw SQL |
+
+> [!NOTE]
+> Index operations are supported on **SQLite**, **MySQL**, and **PostgreSQL**. The File and S3 drivers will throw a `DriverError` if you attempt to create or drop an index.
 
 ### Running Migrations
 
@@ -97,6 +102,21 @@ export const addAge = migration("add_age_column", {
   },
 });
 ```
+
+### Adding Indexes via Migration
+
+```ts
+export const addEmailIndex = migration("users_email_index", {
+  async up({ schema }) {
+    await schema.addIndex("users", ["email"], true);  // unique index
+  },
+  async down({ schema }) {
+    await schema.dropIndex("users", "users_email_index");
+  },
+});
+```
+
+Each migration name must be unique. Migrations run inside the driver's transaction boundary — if any migration fails, the entire batch is rolled back.
 
 ## CLI
 

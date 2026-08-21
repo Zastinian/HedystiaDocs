@@ -266,4 +266,5 @@ Each route method accepts an optional schema object as its third argument:
 | `error` | Declares error response shape |
 | `description` | Used in Swagger docs |
 | `tags` | Used to group routes in Swagger |
+| `security` | Route-level security overrides (see [Security](/framework/overview)) |
 | `test` | Route testing function (inline tests) |

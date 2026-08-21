@@ -113,7 +113,9 @@ wss.upgrade(
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `maxPayload` | `number` | 100 MiB | Maximum allowed frame payload |
-| `resolveData` | `(req) => Record<string, any>` | — | Per-connection data factory (used by `serve()`) |
+| `resolveData` | `(req: WebSocketRequest) => Record<string, unknown>` | — | Per-connection data factory (used by `serve()`) |
+
+The `resolveData` callback receives a `WebSocketRequest` — a structural type exposing `url`, `headers`, and optionally `socket`. This allows runtime-specific request objects (Node's `IncomingMessage`, Bun's `Request`) to be passed without importing platform-specific types.
 
 ### ServerWebSocket API
 
@@ -209,7 +211,8 @@ import { detectRuntime, isBun } from "@hedystia/ws";
 | `ServeInfo` | Return type of `serve()` |
 | `ClientWebSocketOptions` | Client connection options |
 | `UpgradeRequest` | Raw upgrade tuple type |
+| `WebSocketRequest` | Structural request type for `resolveData` |
 | `UpgradeOptions<Data>` | Upgrade call options |
-| `WSData` | User-attached state shape |
+| `WSData` | User-attached state shape (`object`) |
 | `WSMessage` | `string \| ArrayBuffer \| Uint8Array` |
 | `Runtime` | `"bun" \| "node" \| "deno" \| "browser" \| "unknown"` |

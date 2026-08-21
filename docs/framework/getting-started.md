@@ -109,6 +109,29 @@ const app = new Hedystia()
   .listen(3000)
 ```
 
+## Adding Security
+
+Hedystia includes built-in request security. Enable it globally and override per route:
+
+```ts twoslash
+// @noErrors
+import Hedystia, { h } from 'hedystia'
+
+const app = new Hedystia({
+  security: {
+    bodyLimit: 1_024 * 1_024,
+    headers: { preset: 'recommended' },
+    requestId: true,
+    rateLimit: { windowMs: 60_000, limit: 100, key: 'ip' },
+    timeout: 10_000,
+  },
+})
+  .get('/', () => ({ message: 'Hello from Hedystia!' }))
+  .listen(3000)
+```
+
+See the [Framework Overview](/framework/overview) for full security options.
+
 ## Using the Client
 
 Once your server is running, create a client with full type inference:

@@ -38,6 +38,14 @@ const db = database({
 await db.initialize();
 ```
 
+## Indexes
+
+The File driver does **not** support index operations. Attempting to `addIndex` or `dropIndex` will throw a `DriverError`.
+
+## Transactions
+
+Transactions use in-memory snapshots. If a migration or operation fails, the driver rolls back all changes, including newly created table artifacts, and flushes the restored state to disk.
+
 ## Behavior
 
 When the database initializes, `@hedystia/db` ensures that `./data/file_db` exists. For each table defined in `schemas`, it creates a corresponding `[table].json` file to store the rows.

@@ -62,13 +62,16 @@ app.get('/download', ({ set }) => {
 // @noErrors
 import Hedystia, { h } from 'hedystia'
 const createOrder = async (body: any) => ({ id: 1, ...body })
-const app = new Hedystia()
+const app = new Hedystia({ security: { requestId: true } })
 // ---cut---
 app.post(
   '/orders',
-  async ({ body, params, query, headers, set, error }) => {
+  async ({ body, params, query, headers, set, error, requestId }) => {
     // Body is typed from body schema
     const order = await createOrder(body)
+
+    // requestId is available when security.requestId is enabled
+    console.log('Processing request', requestId)
 
     // Set a custom response header
     set.headers.set('x-order-id', String(order.id))

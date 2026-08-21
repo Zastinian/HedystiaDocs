@@ -111,6 +111,22 @@ const app = new Hedystia()
   .listen(3000)
 ```
 
+## Security Errors
+
+When security controls are enabled, the framework may produce the following error responses before the handler runs:
+
+| Scenario | Status |
+|---|---|
+| Request body exceeds `bodyLimit` | 413 |
+| Dangerous input key detected | 400 |
+| Input exceeds `maxStringLength` | 400 |
+| Input exceeds `maxDepth` | 400 |
+| Too many query parameters | 400 |
+| Rate limit exceeded | 429 |
+| Handler or middleware timed out | 408 |
+
+These errors are instances of `SecurityInputError`, `RateLimitError`, or `RequestTimeoutError` and can be caught by `onError`.
+
 ## Validation Errors
 
 When request data fails schema validation, Hedystia automatically responds with a `400` error before invoking your handler:
